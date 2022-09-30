@@ -1,119 +1,75 @@
-import React, { useEffect, useState, useLayoutEffect } from "react";
-import Pages from "../route/Index";
-import Sidebar from "./sidebar/Sidebar";
-import Head from "./head/Head";
-import Header from "./header/Header";
-import Footer from "./footer/Footer";
-import classNames from "classnames";
-import menu from "./menu/MenuData";
+import React, {Fragment, useEffect, useState, useLayoutEffect } from "react";
+import PublicLayout from '../layout/Public'
+import AuthLayout from '../layout/Auth'
+import MainLayout from '../layout/Main'
+import Project from '../pages/app/projects/Projects'
+import NProgress from 'nprogress'
 
-const Layout = () => {
-  //Sidebar
-  const [mobileView, setMobileView] = useState();
-  const [visibility, setVisibility] = useState(false);
-  const [themeState] = useState({
-    main: "default",
-    header: "white",
-    skin: "light",
-  });
+import { withRouter, Redirect } from 'react-router-dom'
+import { connect } from 'react-redux'
 
-  useEffect(() => {
-    viewChange();
-  }, []);
+const mapStateToProps = ({ user }) => ({ user })
 
-  // Stops scrolling on overlay
-  useLayoutEffect(() => {
-    if (visibility) {
-      document.body.style.overflow = "hidden";
-      document.body.style.height = "100%";
+const Layouts = {
+  public: PublicLayout,
+  auth: AuthLayout,
+  main: MainLayout,
+  project: Project,
+}
+
+let previousPath = '';
+
+const Layout = ({ user, children, location: { pathname, search } }) => {
+
+  // NProgress & ScrollTop Management
+  const currentPath = pathname + search
+  if (currentPath !== previousPath) {
+    window.scrollTo(0, 0)
+    NProgress.start()
+  }
+  setTimeout(() => {
+    NProgress.done()
+    previousPath = currentPath
+  }, 300)
+
+  // Layout Rendering
+  const getLayout = () => {
+    if (pathname === '/') {
+      return 'project'
     }
-    if (!visibility) {
-      document.body.style.overflow = "auto";
-      document.body.style.height = "auto";
+    if (pathname === '/projects') {
+      return 'public'
     }
-  }, [visibility]);
-
-  useEffect(() => {
-    document.body.className = `nk-body bg-white npc-default has-aside no-touch nk-nio-theme ${
-      themeState.skin === "dark" ? "dark-mode" : " "
-    }`;
-    let apps = menu.find((item) => item.text === "Applications");
-    let matched = apps.subMenu.find((sub) => {
-      if (process.env.PUBLIC_URL + sub.link === window.location.pathname) {
-        return sub;
-      } else if (window.location.pathname.split("/")[2] === "app-file-manager") {
-        return sub;
-      }
-    });
-    if (matched) {
-      document.body.classList.add("apps-only");
-    } else {
-      document.body.classList.remove("apps-only");
+    if (/^\/auth(?=\/|$)/i.test(pathname)) {
+      return 'auth'
     }
-  }, [window.location.pathname]); // eslint-disable-line react-hooks/exhaustive-deps
+    return 'main'
+  }
 
-  // function to toggle sidebar
-  const toggleSidebar = (e) => {
-    e.preventDefault();
-    if (visibility === false) {
-      setVisibility(true);
-    } else {
-      setVisibility(false);
+  const Container = Layouts[getLayout()]
+  const isUserAuthorized = user.authorized
+  const isUserLoading = user.loading
+  const isAuthLayout = getLayout() === 'auth'
+
+  const BootstrappedLayout = () => {
+    // show loader when user in check authorization process, not authorized yet and not on login pages
+    if (isUserLoading && !isUserAuthorized && !isAuthLayout) {
+      return null
     }
-  };
-
-  // function to change the design view under 1200 px
-  const viewChange = () => {
-    if (window.innerWidth < 1200) {
-      setMobileView(true);
-    } else {
-      setMobileView(false);
-      setVisibility(false);
+    // redirect to login page if current is not login page and user not authorized
+    if (!isAuthLayout && !isUserAuthorized) {
+      return <Redirect to="/auth/login" />
     }
-  };
-  window.addEventListener("load", viewChange);
-  window.addEventListener("resize", viewChange);
-
-  const sidebarClass = classNames({
-    "mobile-menu": mobileView,
-    "nk-sidebar-active": visibility && mobileView,
-  });
+    // in other case render previously set layout
+    return <Container>{children}</Container>
+  }
 
   return (
-    <React.Fragment>
-      <Head title="Loading" />
-      <div className="nk-app-root">
-        <div className="nk-main">
-          <div className="nk-wrap">
-            <Header
-              sidebarToggle={toggleSidebar}
-              setVisibility={setVisibility}
-              fixed={true}
-              theme={themeState.header}
-            />
-            <div className="nk-content">
-              <div className="container wide-xl">
-                <div className="nk-content-inner">
-                  <Sidebar
-                    sidebarToggle={toggleSidebar}
-                    visibility={visibility}
-                    mobileView={mobileView}
-                    fixed
-                    theme="light"
-                    className={sidebarClass}
-                  />
-                  {visibility && mobileView && <div className="toggle-overlay" onClick={(e) => toggleSidebar(e)} />}
-                  <div className="nk-content-body">
-                    <Pages />
-                    <Footer />
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </React.Fragment>
+    <Fragment>
+      {/*<Helmet titleTemplate="Clean UI Pro React | %s" title="React Admin Template" />*/}
+      {BootstrappedLayout()}
+    </Fragment>
   );
 };
-export default Layout;
+
+export default withRouter(connect(mapStateToProps)(Layout))

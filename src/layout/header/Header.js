@@ -70,46 +70,6 @@ const Header = ({ fixed, theme, className, sidebarToggle, setVisibility, ...prop
                     </li>
                     <li className="nk-menu-item">
                       <Link
-                        to={`${process.env.PUBLIC_URL}/app-chat`}
-                        onClick={() => setOnHover(false)}
-                        className="nk-menu-link"
-                      >
-                        <span className="nk-menu-text">Chats / Messenger</span>
-                      </Link>
-                    </li>
-                    <li className="nk-menu-item">
-                      <Link
-                        to={`${process.env.PUBLIC_URL}/app-inbox`}
-                        onClick={() => setOnHover(false)}
-                        className="nk-menu-link"
-                      >
-                        <span className="nk-menu-text">
-                          Mailbox
-                        </span>
-                      </Link>
-                    </li>
-                    <li className="nk-menu-item">
-                      <Link
-                        to={`${process.env.PUBLIC_URL}/app-calender`}
-                        onClick={() => setOnHover(false)}
-                        className="nk-menu-link"
-                      >
-                        <span className="nk-menu-text">Calendar</span>
-                      </Link>
-                    </li>
-                    <li className="nk-menu-item">
-                      <Link
-                        to={`${process.env.PUBLIC_URL}/app-kanban`}
-                        onClick={() => setOnHover(false)}
-                        className="nk-menu-link"
-                      >
-                        <span className="nk-menu-text">
-                          Kanban
-                        </span>
-                      </Link>
-                    </li>
-                    <li className="nk-menu-item">
-                      <Link
                         to={`${process.env.PUBLIC_URL}/app-file-manager`}
                         onClick={() => setOnHover(false)}
                         className="nk-menu-link"
@@ -124,11 +84,11 @@ const Header = ({ fixed, theme, className, sidebarToggle, setVisibility, ...prop
               </li>
               <li
                 className={`nk-menu-item ${
-                  currentUrl === process.env.PUBLIC_URL + "/components" ? "active current-page" : ""
+                  currentUrl === process.env.PUBLIC_URL + "/projects" ? "active current-page" : ""
                 }`}
               >
-                <Link to={`${process.env.PUBLIC_URL}/components`} className="nk-menu-link">
-                  <span className="nk-menu-text">Components</span>
+                <Link to={`${process.env.PUBLIC_URL}/projects`} className="nk-menu-link">
+                  <span className="nk-menu-text">Projects</span>
                 </Link>
               </li>
             </ul>

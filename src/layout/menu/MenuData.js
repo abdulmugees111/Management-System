@@ -1,9 +1,30 @@
 const menu = [
-  { heading: "Dashboards" },
+  { heading: "Overview" },
   {
-    icon: "dashlite",
+    icon: "text-rich",
     text: "SaaS Dashboard",
-    link: "/",
+    link: "/dashboard",
+  },
+  {
+    icon: "grid-alt",
+    text: "Domain & SSL",
+    link: "/domain-ssl",
+  },
+  {
+    icon: "tile-thumb",
+    text: "My Subscription",
+    link: "/subscription",
+  },
+  {
+    icon: "tranx",
+    text: "Payment History",
+    link: "/payment-history",
+  },
+  { heading: "Advanced" },
+  {
+    icon: "text-rich",
+    text: "Project Settings",
+    link: "/settings",
   },
 
   {

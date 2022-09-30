@@ -1,25 +1,35 @@
-import React, { Suspense, lazy } from "react";
+import React from "react";
 import ReactDOM from "react-dom";
 import "./assets/scss/dashlite.scss";
 import "./assets/scss/style-email.scss";
-import { BrowserRouter as Router, Route } from "react-router-dom";
-import App from "./App";
-import reportWebVitals from "./reportWebVitals";
+import Router from './router'
 
-const Error404Modern = lazy(() => import("./pages/error/404-modern"));
+import { Provider } from 'react-redux'
+
+import { createHashHistory } from 'history'
+import { createStore, applyMiddleware, compose } from 'redux'
+import createSagaMiddleware from 'redux-saga'
+import { routerMiddleware } from 'connected-react-router'
+import reducers from './redux/reducers'
+import * as serviceWorker from './serviceWorker'
+import sagas from './redux/sagas'
+
+// middlewared
+const history = createHashHistory()
+const sagaMiddleware = createSagaMiddleware()
+const routeMiddleware = routerMiddleware(history)
+const middlewares = [sagaMiddleware, routeMiddleware]
+
+const store = createStore(reducers(history), compose(applyMiddleware(...middlewares)))
+sagaMiddleware.run(sagas)
+
 
 ReactDOM.render(
-  <React.Fragment>
-    <Suspense fallback={<div />}>
-      <Router basename={`/`}>
-        <Route render={({ location }) => (location.state && location.state.is404 ? <Error404Modern /> : <App />)} />
-      </Router>
-    </Suspense>
-  </React.Fragment>,
+  <Provider store={store}>
+    <Router history={history} />
+  </Provider>,
   document.getElementById("root")
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+serviceWorker.unregister()
+export { store, history }

@@ -4,6 +4,8 @@ import LogoDark from "../../images/logo-dark.png";
 import PageContainer from "../../layout/page-container/PageContainer";
 import Head from "../../layout/head/Head";
 import AuthFooter from "./AuthFooter";
+import { connect } from 'react-redux'
+
 import {
   Block,
   BlockContent,
@@ -12,38 +14,38 @@ import {
   BlockTitle,
   Button,
   Icon,
-  PreviewCard,
+  PreviewCard
 } from "../../components/Component";
+
+
 import { Form, FormGroup, Spinner, Alert } from "reactstrap";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 
-const Login = () => {
-  const [loading, setLoading] = useState(false);
-  const [passState, setPassState] = useState(false);
-  const [errorVal, setError] = useState("");
 
-  const onFormSubmit = (formData) => {
-    setLoading(true);
-    const loginName = "info@softnio.com";
-    const pass = "123456";
-    if (formData.name === loginName && formData.passcode === pass) {
-      localStorage.setItem("accessToken", "token");
-      setTimeout(() => {
-        window.history.pushState(
-          `${process.env.PUBLIC_URL ? process.env.PUBLIC_URL : "/"}`,
-          "auth-login",
-          `${process.env.PUBLIC_URL ? process.env.PUBLIC_URL : "/"}`
-        );
-        window.location.reload();
-      }, 2000);
-    } else {
-      setTimeout(() => {
-        setError("Cannot login with credentials");
-        setLoading(false);
-      }, 2000);
-    }
-  };
+const mapStateToProps = ({ user, settings, dispatch }) => ({
+  dispatch,
+  user,
+  authProvider: settings.authProvider,
+  logo: settings.logo,
+})
+
+
+const Login = ({ dispatch, user, authProvider, logo }) => {
+  const [passState, setPassState] = useState(false);
+  const [errorVal] = useState("");
+
+  const onFinish = values => {
+    dispatch({
+      type: 'user/LOGIN',
+      payload: values,
+    })
+  }
+
+  const onFinishFailed = errorInfo => {
+    console.log('Failed:', errorInfo)
+  }
+
 
   const { errors, register, handleSubmit } = useForm();
 
@@ -76,7 +78,7 @@ const Login = () => {
                 </Alert>
               </div>
             )}
-            <Form className="is-alter" onSubmit={handleSubmit(onFormSubmit)}>
+            <Form className="is-alter" onSubmit={handleSubmit(onFinish)}>
               <FormGroup>
                 <div className="form-label-group">
                   <label className="form-label" htmlFor="default-01">
@@ -89,7 +91,7 @@ const Login = () => {
                     id="default-01"
                     name="name"
                     ref={register({ required: "This field is required" })}
-                    defaultValue="info@softnio.com"
+                    defaultValue="admin"
                     placeholder="Enter your email address or username"
                     className="form-control-lg form-control"
                   />
@@ -122,7 +124,7 @@ const Login = () => {
                     type={passState ? "text" : "password"}
                     id="password"
                     name="passcode"
-                    defaultValue="123456"
+                    defaultValue="admin"
                     ref={register({ required: "This field is required" })}
                     placeholder="Enter your passcode"
                     className={`form-control-lg form-control ${passState ? "is-hidden" : "is-shown"}`}
@@ -132,7 +134,7 @@ const Login = () => {
               </FormGroup>
               <FormGroup>
                 <Button size="lg" className="btn-block" type="submit" color="primary">
-                  {loading ? <Spinner size="sm" color="light" /> : "Sign in"}
+                  <span>Sign in</span>
                 </Button>
               </FormGroup>
             </Form>
@@ -176,4 +178,5 @@ const Login = () => {
     </React.Fragment>
   );
 };
-export default Login;
+
+export default connect(mapStateToProps)(Login)

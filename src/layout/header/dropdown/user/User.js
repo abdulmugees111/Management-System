@@ -3,13 +3,24 @@ import UserAvatar from "../../../../components/user/UserAvatar";
 import { DropdownToggle, DropdownMenu, Dropdown } from "reactstrap";
 import { Icon } from "../../../../components/Component";
 import { LinkList, LinkItem } from "../../../../components/links/Links";
+import { connect } from 'react-redux';
+import { withRouter } from "react-router-dom";
+import store from 'store';
 
-const User = () => {
+const mapStateToProps = ({ user }) => ({
+  user: user,
+  // name: user.name,
+  // email: user.email,
+});
+
+
+const User = (user) => {
   const [open, setOpen] = useState(false);
   const toggle = () => setOpen((prevState) => !prevState);
 
   const handleSignout = () => {
-    localStorage.removeItem("accessToken");
+    store.remove("access_token");
+    store.remove("refresh_token");
   };
 
   return (
@@ -33,8 +44,8 @@ const User = () => {
               <span>AB</span>
             </div>
             <div className="user-info">
-              <span className="lead-text">Abu Bin Ishtiyak</span>
-              <span className="sub-text">info@softnio.com</span>
+              <span className="lead-text">{user.user.name}</span>
+              <span className="sub-text">{user.user.email}</span>
             </div>
           </div>
         </div>
@@ -53,7 +64,7 @@ const User = () => {
         </div>
         <div className="dropdown-inner">
           <LinkList>
-            <a href={`${process.env.PUBLIC_URL}/auth-login`} onClick={handleSignout}>
+            <a href={`${process.env.PUBLIC_URL}/auth/login`} onClick={handleSignout}>
               <Icon name="signout"></Icon>
               <span>Sign Out</span>
             </a>
@@ -64,4 +75,4 @@ const User = () => {
   );
 };
 
-export default User;
+export default withRouter(connect(mapStateToProps)(User));

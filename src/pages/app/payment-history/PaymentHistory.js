@@ -1,31 +1,24 @@
-import React, { useState } from "react";
-import Head from "../layout/head/Head";
-import Content from "../layout/content/Content";
+import React, { useState, useEffect } from "react";
+import { connect } from "react-redux";
+import Head from "../../../layout/head/Head";
+import Content from "../../../layout/content/Content";
 import {
   Block,
+  BlockBetween,
   BlockDes,
   BlockHead,
   BlockHeadContent,
-  BlockTitle,
-  Icon,
-  Button,
-  Row,
-  Col,
-  BlockBetween,
-} from "../components/Component";
+  BlockTitle
+} from "../../../components/block/Block";
+import { Button, Col, Icon, Row } from "../../../components/Component";
 
-import { connect } from "react-redux";
-import { withRouter, useParams } from "react-router-dom";
-
-const mapStateToProps = ({ project, dispatch }) => ({
-  projects: project,
-  dispatch: dispatch
+const mapStateToProps = ({ domain }) => ({
+  domain
 });
 
-
-const Homepage = ({project, dispatch}) => {
+const Domain = ({ domain }) => {
   const [sm, updateSm] = useState(false);
-  let { id } = useParams();
+
   return (
     <React.Fragment>
       <Head title="Homepage"></Head>
@@ -34,10 +27,10 @@ const Homepage = ({project, dispatch}) => {
           <BlockBetween>
             <BlockHeadContent>
               <BlockTitle page tag="h3">
-                Instance Overview
+                Payment History
               </BlockTitle>
               <BlockDes className="text-soft">
-                <p>Welcome to Idara Portal</p>
+                <p>Details of all the payments you made</p>
               </BlockDes>
             </BlockHeadContent>
             <BlockHeadContent>
@@ -45,10 +38,6 @@ const Homepage = ({project, dispatch}) => {
                 <div className="toggle-expand-content" style={{ display: sm ? "block" : "none" }}>
                   <ul className="nk-block-tools g-3">
                     <li className="nk-block-tools-opt">
-                      <Button color="primary">
-                        <span>Connect</span>
-                        <Icon name="arrow-up-right" />
-                      </Button>
                     </li>
                   </ul>
                 </div>
@@ -66,4 +55,6 @@ const Homepage = ({project, dispatch}) => {
     </React.Fragment>
   );
 };
-export default withRouter(connect(mapStateToProps)(Homepage));
+
+export default connect(mapStateToProps)(Domain);
+
