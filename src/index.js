@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./assets/scss/dashlite.scss";
 import "./assets/scss/style-email.scss";
-import Router from './router'
+import Router from './router.js'
 
 import { Provider } from 'react-redux'
 
