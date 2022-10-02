@@ -91,7 +91,7 @@ const Login = ({ dispatch, user, authProvider, logo }) => {
                     id="default-01"
                     name="name"
                     ref={register({ required: "This field is required" })}
-                    defaultValue="admin"
+                    // defaultValue="admin"
                     placeholder="Enter your email address or username"
                     className="form-control-lg form-control"
                   />
@@ -124,7 +124,7 @@ const Login = ({ dispatch, user, authProvider, logo }) => {
                     type={passState ? "text" : "password"}
                     id="password"
                     name="passcode"
-                    defaultValue="admin"
+                    // defaultValue="admin"
                     ref={register({ required: "This field is required" })}
                     placeholder="Enter your passcode"
                     className={`form-control-lg form-control ${passState ? "is-hidden" : "is-shown"}`}
