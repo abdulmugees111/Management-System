@@ -2,7 +2,8 @@ import axios from 'axios'
 import store from 'store'
 
 const apiClient = axios.create({
-  baseURL: 'https://app.idara.io/api/',
+  // baseURL: 'https://app.idara.io/api/',
+  baseURL: 'http://localhost:8043/api/',
   // timeout: 1000,
   // headers: { 'X-Custom-Header': 'foobar' }
   headers: {'Content-Type': 'text/html'}
