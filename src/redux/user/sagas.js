@@ -4,6 +4,7 @@ import { history } from '../../index'
 // import * as firebase from '../../services/'
 import * as jwt from '../../services/jwt'
 import actions from './actions'
+import store from 'store'
 
 const mapAuthProviders = {
   jwt: {
@@ -127,6 +128,8 @@ export default function* rootSaga() {
     takeEvery(actions.REGISTER, REGISTER),
     takeEvery(actions.LOAD_CURRENT_ACCOUNT, LOAD_CURRENT_ACCOUNT),
     takeEvery(actions.LOGOUT, LOGOUT),
-    LOAD_CURRENT_ACCOUNT(), // run once on app load to check user auth
+    store.get('uid') && LOAD_CURRENT_ACCOUNT(), // run once on app load to check user auth
+    
   ])
+
 }

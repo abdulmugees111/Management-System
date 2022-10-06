@@ -9,10 +9,11 @@ export async function login(username, password) {
     })
     .then(response => {
       if (response) {
-        const { access_token, refresh_token } = response.data
+        const { access_token, refresh_token, uid } = response.data
         if (access_token) {
           store.set('access_token', access_token)
           store.set('refresh_token', refresh_token)
+          store.set('uid', uid)
         }
         return response.data
       }
@@ -42,14 +43,17 @@ export async function register(email, password, name) {
 }
 
 export async function currentAccount() {
+
+  const uid = store.get('uid')
+  
   return apiClient
-    .get(`/res.partner/3`)
+    .get(`/res.users/${uid}`)
     .then(response => {
       if (response) {
-        const { access_token } = response.data
-        if (access_token) {
-          store.set('access_token', access_token)
-        }
+        // const { access_token } = response.data
+        // if (access_token) {
+        //   store.set('access_token', access_token)
+        // }
         return response.data
       }
       return false
@@ -61,6 +65,7 @@ export async function logout() {
   return apiClient
     .get('/auth/logout')
     .then(() => {
+      store.remove('uid')
       store.remove('access_token')
       store.remove('refresh_token')
       return true

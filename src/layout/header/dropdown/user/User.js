@@ -21,6 +21,7 @@ const User = (user) => {
   const handleSignout = () => {
     store.remove("access_token");
     store.remove("refresh_token");
+    store.remove("uid");
   };
 
   return (
