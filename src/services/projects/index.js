@@ -15,7 +15,7 @@ export async function getProject(project_id) {
 
 export async function getAllProjects(){
   return apiClient
-    .get(`/my_projects/`, {
+    .get(`/get_projects/`, {
     })
     .then(response => {
       if (response) {
