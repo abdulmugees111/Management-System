@@ -8,7 +8,7 @@ const Footer = () => {
         <div className="nk-footer-wrap">
           <div className="nk-footer-copyright">
             {" "}
-            2022 جميع الحقوق محفوظة &copy;  <a href="https://tajr.io">منصة تاجر</a>
+            All rights are reserved &copy; <a href='https://tajr.io'>Tajr</a>
           </div>
           <div className="nk-footer-links">
             <ul className="nav nav-sm">

@@ -15,7 +15,7 @@ export async function getProject(project_id) {
 
 export async function getAllProjects(){
   return apiClient
-    .get(`/kk_odoo_saas.app/`, {
+    .get(`/my_projects/`, {
     })
     .then(response => {
       if (response) {

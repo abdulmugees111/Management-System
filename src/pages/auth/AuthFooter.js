@@ -100,7 +100,7 @@ const AuthFooter = () => {
           <Col lg="6">
             <div className="nk-block-content text-center text-lg-left">
               <p className="text-soft">
-                2022 جميع الحقوق محفوظة &copy;  <a href="https://tajr.io">منصة تاجر</a>
+                All rights are reserved &copy; <a href='https://tajr.io'>Tajr</a>              
               </p>
             </div>
           </Col>
