@@ -66,7 +66,7 @@ const Login = ({ dispatch, user, authProvider, logo }) => {
               <BlockContent>
                 <BlockTitle tag="h4">Sign-In</BlockTitle>
                 <BlockDes>
-                  <p>Access Dashlite using your email and passcode.</p>
+                  <p>Access Tajr using your email and passcode.</p>
                 </BlockDes>
               </BlockContent>
             </BlockHead>
