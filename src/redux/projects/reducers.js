@@ -1,7 +1,10 @@
 import actions from './actions'
 
 const initialState = {
-  data: {},
+  data: {
+    count: -1,
+    results:[]
+  },
   isLoading: false,
 }
 

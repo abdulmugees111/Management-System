@@ -14,19 +14,26 @@ import reducers from './redux/reducers'
 import * as serviceWorker from './serviceWorker'
 import sagas from './redux/sagas'
 
+import {
+  QueryClient,
+  QueryClientProvider,
+} from '@tanstack/react-query'
+
 // middlewared
 const history = createHashHistory()
 const sagaMiddleware = createSagaMiddleware()
 const routeMiddleware = routerMiddleware(history)
 const middlewares = [sagaMiddleware, routeMiddleware]
-
+const queryClient = new QueryClient()
 const store = createStore(reducers(history), compose(applyMiddleware(...middlewares)))
 sagaMiddleware.run(sagas)
 
 
 ReactDOM.render(
   <Provider store={store}>
-    <Router history={history} />
+    <QueryClientProvider client={queryClient}>
+      <Router history={history} />
+    </QueryClientProvider>
   </Provider>,
   document.getElementById("root")
 );

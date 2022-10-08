@@ -1,5 +1,5 @@
 import { all, put, call, takeEvery } from 'redux-saga/effects'
-import {getAllProjects} from '../../services/projects/index'
+import { getAllProjects, getProject } from '../../services/projects/index'
 import actions from './actions'
 
 export function* GET_ALL_PROJECTS() {
@@ -20,6 +20,28 @@ export function* GET_ALL_PROJECTS() {
     },
   })
 }
+
+
+export function* GET_PROJECT(app_name) {
+  yield put({
+    type: actions.SET_STATE,
+    payload: {
+      isLoading: true,
+    },
+  })
+
+  const project = yield call(getProject(app_name))
+
+  yield put({
+    type: actions.SET_STATE,
+    payload: {
+      data: project,
+      isLoading: false,
+    },
+  })
+}
+
+
 
 export default function* root() {
   yield all([

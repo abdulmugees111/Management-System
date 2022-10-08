@@ -28,10 +28,15 @@ const myErrorHandler = (error, info) => {
 const routes = [
   // Dashboards
   {
-    path: '/project/:id',
-    Component: lazy(() => import('./pages/Homepage')),
+    path: '/project/:app_name',
+    Component: lazy(() => import('./pages/app/projects/ProjectDetails')),
     exact: true,
   },
+  // {
+  //   path: '/project/:id',
+  //   Component: lazy(() => import('./pages/projects/ProjectDetails')),
+  //   exact: true,
+  // },
   {
     path: '/projects',
     Component: lazy(() => import('./pages/app/projects/Projects')),
@@ -65,7 +70,7 @@ const routes = [
   // },
   // {
   //   path: '/auth/register',
-  //   Component: lazy(() => import('pages/auth/register')),
+  //   Component: lazy(() => import('./pages/auth/Register')),
   //   exact: true,
   // },
   // {
@@ -99,7 +104,9 @@ const Router = ({ history, routerAnimation }) => {
                   timeout={routerAnimation === 'none' ? 0 : 300}
                 >
                   <Switch location={location}>
+
                     <Route exact path="/" render={() => <Redirect to="/projects" />} />
+
                     {routes.map(({ path, Component, exact }) => (
 
                       <Route
@@ -117,7 +124,7 @@ const Router = ({ history, routerAnimation }) => {
                                   }}
                                   onError={myErrorHandler}
                                 >
-                                  <Component />
+                                  <Component history={history} />
                                 </ErrorBoundary>
                               </Suspense>
                             </div>
