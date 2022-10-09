@@ -18,10 +18,11 @@ const Sidebar = ({ fixed, theme, className, visibility, sidebarToggle, mobileVie
     <div className={classes}>
       <SimpleBar className="nk-sidebar-menu">
         
-        <Menu sidebarToggle={sidebarToggle} mobileView={mobileView} menuData={layout === 'project' ? menu : layout === 'main' ? mainMenu : mainMenu} />
-
-        
-        {/* <Menu sidebarToggle={sidebarToggle} mobileView={mobileView} /> */}
+        <Menu
+         sidebarToggle={sidebarToggle}
+         mobileView={mobileView}
+         menuData={layout === 'project' ? menu : layout === 'main' ? mainMenu : mainMenu} />      
+         
       </SimpleBar>
     </div>
   );
