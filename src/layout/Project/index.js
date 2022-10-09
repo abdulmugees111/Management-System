@@ -4,7 +4,7 @@ import Head from "../head/Head";
 import Header from "../header/Header";
 import Footer from "../footer/Footer";
 import classNames from "classnames";
-import menu from "../dashboard-menu/MenuData";
+import menu from "../menu/MenuData";
 
 import AuthFooter from "../../pages/auth/Login";
 import { withRouter, Redirect } from 'react-router-dom'
@@ -122,7 +122,7 @@ const MainLayout = ({
                     fixed
                     theme="light"
                     className={sidebarClass}
-                    layout='main'
+                    layout='project'
                   />
                   {visibility && mobileView && <div className="toggle-overlay" onClick={(e) => toggleSidebar(e)} />}
                   <div className="nk-content-body">

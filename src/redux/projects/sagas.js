@@ -22,24 +22,24 @@ export function* GET_ALL_PROJECTS() {
 }
 
 
-export function* GET_PROJECT(app_name) {
-  yield put({
-    type: actions.SET_STATE,
-    payload: {
-      isLoading: true,
-    },
-  })
+// export function* GET_PROJECT(app_name) {
+//   yield put({
+//     type: actions.SET_STATE,
+//     payload: {
+//       isLoading: true,
+//     },
+//   })
 
-  const project = yield call(getProject(app_name))
+//   const project = yield call(getProject(app_name))
 
-  yield put({
-    type: actions.SET_STATE,
-    payload: {
-      data: project,
-      isLoading: false,
-    },
-  })
-}
+//   yield put({
+//     type: actions.SET_STATE,
+//     payload: {
+//       data: project,
+//       isLoading: false,
+//     },
+//   })
+// }
 
 
 

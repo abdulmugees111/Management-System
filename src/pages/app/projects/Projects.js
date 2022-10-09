@@ -10,6 +10,8 @@ import actions from "../../../redux/projects/actions";
 import ProjectCardPage from "./ProjectCard";
 import menu from "../../../layout/menu/MenuData";
 import { Spinner } from "reactstrap"
+import Sidebar from "../../../layout/sidebar/Sidebar";
+import classNames from "classnames";
 
 
 const Projects = ({ projects, dispatch }) => {
@@ -78,6 +80,20 @@ const Projects = ({ projects, dispatch }) => {
   window.addEventListener("load", viewChange);
   window.addEventListener("resize", viewChange);
 
+  const sidebarClass = classNames({
+    "mobile-menu": mobileView,
+    "nk-sidebar-active": visibility && mobileView,
+  });
+
+  const toggleSidebar = (e) => {
+    e.preventDefault();
+    if (visibility === false) {
+      setVisibility(true);
+    } else {
+      setVisibility(false);
+    }
+  };
+
 
   return (
     <Fragment>
@@ -90,10 +106,10 @@ const Projects = ({ projects, dispatch }) => {
               fixed={true}
               theme={themeState.header}
             />
-            <div className="nk-content">
+            {/* <div className="nk-content">
               <div className="container wide-xl">
                 <div className="nk-content-inner">
-                  <div className="nk-content-body">
+                  <div className="nk-content-body"> */}
                     <Content>
                       <Block>
                         {
@@ -107,10 +123,10 @@ const Projects = ({ projects, dispatch }) => {
                       </Block>
                     </Content>
                     <Footer />
-                  </div>
+                  {/* </div>
                 </div>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

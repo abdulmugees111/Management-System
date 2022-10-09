@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-// import menu from "./MenuData";
+import menu from "./MenuData";
 import Icon from "../../components/icon/Icon";
 import classNames from "classnames";
 import { NavLink, Link } from "react-router-dom";
@@ -180,18 +180,18 @@ const MenuItem = ({ icon, link, text, sub, newTab, child, sidebarToggle, badge, 
   );
 };
 
-const PanelItem = ({ icon, link, text, subPanel, index, data, setMenuData, sidebarToggle, mobileView,menuData, ...props }) => {
+const PanelItem = ({ icon, link, text, subPanel, index, data, setMenuData, sidebarToggle, mobileView, ...props }) => {
   const menuItemClass = classNames({
     "nk-menu-item": true,
   });
 
-  if (data === menuData) {
+  if (data === menu) {
     return (
       <li className={menuItemClass}>
         <Link
           to={`${process.env.PUBLIC_URL}${link}`}
           className="nk-menu-link"
-          onClick={() => setMenuData([menuData[index]])}
+          onClick={() => setMenuData([menu[index]])}
         >
           {icon ? (
             <span className="nk-menu-icon">
@@ -253,21 +253,21 @@ const checkMenuUrl = (data) => {
   }
 };
 
-const Menu = ({ sidebarToggle, mobileView, menuData, }) => {
-  const [data, setMenuData] = useState(menuData);
+const DashboardMenu = ({ sidebarToggle, mobileView }) => {
+  const [data, setMenuData] = useState(menu);
 
   useEffect(() => {
     data.forEach((item) => {
       if (item.panel) {
         let found = item.subPanel.find((sPanel) => process.env.PUBLIC_URL + sPanel.link === window.location.pathname);
         if (found) {
-          setMenuData([menuData[menuData.length - 1]]);
+          setMenuData([menu[menu.length - 1]]);
         } else {
-          setMenuData(menuData);
+          setMenuData(menu);
           item.subPanel.forEach((p) => {
             found = checkMenuUrl(p);
             if (found) {
-              setMenuData([menuData[menuData.length - 1]]);
+              setMenuData([menu[menu.length - 1]]);
             }
           });
         }
@@ -290,7 +290,6 @@ const Menu = ({ sidebarToggle, mobileView, menuData, }) => {
             panel={item.panel}
             subPanel={item.subPanel}
             data={data}
-            menuData={menuData}
             setMenuData={setMenuData}
             sidebarToggle={sidebarToggle}
             mobileView={mobileView}
@@ -327,4 +326,4 @@ const Menu = ({ sidebarToggle, mobileView, menuData, }) => {
   );
 };
 
-export default Menu;
+export default DashboardMenu;

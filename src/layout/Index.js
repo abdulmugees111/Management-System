@@ -2,7 +2,7 @@ import React, {Fragment, useEffect, useState, useLayoutEffect } from "react";
 import PublicLayout from '../layout/Public'
 import AuthLayout from '../layout/Auth'
 import MainLayout from '../layout/Main'
-import Project from '../pages/app/projects/Projects'
+import Project from '../layout/Project/index'
 import NProgress from 'nprogress'
 
 import { withRouter, Redirect } from 'react-router-dom'
@@ -35,10 +35,10 @@ const Layout = ({ user, children, location: { pathname, search } }) => {
   // Layout Rendering
   const getLayout = () => {
     if (pathname === '/') {
-      return 'project'
+      return 'main'
     }
-    if (pathname === '/projects') {
-      return 'public'
+    if (/^\/project(?=\/|$)/i.test(pathname)) {
+      return 'project'
     }
     if (/^\/auth(?=\/|$)/i.test(pathname)) {
       return 'auth'

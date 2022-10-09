@@ -21,8 +21,7 @@ import {getProject} from '../../../services/projects/index'
 
 
 const ProjectDetails = () => {
- let { app_name } = useParams();
-
+ const { app_name } = useParams();
 
  const {
   isLoading,
@@ -30,8 +29,8 @@ const ProjectDetails = () => {
   data
  } = useQuery(['get-project', app_name], () => getProject(app_name))
 
-
 console.log({isLoading},{error},{data});
+
  const [sm, updateSm] = useState(false);
 
 
@@ -43,7 +42,7 @@ console.log({isLoading},{error},{data});
      <BlockBetween>
       <BlockHeadContent>
        <BlockTitle page tag="h3">
-        Instance Overview {app_name}
+        Instance Overview
        </BlockTitle>
        <BlockDes className="text-soft">
         <p>Welcome to Idara Portal</p>

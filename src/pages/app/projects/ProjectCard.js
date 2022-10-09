@@ -173,8 +173,8 @@ const ProjectCardPage = ({projects, history}) => {
         <BlockHead size="sm">
           <BlockBetween>
             <BlockHeadContent>
-              <BlockTitle page> Projects</BlockTitle>
-              <BlockDes className="text-soft">You have total {data && data.length} projects</BlockDes>
+              <BlockTitle page> My Subscriptions </BlockTitle>
+              <BlockDes className="text-soft">You have total {data && data.length} subscriptions </BlockDes>
             </BlockHeadContent>
             <Col md='6'>
             <div className="form-control-wrap">

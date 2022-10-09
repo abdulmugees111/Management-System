@@ -32,6 +32,16 @@ const routes = [
     Component: lazy(() => import('./pages/app/projects/ProjectDetails')),
     exact: true,
   },
+  {
+    path: '/',
+    Component: lazy(() => import('./pages/app/user/Dashboard')),
+    exact: true,
+  },
+  {
+    path: '/dashboard',
+    Component: lazy(() => import('./pages/app/user/Dashboard')),
+    exact: true,
+  },
   // {
   //   path: '/project/:id',
   //   Component: lazy(() => import('./pages/projects/ProjectDetails')),
@@ -105,7 +115,7 @@ const Router = ({ history, routerAnimation }) => {
                 >
                   <Switch location={location}>
 
-                    <Route exact path="/" render={() => <Redirect to="/projects" />} />
+                    {/* <Route exact path="/" render={() => <Redirect to="/" />} /> */}
 
                     {routes.map(({ path, Component, exact }) => (
 

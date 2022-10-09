@@ -2,8 +2,10 @@ import React from "react";
 import classNames from "classnames";
 import SimpleBar from "simplebar-react";
 import Menu from "../menu/Menu";
+import menu from "../menu/MenuData";
+import mainMenu from "../dashboard-menu/MenuData";
 
-const Sidebar = ({ fixed, theme, className, visibility, sidebarToggle, mobileView, ...props }) => {
+const Sidebar = ({ fixed, theme, className, visibility, sidebarToggle, mobileView, layout, ...props }) => {
   const classes = classNames({
     "nk-aside toggle-screen-lg": true,
     "content-active": visibility,
@@ -15,7 +17,11 @@ const Sidebar = ({ fixed, theme, className, visibility, sidebarToggle, mobileVie
   return (
     <div className={classes}>
       <SimpleBar className="nk-sidebar-menu">
-        <Menu sidebarToggle={sidebarToggle} mobileView={mobileView} />
+        
+        <Menu sidebarToggle={sidebarToggle} mobileView={mobileView} menuData={layout === 'project' ? menu : layout === 'main' ? mainMenu : mainMenu} />
+
+        
+        {/* <Menu sidebarToggle={sidebarToggle} mobileView={mobileView} /> */}
       </SimpleBar>
     </div>
   );
