@@ -2,7 +2,7 @@ import apiClient from '../axios/index'
 
 export async function getProject(app_name) {
   return apiClient
-    .get(`/get_project/${app_name}`, {
+    .get(`/project/${app_name}`, {
     })
     .then(response => {
       if (response) {
