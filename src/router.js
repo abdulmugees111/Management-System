@@ -42,6 +42,21 @@ const routes = [
     Component: lazy(() => import('./pages/app/user/Dashboard')),
     exact: true,
   },
+  {
+    path: '/invoices',
+    Component: lazy(() => import('./pages/app/payment-history/PaymentHistory')),
+    exact: true,
+  },
+  {
+    path: '/account-settings',
+    Component: lazy(() => import('./pages/app/user/AccountSettings')),
+    exact: true,
+  },
+  {
+    path: '/user-profile',
+    Component: lazy(() => import('./pages/app/user/UserProfile')),
+    exact: true,
+  },
   // {
   //   path: '/project/:id',
   //   Component: lazy(() => import('./pages/projects/ProjectDetails')),

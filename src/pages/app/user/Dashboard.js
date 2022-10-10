@@ -1,31 +1,60 @@
 import React, { useState } from "react";
 import Head from "../../../layout/head/Head";
 import Content from "../../../layout/content/Content";
-import SaleRevenue from "../../../components/partials/default/sale-revenue/SaleRevenue";
-import ActiveSubscription from "../../../components/partials/default/active-subscription/ActiveSubscription";
-import AvgSubscription from "../../../components/partials/default/avg-subscription/AvgSubscription";
-import SalesOverview from "../../../components/partials/default/sales-overview/SalesOverview";
-import TransactionTable from "../../../components/partials/default/transaction/Transaction";
-import RecentActivity from "../../../components/partials/default/recent-activity/Activity";
-import Support from "../../../components/partials/default/support-request/Support";
 
-import { DropdownToggle, DropdownMenu, Card, UncontrolledDropdown, DropdownItem } from "reactstrap";
 import {
  Block,
  BlockDes,
  BlockHead,
  BlockHeadContent,
  BlockTitle,
- Icon,
+ BlockContent,
  Button,
  Row,
  Col,
- PreviewAltCard,
+ PreviewCard,
  BlockBetween,
 } from "../../../components/Component";
+import { Link } from "react-router-dom";
+import { profileIcon, accountIcon, billingIcon, securityIcon, supportIcon } from './components/svgIcons';
+import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
 
-const Dashboard = () => {
+const Dashboard = ({ user }) => {
  const [sm, updateSm] = useState(false);
+
+ const cardsData = [
+  {
+   title: "Personal Info",
+   description: "See your profile data and manage your Account to choose what is saved in our system.",
+   buttonText: "Manage Your Account",
+   url: "#",
+   icon: profileIcon
+  },
+  {
+   title: "Security Setting",
+   description: "You have full control to manage your own account and keep account fully secure.",
+   buttonText: "Account Setting",
+   url: "#",
+   icon: securityIcon
+  },
+  {
+   title: "Billing History",
+   description: "Check out all your payment history. You can also download or print your invoice.",
+   buttonText: "Account History"
+   , url: "",
+   icon:
+    billingIcon
+  },
+  {
+   title: "Account Reports",
+   description: "Check your reports of uses and manage your packages or subscriptions that you have.",
+   buttonText: "Manage Subscription",
+   url: "",
+   icon: accountIcon
+  },
+ ]
+
  return (
   <React.Fragment>
    <Head title="Homepage"></Head>
@@ -34,13 +63,13 @@ const Dashboard = () => {
      <BlockBetween>
       <BlockHeadContent>
        <BlockTitle page tag="h3">
-        Sales Overview
+        Welcome, {user.name}
        </BlockTitle>
        <BlockDes className="text-soft">
-        <p>Welcome to DashLite Dashboard Template</p>
+        <p>Welcome to our dashboard. Manage your account and your subscriptions.</p>
        </BlockDes>
       </BlockHeadContent>
-      <BlockHeadContent>
+      {/* <BlockHeadContent>
        <div className="toggle-wrap nk-block-tools-toggle">
         <Button
          className={`btn-icon btn-trigger toggle-expand mr-n1 ${sm ? "active" : ""}`}
@@ -107,50 +136,79 @@ const Dashboard = () => {
          </ul>
         </div>
        </div>
-      </BlockHeadContent>
+      </BlockHeadContent> */}
      </BlockBetween>
     </BlockHead>
     <Block>
-     <Row className="g-gs">
-      <Col sm="6">
-       <PreviewAltCard>
-        <ActiveSubscription />
-       </PreviewAltCard>
-      </Col>
-      <Col sm="6">
-       <PreviewAltCard>
-        <AvgSubscription />
-       </PreviewAltCard>
-      </Col>
-      <Col xl="6">
-       <PreviewAltCard className="h-100">
-        <SaleRevenue />
-       </PreviewAltCard>
-      </Col>
-      <Col xl="6">
-       <PreviewAltCard className="h-100">
-        <SalesOverview />
-       </PreviewAltCard>
-      </Col>
-      <Col size="12">
-       <Card className="card-bordered card-full">
-        <TransactionTable />
-       </Card>
-      </Col>
-      <Col lg="6">
-       <Card className="card-bordered card-full">
-        <RecentActivity />
-       </Card>
-      </Col>
-      <Col lg="6">
-       <Card className="card-bordered h-100">
-        <Support />
-       </Card>
-      </Col>
+
+     <Row>
+      {
+       cardsData.map((data, i) => {
+        return (
+         <Col sm="6" key={i}>
+          <div className="card card-bordered">
+           <div className="card-body">
+            <Row className="g-gs">
+             <Col sm="3">
+              {data.icon}
+             </Col>
+             <Col sm="9">
+              <h5 className="card-title">{data.title}</h5>
+              <p className="card-text">{data.description}</p>
+             </Col>
+            </Row>
+           </div>
+           <Link to={data.url}>
+
+            <Button outline color="light" style={{ width: '100%' }}>
+             <p style={{ paddingTop: '15px', paddingBottom: '15px' }}>
+              {data.buttonText}
+             </p>
+            </Button>
+           </Link>
+          </div>
+          {
+           i === 1 && <br />
+          }
+         </Col>
+        )
+       })
+      }
      </Row>
+
+     <br />
+     <br />
+     <br />
+     <PreviewCard>
+      <div className="align-center flex-wrap flex-md-nowrap g-4">
+       <div className="nk-block-image w-120px flex-shrink-0">
+        {supportIcon}
+       </div>
+       <BlockContent>
+        <div className="nk-block-content-head px-lg-4">
+         <h5>We’re here to help you!</h5>
+         <p className="text-soft">
+          Ask a question or file a support ticket, manage request, report an issues. Our support team will
+          get back to you by email.
+         </p>
+        </div>
+       </BlockContent>
+       <BlockContent className="flex-shrink-0">
+        <Button color="white" outline className="btn-outline-primary btn-dim">
+         Get Support Now
+        </Button>
+       </BlockContent>
+      </div>
+     </PreviewCard>
+
     </Block>
    </Content>
   </React.Fragment>
  );
 };
-export default Dashboard;
+
+const mapStateToProps = ({ user, }) => ({
+ user: user,
+});
+
+export default withRouter(connect(mapStateToProps)(Dashboard));

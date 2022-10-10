@@ -47,50 +47,14 @@ const Header = ({ fixed, theme, className, sidebarToggle, setVisibility, ...prop
                   <span className="nk-menu-text">Overview</span>
                 </Link>
               </li>
-              <li
-                className={`nk-menu-item has-sub ${
-                  currentUrl.includes(process.env.PUBLIC_URL + "/app-") ? "active" : ""
-                }`}
-                onMouseEnter={onMouseEnter}
-                onMouseLeave={onMouseLeave}
-              >
-                <a href="#toggle" onClick={(ev) => ev.preventDefault()} className="nk-menu-link nk-menu-toggle">
-                  <span className="nk-menu-text">Apps</span>
-                </a>
-                {onHover && (
-                  <ul className="nk-menu-sub">
-                    <li className="nk-menu-item">
-                      <Link
-                        to={`${process.env.PUBLIC_URL}/app-messages`}
-                        onClick={() => setOnHover(false)}
-                        className="nk-menu-link"
-                      >
-                        <span className="nk-menu-text">Messages</span>
-                      </Link>
-                    </li>
-                    <li className="nk-menu-item">
-                      <Link
-                        to={`${process.env.PUBLIC_URL}/app-file-manager`}
-                        onClick={() => setOnHover(false)}
-                        className="nk-menu-link"
-                      >
-                        <span className="nk-menu-text">
-                        File Manager <span className="nk-menu-badge">new</span>
-                        </span>
-                      </Link>
-                    </li>
-                  </ul>
-                )}
-              </li>
-              <li
-                className={`nk-menu-item ${
-                  currentUrl === process.env.PUBLIC_URL + "/projects" ? "active current-page" : ""
-                }`}
+              {/* <li
+                className={`nk-menu-item ${currentUrl === process.env.PUBLIC_URL + "/projects" ? "active current-page" : ""
+                  }`}
               >
                 <Link to={`${process.env.PUBLIC_URL}/projects`} className="nk-menu-link">
                   <span className="nk-menu-text">Projects</span>
                 </Link>
-              </li>
+              </li> */}
             </ul>
           </div>
           <div className="nk-header-tools">
