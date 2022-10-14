@@ -30,6 +30,7 @@ import {
   Progress,
   DropdownItem,
   Form,
+  Card,
 } from "reactstrap";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
@@ -177,11 +178,11 @@ const ProjectCardPage = ({projects, history}) => {
               <BlockDes className="text-soft">You have total {data && data.length} subscriptions </BlockDes>
             </BlockHeadContent>
             <Col md='6'>
-            <div className="form-control-wrap">
-              <input  className="form-control form-control-lg" type="text" id="default-0" placeholder="Search projects"
-                  onChange={(e) => setSearchTerm(e.target.value)}
-              />
-            </div>
+            {/*<div className="form-control-wrap">*/}
+            {/*  <input  className="form-control form-control-lg" type="text" id="default-0" placeholder="Search projects"*/}
+            {/*      onChange={(e) => setSearchTerm(e.target.value)}*/}
+            {/*  />*/}
+            {/*</div>*/}
             </Col>
             <BlockHeadContent>
               <div className="toggle-wrap nk-block-tools-toggle">
@@ -193,57 +194,10 @@ const ProjectCardPage = ({projects, history}) => {
                 </Button>
                 <div className="toggle-expand-content" style={{ display: sm ? "block" : "none" }}>
                   <ul className="nk-block-tools g-3">
-                    {/* filtered by commented out */}
-                    {/* <li>
-                      <UncontrolledDropdown>
-                        <DropdownToggle tag="a" className="dropdown-toggle btn btn-white btn-dim btn-outline-light">
-                          <Icon name="filter-alt" className="d-none d-sm-inline"></Icon>
-                          <span>Filtered By</span>
-                          <Icon name="chevron-right" className="dd-indc"></Icon>
-                        </DropdownToggle>
-                        <DropdownMenu right>
-                          <ul className="link-list-opt no-bdr">
-                            <li>
-                              <DropdownItem
-                                tag="a"
-                                href="#dropdownitem"
-                                onClick={(ev) => {
-                                  ev.preventDefault();
-                                }}
-                              >
-                                <span>Open</span>
-                              </DropdownItem>
-                            </li>
-                            <li>
-                              <DropdownItem
-                                tag="a"
-                                href="#dropdownitem"
-                                onClick={(ev) => {
-                                  ev.preventDefault();
-                                }}
-                              >
-                                <span>Closed</span>
-                              </DropdownItem>
-                            </li>
-                            <li>
-                              <DropdownItem
-                                tag="a"
-                                href="#dropdownitem"
-                                onClick={(ev) => {
-                                  ev.preventDefault();
-                                }}
-                              >
-                                <span>OnGoing</span>
-                              </DropdownItem>
-                            </li>
-                          </ul>
-                        </DropdownMenu>
-                      </UncontrolledDropdown>
-                    </li> */}
                     <li className="nk-block-tools-opt" onClick={() => setModal({ add: true })}>
                       <Button color="primary">
                         <Icon name="plus"></Icon>
-                        <span>Add Project</span>
+                        <span>Add Subscription</span>
                       </Button>
                     </li>
                   </ul>
@@ -254,141 +208,53 @@ const ProjectCardPage = ({projects, history}) => {
         </BlockHead>
 
         <Block>
-          <Row className="g-gs">
-            {data &&
-              data.map((item, idx) => {
-                // var days = setDeadlineDays(item.deadline);
-                return (
-                  <Col sm="6" lg="4" key={item.id}>
-                    <ProjectCard>
-                      <div className="project-head">
-                        <Link 
-                          to={`/project/${item.app_name}`}
-                          className="project-title"
-                        >
-                        {/* <a
-                          href={`/project/${item.app_name}`}
-                          onClick={(ev) => {
-                            ev.preventDefault();
-                            // history.push(`/project/${item.app_name}`)
-                          }}
-                          className="project-title"
-                        > */}
-                          {/* <UserAvatar className="sq" theme={item.avatarClass} text={findUpper(item.title)} /> */}
-                          <div className="project-info">
-                            <h6 className="title">{item.name}</h6>
-                            <span className="sub-text">{item.app_name}</span>
-                          </div>
-                        {/* </a> */}
-                        </Link>
-
-                        <UncontrolledDropdown>
-                          <DropdownToggle
-                            tag="a"
-                            className="dropdown-toggle btn btn-sm btn-icon btn-trigger mt-n1 mr-n1"
-                          >
-                            <Icon name="more-h"></Icon>
-                          </DropdownToggle>
-                          <DropdownMenu right>
-                            <ul className="link-list-opt no-bdr">
-                              <li onClick={() => onEditClick(item.id)}>
-                                <DropdownItem
-                                  tag="a"
-                                  href="#edit"
-                                  onClick={(ev) => {
-                                    ev.preventDefault();
-                                  }}
-                                >
-                                  <Icon name="edit"></Icon>
-                                  <span>Edit Project</span>
-                                </DropdownItem>
-                              </li>
-                              {/* {days >= 0 && (
-                                <li onClick={() => completeProject(item.id)}>
-                                  <DropdownItem
-                                    tag="a"
-                                    href="#markasdone"
-                                    onClick={(ev) => {
-                                      ev.preventDefault();
-                                    }}
-                                  >
-                                    <Icon name="check-round-cut"></Icon>
-                                    <span>Mark As Done</span>
-                                  </DropdownItem>
-                                </li>
-                              )} */}
-                            </ul>
-                          </DropdownMenu>
-                        </UncontrolledDropdown>
-                      </div>
-                      {/* <div className="project-details">
-                        {item.desc.length > 90 ? item.desc.substring(0, 89) + "... " : item.desc}
-                      </div> */}
-                      {/* <div className="project-progress">
-                        <div className="project-progress-details">
-                          <div className="project-progress-task">
-                            <Icon name="check-round-cut"></Icon>
-                            <span>{item.tasks} Tasks</span>
-                          </div>
-                          <div className="project-progress-percent">
-                            {days === 0 ? 100 : calcPercentage(item.totalTask, item.tasks)}%
+          {
+            data &&
+            data.map((project, idx) => {
+              return(<Card className="card-bordered sp-plan">
+                <Row className="no-gutters">
+                  <Col className="col-md-8">
+                    <div className="sp-plan-info card-inner">
+                      <Row className="gx-0 gy-3">
+                        <div className="col-xl-9 col-sm-8">
+                          <div className="sp-plan-name">
+                            <h6 className="title">
+                              <Link to={`/project/${project.app_name}`}>{project.name}
+                              <span className="badge bg-success rounded-pill">Active</span></Link>
+                            </h6>
+                            <p>project ID: <span className="text-base">{project.app_name}</span></p>
                           </div>
                         </div>
-                        <Progress
-                          className="progress-pill progress-md bg-light"
-                          value={days === 0 ? 100 : calcPercentage(item.totalTask, item.tasks)}
-                        ></Progress>
-                      </div> */}
-                      {/* <div className="project-meta">
-                        <ul className="project-users g-1">
-                          {item.team.slice(0, 2).map((item, idx) => {
-                            return (
-                              <li key={idx}>
-                                <UserAvatar
-                                  className="sm"
-                                  text={findUpper(item.label)}
-                                  theme={item.theme}
-                                  image={item.image}
-                                />
-                              </li>
-                            );
-                          })}
-                          {item.team.length > 2 && (
-                            <li>
-                              <UserAvatar theme="light" className="sm" text={`+${item.team.length - 2}`} />
-                            </li>
-                          )}
-                        </ul>
-                        <span
-                          className={`badge badge-dim badge-${
-                            days > 10
-                              ? "light"
-                              : days <= 10 && days >= 2
-                              ? "warning"
-                              : days === 1
-                              ? "danger"
-                              : days <= 0 && "success"
-                          }`}
-                        >
-                          <Icon name="clock"></Icon>
-                          <span>{days <= 0 ? "Done" : days === 1 ? "Due Tomorrow" : days + " Days Left"}</span>
-                        </span>
-                      </div> */}
-                    </ProjectCard>
-
+                        <div className="col-xl-3 col-sm-4">
+                          <div className="sp-plan-opt">
+                            <div className="custom-control custom-switch checked"><label
+                              className="custom-control-label text-soft" htmlFor="auto-plan-p1">Auto Renew</label></div>
+                          </div>
+                        </div>
+                      </Row>
+                    </div>
+                    <div className="sp-plan-desc card-inner">
+                      <ul className="row gx-1">
+                        <li className="col-6 col-lg-3"><p><span className="text-soft">Started On</span> Oct 12, 2018</p>
+                        </li>
+                        <li className="col-6 col-lg-3"><p><span className="text-soft">Recuring</span> Yes</p></li>
+                        <li className="col-6 col-lg-3"><p><span className="text-soft">Price</span> $599.00</p></li>
+                        <li className="col-6 col-lg-3"><p><span className="text-soft">Access</span> Unlimited</p></li>
+                      </ul>
+                    </div>
                   </Col>
-                );
-              })}
-          </Row>
-          {/* <div className="mt-3">
-            <PaginationComponent
-              itemPerPage={itemPerPage}
-              totalItems={data.length}
-              paginate={paginate}
-              currentPage={currentPage}
-            />
-          </div> */}
-
+                  <div className="col-md-4">
+                    <div className="sp-plan-action card-inner">
+                      <div className="sp-plan-btn"><a className="btn btn-primary" data-bs-toggle="modal"
+                                                      href="#subscription-change"><span>Change Plan</span></a></div>
+                      <div className="sp-plan-note text-md-center"><p>Next Billing on <span>Oct 11, 2020</span></p>
+                      </div>
+                    </div>
+                  </div>
+                </Row>
+              </Card>)
+            })
+          }
           <br/>
           <br/>
         </Block>

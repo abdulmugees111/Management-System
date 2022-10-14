@@ -122,7 +122,7 @@ const Projects = ({ projects, dispatch }) => {
 
                       </Block>
                     </Content>
-                    <Footer />
+                    {/*<Footer />*/}
                   {/* </div>
                 </div>
               </div>
