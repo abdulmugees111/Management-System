@@ -13,7 +13,7 @@ const mainMenu = [
   {
     icon: "grid-alt",
     text: "Invoices & Payments",
-    link: "/#",
+    link: "/invoices",
   },
   {
     icon: "tranx",
@@ -34,7 +34,7 @@ const mainMenu = [
   {
     icon: "text-rich",
     text: "Account Settings",
-    link: "/settings",
+    link: "/account-settings",
   },
 
   {

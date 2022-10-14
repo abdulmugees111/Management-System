@@ -106,10 +106,6 @@ const Projects = ({ projects, dispatch }) => {
               fixed={true}
               theme={themeState.header}
             />
-            {/* <div className="nk-content">
-              <div className="container wide-xl">
-                <div className="nk-content-inner">
-                  <div className="nk-content-body"> */}
                     <Content>
                       <Block>
                         {
@@ -122,11 +118,7 @@ const Projects = ({ projects, dispatch }) => {
 
                       </Block>
                     </Content>
-                    {/*<Footer />*/}
-                  {/* </div>
-                </div>
-              </div>
-            </div> */}
+                    <Footer />
           </div>
         </div>
       </div>

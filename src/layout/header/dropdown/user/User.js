@@ -52,15 +52,15 @@ const User = (user) => {
         </div>
         <div className="dropdown-inner">
           <LinkList>
-            <LinkItem link="/user-profile-regular" icon="user-alt" onClick={toggle}>
+            <LinkItem link="/user-profile" icon="user-alt" onClick={toggle}>
               View Profile
             </LinkItem>
-            <LinkItem link="/user-profile-setting" icon="setting-alt" onClick={toggle}>
+            <LinkItem link="/account-settings" icon="setting-alt" onClick={toggle}>
               Account Setting
             </LinkItem>
-            <LinkItem link="/user-profile-activity" icon="activity-alt" onClick={toggle}>
+            {/* <LinkItem link="/user-profile-activity" icon="activity-alt" onClick={toggle}>
               Login Activity
-            </LinkItem>
+            </LinkItem> */}
           </LinkList>
         </div>
         <div className="dropdown-inner">

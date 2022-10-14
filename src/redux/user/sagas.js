@@ -30,7 +30,7 @@ export function* LOGIN({ payload }) {
     yield put({
       type: 'user/LOAD_CURRENT_ACCOUNT',
     })
-    yield history.push('/projects')
+    yield history.push('/dashboard')
     // notification.success({
     //   message: 'Logged In',
     //   description: 'You have successfully logged in!',
