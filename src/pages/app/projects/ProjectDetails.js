@@ -9,11 +9,10 @@ import {
  BlockTitle,
  Icon,
  Button,
- Row,
- Col,
  BlockBetween,
+ PreviewCard,
 } from "../../../components/Component";
-
+import { Row, Col, FormGroup, Spinner } from "reactstrap";
 import { useQuery } from '@tanstack/react-query'
 
 import { withRouter, useParams } from "react-router-dom";
@@ -29,10 +28,8 @@ const ProjectDetails = () => {
   data
  } = useQuery(['get-project', app_name], () => getProject(app_name))
 
-console.log({isLoading},{error},{data});
-
+ console.log({isLoading},{error},{data});
  const [sm, updateSm] = useState(false);
-
 
  return (
   <React.Fragment>
@@ -42,10 +39,10 @@ console.log({isLoading},{error},{data});
      <BlockBetween>
       <BlockHeadContent>
        <BlockTitle page tag="h3">
-        Instance Overview
+        Subscription Overview
        </BlockTitle>
        <BlockDes className="text-soft">
-        <p>Welcome to Idara Portal</p>
+        <p>Welcome to Tajr Portal</p>
        </BlockDes>
       </BlockHeadContent>
       <BlockHeadContent>
@@ -64,12 +61,49 @@ console.log({isLoading},{error},{data});
       </BlockHeadContent>
      </BlockBetween>
     </BlockHead>
-    <Block>
-     <Row className="g-gs">
-      <Col sm="6">
-      </Col>
-     </Row>
-    </Block>
+    {
+      isLoading && <Spinner color="primary" />
+    }
+    {
+      data !== undefined && data.count === 1 &&
+      <Block>
+       <PreviewCard>
+        <Row className="g-4">
+         <Col lg="6">
+          <FormGroup className="form-group">
+           <label className="form-label">
+            Subscription Name
+           </label>
+           <div className="form-control-wrap">
+            <input value={data.results[0].name} type="text" className="form-control" />
+           </div>
+          </FormGroup>
+         </Col>
+         <Col lg="6">
+          <FormGroup className="form-group">
+           <label className="form-label">
+            Subscription ID
+           </label>
+           <div className="form-control-wrap">
+            <input value={data.results[0].app_name} type="text" className="form-control" />
+           </div>
+          </FormGroup>
+         </Col>
+         <Col lg="6">
+          <FormGroup className="form-group">
+           <label className="form-label">
+            Login Username
+           </label>
+           <div className="form-control-wrap">
+            <input value={data.results[0].login_email} type="text" className="form-control" />
+           </div>
+          </FormGroup>
+         </Col>
+
+        </Row>
+       </PreviewCard>
+      </Block>
+    }
    </Content>
   </React.Fragment>
  );

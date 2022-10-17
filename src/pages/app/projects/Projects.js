@@ -8,10 +8,7 @@ import { connect } from "react-redux";
 import Content from "../../../layout/content/Content";
 import actions from "../../../redux/projects/actions";
 import ProjectCardPage from "./ProjectCard";
-import menu from "../../../layout/menu/MenuData";
-import { Spinner } from "reactstrap"
-import Sidebar from "../../../layout/sidebar/Sidebar";
-import classNames from "classnames";
+import { Spinner } from "reactstrap";
 
 
 const Projects = ({ projects, dispatch }) => {
@@ -49,24 +46,6 @@ const Projects = ({ projects, dispatch }) => {
     }
   }, [visibility]);
 
-  useEffect(() => {
-    document.body.className = `nk-body bg-white npc-default has-aside no-touch nk-nio-theme ${themeState.skin === "dark" ? "dark-mode" : " "
-      }`;
-    let apps = menu.find((item) => item.text === "Applications");
-    let matched = apps.subMenu.find((sub) => {
-      if (process.env.PUBLIC_URL + sub.link === window.location.pathname) {
-        return sub;
-      } else if (window.location.pathname.split("/")[2] === "app-file-manager") {
-        return sub;
-      }
-    });
-    if (matched) {
-      document.body.classList.add("apps-only");
-    } else {
-      document.body.classList.remove("apps-only");
-    }
-  }, [window.location.pathname]); // eslint-disable-line react-hooks/exhaustive-deps
-
   // function to change the design view under 1200 px
 
   const viewChange = () => {
@@ -80,19 +59,6 @@ const Projects = ({ projects, dispatch }) => {
   window.addEventListener("load", viewChange);
   window.addEventListener("resize", viewChange);
 
-  const sidebarClass = classNames({
-    "mobile-menu": mobileView,
-    "nk-sidebar-active": visibility && mobileView,
-  });
-
-  const toggleSidebar = (e) => {
-    e.preventDefault();
-    if (visibility === false) {
-      setVisibility(true);
-    } else {
-      setVisibility(false);
-    }
-  };
 
 
   return (
@@ -106,19 +72,18 @@ const Projects = ({ projects, dispatch }) => {
               fixed={true}
               theme={themeState.header}
             />
-                    <Content>
-                      <Block>
-                        {
-                          projects.isLoading && <Spinner color="primary" />
-                        }
-                        {
-                          projects.data.count !== -1 &&
-                            <ProjectCardPage projects={projects.data.results}  />
-                        }
-
-                      </Block>
-                    </Content>
-                    <Footer />
+            <Content>
+              <Block>
+                {
+                  projects.isLoading && <Spinner color="primary" />
+                }
+                {
+                  projects.data.count !== -1 &&
+                  <ProjectCardPage projects={projects.data.results} />
+                }
+              </Block>
+            </Content>
+            <Footer />
           </div>
         </div>
       </div>

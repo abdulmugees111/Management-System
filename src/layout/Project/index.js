@@ -6,7 +6,6 @@ import Footer from "../footer/Footer";
 import classNames from "classnames";
 import menu from "../menu/MenuData";
 
-import AuthFooter from "../../pages/auth/Login";
 import { withRouter, Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 

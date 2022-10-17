@@ -140,37 +140,37 @@ const Login = ({ dispatch, user, authProvider, logo }) => {
             </Form>
             <div className="form-note-s2 text-center pt-4">
               {" "}
-              New on our platform? <Link to={`${process.env.PUBLIC_URL}/auth-register`}>Create an account</Link>
+              New on our platform? <Link to={`${process.env.PUBLIC_URL}/auth/register`}>Create an account</Link>
             </div>
-            <div className="text-center pt-4 pb-3">
-              <h6 className="overline-title overline-title-sap">
-                <span>OR</span>
-              </h6>
-            </div>
-            <ul className="nav justify-center gx-4">
-              <li className="nav-item">
-                <a
-                  className="nav-link"
-                  href="#socials"
-                  onClick={(ev) => {
-                    ev.preventDefault();
-                  }}
-                >
-                  Facebook
-                </a>
-              </li>
-              <li className="nav-item">
-                <a
-                  className="nav-link"
-                  href="#socials"
-                  onClick={(ev) => {
-                    ev.preventDefault();
-                  }}
-                >
-                  Google
-                </a>
-              </li>
-            </ul>
+            {/*<div className="text-center pt-4 pb-3">*/}
+            {/*  <h6 className="overline-title overline-title-sap">*/}
+            {/*    <span>OR</span>*/}
+            {/*  </h6>*/}
+            {/*</div>*/}
+            {/*<ul className="nav justify-center gx-4">*/}
+            {/*  <li className="nav-item">*/}
+            {/*    <a*/}
+            {/*      className="nav-link"*/}
+            {/*      href="#socials"*/}
+            {/*      onClick={(ev) => {*/}
+            {/*        ev.preventDefault();*/}
+            {/*      }}*/}
+            {/*    >*/}
+            {/*      Facebook*/}
+            {/*    </a>*/}
+            {/*  </li>*/}
+            {/*  <li className="nav-item">*/}
+            {/*    <a*/}
+            {/*      className="nav-link"*/}
+            {/*      href="#socials"*/}
+            {/*      onClick={(ev) => {*/}
+            {/*        ev.preventDefault();*/}
+            {/*      }}*/}
+            {/*    >*/}
+            {/*      Google*/}
+            {/*    </a>*/}
+            {/*  </li>*/}
+            {/*</ul>*/}
           </PreviewCard>
         </Block>
         <AuthFooter />

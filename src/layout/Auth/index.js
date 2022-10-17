@@ -23,9 +23,7 @@ const AuthLayout = ({
   authPagesColor
 }) => {
   return (
-    <Login>
-
-    </Login>
+    <>{children}</>
   );
 };
 
