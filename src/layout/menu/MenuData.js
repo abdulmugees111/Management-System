@@ -14,7 +14,7 @@ const menu = [
   {
     icon: "text-rich",
     text: "Project Settings",
-    link: "project/settings",
+    link: "/project/settings",
   },
 
   {

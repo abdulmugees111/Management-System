@@ -2,7 +2,7 @@ import React from "react";
 import classNames from "classnames";
 import SimpleBar from "simplebar-react";
 import Menu from "../menu/Menu";
-import menu from "../menu/MenuData";
+import projectMenu from "../menu/MenuData";
 import mainMenu from "../dashboard-menu/MenuData";
 
 const Sidebar = ({ fixed, theme, className, visibility, sidebarToggle, mobileView, layout, ...props }) => {
@@ -21,7 +21,7 @@ const Sidebar = ({ fixed, theme, className, visibility, sidebarToggle, mobileVie
         <Menu
          sidebarToggle={sidebarToggle}
          mobileView={mobileView}
-         menuData={layout === 'project' ? menu : layout === 'main' ? mainMenu : mainMenu} />      
+         menuData={layout === 'project' ? projectMenu : layout === 'main' ? mainMenu : mainMenu} />
          
       </SimpleBar>
     </div>

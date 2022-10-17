@@ -75,7 +75,7 @@ const ProjectDetails = () => {
             Subscription Name
            </label>
            <div className="form-control-wrap">
-            <input value={data.results[0].name} type="text" className="form-control" />
+            <input disabled value={data.results[0].name} type="text" className="form-control" />
            </div>
           </FormGroup>
          </Col>
@@ -85,7 +85,7 @@ const ProjectDetails = () => {
             Subscription ID
            </label>
            <div className="form-control-wrap">
-            <input value={data.results[0].app_name} type="text" className="form-control" />
+            <input disabled value={data.results[0].app_name} type="text" className="form-control" />
            </div>
           </FormGroup>
          </Col>
@@ -95,7 +95,7 @@ const ProjectDetails = () => {
             Login Username
            </label>
            <div className="form-control-wrap">
-            <input value={data.results[0].login_email} type="text" className="form-control" />
+            <input disabled value={data.results[0].login_email} type="text" className="form-control" />
            </div>
           </FormGroup>
          </Col>
