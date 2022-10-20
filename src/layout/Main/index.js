@@ -56,19 +56,8 @@ const MainLayout = ({
     document.body.className = `nk-body bg-white npc-default has-aside no-touch nk-nio-theme ${
       themeState.skin === "dark" ? "dark-mode" : " "
     }`;
-    let apps = menu.find((item) => item.text === "Applications");
-    let matched = apps.subMenu.find((sub) => {
-      if (process.env.PUBLIC_URL + sub.link === window.location.pathname) {
-        return sub;
-      } else if (window.location.pathname.split("/")[2] === "app-file-manager") {
-        return sub;
-      }
-    });
-    if (matched) {
-      document.body.classList.add("apps-only");
-    } else {
-      document.body.classList.remove("apps-only");
-    }
+
+    document.body.classList.remove("apps-only");
   }, [window.location.pathname]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // function to toggle sidebar

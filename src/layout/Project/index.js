@@ -4,7 +4,6 @@ import Head from "../head/Head";
 import Header from "../header/Header";
 import Footer from "../footer/Footer";
 import classNames from "classnames";
-import menu from "../menu/MenuData";
 
 import { withRouter, Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
@@ -18,7 +17,7 @@ const mapStateToProps = ({ settings }) => ({
   authPagesColor: settings.authPagesColor
 });
 
-const MainLayout = ({
+const ProjectLayout = ({
                       children,
                       logo,
                       isGrayTopbar,
@@ -56,19 +55,8 @@ const MainLayout = ({
     document.body.className = `nk-body bg-white npc-default has-aside no-touch nk-nio-theme ${
       themeState.skin === "dark" ? "dark-mode" : " "
     }`;
-    let apps = menu.find((item) => item.text === "Applications");
-    let matched = apps.subMenu.find((sub) => {
-      if (process.env.PUBLIC_URL + sub.link === window.location.pathname) {
-        return sub;
-      } else if (window.location.pathname.split("/")[2] === "app-file-manager") {
-        return sub;
-      }
-    });
-    if (matched) {
-      document.body.classList.add("apps-only");
-    } else {
+
       document.body.classList.remove("apps-only");
-    }
   }, [window.location.pathname]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // function to toggle sidebar
@@ -138,4 +126,4 @@ const MainLayout = ({
   );
 };
 
-export default withRouter(connect(mapStateToProps)(MainLayout));
+export default withRouter(connect(mapStateToProps)(ProjectLayout));

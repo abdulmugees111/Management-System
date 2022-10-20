@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
-import Head from "../../../layout/head/Head";
-import Content from "../../../layout/content/Content";
+import Head from "../../../../layout/head/Head";
+import Content from "../../../../layout/content/Content";
 import {
   Block,
   BlockBetween,
@@ -9,8 +9,8 @@ import {
   BlockHead,
   BlockHeadContent,
   BlockTitle
-} from "../../../components/block/Block";
-import { Button, Col, Icon, Row } from "../../../components/Component";
+} from "../../../../components/block/Block";
+import { Button, Col, Icon, Row } from "../../../../components/Component";
 
 const mapStateToProps = ({ domain }) => ({
   domain

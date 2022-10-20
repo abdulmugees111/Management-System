@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
-import Head from "../../../layout/head/Head";
-import Content from "../../../layout/content/Content";
+import Head from "../../../../layout/head/Head";
+import Content from "../../../../layout/content/Content";
 import {
   Block,
   BlockBetween,
@@ -9,8 +9,9 @@ import {
   BlockHead,
   BlockHeadContent,
   BlockTitle
-} from "../../../components/block/Block";
-import { Button, Col, Icon, Row } from "../../../components/Component";
+} from "../../../../components/block/Block";
+import { Button, Col, Icon, Row } from "../../../../components/Component";
+import { useParams } from "react-router-dom";
 
 const mapStateToProps = ({ domain }) => ({
   domain
@@ -18,7 +19,8 @@ const mapStateToProps = ({ domain }) => ({
 
 const Domain = ({ domain }) => {
   const [sm, updateSm] = useState(false);
-
+  const { app_name } = useParams();
+  console.log(app_name)
   return (
     <React.Fragment>
       <Head title="Homepage"></Head>
@@ -27,10 +29,10 @@ const Domain = ({ domain }) => {
           <BlockBetween>
             <BlockHeadContent>
               <BlockTitle page tag="h3">
-                Domain(s) and SSL Settings
+                Subscription Settings
               </BlockTitle>
               <BlockDes className="text-soft">
-                <p>Connect your Custom Domain</p>
+                <p>Modify your Subscription</p>
               </BlockDes>
             </BlockHeadContent>
             <BlockHeadContent>

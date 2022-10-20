@@ -60,9 +60,6 @@ const Layout = ({ user, children, location: { pathname, search } }) => {
     if (!isAuthLayout && !isUserAuthorized) {
       return <Redirect to="/auth/login" />
     }
-    console.log(Container)
-    console.log(children)
-
     // in other case render previously set layout
     return <Container>{children}</Container>
   }

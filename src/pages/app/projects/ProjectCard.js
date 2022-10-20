@@ -69,7 +69,7 @@ const ProjectCardPage = ({projects, history}) => {
                         <div className="col-xl-9 col-sm-8">
                           <div className="sp-plan-name">
                             <h6 className="title">
-                              <Link to={`/project/${project.app_name}`}>{project.name}
+                              <Link to={`/project/${project.app_name}/overview`}>{project.name}
                               <span className="badge bg-success rounded-pill">Active</span></Link>
                             </h6>
                             <p>project ID: <span className="text-base">{project.app_name}</span></p>
@@ -94,7 +94,7 @@ const ProjectCardPage = ({projects, history}) => {
                   <div className="col-md-4">
                     <div className="sp-plan-action card-inner">
                       <div className="sp-plan-btn">
-                        <Link to={`/project/${project.app_name}`} className="btn btn-primary">
+                        <Link to={`/project/${project.app_name}/overview`} className="btn btn-primary">
                           <span>More Info</span>
                         </Link>
                       </div>

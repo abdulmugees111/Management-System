@@ -21,7 +21,7 @@ const Sidebar = ({ fixed, theme, className, visibility, sidebarToggle, mobileVie
         <Menu
          sidebarToggle={sidebarToggle}
          mobileView={mobileView}
-         menuData={layout === 'project' ? projectMenu : layout === 'main' ? mainMenu : mainMenu} />
+         menuData={layout === 'project' ? projectMenu() : layout === 'main' ? mainMenu : mainMenu} />
          
       </SimpleBar>
     </div>

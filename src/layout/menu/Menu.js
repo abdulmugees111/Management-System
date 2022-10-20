@@ -308,7 +308,7 @@ const Menu = ({ sidebarToggle, mobileView, menuData, }) => {
             mobileView={mobileView}
           />
         ) : (
-          item.text !== "Applications" && (
+           (
             <MenuItem
               key={item.text}
               link={item.link}

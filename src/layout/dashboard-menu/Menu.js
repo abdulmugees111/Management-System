@@ -307,7 +307,7 @@ const DashboardMenu = ({ sidebarToggle, mobileView }) => {
             mobileView={mobileView}
           />
         ) : (
-          item.text !== "Applications" && (
+          (
             <MenuItem
               key={item.text}
               link={item.link}

@@ -37,14 +37,5 @@ const mainMenu = [
     link: "/account-settings",
   },
 
-  {
-    icon: "grid-alt",
-    text: "Applications",
-    active: false,
-    subMenu: [
-      
-    ],
-  },
-
 ];
 export default mainMenu;

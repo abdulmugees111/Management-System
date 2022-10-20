@@ -28,7 +28,6 @@ const ProjectDetails = () => {
   data
  } = useQuery(['get-project', app_name], () => getProject(app_name))
 
- console.log({isLoading},{error},{data});
  const [sm, updateSm] = useState(false);
 
  return (

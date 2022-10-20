@@ -33,6 +33,21 @@ const routes = [
     exact: true,
   },
   {
+    path: '/project/:app_name/overview',
+    Component: lazy(() => import('./pages/app/projects/ProjectDetails')),
+    exact: true,
+  },
+  {
+    path: '/project/:app_name/domain-ssl',
+    Component: lazy(() => import('./pages/app/projects/domain/Domain')),
+    exact: true,
+  },
+  {
+    path: '/project/:app_name/settings',
+    Component: lazy(() => import('./pages/app/projects/app-settings/Settings')),
+    exact: true,
+  },
+  {
     path: '/',
     Component: lazy(() => import('./pages/app/user/Dashboard')),
     exact: true,
@@ -69,7 +84,7 @@ const routes = [
   },
   {
     path: '/domain-ssl',
-    Component: lazy(() => import('./pages/app/domain/Domain')),
+    Component: lazy(() => import('./pages/app/projects/domain/Domain')),
     exact: true,
   },
   {
