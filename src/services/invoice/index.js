@@ -1,11 +1,10 @@
 import apiClient from "../axios";
 
-export async function register_user(userData) {
+export async function get_invoices() {
   return apiClient
-    .post("/register", userData)
+    .get("/invoices")
     .then((response) => {
       if (response) {
-        console.log({ newuser: response.data });
         return response.data;
       }
       return false;

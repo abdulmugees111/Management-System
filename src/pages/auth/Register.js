@@ -36,19 +36,23 @@ const Register = ({ history }) => {
   const { isFetching, refetch, } = useQuery(["get-project-domain", userData], () => register_user(userData),
   {
     enabled:false,
-    onSuccess:()=>{
-      setUserData({
-        name: "",
-        login: "",
-        password: "",
-        confirm_password: "",
-      });
+    onSuccess:(data)=>{
+      if(data){
+        setUserData({
+          name: "",
+          login: "",
+          password: "",
+          confirm_password: "",
+        });
+        toast.success('Registerd Successfully!')
+      }else{
+      toast.error("Error occured while processing your request!");
 
-      toast.success('Registerd Successfully!')
+      }
+      // 
     },
     onError:()=>{
       toast.error("Error occured while processing your request!");
-
     }
   
   });
@@ -93,6 +97,7 @@ const Register = ({ history }) => {
                     type="text"
                     id="name"
                     name="name"
+                    value={userData.name}
                     placeholder="Enter your name"
                     ref={register({ required: true })}
                     className="form-control-lg form-control"
@@ -113,6 +118,7 @@ const Register = ({ history }) => {
                     bssize="lg"
                     id="default-01"
                     name="email"
+                    value={userData.login}
                     ref={register({ required: true })}
                     className="form-control-lg form-control"
                     placeholder="Enter your email address or username"
@@ -144,6 +150,7 @@ const Register = ({ history }) => {
                     type={passState ? "text" : "password"}
                     id="password"
                     name="passcode"
+                    value={userData.password}
                     ref={register({ required: "This field is required" })}
                     placeholder="Enter your passcode"
                     className={`form-control-lg form-control ${passState ? "is-hidden" : "is-shown"}`}
@@ -176,6 +183,7 @@ const Register = ({ history }) => {
                     type={passState ? "text" : "password"}
                     id="confirm_password"
                     name="confirm_password"
+                    value={userData.confirm_password}
                     ref={register({ required: "This field is required" })}
                     placeholder="Enter your confirm passcode"
                     className={`form-control-lg form-control ${passState ? "is-hidden" : "is-shown"}`}
