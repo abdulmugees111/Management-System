@@ -66,9 +66,9 @@ const Domain = ({ domain }) => {
                     <table className="table table-tranx">
                       <thead>
                         <tr className="tb-tnx-head">
-                          <th className="tb-tnx-id">
+                          {/* <th className="tb-tnx-id">
                             <span className="">id</span>
-                          </th>
+                          </th> */}
                           <th className="tb-tnx-info">
                             <span className="tb-tnx-desc d-none d-sm-inline-block">
                               <span>Name</span>
@@ -84,9 +84,9 @@ const Domain = ({ domain }) => {
                           ? data.results.map((item) => {
                               return (
                                 <tr key={item.id} className="tb-tnx-item">
-                                  <td className="tb-tnx-id">
+                                  {/* <td className="tb-tnx-id">
                                     <span>{item.id}</span>
-                                  </td>
+                                  </td> */}
                                   <td className="tb-tnx-info">
                                     <div className="tb-tnx-desc">
                                       <span className="title">{item.name}</span>
