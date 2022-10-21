@@ -32,23 +32,6 @@ const UserProfileSettingPage = () => {
     <Card className="card-bordered">
      <div className="card-inner-group">
       <div className="card-inner">
-       <div className="between-center flex-wrap flex-md-nowrap g-3">
-        <div className="nk-block-text">
-         <h6>Save my Activity Logs</h6>
-         <p>You can save your all activity logs including unusual activity detected.</p>
-        </div>
-        <div className="nk-block-actions">
-         <ul className="align-center gx-3">
-          <li className="order-md-last">
-           <div className="custom-control custom-switch mr-n2">
-            <InputSwitch checked id="activity-log" />
-           </div>
-          </li>
-         </ul>
-        </div>
-       </div>
-      </div>
-      <div className="card-inner">
        <div className="between-center flex-wrap g-3">
         <div className="nk-block-text">
          <h6>Change Password</h6>
