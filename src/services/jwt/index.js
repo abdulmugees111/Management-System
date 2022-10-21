@@ -22,19 +22,16 @@ export async function login(username, password) {
     .catch(err => console.log(err))
 }
 
-export async function register(email, password, name) {
+export async function register(userData) {
   return apiClient
-    .post('/auth/register', {
-      email,
-      password,
-      name,
-    })
+    .post('/register', userData)
     .then(response => {
       if (response) {
-        const { access_token } = response.data
-        if (access_token) {
-          store.set('access_token', access_token)
-        }
+        // const { access_token } = response.data
+        // if (access_token) {
+        //   store.set('access_token', access_token)
+        // }
+        console.log({newuser:response.data});
         return response.data
       }
       return false

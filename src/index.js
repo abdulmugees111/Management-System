@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import "./assets/scss/dashlite.scss";
 import "./assets/scss/style-email.scss";
 import Router from './router'
-
+import { ToastContainer} from "react-toastify";
 import { Provider } from 'react-redux'
 
 import { createHashHistory } from 'history'
@@ -31,6 +31,18 @@ sagaMiddleware.run(sagas)
 
 ReactDOM.render(
   <Provider store={store}>
+    <ToastContainer
+      position="top-right"
+      autoClose={5000}
+      hideProgressBar
+      newestOnTop={false}
+      closeOnClick
+      rtl={false}
+      pauseOnFocusLoss
+      draggable
+      pauseOnHover
+      theme="light"
+    />
     <QueryClientProvider client={queryClient}>
       <Router history={history} />
     </QueryClientProvider>
