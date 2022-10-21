@@ -18,7 +18,7 @@ export async function getProject(app_name) {
 
 export async function getAllProjects(){
   return apiClient
-    .get(`/get_projects/`, {
+  .get(`/get_projects/`, {
     })
     .then(response => {
       if (response) {
@@ -27,4 +27,19 @@ export async function getAllProjects(){
       return false
     })
     .catch(err => console.log(err))
-}
+  }
+  
+  export async function getProjectDomains(app_name) {
+    return apiClient
+      .get(`/project/${app_name}/domains`, {})
+      .then((response) => {
+        if (response) {
+          return response.data;
+        }
+        return false;
+      })
+      .catch((err) => {
+        console.log(err);
+        return err;
+      });
+  }

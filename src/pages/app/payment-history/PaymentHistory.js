@@ -101,6 +101,7 @@ const PaymentHistory = () => {
   // submit function to add a new item
   const onFormSubmit = (submitData) => {
     const { bill, total } = submitData;
+    
     let submittedData = {
       id: data.length + 1,
       ref: 4970 + data.length,
