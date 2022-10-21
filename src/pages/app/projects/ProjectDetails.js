@@ -10,7 +10,7 @@ import {
  Icon,
  Button,
  BlockBetween,
- PreviewCard,
+ PreviewCard, BackTo
 } from "../../../components/Component";
 import { Row, Col, FormGroup, Spinner } from "reactstrap";
 import { useQuery } from '@tanstack/react-query'
@@ -37,6 +37,9 @@ const ProjectDetails = () => {
     <BlockHead size="sm">
      <BlockBetween>
       <BlockHeadContent>
+       <BackTo link="/projects" icon="arrow-left">
+        Subscriptions
+       </BackTo>
        <BlockTitle page tag="h3">
         Subscription Overview
        </BlockTitle>

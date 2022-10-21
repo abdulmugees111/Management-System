@@ -3,12 +3,13 @@ import { connect } from "react-redux";
 import Head from "../../../../layout/head/Head";
 import Content from "../../../../layout/content/Content";
 import {
+  BackTo,
   Block,
   BlockBetween,
   BlockDes,
   BlockHead,
   BlockHeadContent,
-  BlockTitle,
+  BlockTitle
 } from "../../../../components/block/Block";
 
 import { Card, Spinner } from "reactstrap";
@@ -33,6 +34,9 @@ const Domain = ({ domain }) => {
         <BlockHead size="sm">
           <BlockBetween>
             <BlockHeadContent>
+              <BackTo link="/projects" icon="arrow-left">
+                Subscriptions
+              </BackTo>
               <BlockTitle page tag="h3">
                 Domain(s) and SSL Settings
               </BlockTitle>

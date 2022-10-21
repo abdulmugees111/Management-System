@@ -24,7 +24,7 @@ const ProjectCardPage = ({projects, history}) => {
 
   return (
     <React.Fragment>
-      <Head title="Project Card"></Head>
+      <Head title="My Subscriptions"></Head>
       <Content>
         <BlockHead size="sm">
           <BlockBetween>

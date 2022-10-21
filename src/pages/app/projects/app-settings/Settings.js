@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import Head from "../../../../layout/head/Head";
 import Content from "../../../../layout/content/Content";
 import {
+  BackTo,
   Block,
   BlockBetween,
   BlockDes,
@@ -20,7 +21,6 @@ const mapStateToProps = ({ domain }) => ({
 const Domain = ({ domain }) => {
   const [sm, updateSm] = useState(false);
   const { app_name } = useParams();
-  console.log(app_name)
   return (
     <React.Fragment>
       <Head title="Homepage"></Head>
@@ -28,6 +28,9 @@ const Domain = ({ domain }) => {
         <BlockHead size="sm">
           <BlockBetween>
             <BlockHeadContent>
+              <BackTo link="/projects" icon="arrow-left">
+                Subscriptions
+              </BackTo>
               <BlockTitle page tag="h3">
                 Subscription Settings
               </BlockTitle>
