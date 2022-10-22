@@ -280,26 +280,27 @@ const PaymentHistory = () => {
                 <table className="table table-tranx">
                   <thead>
                     <tr className="tb-tnx-head">
-                      <th className="tb-tnx-info">
-                        <span >
-                          <span>Name</span>
-                        </span>
+
+
+                      <th className="tb-tnx-id">
+                        <span className="">Name</span>
                       </th>
-                      <th>
-                        <span className=" ">
+
+                      <th className="tb-tnx-info">
+                        <span className="tb-tnx-desc d-none d-sm-inline-block">
                           <span>Payment Reference</span>
                         </span>
-                      </th>
-                      <th>
-                        <span >
-                          <span>Status</span>
+                        <span className="tb-tnx-date d-md-inline-block d-none">
+                          <span className="d-none d-md-block">
+                            <span>invoice date</span>
+                          </span>
                         </span>
                       </th>
-                      <th>
-                        <span >
-                          <span>Date</span>
-                        </span>
+
+                      <th className="tb-tnx-amount is-alt">
+                        <span className="tb-tnx-status d-none d-md-inline-block">State</span>
                       </th>
+
                       <th className="tb-tnx-action">
                         <span>&nbsp;</span>
                       </th>
@@ -311,43 +312,35 @@ const PaymentHistory = () => {
                       ? invoices.results.map((item) => {
                           return (
                             <tr key={item.id} className="tb-tnx-item">
-                              {/* <td className="tb-tnx-id">
-                              <a
-                                href="#ref"
-                                onClick={(ev) => {
-                                  ev.preventDefault();
-                                }}
-                              >
-                                <span>{item.ref}</span>
-                              </a>
-                            </td> */}
+                              <td className="tb-tnx-id">
+                                <a
+                                  href="#ref"
+                                  onClick={(ev) => {
+                                    ev.preventDefault();
+                                  }}
+                                >
+                                  <span>{item.name}</span>
+                                </a>
+                              </td>
                               <td className="tb-tnx-info">
                                 <div className="tb-tnx-desc">
-                                  <span className="title">{item.name}</span>
+                                  <span className="title">{item.payment_reference}</span>
                                 </div>
-                              </td>
-                              <td>
-                                <div >
-                                  <span>{item.payment_reference}</span>
+                                <div className="tb-tnx-date">
+                                  <span className="date">20-20-2022</span>
                                 </div>
                               </td>
                               <td className="tb-tnx-amount is-alt">
                                 <div className="tb-tnx-status">
                                   <span
                                     className={`badge badge-dot badge-${
-                                      item.state === "Paid" ? "success" : item.state === "Due" ? "warning" : "danger"
+                                      item.state === "posted" ? "success" : item.state === "Due" ? "warning" : "danger"
                                     }`}
                                   >
                                     {item.state}
                                   </span>
                                 </div>
                               </td>
-                              <td>
-                                <div >
-                                  <span>{item.invoice_date}</span>
-                                </div>
-                              </td>
-
                               <td className="tb-tnx-action">
                                 <UncontrolledDropdown>
                                   <DropdownToggle
