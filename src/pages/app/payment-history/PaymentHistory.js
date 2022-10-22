@@ -321,7 +321,7 @@ const PaymentHistory = () => {
                                   <span className="title">{item.payment_reference}</span>
                                 </div>
                                 <div className="tb-tnx-date">
-                                  <span className="date">20-20-2022</span>
+                                  <span className="date">{item.invoice_date}</span>
                                 </div>
                               </td>
                               <td className="tb-tnx-amount is-alt">
