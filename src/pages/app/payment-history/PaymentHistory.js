@@ -280,12 +280,9 @@ const PaymentHistory = () => {
                 <table className="table table-tranx">
                   <thead>
                     <tr className="tb-tnx-head">
-
-
                       <th className="tb-tnx-id">
                         <span className="">Name</span>
                       </th>
-
                       <th className="tb-tnx-info">
                         <span className="tb-tnx-desc d-none d-sm-inline-block">
                           <span>Payment Reference</span>
@@ -296,17 +293,14 @@ const PaymentHistory = () => {
                           </span>
                         </span>
                       </th>
-
                       <th className="tb-tnx-amount is-alt">
                         <span className="tb-tnx-status d-none d-md-inline-block">State</span>
                       </th>
-
                       <th className="tb-tnx-action">
                         <span>&nbsp;</span>
                       </th>
                     </tr>
                   </thead>
-
                   <tbody>
                     {invoices && invoices.count > 0
                       ? invoices.results.map((item) => {
@@ -364,7 +358,7 @@ const PaymentHistory = () => {
                                             ev.preventDefault();
                                           }}
                                         >
-                                          View
+                                          Edit
                                         </DropdownItem>
                                       </li>
                                       <li>
@@ -375,7 +369,7 @@ const PaymentHistory = () => {
                                             ev.preventDefault();
                                           }}
                                         >
-                                          Print
+                                          Remove
                                         </DropdownItem>
                                       </li>
                                     </ul>
