@@ -1,62 +1,121 @@
 import React, { useState } from "react";
 import Head from "../../../layout/head/Head";
-import DatePicker from "react-datepicker";
-import { Modal, ModalBody, FormGroup } from "reactstrap";
+
+import { Spinner, Modal, ModalBody, FormGroup } from "reactstrap";
 import {
- Block,
- BlockBetween,
- BlockDes,
- BlockHead,
- BlockHeadContent,
- BlockTitle,
- Icon,
- Row,
- Col,
- Button,
- RSelect,
+  Block,
+  BlockBetween,
+  BlockDes,
+  BlockHead,
+  BlockHeadContent,
+  BlockTitle,
+  Icon,
+  Row,
+  Col,
+  Button,
+  RSelect,
 } from "../../../components/Component";
 import { countryOptions, userData } from "./UserData";
 import { getDateStructured } from "../../../utils/Utils";
 import { withRouter } from "react-router";
-import { connect } from 'react-redux';
-import { useQuery } from '@tanstack/react-query';
-import {get_user_data} from '../../../services/user/index'
+import { connect } from "react-redux";
+import { useQuery } from "@tanstack/react-query";
+import { get_countries, get_states, get_user_data, update_user_data } from "../../../services/user/index";
+import { reFormat } from "../../../utils/formattors";
 
-const UserProfile = ({user}) => {
-    const {partner_id } = user;
- const [modalTab, setModalTab] = useState("1");
- const [userInfo, setUserInfo] = useState(userData[0]);
- const [formData, setFormData] = useState({
-  name: "Abu Bin Ishtiak",
-  displayName: "Ishtiak",
-  phone: "818474958",
-  dob: "1980-08-10",
-  address: "2337 Kildeer Drive",
-  address2: "",
-  state: "Kentucky",
-  country: "Canada",
- });
- const [modal, setModal] = useState(false);
+const UserProfile = ({ user }) => {
+  const [formData, setFormData] = useState({
+    name: "",
+    phone: "",
+    address: "",
+    address2: "",
+    vat: "",
+    state_id: {
+      id: 0,
+      name: "",
+    },
+    country_id: {
+      id: 0,
+      name: "",
+    },
+  });
 
- const onInputChange = (e) => {
-  setFormData({ ...formData, [e.target.name]: e.target.value });
- };
+  const { partner_id } = user;
+  const { isLoading, error, data } = useQuery(["get-user-data", partner_id], () => get_user_data(partner_id), {
+    onSuccess: (data) => {
+      if (data) {
+        setFormData({
+          name: data.name,
+          phone: data.phone,
+          address: data.street,
+          address2: "",
+          vat: data.vat,
+          company_name: data.company_name,
+          state: data.state_id
+            ? data.state_id
+            : {
+                id: "",
+                name: "",
+              },
+          country_id: data.country_id
+            ? data.country_id
+            : {
+                id: "",
+                name: "",
+              },
+        });
+      }
+    },
+  });
 
- const submitForm = () => {
-  let submitData = {
-   ...formData,
+  const { isFetching: updateDataLoading, refetch:updateUser } = useQuery(
+    ["update-user-data", partner_id],
+    () => update_user_data(partner_id, formData),
+    {
+      enabled: false,
+      onSuccess: (data) => {
+        if (data) {
+          setFormData({
+            name: data.name,
+            phone: data.phone,
+            address: data.street,
+            address2: "",
+            vat: data.vat,
+            company_name: data.company_name,
+            state: data.state_id ? data.state_id.name : "",
+            country: data.country_id ? data.country_id.name : "",
+          });
+        }
+        console.log({ updateDataLoading }, { data });
+      },
+    }
+  );
+
+  const { data: countriesList } = useQuery(["get-countries"], get_countries);
+  const { data: statesList } = useQuery(["get-states", formData.country_id.id],
+   () =>
+    get_states(formData.country_id.id)
+  );
+ 
+  const [modal, setModal] = useState(false);
+
+  const onInputChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
-  setUserInfo(submitData);
-  setModal(false);
- };
 
-  const { isLoading, error, data } = useQuery(["get-user-data", partner_id], () => get_user_data(partner_id));
+  const submitForm = () => {
+    // let submitData = {
+    //   ...formData,
+    // };
+    // setUserInfo(submitData);
+    updateUser();
+    console.log({ formData });
+    
+  };
 
-if (isLoading){
-    return(
-        <>Loading...</>
-    )
-}
+  if (isLoading) {
+    return <>Loading...</>;
+  }
   return (
     <React.Fragment>
       <Head title="User List - Profile"></Head>
@@ -87,17 +146,6 @@ if (isLoading){
               </span>
             </div>
           </div>
-          {/* <div className="data-item" onClick={() => setModal(true)}>
-            <div className="data-col">
-              <span className="data-label">Display Name</span>
-              <span className="data-value">----</span>
-            </div>
-            <div className="data-col data-col-end">
-              <span className="data-more">
-                <Icon name="forward-ios"></Icon>
-              </span>
-            </div>
-          </div> */}
           <div className="data-item">
             <div className="data-col">
               <span className="data-label">Email</span>
@@ -122,6 +170,17 @@ if (isLoading){
           </div>
           <div className="data-item" onClick={() => setModal(true)}>
             <div className="data-col">
+              <span className="data-label">Company Name</span>
+              <span className="data-value text-soft">{data.company_name}</span>
+            </div>
+            <div className="data-col data-col-end">
+              <span className="data-more">
+                <Icon name="forward-ios"></Icon>
+              </span>
+            </div>
+          </div>
+          <div className="data-item" onClick={() => setModal(true)}>
+            <div className="data-col">
               <span className="data-label">VAT</span>
               <span className="data-value text-soft">{data.vat}</span>
             </div>
@@ -131,24 +190,14 @@ if (isLoading){
               </span>
             </div>
           </div>
-          {/* <div className="data-item" onClick={() => setModal(true)}>
-            <div className="data-col">
-              <span className="data-label">Date of Birth</span>
-              <span className="data-value">----</span>
-            </div>
-            <div className="data-col data-col-end">
-              <span className="data-more">
-                <Icon name="forward-ios"></Icon>
-              </span>
-            </div>
-          </div> */}
+
           <div className="data-item" onClick={() => setModal(true)}>
             <div className="data-col">
               <span className="data-label">Address</span>
               <span className="data-value">
                 {data.street},
                 <br />
-                {data.zip}, {data.city}, {data.country_id.name}
+                {data.zip}, {data.city}, {data.country_id ? data.country_id.name : ""}
               </span>
             </div>
             <div className="data-col data-col-end">
@@ -196,23 +245,6 @@ if (isLoading){
               </a>
             </div>
           </div>
-          {/* <div className="data-item">
-            <div className="data-col">
-              <span className="data-label">Timezone</span>
-              <span className="data-value">Bangladesh (GMT +6)</span>
-            </div>
-            <div className="data-col data-col-end">
-              <a
-                href="#link"
-                onClick={(ev) => {
-                  ev.preventDefault();
-                }}
-                className="link link-primary"
-              >
-                Change
-              </a>
-            </div>
-          </div> */}
         </div>
       </Block>
 
@@ -230,34 +262,10 @@ if (isLoading){
           </a>
           <div className="p-2">
             <h5 className="title">Update Profile</h5>
-            <ul className="nk-nav nav nav-tabs">
-              <li className="nav-item">
-                <a
-                  className={`nav-link ${modalTab === "1" && "active"}`}
-                  onClick={(ev) => {
-                    ev.preventDefault();
-                    setModalTab("1");
-                  }}
-                  href="#personal"
-                >
-                  Personal
-                </a>
-              </li>
-              <li className="nav-item">
-                <a
-                  className={`nav-link ${modalTab === "2" && "active"}`}
-                  onClick={(ev) => {
-                    ev.preventDefault();
-                    setModalTab("2");
-                  }}
-                  href="#address"
-                >
-                  Address
-                </a>
-              </li>
-            </ul>
+            <br />
+
             <div className="tab-content">
-              <div className={`tab-pane ${modalTab === "1" ? "active" : ""}`} id="personal">
+              <div className={`tab-pane active`} id="personal">
                 <Row className="gy-4">
                   <Col md="6">
                     <FormGroup>
@@ -277,17 +285,18 @@ if (isLoading){
                   </Col>
                   <Col md="6">
                     <FormGroup>
-                      <label className="form-label" htmlFor="display-name">
-                        Display Name
+                      <label className="form-label" htmlFor="company-name">
+                        Company Name
                       </label>
                       <input
+                        required
                         type="text"
-                        id="display-name"
+                        id="company-name"
                         className="form-control"
-                        name="displayName"
+                        name="company_name"
                         onChange={(e) => onInputChange(e)}
-                        defaultValue={formData.displayName}
-                        placeholder="Enter display name"
+                        defaultValue={formData.company_name}
+                        placeholder="Enter Company name"
                       />
                     </FormGroup>
                   </Col>
@@ -297,6 +306,7 @@ if (isLoading){
                         Phone Number
                       </label>
                       <input
+                        required
                         type="number"
                         id="phone-no"
                         className="form-control"
@@ -309,57 +319,22 @@ if (isLoading){
                   </Col>
                   <Col md="6">
                     <FormGroup>
-                      <label className="form-label" htmlFor="birth-day">
-                        Date of Birth
+                      <label className="form-label" htmlFor="vat">
+                        VAT
                       </label>
-                      <DatePicker
-                        selected={new Date(formData.dob)}
+                      <input
+                        required
+                        type="number"
+                        id="vat"
                         className="form-control"
-                        onChange={(date) => setFormData({ ...formData, dob: getDateStructured(date) })}
-                        maxDate={new Date()}
+                        name="vat"
+                        onChange={(e) => onInputChange(e)}
+                        defaultValue={formData.vat}
+                        placeholder="VAT"
                       />
                     </FormGroup>
                   </Col>
-                  <Col size="12">
-                    <div className="custom-control custom-switch">
-                      <input type="checkbox" className="custom-control-input form-control" id="latest-sale" />
-                      <label className="custom-control-label" htmlFor="latest-sale">
-                        Use full name to display{" "}
-                      </label>
-                    </div>
-                  </Col>
-                  <Col size="12">
-                    <ul className="align-center flex-wrap flex-sm-nowrap gx-4 gy-2">
-                      <li>
-                        <Button
-                          color="primary"
-                          size="lg"
-                          onClick={(ev) => {
-                            ev.preventDefault();
-                            submitForm();
-                          }}
-                        >
-                          Update Profile
-                        </Button>
-                      </li>
-                      <li>
-                        <a
-                          href="#dropdownitem"
-                          onClick={(ev) => {
-                            ev.preventDefault();
-                            setModal(false);
-                          }}
-                          className="link link-light"
-                        >
-                          Cancel
-                        </a>
-                      </li>
-                    </ul>
-                  </Col>
-                </Row>
-              </div>
-              <div className={`tab-pane ${modalTab === "2" ? "active" : ""}`} id="address">
-                <Row className="gy-4">
+
                   <Col md="6">
                     <FormGroup>
                       <label className="form-label" htmlFor="address-l1">
@@ -390,44 +365,55 @@ if (isLoading){
                       />
                     </FormGroup>
                   </Col>
-                  <Col md="6">
-                    <FormGroup>
-                      <label className="form-label" htmlFor="address-st">
-                        State
-                      </label>
-                      <input
-                        type="text"
-                        id="address-st"
-                        name="state"
-                        onChange={(e) => onInputChange(e)}
-                        defaultValue={formData.state}
-                        className="form-control"
-                      />
-                    </FormGroup>
-                  </Col>
+
                   <Col md="6">
                     <FormGroup>
                       <label className="form-label" htmlFor="address-county">
                         Country
                       </label>
                       <RSelect
-                        options={countryOptions}
+                        options={countriesList ? reFormat(countriesList) : []}
                         placeholder="Select a country"
                         defaultValue={[
                           {
-                            value: formData.country,
-                            label: formData.country,
+                            value: formData.country_id.id,
+                            label: formData.country_id.name,
                           },
                         ]}
-                        onChange={(e) => setFormData({ ...formData, country: e.value })}
+                        onChange={(e) => setFormData({ ...formData, country_id: { id: e.value, label: e.label } })}
+                      />
+                    </FormGroup>
+                  </Col>
+                  <Col md="6">
+                    <FormGroup>
+                      <label className="form-label" htmlFor="address-st">
+                        State
+                      </label>
+                      <RSelect
+                        options={statesList ? reFormat(statesList) : []}
+                        placeholder="Select a state"
+                        defaultValue={[
+                          {
+                            value: formData.state_id?.id,
+                            label: formData.state_id?.name,
+                          },
+                        ]}
+                        onChange={(e) => setFormData({ ...formData, state_id: { id: e.value, name: e.label } })}
                       />
                     </FormGroup>
                   </Col>
                   <Col size="12">
                     <ul className="align-center flex-wrap flex-sm-nowrap gx-4 gy-2">
                       <li>
-                        <Button color="primary" size="lg" onClick={() => submitForm()}>
-                          Update Address
+                        <Button
+                          color="primary"
+                          size="lg"
+                          onClick={(ev) => {
+                            ev.preventDefault();
+                            submitForm();
+                          }}
+                        >
+                          {updateDataLoading ? <Spinner size="sm" color="light" /> : "Update Profile"}
                         </Button>
                       </li>
                       <li>
@@ -447,12 +433,12 @@ if (isLoading){
                 </Row>
               </div>
             </div>
+            
           </div>
         </ModalBody>
       </Modal>
     </React.Fragment>
   );
-
 };
 const mapStateToProps = ({ user, dispatch }) => ({
   user: user,
