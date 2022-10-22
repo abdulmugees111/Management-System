@@ -120,6 +120,17 @@ if (isLoading){
               </span>
             </div>
           </div>
+          <div className="data-item" onClick={() => setModal(true)}>
+            <div className="data-col">
+              <span className="data-label">VAT</span>
+              <span className="data-value text-soft">{data.vat}</span>
+            </div>
+            <div className="data-col data-col-end">
+              <span className="data-more">
+                <Icon name="forward-ios"></Icon>
+              </span>
+            </div>
+          </div>
           {/* <div className="data-item" onClick={() => setModal(true)}>
             <div className="data-col">
               <span className="data-label">Date of Birth</span>
