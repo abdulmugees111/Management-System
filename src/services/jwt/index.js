@@ -47,10 +47,6 @@ export async function currentAccount() {
     .get(`/res.users/${uid}`)
     .then(response => {
       if (response) {
-        // const { access_token } = response.data
-        // if (access_token) {
-        //   store.set('access_token', access_token)
-        // }
         return response.data
       }
       return false

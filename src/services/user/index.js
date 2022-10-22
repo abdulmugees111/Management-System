@@ -15,3 +15,18 @@ export async function register_user(userData) {
       throw new Error(err);
     });
 }
+
+export async function get_user_data(partner_id) {
+  return apiClient
+    .get(`/res.partner/${partner_id}`)
+    .then((response) => {
+      if (response) {
+        return response.data;
+      }
+      return false;
+    })
+    .catch((err) => {
+      console.log(err);
+      throw new Error(err);
+    });
+}
