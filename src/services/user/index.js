@@ -16,9 +16,9 @@ export async function register_user(userData) {
     });
 }
 
-export async function get_user_data(partner_id) {
+export async function get_user_data() {
   return apiClient
-    .get(`/res.partner/${partner_id}`)
+    .get(`/user-profile`)
     .then((response) => {
       if (response) {
         return response.data;
@@ -50,7 +50,7 @@ export async function update_password(formData) {
 }
 export async function update_user_data(partner_id, formData) {
   return apiClient
-    .put(`/res.partner/${partner_id}`,formData)
+    .put(`/user-profile`, { ...formData, country_id: formData.country_id[0], state_id: formData.state_id[0] })
     .then((response) => {
       if (response) {
         return response.data;
@@ -62,6 +62,7 @@ export async function update_user_data(partner_id, formData) {
       throw new Error(err);
     });
 }
+
 export async function get_countries() {
   return apiClient
     .get(`/res.country`)

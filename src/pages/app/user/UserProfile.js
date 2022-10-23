@@ -22,50 +22,31 @@ import { connect } from "react-redux";
 import { useQuery } from "@tanstack/react-query";
 import { get_countries, get_states, get_user_data, update_user_data } from "../../../services/user/index";
 import { reFormat } from "../../../utils/formattors";
+import { toast } from 'react-toastify';
 
 const UserProfile = ({ user }) => {
+ 
   const [formData, setFormData] = useState({
     name: "",
     phone: "",
-    address: "",
-    address2: "",
+    street: "",
     vat: "",
-    state_id: {
-      id: 0,
-      name: "",
-    },
-    country_id: {
-      id: 0,
-      name: "",
-    },
+    email:"",
+    country_id:[],
+    state_id:[]
   });
+
+
 
   const { partner_id } = user;
   const { isLoading, error, data } = useQuery(["get-user-data", partner_id], () => get_user_data(partner_id), {
     onSuccess: (data) => {
       if (data) {
         setFormData({
-          name: data.name,
-          phone: data.phone,
-          address: data.street,
-          address2: "",
-          vat: data.vat,
-          company_name: data.company_name,
-          state: data.state_id
-            ? data.state_id
-            : {
-                id: "",
-                name: "",
-              },
-          country_id: data.country_id
-            ? data.country_id
-            : {
-                id: "",
-                name: "",
-              },
+      ...(delete data.id && data)
         });
       }
-    },
+    },onError:()=>toast.error("Error occured while processing your request")
   });
 
   const { isFetching: updateDataLoading, refetch:updateUser } = useQuery(
@@ -82,8 +63,6 @@ const UserProfile = ({ user }) => {
             address2: "",
             vat: data.vat,
             company_name: data.company_name,
-            state: data.state_id ? data.state_id.name : "",
-            country: data.country_id ? data.country_id.name : "",
           });
         }
         console.log({ updateDataLoading }, { data });
@@ -92,9 +71,10 @@ const UserProfile = ({ user }) => {
   );
 
   const { data: countriesList } = useQuery(["get-countries"], get_countries);
-  const { data: statesList } = useQuery(["get-states", formData.country_id.id],
-   () =>
-    get_states(formData.country_id.id)
+  const { data: statesList } = useQuery(["get-states", formData.country_id[0]], () =>
+    get_states(formData.country_id[0],{
+      enabled:false
+    })
   );
  
   const [modal, setModal] = useState(false);
@@ -337,30 +317,30 @@ const UserProfile = ({ user }) => {
 
                   <Col md="6">
                     <FormGroup>
-                      <label className="form-label" htmlFor="address-l1">
-                        Address Line 1
+                      <label className="form-label" htmlFor="street">
+                        Street
                       </label>
                       <input
                         type="text"
-                        id="address-l1"
-                        name="address"
+                        id="street"
+                        name="street"
                         onChange={(e) => onInputChange(e)}
-                        defaultValue={formData.address}
+                        defaultValue={formData.street}
                         className="form-control"
                       />
                     </FormGroup>
                   </Col>
                   <Col md="6">
                     <FormGroup>
-                      <label className="form-label" htmlFor="address-l2">
-                        Address Line 2
+                      <label className="form-label" htmlFor="email">
+                        Email
                       </label>
                       <input
-                        type="text"
-                        id="address-l2"
-                        name="address2"
+                        type="email"
+                        id="email"
+                        name="email"
                         onChange={(e) => onInputChange(e)}
-                        defaultValue={formData.address2}
+                        defaultValue={formData.email}
                         className="form-control"
                       />
                     </FormGroup>
@@ -376,14 +356,15 @@ const UserProfile = ({ user }) => {
                         placeholder="Select a country"
                         defaultValue={[
                           {
-                            value: formData.country_id.id,
-                            label: formData.country_id.name,
+                            value: formData.country_id[0],
+                            label: formData.country_id[1],
                           },
                         ]}
-                        onChange={(e) => setFormData({ ...formData, country_id: { id: e.value, label: e.label } })}
+                        onChange={(e) => setFormData({ ...formData, country_id: [e.value, e.label] })}
                       />
                     </FormGroup>
                   </Col>
+
                   <Col md="6">
                     <FormGroup>
                       <label className="form-label" htmlFor="address-st">
@@ -394,11 +375,11 @@ const UserProfile = ({ user }) => {
                         placeholder="Select a state"
                         defaultValue={[
                           {
-                            value: formData.state_id?.id,
-                            label: formData.state_id?.name,
+                            value: formData.state_id[0],
+                            label: formData.state_id[1],
                           },
                         ]}
-                        onChange={(e) => setFormData({ ...formData, state_id: { id: e.value, name: e.label } })}
+                        onChange={(e) => setFormData({ ...formData, state_id: [e.value, e.label]})}
                       />
                     </FormGroup>
                   </Col>
@@ -433,7 +414,6 @@ const UserProfile = ({ user }) => {
                 </Row>
               </div>
             </div>
-            
           </div>
         </ModalBody>
       </Modal>
