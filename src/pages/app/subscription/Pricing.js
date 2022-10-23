@@ -13,7 +13,7 @@ import {
   Row,
 } from "../../../components/Component";
 import { Card } from "reactstrap";
-
+import {pricingTableDataV2} from './data'
 const PricingTable = () => {
   return (
     <React.Fragment>
@@ -22,7 +22,7 @@ const PricingTable = () => {
         <BlockHead size="sm">
           <BlockBetween className="g-3">
             <BlockContent>
-              <BlockTitle>Pricing Table</BlockTitle>
+              <BlockTitle>Tajr Pricing</BlockTitle>
               <BlockDes className="text-soft">
                 <p>Choose your pricing plan and start enjoying our service.</p>
               </BlockDes>
@@ -31,20 +31,10 @@ const PricingTable = () => {
         </BlockHead>
 
         <Block size="lg">
-          <BlockHead>
-            <BlockBetween className="g-3">
-              <BlockContent>
-                <BlockTitle>Pricing Table V2</BlockTitle>
-                <BlockDes className="text-soft">
-                  <p>Choose your pricing plan and start enjoying our service.</p>
-                </BlockDes>
-              </BlockContent>
-            </BlockBetween>
-          </BlockHead>
           <Row className="g-gs">
-            {{}.map((item) => {
+            {pricingTableDataV2.map((item) => {
               return (
-                <Col md={6} key={item.id}>
+                <Col md={6} xl="4" key={item.id}>
                   <Card className={`card-bordered pricing text-center ${item.tags ? "recommend" : ""}`}>
                     {item.tags && (
                       <Badge color="primary" className="pricing-badge">
