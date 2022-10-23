@@ -48,9 +48,9 @@ export async function update_password(formData) {
       throw new Error(err);
     });
 }
-export async function update_user_data(partner_id, formData) {
+export async function update_user_data(formData) {
   return apiClient
-    .put(`/user-profile`, { ...formData, country_id: formData.country_id[0], state_id: formData.state_id[0] })
+    .post(`/user-profile`, { ...formData, country_id: formData.country_id[0], state_id: formData.state_id[0] })
     .then((response) => {
       if (response) {
         return response.data;

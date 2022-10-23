@@ -24,7 +24,7 @@ import { get_countries, get_states, get_user_data, update_user_data } from "../.
 import { reFormat } from "../../../utils/formattors";
 import { toast } from 'react-toastify';
 
-const UserProfile = ({ user }) => {
+const UserProfile = () => {
  
   const [formData, setFormData] = useState({
     name: "",
@@ -37,9 +37,7 @@ const UserProfile = ({ user }) => {
   });
 
 
-
-  const { partner_id } = user;
-  const { isLoading, error, data } = useQuery(["get-user-data", partner_id], () => get_user_data(partner_id), {
+  const { isLoading, error, data, refetch:getUserRefetch } = useQuery(["get-user-data"], get_user_data, {
     onSuccess: (data) => {
       if (data) {
         setFormData({
@@ -50,31 +48,28 @@ const UserProfile = ({ user }) => {
   });
 
   const { isFetching: updateDataLoading, refetch:updateUser } = useQuery(
-    ["update-user-data", partner_id],
-    () => update_user_data(partner_id, formData),
+    ["update-user-data"],
+    () => update_user_data(formData),
     {
       enabled: false,
       onSuccess: (data) => {
         if (data) {
-          setFormData({
-            name: data.name,
-            phone: data.phone,
-            address: data.street,
-            address2: "",
-            vat: data.vat,
-            company_name: data.company_name,
-          });
+          setModal(false)
+            getUserRefetch()
+            toast.success("Profile successfully updated")
+        }else{
+       toast.error("Error processing your request");
+
         }
-        console.log({ updateDataLoading }, { data });
+        
       },
+      onError:()=>toast.error("Error processing your request")
     }
   );
 
   const { data: countriesList } = useQuery(["get-countries"], get_countries);
   const { data: statesList } = useQuery(["get-states", formData.country_id[0]], () =>
-    get_states(formData.country_id[0],{
-      enabled:false
-    })
+    get_states(formData.country_id[0])
   );
  
   const [modal, setModal] = useState(false);
