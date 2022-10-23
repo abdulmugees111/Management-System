@@ -83,6 +83,11 @@ const routes = [
     exact: true,
   },
   {
+    path: '/pricing',
+    Component: lazy(() => import('./pages/app/subscription/Pricing')),
+    exact: true,
+  },
+  {
     path: '/domain-ssl',
     Component: lazy(() => import('./pages/app/projects/domain/Domain')),
     exact: true,
