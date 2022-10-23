@@ -31,6 +31,8 @@ import {
 import { statusOptions, paymentData } from "./Invoice";
 import { dateFormatterAlt } from "../../../utils/Utils";
 import { useForm } from "react-hook-form";
+import { useQuery } from '@tanstack/react-query';
+import { get_invoices } from "../../../services/invoice";
 
 const PaymentHistory = () => {
   const [onSearch, setonSearch] = useState(true);
@@ -136,6 +138,7 @@ const PaymentHistory = () => {
 
   const { errors, register, handleSubmit } = useForm();
 
+  const { isLoading, error, data:invoices } = useQuery(["get-invoices"], get_invoices);
   return (
     <React.Fragment>
       <Head title="Payment History"></Head>
@@ -278,23 +281,20 @@ const PaymentHistory = () => {
                   <thead>
                     <tr className="tb-tnx-head">
                       <th className="tb-tnx-id">
-                        <span className="">#</span>
+                        <span className="">Name</span>
                       </th>
                       <th className="tb-tnx-info">
                         <span className="tb-tnx-desc d-none d-sm-inline-block">
-                          <span>Bill For</span>
+                          <span>Payment Reference</span>
                         </span>
                         <span className="tb-tnx-date d-md-inline-block d-none">
-                          <span className="d-md-none">Date</span>
                           <span className="d-none d-md-block">
-                            <span>Issue Date</span>
-                            <span>Due Date</span>
+                            <span>invoice date</span>
                           </span>
                         </span>
                       </th>
                       <th className="tb-tnx-amount is-alt">
-                        <span className="tb-tnx-total">Total</span>
-                        <span className="tb-tnx-status d-none d-md-inline-block">Status</span>
+                        <span className="tb-tnx-status d-none d-md-inline-block">State</span>
                       </th>
                       <th className="tb-tnx-action">
                         <span>&nbsp;</span>
@@ -302,86 +302,83 @@ const PaymentHistory = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    {currentItems.length > 0
-                      ? currentItems.map((item) => {
-                        return (
-                          <tr key={item.id} className="tb-tnx-item">
-                            <td className="tb-tnx-id">
-                              <a
-                                href="#ref"
-                                onClick={(ev) => {
-                                  ev.preventDefault();
-                                }}
-                              >
-                                <span>{item.ref}</span>
-                              </a>
-                            </td>
-                            <td className="tb-tnx-info">
-                              <div className="tb-tnx-desc">
-                                <span className="title">{item.bill}</span>
-                              </div>
-                              <div className="tb-tnx-date">
-                                <span className="date">{item.issue}</span>
-                                <span className="date">{item.due}</span>
-                              </div>
-                            </td>
-                            <td className="tb-tnx-amount is-alt">
-                              <div className="tb-tnx-total">
-                                <span className="amount">${item.total}</span>
-                              </div>
-                              <div className="tb-tnx-status">
-                                <span
-                                  className={`badge badge-dot badge-${item.status === "Paid" ? "success" : item.status === "Due" ? "warning" : "danger"
+                    {invoices && invoices.count > 0
+                      ? invoices.results.map((item) => {
+                          return (
+                            <tr key={item.id} className="tb-tnx-item">
+                              <td className="tb-tnx-id">
+                                <a
+                                  href="#ref"
+                                  onClick={(ev) => {
+                                    ev.preventDefault();
+                                  }}
+                                >
+                                  <span>{item.name}</span>
+                                </a>
+                              </td>
+                              <td className="tb-tnx-info">
+                                <div className="tb-tnx-desc">
+                                  <span className="title">{item.payment_reference}</span>
+                                </div>
+                                <div className="tb-tnx-date">
+                                  <span className="date">{item.invoice_date}</span>
+                                </div>
+                              </td>
+                              <td className="tb-tnx-amount is-alt">
+                                <div className="tb-tnx-status">
+                                  <span
+                                    className={`badge badge-dot badge-${
+                                      item.state === "posted" ? "success" : item.state === "Due" ? "warning" : "danger"
                                     }`}
-                                >
-                                  {item.status}
-                                </span>
-                              </div>
-                            </td>
-                            <td className="tb-tnx-action">
-                              <UncontrolledDropdown>
-                                <DropdownToggle
-                                  tag="a"
-                                  className="text-soft dropdown-toggle btn btn-icon btn-trigger"
-                                >
-                                  <Icon name="more-h"></Icon>
-                                </DropdownToggle>
-                                <DropdownMenu right>
-                                  <ul className="link-list-plain">
-                                    <li
-                                      onClick={() => {
-                                        loadDetail(item.id);
-                                        setViewModal(true);
-                                      }}
-                                    >
-                                      <DropdownItem
-                                        tag="a"
-                                        href="#view"
-                                        onClick={(ev) => {
-                                          ev.preventDefault();
+                                  >
+                                    {item.state}
+                                  </span>
+                                </div>
+                              </td>
+                              <td className="tb-tnx-action">
+                                <UncontrolledDropdown>
+                                  <DropdownToggle
+                                    tag="a"
+                                    className="text-soft dropdown-toggle btn btn-icon btn-trigger"
+                                  >
+                                    <Icon name="more-h"></Icon>
+                                  </DropdownToggle>
+                                  <DropdownMenu right>
+                                    <ul className="link-list-plain">
+                                      <li
+                                        onClick={() => {
+                                          loadDetail(item.id);
+                                          setViewModal(true);
                                         }}
                                       >
-                                        View
-                                      </DropdownItem>
-                                    </li>
-                                    <li>
-                                      <DropdownItem
-                                        tag="a"
-                                        href="#print"
-                                        onClick={(ev) => {
-                                          ev.preventDefault();
-                                        }}
-                                      >
-                                        Print
-                                      </DropdownItem>
-                                    </li>
-                                  </ul>
-                                </DropdownMenu>
-                              </UncontrolledDropdown>
-                            </td>
-                          </tr>
-                        );
-                      })
+                                        <DropdownItem
+                                          tag="a"
+                                          href="#view"
+                                          onClick={(ev) => {
+                                            ev.preventDefault();
+                                          }}
+                                        >
+                                          Edit
+                                        </DropdownItem>
+                                      </li>
+                                      <li>
+                                        <DropdownItem
+                                          tag="a"
+                                          href="#print"
+                                          onClick={(ev) => {
+                                            ev.preventDefault();
+                                          }}
+                                        >
+                                          Remove
+                                        </DropdownItem>
+                                      </li>
+                                    </ul>
+                                  </DropdownMenu>
+                                </UncontrolledDropdown>
+                              </td>
+                            </tr>
+                          );
+                        })
                       : null}
                   </tbody>
                 </table>

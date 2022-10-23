@@ -28,48 +28,48 @@ const myErrorHandler = (error, info) => {
 const routes = [
   // Dashboards
   {
-    path: '/project/:app_name',
-    Component: lazy(() => import('./pages/app/projects/ProjectDetails')),
+    path: "/project/:app_name",
+    Component: lazy(() => import("./pages/app/projects/ProjectDetails")),
     exact: true,
   },
   {
-    path: '/project/:app_name/overview',
-    Component: lazy(() => import('./pages/app/projects/ProjectDetails')),
+    path: "/project/:app_name/overview",
+    Component: lazy(() => import("./pages/app/projects/ProjectDetails")),
     exact: true,
   },
   {
-    path: '/project/:app_name/domain-ssl',
-    Component: lazy(() => import('./pages/app/projects/domain/Domain')),
+    path: "/project/:app_name/domain-ssl",
+    Component: lazy(() => import("./pages/app/projects/domain/Domain")),
     exact: true,
   },
   {
-    path: '/project/:app_name/settings',
-    Component: lazy(() => import('./pages/app/projects/app-settings/Settings')),
+    path: "/project/:app_name/settings",
+    Component: lazy(() => import("./pages/app/projects/app-settings/Settings")),
     exact: true,
   },
   {
-    path: '/',
-    Component: lazy(() => import('./pages/app/user/Dashboard')),
+    path: "/",
+    Component: lazy(() => import("./pages/app/user/Dashboard")),
     exact: true,
   },
   {
-    path: '/dashboard',
-    Component: lazy(() => import('./pages/app/user/Dashboard')),
+    path: "/dashboard",
+    Component: lazy(() => import("./pages/app/user/Dashboard")),
     exact: true,
   },
   {
-    path: '/invoices',
-    Component: lazy(() => import('./pages/app/payment-history/PaymentHistory')),
+    path: "/invoices",
+    Component: lazy(() => import("./pages/app/payment-history/PaymentHistory")),
     exact: true,
   },
   {
-    path: '/account-settings',
-    Component: lazy(() => import('./pages/app/user/AccountSettings')),
+    path: "/account-settings",
+    Component: lazy(() => import("./pages/app/user/AccountSettings")),
     exact: true,
   },
   {
-    path: '/user-profile',
-    Component: lazy(() => import('./pages/app/user/UserProfile')),
+    path: "/user-profile",
+    Component: lazy(() => import("./pages/app/user/UserProfile")),
     exact: true,
   },
   // {
@@ -78,34 +78,34 @@ const routes = [
   //   exact: true,
   // },
   {
-    path: '/projects',
-    Component: lazy(() => import('./pages/app/projects/Projects')),
+    path: "/projects",
+    Component: lazy(() => import("./pages/app/projects/Projects")),
     exact: true,
   },
   {
-    path: '/pricing',
-    Component: lazy(() => import('./pages/app/subscription/Pricing')),
+    path: "/domain-ssl",
+    Component: lazy(() => import("./pages/app/projects/domain/Domain")),
     exact: true,
   },
   {
-    path: '/domain-ssl',
-    Component: lazy(() => import('./pages/app/projects/domain/Domain')),
+    path: "/subscription",
+    Component: lazy(() => import("./pages/app/subscription/Subscription")),
     exact: true,
   },
   {
-    path: '/subscription',
-    Component: lazy(() => import('./pages/app/subscription/Subscription')),
-    exact: true,
-  },
-  {
-    path: '/payment-history',
-    Component: lazy(() => import('./pages/app/payment-history/PaymentHistory')),
+    path: "/payment-history",
+    Component: lazy(() => import("./pages/app/payment-history/PaymentHistory")),
     exact: true,
   },
   // Auth Pages
   {
-    path: '/auth/login',
-    Component: lazy(() => import('./pages/auth/Login')),
+    path: "/auth/login",
+    Component: lazy(() => import("./pages/auth/Login")),
+    exact: true,
+  },
+  {
+    path: "/auth/success",
+    Component: lazy(() => import("./pages/auth/Success")),
     exact: true,
   },
   // {
@@ -114,8 +114,8 @@ const routes = [
   //   exact: true,
   // },
   {
-    path: '/auth/register',
-    Component: lazy(() => import('./pages/auth/Register')),
+    path: "/auth/register",
+    Component: lazy(() => import("./pages/auth/Register")),
     exact: true,
   },
   // {
@@ -128,7 +128,7 @@ const routes = [
   //   Component: lazy(() => import('pages/auth/500')),
   //   exact: true,
   // },
-]
+];
 
 const mapStateToProps = ({ settings }) => ({
   routerAnimation: settings.routerAnimation,

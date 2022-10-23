@@ -9,13 +9,14 @@ import {
   BlockDes,
   BlockHead,
   BlockHeadContent,
-  BlockTitle
+  BlockTitle,
 } from "../../../../components/block/Block";
 
-import { Card, Spinner } from "reactstrap";
+import { Card, Spinner, UncontrolledDropdown, DropdownMenu, DropdownToggle, DropdownItem } from "reactstrap";
 import { getProjectDomains } from "../../../../services/projects";
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router";
+import { Icon } from "../../../../components/Component";
 
 const mapStateToProps = ({ domain }) => ({
   domain,
@@ -57,55 +58,99 @@ const Domain = ({ domain }) => {
         </BlockHead>
         {isLoading ? (
           <Spinner color="primary" />
+        ) : error ? (
+          <>Error..</>
         ) : (
-          error? (<>Error..</>) :(
-            <Block>
-              <Card className="card-bordered card-stretch">
-                <div className="card-inner-group">
-                  <div className="card-inner p-0">
-                    <table className="table table-tranx">
-                      <thead>
-                        <tr className="tb-tnx-head">
-                          {/* <th className="tb-tnx-id">
+          <Block>
+            <Card className="card-bordered card-stretch">
+              <div className="card-inner-group">
+                <div className="card-inner p-0">
+                  <table className="table table-tranx">
+                    <thead>
+                      <tr className="tb-tnx-head">
+                        {/* <th className="tb-tnx-id">
                             <span className="">id</span>
                           </th> */}
-                          <th className="tb-tnx-info">
-                            <span className="tb-tnx-desc d-none d-sm-inline-block">
-                              <span>Name</span>
-                            </span>
-                            <span className="tb-tnx-desc d-none d-sm-inline-block">
-                              <span>SSL</span>
-                            </span>
-                          </th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {data && data.count > 0
-                          ? data.results.map((item) => {
-                              return (
-                                <tr key={item.id} className="tb-tnx-item">
-                                  {/* <td className="tb-tnx-id">
+                        <th className="tb-tnx-info">
+                          <span className="tb-tnx-desc d-none d-sm-inline-block">
+                            <span>Name</span>
+                          </span>
+                          <span className="tb-tnx-desc d-none d-sm-inline-block">
+                            <span>SSL</span>
+                          </span>
+                        </th>
+                       <th className="tb-tnx-action">
+                        <span>&nbsp;</span>
+                      </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {data && data.count > 0
+                        ? data.results.map((item,i) => {
+                            return (
+                              <tr key={i} className="tb-tnx-item">
+                                {/* <td className="tb-tnx-id">
                                     <span>{item.id}</span>
                                   </td> */}
-                                  <td className="tb-tnx-info">
-                                    <div className="tb-tnx-desc">
-                                      <span className="title">{item.name}</span>
-                                    </div>
-                                    <div className="tb-tnx-desc">
-                                      <span className="title">{!!item.ssl ? "true" : "false"}</span>
-                                    </div>
-                                  </td>
-                                </tr>
-                              );
-                            })
-                          : null}
-                      </tbody>
-                    </table>
-                  </div>
+                                <td className="tb-tnx-info">
+                                  <div className="tb-tnx-desc">
+                                    <span className="title">{item.name}</span>
+                                  </div>
+                                  <div className="tb-tnx-desc">
+                                    <span className="title">{!!item.ssl ? "true" : "false"}</span>
+                                  </div>
+                                </td>
+                                <td className="tb-tnx-action">
+                                  <UncontrolledDropdown>
+                                    <DropdownToggle
+                                      tag="a"
+                                      className="text-soft dropdown-toggle btn btn-icon btn-trigger"
+                                    >
+                                      <Icon name="more-h"></Icon>
+                                    </DropdownToggle>
+                                    <DropdownMenu right>
+                                      <ul className="link-list-plain">
+                                        <li
+                                          onClick={() => {
+                                            loadDetail(item.id);
+                                            setViewModal(true);
+                                          }}
+                                        >
+                                          <DropdownItem
+                                            tag="a"
+                                            href="#view"
+                                            onClick={(ev) => {
+                                              ev.preventDefault();
+                                            }}
+                                          >
+                                            Edit
+                                          </DropdownItem>
+                                        </li>
+                                        <li>
+                                          <DropdownItem
+                                            tag="a"
+                                            href="#print"
+                                            onClick={(ev) => {
+                                              ev.preventDefault();
+                                            }}
+                                          >
+                                            Remove
+                                          </DropdownItem>
+                                        </li>
+                                      </ul>
+                                    </DropdownMenu>
+                                  </UncontrolledDropdown>
+                                </td>
+                              </tr>
+                            );
+                          })
+                        : null}
+                    </tbody>
+                  </table>
                 </div>
-              </Card>
-            </Block>
-          )
+              </div>
+            </Card>
+          </Block>
         )}
       </Content>
     </React.Fragment>

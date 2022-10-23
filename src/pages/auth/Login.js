@@ -35,6 +35,7 @@ const Login = ({ dispatch, user, authProvider, logo }) => {
   const [passState, setPassState] = useState(false);
   const [errorVal] = useState("");
 
+  console.log({user});
   const onFinish = values => {
     dispatch({
       type: 'user/LOGIN',
@@ -134,7 +135,7 @@ const Login = ({ dispatch, user, authProvider, logo }) => {
               </FormGroup>
               <FormGroup>
                 <Button size="lg" className="btn-block" type="submit" color="primary">
-                  <span>Sign in</span>
+                  {user.loading? <Spinner size={'sm'} color="white" /> : <span>Sign in</span>}
                 </Button>
               </FormGroup>
             </Form>

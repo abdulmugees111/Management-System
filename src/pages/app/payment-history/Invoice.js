@@ -13,7 +13,6 @@ export const invoiceData = [
     totalAmount: "2300.00",
     status: "Complete",
   },
-
 ];
 
 export const paymentData = [

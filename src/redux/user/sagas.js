@@ -5,6 +5,7 @@ import { history } from '../../index'
 import * as jwt from '../../services/jwt'
 import actions from './actions'
 import store from 'store'
+import { toast } from 'react-toastify';
 
 const mapAuthProviders = {
   jwt: {
@@ -22,6 +23,8 @@ export function* LOGIN({ payload }) {
     type: 'user/SET_STATE',
     payload: {
       loading: true,
+        error:false
+
     },
   })
   const { authProvider: autProviderName } = yield select(state => state.settings)
@@ -31,10 +34,7 @@ export function* LOGIN({ payload }) {
       type: 'user/LOAD_CURRENT_ACCOUNT',
     })
     yield history.push('/dashboard')
-    // notification.success({
-    //   message: 'Logged In',
-    //   description: 'You have successfully logged in!',
-    // })
+   toast.success("Logged in successfully")
   }
   if (!success) {
     yield put({
@@ -43,6 +43,7 @@ export function* LOGIN({ payload }) {
         loading: false,
       },
     })
+    toast.error("Login error! Please check credentials")
   }
 }
 
@@ -86,13 +87,14 @@ export function* LOAD_CURRENT_ACCOUNT() {
   const { authProvider } = yield select(state => state.settings)
   const response = yield call(mapAuthProviders[authProvider].currentAccount)
   if (response) {
-    const { id, email, name } = response
+    const { id, email, name, partner_id } = response;
     yield put({
       type: 'user/SET_STATE',
       payload: {
         id,
         name,
         email,
+        partner_id,
         authorized: true,
       },
     })
