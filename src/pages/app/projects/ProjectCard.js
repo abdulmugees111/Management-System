@@ -45,10 +45,13 @@ const ProjectCardPage = ({projects, history}) => {
                 <div className="toggle-expand-content" style={{ display: sm ? "block" : "none" }}>
                   <ul className="nk-block-tools g-3">
                     <li className="nk-block-tools-opt" >
+                      <Link to={'/pricing'}  >
+
                       <Button color="primary">
                         <Icon name="plus"></Icon>
                         <span>Add Subscription</span>
                       </Button>
+                      </Link>
                     </li>
                   </ul>
                 </div>
@@ -61,47 +64,63 @@ const ProjectCardPage = ({projects, history}) => {
           {
             data &&
             data.map((project, idx) => {
-              return(<Card className="card-bordered sp-plan">
-                <Row className="no-gutters">
-                  <Col className="col-md-8">
-                    <div className="sp-plan-info card-inner">
-                      <Row className="gx-0 gy-3">
-                        <div className="col-xl-9 col-sm-8">
-                          <div className="sp-plan-name">
-                            <h6 className="title">
-                              <Link to={`/project/${project.app_name}/overview`}>{project.name}
-                              <span className="badge bg-success rounded-pill">Active</span></Link>
-                            </h6>
-                            <p>project ID: <span className="text-base">{project.app_name}</span></p>
+              return (
+                <Card key={idx} className="card-bordered sp-plan">
+                  <Row className="no-gutters">
+                    <Col className="col-md-8">
+                      <div className="sp-plan-info card-inner">
+                        <Row className="gx-0 gy-3">
+                          <div className="col-xl-9 col-sm-8">
+                            <div className="sp-plan-name">
+                              <h6 className="title">
+                                <Link to={`/project/${project.app_name}/overview`}>
+                                  {project.name}
+                                  <span className="badge bg-success rounded-pill">Active</span>
+                                </Link>
+                              </h6>
+                              <p>
+                                project ID: <span className="text-base">{project.app_name}</span>
+                              </p>
+                            </div>
                           </div>
-                        </div>
-                        <div className="col-xl-3 col-sm-4">
-                          <div className="sp-plan-opt">
-                            <div className="custom-control custom-switch checked"><label
-                              className="custom-control-label text-soft" htmlFor="auto-plan-p1">Auto Renew</label></div>
+                          <div className="col-xl-3 col-sm-4">
+                            <div className="sp-plan-opt">
+                              <div className="custom-control custom-switch checked">
+                                <label className="custom-control-label text-soft" htmlFor="auto-plan-p1">
+                                  Auto Renew
+                                </label>
+                              </div>
+                            </div>
                           </div>
+                        </Row>
+                      </div>
+                      <div className="sp-plan-desc card-inner">
+                        <ul className="row gx-1">
+                          <li className="col-6 col-lg-3">
+                            <p>
+                              <span className="text-soft">Started On</span> Oct 12, 2018
+                            </p>
+                          </li>
+                          <li className="col-6 col-lg-3">
+                            <p>
+                              <span className="text-soft">Recurring</span> Yes
+                            </p>
+                          </li>
+                        </ul>
+                      </div>
+                    </Col>
+                    <div className="col-md-4">
+                      <div className="sp-plan-action card-inner">
+                        <div className="sp-plan-btn">
+                          <Link to={`/project/${project.app_name}/overview`} className="btn btn-primary">
+                            <span>More Info</span>
+                          </Link>
                         </div>
-                      </Row>
-                    </div>
-                    <div className="sp-plan-desc card-inner">
-                      <ul className="row gx-1">
-                        <li className="col-6 col-lg-3"><p><span className="text-soft">Started On</span> Oct 12, 2018</p>
-                        </li>
-                        <li className="col-6 col-lg-3"><p><span className="text-soft">Recurring</span> Yes</p></li>
-                      </ul>
-                    </div>
-                  </Col>
-                  <div className="col-md-4">
-                    <div className="sp-plan-action card-inner">
-                      <div className="sp-plan-btn">
-                        <Link to={`/project/${project.app_name}/overview`} className="btn btn-primary">
-                          <span>More Info</span>
-                        </Link>
                       </div>
                     </div>
-                  </div>
-                </Row>
-              </Card>)
+                  </Row>
+                </Card>
+              );
             })
           }
           <br/>
