@@ -24,13 +24,18 @@ import {
   Block,
   RSelect,
 } from "../../../components/Component";
+import { useLocation } from "react-router-dom";
+const OrderPage = () => {
+  let location = useLocation();
+  const { state } = location;
 
-const OrderPage = ({ match }) => {
 const opts = [
-  { value: "Starter", label: "Starter" },
-  { value: "Pro", label: "Pro" },
-  { value: "Enterprise", label: "Enterprise" },
+  { value: "1", label: "Starter" },
+  { value: "2", label: "Pro" },
+  { value: "3", label: "Enterprise" },
 ];
+
+
 const submitHandler = (e) =>{
 e.preventDefault()
 }
@@ -58,7 +63,7 @@ e.preventDefault()
                 </label>
                 <RSelect
                   options={opts}
-                  defaultValue={{ value: "Starter", label: "Starter" }}
+                  defaultValue={{ value: state.planID, label: state.planName }}
                   // onChange={(e) => setFormData({ ...formData, status: e.value })}
                 />
 

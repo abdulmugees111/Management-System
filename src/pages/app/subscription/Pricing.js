@@ -14,6 +14,7 @@ import {
 } from "../../../components/Component";
 import { Card } from "reactstrap";
 import {pricingTableDataV2} from './data'
+import { Link } from "react-router-dom";
 const PricingTable = () => {
   return (
     <React.Fragment>
@@ -56,7 +57,14 @@ const PricingTable = () => {
                         <span className="bill">{item.userNumber} User, Billed Yearly</span>
                       </div>
                       <div className="pricing-action">
-                        <Button color="primary">Select Plan</Button>
+                        <Link
+                          to={{
+                            pathname: "/order",
+                            state: { planID: item.id, planName: item.title },
+                          }}
+                        >
+                          <Button color="primary">Select Plan</Button>
+                        </Link>
                       </div>
                     </div>
                   </Card>
