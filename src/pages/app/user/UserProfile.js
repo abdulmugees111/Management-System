@@ -22,48 +22,50 @@ import { connect } from "react-redux";
 import { useQuery } from "@tanstack/react-query";
 import { get_countries, get_states, get_user_data, update_user_data } from "../../../services/user/index";
 import { reFormat } from "../../../utils/formattors";
-import { toast } from 'react-toastify';
+import { toast } from "react-toastify";
 
 const UserProfile = () => {
- 
   const [formData, setFormData] = useState({
     name: "",
     phone: "",
     street: "",
     vat: "",
-    email:"",
-    country_id:[],
-    state_id:[]
+    email: "",
+    country_id: [],
+    state_id: [],
   });
 
-
-  const { isLoading, error, data, refetch:getUserRefetch } = useQuery(["get-user-data"], get_user_data, {
+  const {
+    isLoading,
+    error,
+    data,
+    refetch: getUserRefetch,
+  } = useQuery(["get-user-data"], get_user_data, {
     onSuccess: (data) => {
       if (data) {
         setFormData({
-      ...(delete data.id && data)
+          ...(delete data.id && data),
         });
       }
-    },onError:()=>toast.error("Error occured while processing your request")
+    },
+    onError: () => toast.error("Error occured while processing your request"),
   });
 
-  const { isFetching: updateDataLoading, refetch:updateUser } = useQuery(
+  const { isFetching: updateDataLoading, refetch: updateUser } = useQuery(
     ["update-user-data"],
     () => update_user_data(formData),
     {
       enabled: false,
       onSuccess: (data) => {
         if (data) {
-          setModal(false)
-            getUserRefetch()
-            toast.success("Profile successfully updated")
-        }else{
-       toast.error("Error processing your request");
-
+          setModal(false);
+          getUserRefetch();
+          toast.success("Profile successfully updated");
+        } else {
+          toast.error("Error processing your request");
         }
-        
       },
-      onError:()=>toast.error("Error processing your request")
+      onError: () => toast.error("Error processing your request"),
     }
   );
 
@@ -71,7 +73,7 @@ const UserProfile = () => {
   const { data: statesList } = useQuery(["get-states", formData.country_id[0]], () =>
     get_states(formData.country_id[0])
   );
- 
+
   const [modal, setModal] = useState(false);
 
   const onInputChange = (e) => {
@@ -85,7 +87,6 @@ const UserProfile = () => {
     // setUserInfo(submitData);
     updateUser();
     console.log({ formData });
-    
   };
 
   if (isLoading) {
@@ -374,7 +375,7 @@ const UserProfile = () => {
                             label: formData.state_id[1],
                           },
                         ]}
-                        onChange={(e) => setFormData({ ...formData, state_id: [e.value, e.label]})}
+                        onChange={(e) => setFormData({ ...formData, state_id: [e.value, e.label] })}
                       />
                     </FormGroup>
                   </Col>
