@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Content from "../../../layout/content/Content";
 import Head from "../../../layout/head/Head";
 import { Link } from "react-router-dom";
-import { Stepper, Step } from "react-form-stepper";
+
 import {
   Button,
   Card,
