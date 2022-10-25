@@ -3,6 +3,7 @@ import PublicLayout from '../layout/Public'
 import AuthLayout from '../layout/Auth'
 import MainLayout from '../layout/Main'
 import Project from '../layout/Project/index'
+import Order from '../layout/Order/index'
 import NProgress from 'nprogress'
 
 import { withRouter, Redirect } from 'react-router-dom'
@@ -15,6 +16,7 @@ const Layouts = {
   auth: AuthLayout,
   main: MainLayout,
   project: Project,
+  order: Order,
 }
 
 let previousPath = '';
@@ -43,6 +45,10 @@ const Layout = ({ user, children, location: { pathname, search } }) => {
     if (/^\/auth(?=\/|$)/i.test(pathname)) {
       return 'auth'
     }
+    if (/^\/order(?=\/|$)/i.test(pathname)) {
+      return "order";
+    }
+
     return 'main'
   }
 

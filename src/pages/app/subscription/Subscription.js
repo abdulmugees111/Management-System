@@ -12,6 +12,7 @@ import {
 } from "../../../components/block/Block";
 import { Button, Col, Icon, Row } from "../../../components/Component";
 
+
 const mapStateToProps = ({ domain }) => ({
   domain
 });
@@ -33,21 +34,13 @@ const Domain = ({ domain }) => {
                 <p>cancel or renew your subscription</p>
               </BlockDes>
             </BlockHeadContent>
-            <BlockHeadContent>
-              <div className="toggle-wrap nk-block-tools-toggle">
-                <div className="toggle-expand-content" style={{ display: sm ? "block" : "none" }}>
-                  <ul className="nk-block-tools g-3">
-                    <li className="nk-block-tools-opt">
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </BlockHeadContent>
+
           </BlockBetween>
         </BlockHead>
         <Block>
           <Row className="g-gs">
             <Col sm="6">
+              
             </Col>
           </Row>
         </Block>

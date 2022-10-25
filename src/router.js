@@ -98,6 +98,11 @@ const routes = [
     exact: true,
   },
   {
+    path: "/order",
+    Component: lazy(() => import("./pages/app/subscription/OrderPage")),
+    exact: true,
+  },
+  {
     path: "/payment-history",
     Component: lazy(() => import("./pages/app/payment-history/PaymentHistory")),
     exact: true,
