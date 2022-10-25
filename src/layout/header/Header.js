@@ -5,6 +5,7 @@ import User from "./dropdown/user/User";
 import Notification from "./dropdown/notification/Notification";
 import Toggle from "../sidebar/Toggle";
 import { Link } from "react-router-dom";
+import { matchPath, useLocation } from "react-router-dom";
 
 const Header = ({ fixed, theme, className, sidebarToggle, setVisibility, ...props }) => {
   const [onHover, setOnHover] = useState(false);
@@ -15,22 +16,15 @@ const Header = ({ fixed, theme, className, sidebarToggle, setVisibility, ...prop
     [`is-${theme}`]: theme !== "white" && theme !== "light",
     [`${className}`]: className,
   });
-
-  let currentUrl;
-
-  if (window.location.pathname !== undefined) {
-    currentUrl = window.location.pathname;
-  } else {
-    currentUrl = null;
-  }
-
+const { pathname } = useLocation();
+  
   const onMouseEnter = () => {
     setOnHover(true);
   };
   const onMouseLeave = () => {
     setOnHover(false);
   };
-
+console.log({ pathname });
   return (
     <div className={headerClass}>
       <div className="container-lg wide-xl">
@@ -40,9 +34,7 @@ const Header = ({ fixed, theme, className, sidebarToggle, setVisibility, ...prop
           </div>
           <div className="nk-header-menu">
             <ul className="nk-menu nk-menu-main">
-              <li
-                className={`nk-menu-item ${currentUrl === process.env.PUBLIC_URL + "/" ? "active current-page" : ""}`}
-              >
+              <li className={`nk-menu-item ${pathname === "/" || pathname === '/dashboard' ? "active current-page" : ""}`}>
                 <Link to={`${process.env.PUBLIC_URL}/`} className="nk-menu-link">
                   <span className="nk-menu-text">Overview</span>
                 </Link>
