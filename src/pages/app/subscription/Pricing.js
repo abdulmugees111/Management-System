@@ -60,7 +60,7 @@ const PricingTable = () => {
                         <Link
                           to={{
                             pathname: "/order",
-                            state: { planID: item.id, planName: item.title },
+                            state: { planID: item.id, planName: `${item.title} - ${item.amount}/yr` },
                           }}
                         >
                           <Button color="primary">Select Plan</Button>

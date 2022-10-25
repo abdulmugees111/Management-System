@@ -113,7 +113,7 @@ const OrderLayout = ({
                     layout='main'
                   />
                   {visibility && mobileView && <div className="toggle-overlay" onClick={(e) => toggleSidebar(e)} />} */}
-                  <div className="nk-content-body" style={{paddingTop:'0px'}}>
+                  <div className="nk-content-body" >
                     <div>{children}</div>
                     <Footer />
                   </div>

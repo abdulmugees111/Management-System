@@ -1,14 +1,14 @@
-import React, { useState } from "react";
+import React from "react";
 import classNames from "classnames";
 import Logo from "../logo/Logo";
 import User from "./dropdown/user/User";
 import Notification from "./dropdown/notification/Notification";
 import Toggle from "../sidebar/Toggle";
 import { Link } from "react-router-dom";
-import { matchPath, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 const Header = ({ fixed, theme, className, sidebarToggle, setVisibility, ...props }) => {
-  const [onHover, setOnHover] = useState(false);
+
   const headerClass = classNames({
     "nk-header": true,
     "nk-header-fixed": fixed,
@@ -18,13 +18,7 @@ const Header = ({ fixed, theme, className, sidebarToggle, setVisibility, ...prop
   });
 const { pathname } = useLocation();
   
-  const onMouseEnter = () => {
-    setOnHover(true);
-  };
-  const onMouseLeave = () => {
-    setOnHover(false);
-  };
-console.log({ pathname });
+ 
   return (
     <div className={headerClass}>
       <div className="container-lg wide-xl">

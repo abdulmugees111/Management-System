@@ -17,28 +17,31 @@ import {
   Row,
   UncontrolledDropdown,
 } from "reactstrap";
-import {
-  BlockHeadContent,
-  BlockTitle,
-  BlockHead,
-  Block,
-  RSelect,
-} from "../../../components/Component";
+import { BlockHeadContent, BlockTitle, BlockHead, Block, RSelect } from "../../../components/Component";
 import { useLocation } from "react-router-dom";
+import { pricingTableDataV2 } from "./data";
 const OrderPage = () => {
   let location = useLocation();
   const { state } = location;
 
-const opts = [
-  { value: "1", label: "Starter" },
-  { value: "2", label: "Pro" },
-  { value: "3", label: "Enterprise" },
-];
+  const [formData, setFormData] = useState({
+    plan: {
+      value: state?.planID ? state.planID : 0,
+      label: state?.planName ? state.planName : "Starter - $99/yr",
+    },
+    address: "",
+    payment_method: { value: "", label: "" },
+  });
+  const opts = [
+    { value: 1, label: `Starter - $99/yr` },
+    { value: 2, label: `Pro - $299/yr` },
+    { value: 3, label: `Enterprise - $599/yr` },
+  ];
 
-
-const submitHandler = (e) =>{
-e.preventDefault()
-}
+  const submitHandler = (e) => {
+    e.preventDefault();
+    console.log({ formData });
+  };
   return (
     <React.Fragment>
       <Head title="Order"></Head>
@@ -63,8 +66,11 @@ e.preventDefault()
                 </label>
                 <RSelect
                   options={opts}
-                  defaultValue={{ value: state.planID, label: state.planName }}
-                  // onChange={(e) => setFormData({ ...formData, status: e.value })}
+                  defaultValue={{
+                    value: state?.planID ? state.planID : 0,
+                    label: state?.planName ? state.planName : "Starter - $99/yr",
+                  }}
+                  onChange={(e) => setFormData({ ...formData, plan: { value: e.value, label: e.label } })}
                 />
 
                 <li className="divider"></li>
@@ -84,8 +90,8 @@ e.preventDefault()
                       name="address"
                       placeholder="Enter your address"
                       className="form-control-lg form-control"
+                      onChange={(e) => setFormData({ ...formData, address: e.target.value })}
                     />
-                    {/* {errors.name && <span className="invalid">{errors.name.message}</span>} */}
                   </div>
                 </FormGroup>
                 <li className="divider"></li>
@@ -97,7 +103,7 @@ e.preventDefault()
                 <RSelect
                   options={opts}
                   defaultValue={{ value: "Starter", label: "Starter" }}
-                  // onChange={(e) => setFormData({ ...formData, status: e.value })}
+                  onChange={(e) => setFormData({ ...formData, payment_method: { value: e.value, label: e.label } })}
                 />
               </Card>
               <br />
