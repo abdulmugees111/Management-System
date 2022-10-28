@@ -43,6 +43,7 @@ ReactDOM.render(
       pauseOnHover
       theme="light"
     />
+    
     <QueryClientProvider client={queryClient}>
       <Router history={history} />
     </QueryClientProvider>

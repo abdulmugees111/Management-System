@@ -1,51 +1,67 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Content from "../../../layout/content/Content";
 import Head from "../../../layout/head/Head";
 import { Link } from "react-router-dom";
 
-import {
-  Button,
-  Card,
-  Col,
-  DropdownItem,
-  DropdownMenu,
-  DropdownToggle,
-  FormGroup,
-  Modal,
-  ModalBody,
-  ModalFooter,
-  Row,
-  UncontrolledDropdown,
-} from "reactstrap";
+import { Button, Card, Col, FormGroup, Row, Spinner } from "reactstrap";
 import { BlockHeadContent, BlockTitle, BlockHead, Block, RSelect } from "../../../components/Component";
 import { useLocation } from "react-router-dom";
 import { pricingTableDataV2 } from "./data";
-const OrderPage = () => {
+import { useQuery } from "@tanstack/react-query";
+import { getPricings, getStripeSession } from "../../../services/order";
+import { PlansReFormattor } from "../../../utils/formattors";
+import { toast } from "react-toastify";
+const OrderPage = ({ history }) => {
   let location = useLocation();
   const { state } = location;
 
   const [formData, setFormData] = useState({
+    price: state?.planPrice || 0,
     plan: {
-      value: state?.planID ? state.planID : 0,
-      label: state?.planName ? state.planName : "Starter - $99/yr",
+      value: state?.planID ? state.planID : -1,
+      label: state?.planName ? state.planName : "Select a plan",
     },
     address: "",
-    payment_method: { value: "", label: "" },
+    payment_method: { value: -1, label: "" },
   });
-  const opts = [
-    { value: 1, label: `Starter - $99/yr` },
-    { value: 2, label: `Pro - $299/yr` },
-    { value: 3, label: `Enterprise - $599/yr` },
+
+  const { data, isLoading } = useQuery(["get-pricings"], getPricings);
+  const {
+    data: stripeSessionLink,
+    isFetching,
+    refetch,
+  } = useQuery(["get-stripe-session", formData.plan.value], () => getStripeSession(formData.plan.value), {
+    enabled: false,
+    onSuccess: (data) => {
+      console.log(data);
+      // history.push(data)
+      if (!data) {
+        toast.error("Error occured while processing your request");
+      }
+    },
+    onError: () => toast.error("Error occured while processing your request"),
+  });
+
+  const payment_methods = [
+    { value: 1, label: `Wire Transfer` },
+    { value: 2, label: `Stripe` },
   ];
+
 
   const submitHandler = (e) => {
     e.preventDefault();
-    console.log({ formData });
+
+    if (formData.plan.value > 0) {
+      refetch();
+    }
+
+    console.log(formData);
   };
+
+
   return (
     <React.Fragment>
-      <Head title="Order"></Head>
-      {/* <Content size="lg"> */}
+      <Head title="Order" />
       <BlockHead>
         <BlockHeadContent>
           <BlockTitle tag="h3">Ready to get started</BlockTitle>
@@ -64,19 +80,24 @@ const OrderPage = () => {
                 <label className="form-label" htmlFor="plan">
                   Your plan:
                 </label>
+
                 <RSelect
-                  options={opts}
+                  options={PlansReFormattor(!isLoading ? data : [])}
                   defaultValue={{
-                    value: state?.planID ? state.planID : 0,
-                    label: state?.planName ? state.planName : "Starter - $99/yr",
+                    value: state?.planID ? state.planID : -1,
+                    label: state?.planName ? state.planName : "Select a plan",
                   }}
-                  onChange={(e) => setFormData({ ...formData, plan: { value: e.value, label: e.label } })}
+                  onChange={(e) => 
+                    setFormData({
+                      ...formData,
+                      plan: { value: e.value, label: e.label },
+                      price: e.price,
+                    })
+                  }
                 />
 
-                <li className="divider"></li>
-
+                {/* <li className="divider"></li>
                 <h5 className="py-2 title">Address info</h5>
-
                 <FormGroup>
                   <div className="form-label-group">
                     <label className="form-label" htmlFor="address">
@@ -92,17 +113,18 @@ const OrderPage = () => {
                       className="form-control-lg form-control"
                       onChange={(e) => setFormData({ ...formData, address: e.target.value })}
                     />
+                    <span className="invalid">This feild is required</span>
                   </div>
-                </FormGroup>
+                </FormGroup> */}
                 <li className="divider"></li>
-
                 <h5 className="py-2 title">Payment info</h5>
                 <label className="form-label" htmlFor="payment">
                   Select payment method:
                 </label>
+
                 <RSelect
-                  options={opts}
-                  defaultValue={{ value: "Starter", label: "Starter" }}
+                  options={payment_methods}
+                  defaultValue={{ value: -1, label: "Select payment method" }}
                   onChange={(e) => setFormData({ ...formData, payment_method: { value: e.value, label: e.label } })}
                 />
               </Card>
@@ -113,9 +135,6 @@ const OrderPage = () => {
                 className="card-bordered product-card px-2 py-3 "
                 style={{
                   overflow: "visible",
-                  // display: "flex",
-                  // flexDirection: "column",
-                  // justifyContent: "space-between",
                   height: "fit-content",
                   background: "#fcfcfc",
                 }}
@@ -124,27 +143,29 @@ const OrderPage = () => {
                 <li className="divider" style={{ marginTop: "10px" }}></li>
                 <div style={{ display: "flex", justifyContent: "space-between" }} className="px-2">
                   <label className=" form-label">Sub total:</label>
-                  <label className=" form-label">$300</label>
+                  <label className=" form-label">${formData.price}</label>
                 </div>
                 <div style={{ display: "flex", justifyContent: "space-between" }} className="px-2">
                   <label className=" form-label">Taxes:</label>
-                  <label className=" form-label">$300</label>
+                  <label className=" form-label">$0</label>
                 </div>
                 <li className="divider"></li>
                 <div style={{ display: "flex", justifyContent: "space-between" }} className="px-2">
                   <label className=" form-label">Total:</label>
-                  <label className=" form-label">$600</label>
+                  <label className=" form-label">${formData.price}</label>
                 </div>
 
                 <Button size="lg" className="btn-block mt-3" color="primary" type="submit">
-                  Process checkout
+                  {isFetching ? <Spinner size={"sm"} color="white" /> : <span>Proceed payment</span>}
                 </Button>
               </Card>
             </Col>
           </Row>
         </form>
       </Block>
-      {/* </Content> */}
+      <br />
+      <br />
+      <br />
     </React.Fragment>
   );
 };

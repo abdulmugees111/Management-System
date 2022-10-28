@@ -23,8 +23,6 @@ export function* LOGIN({ payload }) {
     type: 'user/SET_STATE',
     payload: {
       loading: true,
-        error:false
-
     },
   })
   const { authProvider: autProviderName } = yield select(state => state.settings)
@@ -62,10 +60,7 @@ export function* REGISTER({ payload }) {
       type: 'user/LOAD_CURRENT_ACCOUNT',
     })
     yield history.push('/')
-    // notification.success({
-    //   message: 'Succesful Registered',
-    //   description: 'You have successfully registered!',
-    // })
+
   }
   if (!success) {
     yield put({
