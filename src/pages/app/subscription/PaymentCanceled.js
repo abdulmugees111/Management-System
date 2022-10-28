@@ -5,7 +5,7 @@ import Head from "../../../layout/head/Head";
 import { Block, BlockHead, BlockHeadContent, BlockTitle, PreviewCard } from "../../../components/Component";
 import { ReactComponent as ReactLogo } from "../../../assets/canceled.svg";
 
-const PaymentCanceled = ({ ...props }) => {
+const PaymentCanceled = () => {
   return (
     <React.Fragment>
       <Head title="Payment Failed" />
@@ -31,7 +31,7 @@ const PaymentCanceled = ({ ...props }) => {
 
                 <h3>Your subscription could not succeed</h3>
                 <p>
-                  An error has occured while processing your payment or the payment is canceled intentionlly by user. If
+                  An error has occurred while processing your payment or the payment is canceled intentionally by user. If
                   you are experiencing this issue again and again please contact us through email.
                 </p>
               </div>
