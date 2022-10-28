@@ -5,8 +5,7 @@ import "./assets/scss/style-email.scss";
 import Router from './router'
 import { ToastContainer} from "react-toastify";
 import { Provider } from 'react-redux'
-
-import { createHashHistory } from 'history'
+import { createBrowserHistory } from "history";
 import { createStore, applyMiddleware, compose } from 'redux'
 import createSagaMiddleware from 'redux-saga'
 import { routerMiddleware } from 'connected-react-router'
@@ -20,7 +19,7 @@ import {
 } from '@tanstack/react-query'
 
 // middlewared
-const history = createHashHistory()
+const history = createBrowserHistory()
 const sagaMiddleware = createSagaMiddleware()
 const routeMiddleware = routerMiddleware(history)
 const middlewares = [sagaMiddleware, routeMiddleware]
