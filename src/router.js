@@ -118,6 +118,17 @@ const routes = [
     Component: lazy(() => import("./pages/auth/Success")),
     exact: true,
   },
+  {
+    path: "/payment/success",
+    Component: lazy(() => import("./pages/app/subscription/PaymentSuccess")),
+    exact: true,
+  },
+  {
+    path: "/payment/canceled",
+    Component: lazy(() => import("./pages/app/subscription/PaymentCanceled")),
+    exact: true,
+  },
+
   // {
   //   path: '/auth/forgot-password',
   //   Component: lazy(() => import('pages/auth/forgot-password')),

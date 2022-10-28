@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import Content from "../../../layout/content/Content";
 import Head from "../../../layout/head/Head";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 
 import { Button, Card, Col, FormGroup, Row, Spinner } from "reactstrap";
 import { BlockHeadContent, BlockTitle, BlockHead, Block, RSelect } from "../../../components/Component";
@@ -27,14 +27,14 @@ const OrderPage = ({ history }) => {
 
   const { data, isLoading } = useQuery(["get-pricings"], getPricings);
   const {
-    data: stripeSessionLink,
     isFetching,
     refetch,
   } = useQuery(["get-stripe-session", formData.plan.value], () => getStripeSession(formData.plan.value), {
     enabled: false,
     onSuccess: (data) => {
       console.log(data);
-      // history.push(data)
+      // history.push(data.redirect_url)
+      window.location.replace(data.redirect_url);
       if (!data) {
         toast.error("Error occured while processing your request");
       }
