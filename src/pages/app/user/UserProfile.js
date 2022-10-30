@@ -100,7 +100,7 @@ const UserProfile = () => {
           <BlockHeadContent>
             <BlockTitle tag="h4">Personal Information</BlockTitle>
             <BlockDes>
-              <p>Basic info, like your name and address, that you use on Nio Platform.</p>
+              <p>Basic info, like your name and address, that you use on Tajr Platform.</p>
             </BlockDes>
           </BlockHeadContent>
         </BlockBetween>

@@ -36,10 +36,10 @@ const OrderPage = ({ history }) => {
       // history.push(data.redirect_url)
       window.location.replace(data.redirect_url);
       if (!data) {
-        toast.error("Error occured while processing your request");
+        toast.error("Error occurred while processing your request");
       }
     },
-    onError: () => toast.error("Error occured while processing your request"),
+    onError: () => toast.error("Error occurred while processing your request"),
   });
 
   const payment_methods = [

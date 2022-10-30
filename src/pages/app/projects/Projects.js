@@ -83,7 +83,6 @@ const Projects = ({ projects, dispatch }) => {
                 }
               </Block>
             </Content>
-            <Footer />
           </div>
         </div>
       </div>

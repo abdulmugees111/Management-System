@@ -24,36 +24,35 @@ const Dashboard = ({ user }) => {
  const [sm, updateSm] = useState(false);
 
  const cardsData = [
-  {
-   title: "Personal Info",
-   description: "See your profile data and manage your Account to choose what is saved in our system.",
-   buttonText: "Manage Your Account",
-   url: "#",
-   icon: profileIcon
-  },
-  {
-   title: "Security Setting",
-   description: "You have full control to manage your own account and keep account fully secure.",
-   buttonText: "Account Setting",
-   url: "#",
-   icon: securityIcon
-  },
-  {
-   title: "Billing History",
-   description: "Check out all your payment history. You can also download or print your invoice.",
-   buttonText: "Account History"
-   , url: "",
-   icon:
-    billingIcon
-  },
-  {
-   title: "Account Reports",
-   description: "Check your reports of uses and manage your packages or subscriptions that you have.",
-   buttonText: "Manage Subscription",
-   url: "",
-   icon: accountIcon
-  },
- ]
+   {
+     title: "Personal Info",
+     description: "See your profile data and manage your Account to choose what is saved in our system.",
+     buttonText: "Manage Your Account",
+     url: "/user-profile",
+     icon: profileIcon,
+   },
+   {
+     title: "Security Setting",
+     description: "You have full control to manage your own account and keep account fully secure.",
+     buttonText: "Account Setting",
+     url: "/account-settings",
+     icon: securityIcon,
+   },
+   {
+     title: "Billing History",
+     description: "Check out all your payment history. You can also download or print your invoice.",
+     buttonText: "Account History",
+     url: "/invoices",
+     icon: billingIcon,
+   },
+   {
+     title: "Account Reports",
+     description: "Check your reports of uses and manage your packages or subscriptions that you have.",
+     buttonText: "Manage Subscription",
+     url: "/projects",
+     icon: accountIcon,
+   },
+ ];
 
  return (
   <React.Fragment>

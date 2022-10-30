@@ -99,11 +99,11 @@ const UserProfileSettingPage = ({history}) => {
                        Change Password
                      </Button>
                    </li>
-                   <li>
+                   {/* <li>
                      <em className="text-soft text-date fs-12px">
                        Last changed: <span>Oct 2, 2019</span>
                      </em>
-                   </li>
+                   </li> */}
                  </ul>
                </div>
              </div>
@@ -112,7 +112,7 @@ const UserProfileSettingPage = ({history}) => {
              <div className="between-center flex-wrap flex-md-nowrap g-3">
                <div className="nk-block-text">
                  <h6>
-                   2 Factor Auth &nbsp; <span className="badge badge-success ml-0">Enabled</span>
+                   2 Factor Auth (Coming Soon) &nbsp; <span className="badge badge-success ml-0">Enabled</span>
                  </h6>
                  <p>
                    Secure your account with 2FA security. When it is activated you will need to enter not only your

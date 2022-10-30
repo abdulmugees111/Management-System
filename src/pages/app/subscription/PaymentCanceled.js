@@ -15,12 +15,6 @@ const PaymentCanceled = () => {
             <BlockTitle tag="h2" className="fw-normal">
               Payment Failed!
             </BlockTitle>
-            {/* <BlockDes>
-              <p className="lead">
-                We love to share ideas! Visit our blog if you're looking for great articles or inspiration to get you
-                going.
-              </p>
-            </BlockDes> */}
           </BlockHeadContent>
         </BlockHead>
         <Block>
@@ -28,7 +22,6 @@ const PaymentCanceled = () => {
             <article className="entry">
               <div style={{ display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center" }}>
                 <ReactLogo />
-
                 <h3>Your subscription could not succeed</h3>
                 <p>
                   An error has occurred while processing your payment or the payment is canceled intentionally by user. If
