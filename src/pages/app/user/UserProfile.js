@@ -48,7 +48,7 @@ const UserProfile = () => {
         });
       }
     },
-    onError: () => toast.error("Error occured while processing your request"),
+    onError: () => toast.error("Error occurred while processing your request"),
   });
 
   const { isFetching: updateDataLoading, refetch: updateUser } = useQuery(

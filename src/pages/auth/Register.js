@@ -44,15 +44,15 @@ const Register = ({ history }) => {
           password: "",
           confirm_password: "",
         });
-        toast.success('Registerd Successfully!')
+        toast.success('Registered Successfully!')
       }else{
-      toast.error("Error occured while processing your request!");
+      toast.error("Error occurred while processing your request!");
 
       }
       // 
     },
     onError:()=>{
-      toast.error("Error occured while processing your request!");
+      toast.error("Error occurred while processing your request!");
     }
   
   });

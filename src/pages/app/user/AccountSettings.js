@@ -51,12 +51,12 @@ const UserProfileSettingPage = ({history}) => {
          toast.success("Password Changed Successfully! Please Login again with new password");
          handleSignout();
        } else {
-         toast.error("Error occured while processing your request!");
+         toast.error("Error occurred while processing your request!");
        }
        //
      },
      onError: () => {
-       toast.error("Error occured while processing your request!");
+       toast.error("Error occurred while processing your request!");
      },
    });
 
