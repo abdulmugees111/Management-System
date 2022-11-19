@@ -67,7 +67,7 @@ const Login = ({ dispatch, user, authProvider, logo }) => {
               <BlockContent>
                 <BlockTitle tag="h4">Sign-In</BlockTitle>
                 <BlockDes>
-                  <p>Access Tajr using your email and passcode.</p>
+                  <p>Access Tajr using your email and password.</p>
                 </BlockDes>
               </BlockContent>
             </BlockHead>
@@ -102,7 +102,7 @@ const Login = ({ dispatch, user, authProvider, logo }) => {
               <FormGroup>
                 <div className="form-label-group">
                   <label className="form-label" htmlFor="password">
-                    Passcode
+                    Password
                   </label>
                   <Link className="link link-primary link-sm" to={`${process.env.PUBLIC_URL}/auth-reset`}>
                     Forgot Code?
@@ -127,7 +127,7 @@ const Login = ({ dispatch, user, authProvider, logo }) => {
                     name="passcode"
                     // defaultValue="admin"
                     ref={register({ required: "This field is required" })}
-                    placeholder="Enter your passcode"
+                    placeholder="Enter your Password"
                     className={`form-control-lg form-control ${passState ? "is-hidden" : "is-shown"}`}
                   />
                   {errors.passcode && <span className="invalid">{errors.passcode.message}</span>}
