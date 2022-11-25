@@ -63,6 +63,36 @@ const routes = [
     exact: true,
   },
   {
+    path: "/knowledge-base",
+    Component: lazy(() => import("./pages/app/knowledge-base/Sections")),
+    exact: true,
+  },
+  {
+    path: "/kb/article/:article_id",
+    Component: lazy(() => import("./pages/app/knowledge-base/Article")),
+    exact: true,
+  },
+  {
+    path: "/kb/article/section/:section_id",
+    Component: lazy(() => import("./pages/app/knowledge-base/Articles")),
+    exact: true,
+  },
+  {
+    path: "/help/tickets",
+    Component: lazy(() => import("./pages/app/helpdesk/Tickets")),
+    exact: true,
+  },
+  {
+    path: "/help/ticket/create",
+    Component: lazy(() => import("./pages/app/helpdesk/CreateTicket")),
+    exact: true,
+  },
+  {
+    path: "/help/ticket/:ticket_id",
+    Component: lazy(() => import("./pages/app/helpdesk/TicketDetails")),
+    exact: true,
+  },
+  {
     path: "/account-settings",
     Component: lazy(() => import("./pages/app/user/AccountSettings")),
     exact: true,

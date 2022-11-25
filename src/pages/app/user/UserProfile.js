@@ -86,7 +86,6 @@ const UserProfile = () => {
     // };
     // setUserInfo(submitData);
     updateUser();
-    console.log({ formData });
   };
 
   if (isLoading) {

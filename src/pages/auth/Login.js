@@ -35,7 +35,6 @@ const Login = ({ dispatch, user, authProvider, logo }) => {
   const [passState, setPassState] = useState(false);
   const [errorVal] = useState("");
 
-  console.log({user});
   const onFinish = values => {
     dispatch({
       type: 'user/LOGIN',

@@ -151,15 +151,6 @@ const PaymentHistory = () => {
                 <p>Here is payment history of your account.</p>
               </BlockDes>
             </BlockHeadContent>
-            {/* <BlockHeadContent>
-              <ul className="nk-block-tools g-3">
-                <li>
-                  <Button color="primary" className="btn-icon" onClick={() => setModal({ add: true })}>
-                    <Icon name="plus"></Icon>
-                  </Button>
-                </li>
-              </ul>
-            </BlockHeadContent> */}
           </BlockBetween>
         </BlockHead>
 
@@ -383,128 +374,10 @@ const PaymentHistory = () => {
                   </tbody>
                 </table>
               </div>
-              {/* <div className="card-inner">
-                {currentItems.length > 0 ? (
-                  <PaginationComponent
-                    noDown
-                    itemPerPage={itemPerPage}
-                    totalItems={data.length}
-                    paginate={paginate}
-                    currentPage={currentPage}
-                  />
-                ) : (
-                  <div className="text-center">
-                    <span className="text-silent">No data found</span>
-                  </div>
-                )}
-              </div> */}
             </div>
           </Card>
         </Block>
 
-        {/* <Modal isOpen={modal.add} toggle={() => setModal({ add: false })} className="modal-dialog-centered" size="lg">
-          <ModalBody>
-            <a
-              href="#cancel"
-              onClick={(ev) => {
-                ev.preventDefault();
-                onFormCancel();
-              }}
-              className="close"
-            >
-              <Icon name="cross-sm"></Icon>
-            </a>
-            <div className="p-2">
-              <h5 className="title">Add Bill</h5>
-              <div className="mt-4">
-                <Form className="row gy-4 mt-4" onSubmit={handleSubmit(onFormSubmit)}>
-                  <Col md="6">
-                    <FormGroup>
-                      <label className="form-label">Bill</label>
-                      <input
-                        className="form-control"
-                        ref={register({ required: "This field is required" })}
-                        type="text"
-                        name="bill"
-                        defaultValue={formData.bill}
-                        placeholder="Enter bill"
-                      />
-                      {errors.bill && <span className="invalid">{errors.bill.message}</span>}
-                    </FormGroup>
-                  </Col>
-                  <Col md="6">
-                    <FormGroup>
-                      <label className="form-label">Total</label>
-                      <input
-                        className="form-control"
-                        ref={register({ required: "This field is required" })}
-                        type="number"
-                        name="total"
-                        defaultValue={formData.total}
-                      />
-                      {errors.total && <span className="invalid">{errors.total.message}</span>}
-                    </FormGroup>
-                  </Col>
-                  <Col md="6">
-                    <FormGroup>
-                      <label className="form-label">Issue Date</label>
-                      <DatePicker
-                        selected={formData.issue}
-                        className="form-control"
-                        onChange={(date) => setFormData({ ...formData, issue: date })}
-                        minDate={new Date()}
-                      />
-                    </FormGroup>
-                  </Col>
-                  <Col md="6">
-                    <FormGroup>
-                      <label className="form-label">Due Date</label>
-                      <DatePicker
-                        selected={formData.due}
-                        className="form-control"
-                        onChange={(date) => setFormData({ ...formData, due: date })}
-                        minDate={new Date()}
-                      />
-                    </FormGroup>
-                  </Col>
-                  <Col md="12">
-                    <FormGroup>
-                      <label className="form-label">Status</label>
-                      <div className="form-control-wrap">
-                        <RSelect
-                          options={statusOptions}
-                          defaultValue={{ value: "Paid", label: "Paid" }}
-                          onChange={(e) => setFormData({ ...formData, status: e.value })}
-                        />
-                      </div>
-                    </FormGroup>
-                  </Col>
-                  <Col size="12">
-                    <ul className="align-center flex-wrap flex-sm-nowrap gx-4 gy-2">
-                      <li>
-                        <Button color="primary" size="md" type="submit">
-                          Add Bill
-                        </Button>
-                      </li>
-                      <li>
-                        <a
-                          href="#cancel"
-                          onClick={(ev) => {
-                            ev.preventDefault();
-                            onFormCancel();
-                          }}
-                          className="link link-light"
-                        >
-                          Cancel
-                        </a>
-                      </li>
-                    </ul>
-                  </Col>
-                </Form>
-              </div>
-            </div>
-          </ModalBody>
-        </Modal> */}
 
         <Modal isOpen={viewModal} toggle={() => setViewModal(false)} className="modal-dialog-centered" size="lg">
           <ModalBody>

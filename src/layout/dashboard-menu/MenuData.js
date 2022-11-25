@@ -22,11 +22,11 @@ const mainMenu = [
     subMenu: [
       {
         text: "Knowledge Base",
-        link: "/project-card",
+        link: "/knowledge-base",
       },
       {
         text: "Tickets",
-        link: "/project-list",
+        link: "/help/tickets",
       },
     ]
   },

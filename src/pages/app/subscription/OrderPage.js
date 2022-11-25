@@ -32,7 +32,6 @@ const OrderPage = ({ history }) => {
   } = useQuery(["get-stripe-session", formData.plan.value], () => getStripeSession(formData.plan.value), {
     enabled: false,
     onSuccess: (data) => {
-      console.log(data);
       // history.push(data.redirect_url)
       window.location.replace(data.redirect_url);
       if (!data) {
@@ -54,8 +53,6 @@ const OrderPage = ({ history }) => {
     if (formData.plan.value > 0) {
       refetch();
     }
-
-    console.log(formData);
   };
 
 
