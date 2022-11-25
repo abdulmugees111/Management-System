@@ -18,11 +18,13 @@ import {
 } from "../../../components/Component";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { create_ticket } from "../../../services/helpdesk/tickets";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { Card, Form, FormGroup, Spinner } from "reactstrap";
 import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
 
 const CreateTicket = () => {
+  const history = useHistory();
 
   const useCreateTicket = () => {
     const queryClient = useQueryClient();
@@ -37,11 +39,15 @@ const CreateTicket = () => {
         if (context.successCb) {
           context.successCb(result);
         }
+        toast.success("Ticket Created Successfully.");
+        history.push('/help/tickets')
       },
       onError: (error, variables, context) => {
         if (context.errorCb) {
           context.errorCb(error);
         }
+        toast.error("There is an error while creating the ticket.");
+
       },
     });
     return useMutation(["create-ticket"]);

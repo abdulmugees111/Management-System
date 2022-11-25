@@ -1,5 +1,6 @@
 import axios from 'axios'
 import store from 'store'
+import { toast } from "react-toastify";
 
 const apiClient = axios.create({
   baseURL: 'https://app.tajr.io/api/',
@@ -25,6 +26,8 @@ apiClient.interceptors.response.use(undefined, error => {
   const { data } = response
   if (data) {
   // custom code for showing error
+    toast.error("There is an Error While Processing your Request.");
+
   }
 })
 
