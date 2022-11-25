@@ -2,7 +2,7 @@ import axios from 'axios'
 import store from 'store'
 
 const apiClient = axios.create({
-  baseURL: 'http://localhost:8043/api/',
+  baseURL: 'https://app.tajr.io/api/',
   // timeout: 1000,
   // headers: { 'X-Custom-Header': 'foobar' }
   headers: {'Content-Type': 'text/html'}
