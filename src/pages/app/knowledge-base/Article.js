@@ -14,7 +14,7 @@ import {
     PaginationComponent,
     Row,
     RSelect,
-    PreviewCard,
+    PreviewCard, BackTo
 } from "../../../components/Component";
 import { useQuery } from '@tanstack/react-query';
 import { get_article } from "../../../services/knowledge-base/article";
@@ -33,17 +33,22 @@ const Article = () => {
             {
                 article !== undefined &&
                 <Content>
-                    <BlockHead size="sm">
-                        <BlockBetween>
-                            <BlockHeadContent>
-                                <BlockTitle page>{article.name}</BlockTitle>
-                                <BlockDes className="text-soft">
-                                    <p>{article.kanban_manual_description}</p>
-                                </BlockDes>
-                            </BlockHeadContent>
+                    <Block>
+                        <BlockHead size="sm">
+                            <BlockBetween>
+                                <BlockHeadContent>
+                                    <BackTo link={`/kb/article/section/${article.section_id[0]}`} icon="arrow-left">
+                                        {article.section_id[1]}
+                                    </BackTo>
+                                    <BlockTitle page>{article.name}</BlockTitle>
+                                    <BlockDes className="text-soft">
+                                        <p>{article.kanban_manual_description}</p>
+                                    </BlockDes>
+                                </BlockHeadContent>
+                            </BlockBetween>
+                        </BlockHead>
+                    </Block>
 
-                        </BlockBetween>
-                    </BlockHead>
                     <Block>
                         <PreviewCard className="card-bordered">
                             <div className="entry">

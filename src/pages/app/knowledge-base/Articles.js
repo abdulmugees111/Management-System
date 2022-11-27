@@ -3,73 +3,82 @@ import Content from "../../../layout/content/Content";
 import Head from "../../../layout/head/Head";
 
 import {
-    Button,
-    Block,
-    BlockBetween,
-    BlockDes,
-    BlockHead,
-    BlockHeadContent,
-    BlockTitle,
-    Icon,
-    Col,
-    PaginationComponent,
-    Row,
-    RSelect,
+  Button,
+  Block,
+  BlockBetween,
+  BlockDes,
+  BlockHead,
+  BlockHeadContent,
+  BlockTitle,
+  Icon,
+  Col,
+  PaginationComponent,
+  Row,
+  RSelect, BackTo
 } from "../../../components/Component";
-import { useQuery } from '@tanstack/react-query';
+import { useQuery } from "@tanstack/react-query";
 import { get_articles } from "../../../services/knowledge-base/articles";
 import { Link, useParams } from "react-router-dom";
+import { Spinner } from "reactstrap";
+
 const Articles = () => {
-    const { section_id } = useParams();
-    const { isLoading, error, data: articles } = useQuery(["get-articles", section_id], () => get_articles(section_id));
+  const { section_id } = useParams();
+  const { isLoading, error, data: articles } = useQuery(["get-articles", section_id], () => get_articles(section_id));
 
-    return (
-        <React.Fragment>
-            <Head title="Knowledge Base"></Head>
-            <Content>
-                <BlockHead size="sm">
-                    <BlockBetween>
-                        <BlockHeadContent>
-                            <BlockTitle page>Knowledge Base - Articles</BlockTitle>
-                            <BlockDes className="text-soft">
-                                <p>We are here to help you.</p>
-                            </BlockDes>
-                        </BlockHeadContent>
+  return (
+    <React.Fragment>
+      {
+        isLoading && <Spinner color="primary" />
+      }
 
-                    </BlockBetween>
-                </BlockHead>
+      <Head title="Help Articles"/>
+      {articles &&
+        <Content>
+          <Block>
+            <BlockHead size="sm">
+              <BlockBetween>
+                <BlockHeadContent>
+                  <BackTo link="/knowledge-base" icon="arrow-left">
+                    Sections
+                  </BackTo>
+                  <BlockTitle page tag="h3">
+                    {articles.section.name}
+                  </BlockTitle>
+                  <BlockDes className="text-soft">
+                    <div dangerouslySetInnerHTML={{ __html: articles.section.description }} />
+                  </BlockDes>
+                </BlockHeadContent>
+              </BlockBetween>
+            </BlockHead>
+          </Block>
 
-                <Block>
-                    <Row className="g-gs">
-                        <Col lg={6}>
-                            {articles && articles.count > 0
-                                ? articles.records.map((article) => {
+          <Block>
+            <div className="card card-bordered">
+              <div className="card-inner">
+                {articles && articles.count > 0
+                  ? articles.records.map((article) => {
+                    return (
+                      <div class="support-queue-item">
+                        <Link className="support-queue-link" to={`${process.env.PUBLIC_URL}/kb/article/${article.id}`}>
+                        <div class="support-queue-media"><em
+                          class="icon icon-circle ni ni-cc-secure bg-warning"></em></div>
+                        <div class="support-queue-body">
+                          <div class="support-queue-context"><h5 class="support-queue-title title">{article.name}</h5>
+                            <div class="support-queue-desc">{article.kanban_manual_description}</div>
+                          </div>
+                          <div class="support-queue-update"><span>Updated: {article.write_revision_date}</span></div>
+                        </div>
+                      </Link></div>
+                    );
 
-                                    return (
-                                        <Link to={`${process.env.PUBLIC_URL}/kb/article/${article.id}`} className="card card-bordered text-soft">
-                                            <div className="card-inner">
-                                                <div className="align-center justify-between">
-                                                    <div className="g">
-                                                        <h6 className="title">{article.name}</h6>
-                                                        <p>{article.kanban_manual_description}</p>
-                                                    </div>
-                                                    <div className="g">
-                                                        <span className="btn btn-icon btn-trigger mr-n1">
-                                                            <Icon name="chevron-right"></Icon>
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                            </div>{" "}
-                                        </Link>
-                                    )
-                                }) : null}
-                        </Col>
-                    </Row>
-
-                </Block>
-            </Content>
-        </React.Fragment>
-    );
+                  }) : null}
+              </div>
+            </div>
+          </Block>
+        </Content>
+      }
+    </React.Fragment>
+  );
 };
 
 export default Articles;

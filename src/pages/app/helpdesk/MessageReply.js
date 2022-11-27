@@ -4,18 +4,6 @@ import Head from "../../../layout/head/Head";
 
 import {
     Button,
-    Block,
-    BlockBetween,
-    BlockDes,
-    BlockHead,
-    BlockHeadContent,
-    BlockTitle,
-    Icon,
-    Col,
-    PaginationComponent,
-    Row,
-    RSelect,
-    PreviewCard,
 } from "../../../components/Component";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { post_ticket_message } from "../../../services/helpdesk/ticketDetails";
@@ -78,7 +66,6 @@ const MessageReply = () => {
                                 name="message"
                                 form="message-form"
                                 className="form-control-lg form-control"
-                                // onChange={(e) => setformData({ message: e.target.value })}
                                 ref={register({ required: "This field is required" })}
                                 required={true}
                                 defaultValue={formData.message}
@@ -88,8 +75,8 @@ const MessageReply = () => {
                     <div className="form-action">
                         <ul className="form-btn-group">
                             <li>
-                                <Button type="submit" color="primary" size="sm" className="btn-block">
-                                    {messageReply.isLoading ? <Spinner size="sm" color="light" /> : "Send"}
+                                <Button type="submit" color="primary" size="" className="btn-block">
+                                    {messageReply.isLoading ? <Spinner size="" color="light" /> : "Send Reply"}
                                 </Button>
 
                             </li>
@@ -102,7 +89,7 @@ const MessageReply = () => {
             </div>
         }
     </>
-    );
-};
+    )
+}
 
-export { MessageReply };
+export { MessageReply }

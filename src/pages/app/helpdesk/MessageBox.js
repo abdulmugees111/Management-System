@@ -55,14 +55,12 @@ const MessageBox = ({ ticket_id, ...props }) => {
                 </div>
                 <div className="ticket-msg-comment">
                   <div dangerouslySetInnerHTML={{ __html: message.body }} />
-
                 </div>
               </div>
-
           )
           }) : null
         }
-        <MessageReply ticket_id={ticket_id} />;
+        <MessageReply ticket_id={ticket_id} />
       </PreviewCard>
     </Block>
   );
