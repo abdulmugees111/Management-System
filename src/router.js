@@ -63,6 +63,11 @@ const routes = [
     exact: true,
   },
   {
+    path: "/invoice/:invoice_id",
+    Component: lazy(() => import("./pages/app/payment-history/InvoiceDetails")),
+    exact: true,
+  },
+  {
     path: "/knowledge-base",
     Component: lazy(() => import("./pages/app/knowledge-base/Sections")),
     exact: true,

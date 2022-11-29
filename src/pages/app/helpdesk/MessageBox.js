@@ -23,7 +23,7 @@ import { Div, Card, Spinner } from "reactstrap";
 import { MessageReply } from "./MessageReply";
 import { useParams } from "react-router-dom";
 
-const MessageBox = ({ ticket_id, ...props }) => {
+const MessageBox = ({ ticket_id, stage, ...props }) => {
   const {
     isLoading,
     error,
@@ -60,7 +60,9 @@ const MessageBox = ({ ticket_id, ...props }) => {
           )
           }) : null
         }
-        <MessageReply ticket_id={ticket_id} />
+        {
+          (stage[1] === "New" || stage[1] === "In Progress") ? <MessageReply ticket_id={ticket_id} /> : <h3>Can not send Message</h3>
+        }
       </PreviewCard>
     </Block>
   );

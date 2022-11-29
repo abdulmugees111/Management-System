@@ -2,39 +2,12 @@ import React, { useState, useEffect } from "react";
 import Content from "../../../layout/content/Content";
 import Head from "../../../layout/head/Head";
 import {
-  UncontrolledDropdown,
-  DropdownMenu,
-  DropdownToggle,
-  Card,
-  FormGroup,
-  Modal,
-  ModalBody,
-  DropdownItem,
-  Form,
-  Badge,
-  CardHeader,
-  CardBody,
-  CardTitle,
-  CardText,
-  CardFooter
-} from "reactstrap";
-import {
-  Button,
   Block,
-  BlockBetween,
-  BlockDes,
-  BlockHead,
-  BlockHeadContent,
-  BlockTitle,
-  Icon,
-  Col,
-  PaginationComponent,
-  Row,
-  RSelect
 } from "../../../components/Component";
 import { useQuery } from "@tanstack/react-query";
 import { get_sections } from "../../../services/knowledge-base/sections";
 import { Link } from "react-router-dom";
+import { Spinner } from "reactstrap";
 
 const Sections = () => {
   const { isLoading, error, data: sections } = useQuery(["get-sections"], get_sections);
@@ -60,6 +33,9 @@ const Sections = () => {
           </div>
         </div>
         <Block>
+          {
+            isLoading && <Spinner color="primary" />
+          }
           {sections && sections.count > 0
             ? sections.records.map((section) => {
 

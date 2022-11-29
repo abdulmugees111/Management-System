@@ -62,7 +62,7 @@ const TicketDetails = () => {
                                 <div>{ticket.description}</div>
                             </PreviewCard>
                         </Block>
-                        <MessageBox ticket_id={ticket_id}/>
+                        <MessageBox ticket_id={ticket_id} stage={ticket.stage_id}/>
                     </>
                 }
             </Content>

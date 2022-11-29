@@ -33,6 +33,7 @@ import { dateFormatterAlt } from "../../../utils/Utils";
 import { useForm } from "react-hook-form";
 import { useQuery } from '@tanstack/react-query';
 import { get_invoices } from "../../../services/invoice";
+import { Link } from "react-router-dom";
 
 const PaymentHistory = () => {
   const [onSearch, setonSearch] = useState(true);
@@ -157,116 +158,7 @@ const PaymentHistory = () => {
         <Block>
           <Card className="card-bordered card-stretch">
             <div className="card-inner-group">
-              <div className="card-inner">
-                <div className="card-title-group">
-                  <div className="card-title">
-                    <h5 className="title">All Orders</h5>
-                  </div>
-                  <div className="card-tools mr-n1">
-                    <ul className="btn-toolbar">
-                      <li>
-                        <Button onClick={toggle} className="btn-icon search-toggle toggle-search">
-                          <Icon name="search"></Icon>
-                        </Button>
-                      </li>
-                      <li className="btn-toolbar-sep"></li>
-                      <li>
-                        <UncontrolledDropdown>
-                          <DropdownToggle tag="a" className="dropdown-toggle btn btn-icon btn-trigger">
-                            <Icon name="setting"></Icon>
-                          </DropdownToggle>
-                          <DropdownMenu right>
-                            <ul className="link-check">
-                              <li>
-                                <span>Show</span>
-                              </li>
-
-                              <li className={itemPerPage === 10 ? "active" : ""}>
-                                <DropdownItem
-                                  tag="a"
-                                  href="#dropdownitem"
-                                  onClick={(ev) => {
-                                    ev.preventDefault();
-                                    setItemPerPage(10);
-                                  }}
-                                >
-                                  10
-                                </DropdownItem>
-                              </li>
-                              <li className={itemPerPage === 15 ? "active" : ""}>
-                                <DropdownItem
-                                  tag="a"
-                                  href="#dropdownitem"
-                                  onClick={(ev) => {
-                                    ev.preventDefault();
-                                    setItemPerPage(15);
-                                  }}
-                                >
-                                  15
-                                </DropdownItem>
-                              </li>
-                            </ul>
-                            <ul className="link-check">
-                              <li>
-                                <span>Order</span>
-                              </li>
-                              <li className={sort === "dsc" ? "active" : ""}>
-                                <DropdownItem
-                                  tag="a"
-                                  href="#dropdownitem"
-                                  onClick={(ev) => {
-                                    ev.preventDefault();
-                                    setSortState("dsc");
-                                    sortingFunc("dsc");
-                                  }}
-                                >
-                                  DESC
-                                </DropdownItem>
-                              </li>
-                              <li className={sort === "asc" ? "active" : ""}>
-                                <DropdownItem
-                                  tag="a"
-                                  href="#dropdownitem"
-                                  onClick={(ev) => {
-                                    ev.preventDefault();
-                                    setSortState("asc");
-                                    sortingFunc("asc");
-                                  }}
-                                >
-                                  ASC
-                                </DropdownItem>
-                              </li>
-                            </ul>
-                          </DropdownMenu>
-                        </UncontrolledDropdown>
-                      </li>
-                    </ul>
-                  </div>
-                  <div className={`card-search search-wrap ${!onSearch ? "active" : ""}`}>
-                    <div className="search-content">
-                      <Button
-                        className="search-back btn-icon toggle-search"
-                        onClick={() => {
-                          setSearchText("");
-                          toggle();
-                        }}
-                      >
-                        <Icon name="arrow-left"></Icon>
-                      </Button>
-                      <input
-                        type="text"
-                        className="form-control border-transparent form-focus-none"
-                        placeholder="Search by bill name"
-                        value={onSearchText}
-                        onChange={(e) => onFilterChange(e)}
-                      />
-                      <Button className="search-submit btn-icon">
-                        <Icon name="search"></Icon>
-                      </Button>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              
               <div className="card-inner p-0">
                 <table className="table table-tranx">
                   <thead>
@@ -287,9 +179,9 @@ const PaymentHistory = () => {
                       <th className="tb-tnx-amount is-alt">
                         <span className="tb-tnx-status d-none d-md-inline-block">State</span>
                       </th>
-                      <th className="tb-tnx-action">
-                        <span>&nbsp;</span>
-                      </th>
+                      {/*<th className="tb-tnx-action">*/}
+                      {/*  <span>&nbsp;</span>*/}
+                      {/*</th>*/}
                     </tr>
                   </thead>
                   <tbody>
@@ -298,14 +190,9 @@ const PaymentHistory = () => {
                           return (
                             <tr key={item.id} className="tb-tnx-item">
                               <td className="tb-tnx-id">
-                                <a
-                                  href="#ref"
-                                  onClick={(ev) => {
-                                    ev.preventDefault();
-                                  }}
-                                >
+                                <Link to={`/invoice/${item.id}`}>
                                   <span>{item.name}</span>
-                                </a>
+                                </Link>
                               </td>
                               <td className="tb-tnx-info">
                                 <div className="tb-tnx-desc">
@@ -325,47 +212,6 @@ const PaymentHistory = () => {
                                     {item.state}
                                   </span>
                                 </div>
-                              </td>
-                              <td className="tb-tnx-action">
-                                <UncontrolledDropdown>
-                                  <DropdownToggle
-                                    tag="a"
-                                    className="text-soft dropdown-toggle btn btn-icon btn-trigger"
-                                  >
-                                    <Icon name="more-h"></Icon>
-                                  </DropdownToggle>
-                                  <DropdownMenu right>
-                                    <ul className="link-list-plain">
-                                      <li
-                                        onClick={() => {
-                                          loadDetail(item.id);
-                                          setViewModal(true);
-                                        }}
-                                      >
-                                        <DropdownItem
-                                          tag="a"
-                                          href="#view"
-                                          onClick={(ev) => {
-                                            ev.preventDefault();
-                                          }}
-                                        >
-                                          Edit
-                                        </DropdownItem>
-                                      </li>
-                                      <li>
-                                        <DropdownItem
-                                          tag="a"
-                                          href="#print"
-                                          onClick={(ev) => {
-                                            ev.preventDefault();
-                                          }}
-                                        >
-                                          Remove
-                                        </DropdownItem>
-                                      </li>
-                                    </ul>
-                                  </DropdownMenu>
-                                </UncontrolledDropdown>
                               </td>
                             </tr>
                           );
