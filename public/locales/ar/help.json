@@ -1,0 +1,9 @@
+{
+  "helpdesk_tickets_title": "مكتب المساعدة - التذاكر",
+  "helpdesk_tickets_desc": "نحن هنا لمساعدتك.",
+  "helpdesk_tickets_name_field": "اسم",
+  "helpdesk_tickets_ticket_ref_field": "مرجع التذاكر",
+  "helpdesk_tickets_create_date_field": "تاريخ الإنشاء",
+  "create_ticket_title": "إنشاء تذكرة دعم",
+  "create_ticket_desc": "نحن هنا لمساعدتك."
+}

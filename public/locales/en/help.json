@@ -1,0 +1,10 @@
+{
+  "helpdesk_tickets_title": "Helpdesk - Tickets",
+  "helpdesk_tickets_desc": "We are here to help you.",
+  "helpdesk_tickets_name_field": "NAME",
+  "helpdesk_tickets_ticket_ref_field": "TICKET REFERENCE",
+  "helpdesk_tickets_create_date_field": "CREATE DATE",
+  "create_ticket_title":"Create Support Ticket",
+  "create_ticket_desc":"We are here to help you."
+  
+}

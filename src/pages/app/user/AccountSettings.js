@@ -18,8 +18,10 @@ import { useQuery } from '@tanstack/react-query';
 import { update_password } from "../../../services/user";
 import { toast } from 'react-toastify';
 import store from "store";
+import { useTranslation } from "react-i18next";
 
 const UserProfileSettingPage = ({history}) => {
+  const { t } = useTranslation(['account_settings','common']);
       const [passState, setPassState] = useState(false);
       const [isConfirmPassSame, setIsConfirmPassSame] = useState(true);
 
@@ -75,9 +77,9 @@ const UserProfileSettingPage = ({history}) => {
      <BlockHead size="lg">
        <BlockBetween>
          <BlockHeadContent>
-           <BlockTitle tag="h4">Security Settings</BlockTitle>
+           <BlockTitle tag="h4">{t("security_settings_title")}</BlockTitle>
            <BlockDes>
-             <p>These settings will help you to keep your account secure.</p>
+             <p>{t("security_settings_desc")}</p>
            </BlockDes>
          </BlockHeadContent>
        </BlockBetween>
@@ -89,14 +91,14 @@ const UserProfileSettingPage = ({history}) => {
            <div className="card-inner">
              <div className="between-center flex-wrap g-3">
                <div className="nk-block-text">
-                 <h6>Change Password</h6>
-                 <p>Set a unique password to protect your account.</p>
+                 <h6>{t("change_pass_title")}</h6>
+                 <p>{t("change_pass_desc")}</p>
                </div>
                <div className="nk-block-actions flex-shrink-sm-0">
                  <ul className="align-center flex-wrap flex-sm-nowrap gx-3 gy-2">
                    <li className="order-md-last">
                      <Button color="primary" onClick={() => setModal(true)}>
-                       Change Password
+                     {t("change_pass_btn",{ns:'common'})}
                      </Button>
                    </li>
                    {/* <li>
@@ -112,15 +114,14 @@ const UserProfileSettingPage = ({history}) => {
              <div className="between-center flex-wrap flex-md-nowrap g-3">
                <div className="nk-block-text">
                  <h6>
-                   2 Factor Auth (Coming Soon) &nbsp; <span className="badge badge-success ml-0">Enabled</span>
+                 {t("2fa_title")} &nbsp; <span className="badge badge-success ml-0">{t("enabled_state",{ns:'common'})}</span>
                  </h6>
                  <p>
-                   Secure your account with 2FA security. When it is activated you will need to enter not only your
-                   password, but also a special code using app. You will receive this code via mobile application.{" "}
+                 {t("2fa_desc")}
                  </p>
                </div>
                <div className="nk-block-actions">
-                 <Button color="primary">Disable</Button>
+                 <Button color="primary">{t("disable_btn",{ns:'common'})}</Button>
                </div>
              </div>
            </div>

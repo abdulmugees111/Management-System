@@ -1,0 +1,8 @@
+{
+  "security_settings_title": "Security Settings",
+  "security_settings_desc": "These settings will help you to keep your account secure.",
+  "change_pass_title": "Change Password",
+  "change_pass_desc": "Set a unique password to protect your account.",
+  "2fa_title": "2 Factor Auth (Coming Soon)",
+  "2fa_desc": "Secure your account with 2FA security. When it is activated you will need to enter not only your password, but also a special code using app. You will receive this code via mobile application."
+}

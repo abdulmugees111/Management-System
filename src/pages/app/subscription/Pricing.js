@@ -16,15 +16,17 @@ import {
   Row,
 } from "../../../components/Component";
 import { Card } from "reactstrap";
-import {pricingTableDataV2} from './data'
+import { pricingTableDataV2 } from "./data";
 import { Link } from "react-router-dom";
-import { useQuery } from '@tanstack/react-query';
-import {getPricings} from '../../../services/order/index'
+import { useQuery } from "@tanstack/react-query";
+import { getPricings } from "../../../services/order/index";
+import { useTranslation } from "react-i18next";
 
 const PricingTable = () => {
+  const { t } = useTranslation(["pricing"]);
 
-  const {data, isLoading} = useQuery(['get-pricings'],getPricings)
-  
+  const { data, isLoading } = useQuery(["get-pricings"], getPricings);
+
   return (
     <React.Fragment>
       <Head title="Pricing"></Head>
@@ -32,9 +34,9 @@ const PricingTable = () => {
         <BlockHead size="sm">
           <BlockBetween className="g-3">
             <BlockContent>
-              <BlockTitle>Tajr Pricing</BlockTitle>
+              <BlockTitle>{t("pricing_title")}</BlockTitle>
               <BlockDes className="text-soft">
-                <p>Choose your pricing plan and start enjoying our service.</p>
+                <p>{t("pricing_desc")}</p>
               </BlockDes>
             </BlockContent>
           </BlockBetween>
@@ -56,7 +58,15 @@ const PricingTable = () => {
                         <img src={item.id === 1 ? PlanS1 : item.id === 2 ? PlanS2 : PlanS3} alt="" />
                       </div>
                       <div className="pricing-title w-220px mx-auto">
-                        <h5 className="title">{item.name}</h5>
+                        <h5 className="title">
+                          {item.name === "Tajr Basic Plan"
+                            ? t("basic_plan_title")
+                            : item.name === "Tajr Pro Plan"
+                            ? t("pro_plan_title")
+                            : item.name === "Tajr Pro Plan"
+                            ? t("basic_enterprise_title")
+                            : null}
+                        </h5>
                         <span className="sub-text">{item.desc}</span>
                       </div>
                       <div className="pricing-amount">
@@ -66,7 +76,6 @@ const PricingTable = () => {
                         <span className="bill"> Billed Yearly</span>
                       </div>
                       <div className="pricing-action">
-
                         <Link
                           to={{
                             pathname: "/order",
@@ -75,7 +84,6 @@ const PricingTable = () => {
                         >
                           <Button color="primary">Select Plan</Button>
                         </Link>
-
                       </div>
                     </div>
                   </Card>

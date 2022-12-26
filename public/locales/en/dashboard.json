@@ -1,0 +1,14 @@
+{
+    "welcome_user": "Welcome, {{user}}",
+    "welcome_message":"Welcome to our dashboard. Manage your account and your subscriptions.",
+    "personal_info_title":"Personal Info",
+    "personal_info_desc":"See your profile data and manage your Account to choose what is saved in our system.",
+    "security_settings_title":"Security Setting",
+    "security_settings_desc":"You have full control to manage your own account and keep account fully secure.",
+    "billing_history_title":"Billing History",
+    "billing_history_desc":"Check out all your payment history. You can also download or print your invoice.",
+    "account_reports_title":"Account Reports",
+    "account_reports_desc":"Check your reports of uses and manage your packages or subscriptions that you have.",
+    "help_title":"We’re here to help you!",
+    "help_desc":"Ask a question or file a support ticket, manage request, report an issues. Our support team will get back to you by email."
+}

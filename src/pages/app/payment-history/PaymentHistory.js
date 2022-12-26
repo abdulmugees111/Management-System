@@ -34,8 +34,10 @@ import { useForm } from "react-hook-form";
 import { useQuery } from '@tanstack/react-query';
 import { get_invoices } from "../../../services/invoice";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const PaymentHistory = () => {
+  const { t } = useTranslation(['invoices']);
   const [onSearch, setonSearch] = useState(true);
   const [onSearchText, setSearchText] = useState("");
   const [modal, setModal] = useState({
@@ -142,14 +144,14 @@ const PaymentHistory = () => {
   const { isLoading, error, data:invoices } = useQuery(["get-invoices"], get_invoices);
   return (
     <React.Fragment>
-      <Head title="Payment History"></Head>
+      <Head title={t('payment_history_title')}></Head>
       <Content>
         <BlockHead size="sm">
           <BlockBetween>
             <BlockHeadContent>
-              <BlockTitle page>Payment History</BlockTitle>
+              <BlockTitle page>{t('payment_history_title')}</BlockTitle>
               <BlockDes className="text-soft">
-                <p>Here is payment history of your account.</p>
+                <p>{t('payment_history_desc')}</p>
               </BlockDes>
             </BlockHeadContent>
           </BlockBetween>
@@ -164,20 +166,20 @@ const PaymentHistory = () => {
                   <thead>
                     <tr className="tb-tnx-head">
                       <th className="tb-tnx-id">
-                        <span className="">Name</span>
+                        <span className="">{t('name_table_field')}</span>
                       </th>
                       <th className="tb-tnx-info">
                         <span className="tb-tnx-desc d-none d-sm-inline-block">
-                          <span>Payment Reference</span>
+                          <span>{t('payment_ref_table_field')}</span>
                         </span>
                         <span className="tb-tnx-date d-md-inline-block d-none">
                           <span className="d-none d-md-block">
-                            <span>invoice date</span>
+                            <span>{t('invoice_date_table_field')}</span>
                           </span>
                         </span>
                       </th>
                       <th className="tb-tnx-amount is-alt">
-                        <span className="tb-tnx-status d-none d-md-inline-block">State</span>
+                        <span className="tb-tnx-status d-none d-md-inline-block">{t('state_table_field')}</span>
                       </th>
                       {/*<th className="tb-tnx-action">*/}
                       {/*  <span>&nbsp;</span>*/}

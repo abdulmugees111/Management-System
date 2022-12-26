@@ -22,8 +22,10 @@ import { Link, useHistory } from "react-router-dom";
 import { Card, Form, FormGroup, Spinner } from "reactstrap";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
+import { useTranslation } from "react-i18next";
 
 const CreateTicket = () => {
+  const {t}=useTranslation(['help','common'])
   const history = useHistory();
 
   const useCreateTicket = () => {
@@ -76,9 +78,9 @@ const CreateTicket = () => {
         <BlockHead size="sm">
           <BlockBetween>
             <BlockHeadContent>
-              <BlockTitle page>Create Support Ticket</BlockTitle>
+              <BlockTitle page>{t('create_ticket_title',{ns:'help'})}</BlockTitle>
               <BlockDes className="text-soft">
-                <p>We are here to help you.</p>
+                <p>{t('create_ticket_desc',{ns:'help'})}</p>
               </BlockDes>
             </BlockHeadContent>
 
@@ -92,13 +94,13 @@ const CreateTicket = () => {
                 <Form className="row gy-4" id="submit-ticket" onSubmit={handleSubmit(onFormSubmit)}>
                   <Col md="6">
                     <FormGroup>
-                      <label className="form-label">Name</label>
+                      <label className="form-label">{t('name',{ns:'common'})}</label>
                       <input
                         className="form-control"
                         ref={register({ required: "This field is required" })}
                         type="text"
                         name="name"
-                        placeholder="Jane Doe"
+                        placeholder={t('name_ph',{ns:'common'})}
                         // required={true}
                         defaultValue={formData.name}
 
@@ -108,7 +110,7 @@ const CreateTicket = () => {
                   </Col>
                   <Col md="6">
                     <FormGroup>
-                      <label className="form-label"> Email </label>
+                      <label className="form-label"> {t('email',{ns:'common'})} </label>
                       <input
                         className="form-control"
                         ref={register({ required: "This field is required" })}
@@ -123,10 +125,10 @@ const CreateTicket = () => {
                   </Col>
                   <Col md="6">
                     <FormGroup>
-                      <label className="form-label">Subject</label>
+                      <label className="form-label">{t('subject',{ns:'common'})}</label>
                       <input
                         className="form-control"
-                        placeholder="I am having issue while connecting website"
+                        placeholder={t('subject_ph',{ns:'common'})}
                         ref={register({ required: "This field is required" })}
                         type="text"
                         name="subject"
@@ -137,13 +139,13 @@ const CreateTicket = () => {
                   </Col>
                   <Col md="12">
                     <FormGroup>
-                      <label className="form-label">Description</label>
+                      <label className="form-label">{t('description',{ns:'common'})}</label>
                       <textarea
                         form="submit-ticket"
                         className="form-control"
                         ref={register({ required: "This field is required" })}
                         name="description"
-                        placeholder="Add Your Description Here..."
+                        placeholder={t('description_ph',{ns:'common'})}
                         required={true}
                       />
                       {errors.description && <span className="invalid">{errors.description.message}</span>}
@@ -153,13 +155,13 @@ const CreateTicket = () => {
                     <ul className="align-center flex-wrap flex-sm-nowrap gx-4 gy-2">
                       <li>
                         <Button type="submit" color="primary" disabled={createTicket.isLoading} size="md">
-                          {createTicket.isLoading ? <Spinner size="sm" color="light" /> : "Submit Ticket"}</Button>
+                          {createTicket.isLoading ? <Spinner size="sm" color="light" /> : t('submit_ticket_btn',{ns:'common'})}</Button>
                       </li>
                       <li>
                         <Link to="/help/tickets"
                               className="link link-light"
                         >
-                          Cancel
+                          {t('cancel_btn',{ns:'common'})}
                         </Link>
                       </li>
                     </ul>

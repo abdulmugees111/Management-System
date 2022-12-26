@@ -1,0 +1,8 @@
+{
+    "payment_history_title":"تاريخ الدفع",
+    "payment_history_desc":"هنا هو تاريخ الدفع لحسابك.",
+    "name_table_field":"اسم",
+    "payment_ref_table_field":"إشارة دفع",
+    "invoice_date_table_field":"تاريخ الفاتورة",
+    "state_table_field":"ولاية"
+}

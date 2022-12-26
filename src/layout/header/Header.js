@@ -6,6 +6,7 @@ import Notification from "./dropdown/notification/Notification";
 import Toggle from "../sidebar/Toggle";
 import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
+import LanguageSwitcher from "../../components/internationalization/LanguageSwitcher";
 
 const Header = ({ fixed, theme, className, sidebarToggle, setVisibility, ...props }) => {
 
@@ -33,6 +34,7 @@ const { pathname } = useLocation();
                   <span className="nk-menu-text">Overview</span>
                 </Link>
               </li>
+              <li><LanguageSwitcher/></li>
               {/* <li
                 className={`nk-menu-item ${currentUrl === process.env.PUBLIC_URL + "/projects" ? "active current-page" : ""
                   }`}

@@ -19,36 +19,39 @@ import { Link } from "react-router-dom";
 import { profileIcon, accountIcon, billingIcon, securityIcon, supportIcon } from './components/svgIcons';
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+
 
 const Dashboard = ({ user }) => {
+  const { t } = useTranslation(['dashboard','common']);
  const [sm, updateSm] = useState(false);
 
  const cardsData = [
    {
-     title: "Personal Info",
-     description: "See your profile data and manage your Account to choose what is saved in our system.",
-     buttonText: "Manage Your Account",
+     title: t("personal_info_title"),
+     description: t("personal_info_desc"),
+     buttonText: t("manage_account_btn", { ns: 'common' }),
      url: "/user-profile",
      icon: profileIcon,
    },
    {
-     title: "Security Setting",
-     description: "You have full control to manage your own account and keep account fully secure.",
-     buttonText: "Account Setting",
+     title: t("security_settings_title"),
+     description: t("security_settings_desc"),
+     buttonText: t("account_settings_btn", { ns: 'common' }),
      url: "/account-settings",
      icon: securityIcon,
    },
    {
-     title: "Billing History",
-     description: "Check out all your payment history. You can also download or print your invoice.",
-     buttonText: "Account History",
+     title: t("billing_history_title"),
+     description: t("billing_history_desc"),
+     buttonText: t("account_history_btn", { ns: 'common' }),
      url: "/invoices",
      icon: billingIcon,
    },
    {
-     title: "Account Reports",
-     description: "Check your reports of uses and manage your packages or subscriptions that you have.",
-     buttonText: "Manage Subscription",
+     title: t("account_reports_title"),
+     description: t("account_reports_desc"),
+     buttonText: t("manage_subscriptions_btn", { ns: 'common' }),
      url: "/projects",
      icon: accountIcon,
    },
@@ -62,10 +65,10 @@ const Dashboard = ({ user }) => {
      <BlockBetween>
       <BlockHeadContent>
        <BlockTitle page tag="h3">
-        Welcome, {user.name}
+        {t("welcome_user", { user: user.name })}
        </BlockTitle>
        <BlockDes className="text-soft">
-        <p>Welcome to our dashboard. Manage your account and your subscriptions.</p>
+        <p>{t("welcome_message")}</p>
        </BlockDes>
       </BlockHeadContent>
       {/* <BlockHeadContent>
@@ -185,16 +188,15 @@ const Dashboard = ({ user }) => {
        </div>
        <BlockContent>
         <div className="nk-block-content-head px-lg-4">
-         <h5>We’re here to help you!</h5>
+         <h5>{t("help_title")}</h5>
          <p className="text-soft">
-          Ask a question or file a support ticket, manage request, report an issues. Our support team will
-          get back to you by email.
+         {t("help_desc")}
          </p>
         </div>
        </BlockContent>
        <BlockContent className="flex-shrink-0">
         <Button color="white" outline className="btn-outline-primary btn-dim">
-         Get Support Now
+         {t("get_support_btn",{ns:"common"})}
         </Button>
        </BlockContent>
       </div>

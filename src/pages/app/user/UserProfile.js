@@ -23,8 +23,10 @@ import { useQuery } from "@tanstack/react-query";
 import { get_countries, get_states, get_user_data, update_user_data } from "../../../services/user/index";
 import { reFormat } from "../../../utils/formattors";
 import { toast } from "react-toastify";
+import { useTranslation } from "react-i18next";
 
 const UserProfile = () => {
+  const {t,i18n}=useTranslation(['common'])
   const [formData, setFormData] = useState({
     name: "",
     phone: "",
@@ -97,9 +99,9 @@ const UserProfile = () => {
       <BlockHead size="lg">
         <BlockBetween>
           <BlockHeadContent>
-            <BlockTitle tag="h4">Personal Information</BlockTitle>
+            <BlockTitle tag="h4">{t('personal_information')}</BlockTitle>
             <BlockDes>
-              <p>Basic info, like your name and address, that you use on Tajr Platform.</p>
+              <p>{t('personal_information_desc')}</p>
             </BlockDes>
           </BlockHeadContent>
         </BlockBetween>
@@ -108,11 +110,11 @@ const UserProfile = () => {
       <Block>
         <div className="nk-data data-list data-list-s2">
           <div className="data-head">
-            <h6 className="overline-title">Basics</h6>
+            <h6 className="overline-title">{t('basics')}</h6>
           </div>
           <div className="data-item" onClick={() => setModal(true)}>
             <div className="data-col">
-              <span className="data-label">Full Name</span>
+              <span className="data-label">{t('full_name')}</span>
               <span className="data-value">{data.name}</span>
             </div>
             <div className="data-col data-col-end">
@@ -123,7 +125,7 @@ const UserProfile = () => {
           </div>
           <div className="data-item">
             <div className="data-col">
-              <span className="data-label">Email</span>
+              <span className="data-label">{t('email')}</span>
               <span className="data-value">{data.email}</span>
             </div>
             <div className="data-col data-col-end">
@@ -134,7 +136,7 @@ const UserProfile = () => {
           </div>
           <div className="data-item" onClick={() => setModal(true)}>
             <div className="data-col">
-              <span className="data-label">Phone Number</span>
+              <span className="data-label">{t('pno')}</span>
               <span className="data-value text-soft">{data.phone}</span>
             </div>
             <div className="data-col data-col-end">
@@ -145,7 +147,7 @@ const UserProfile = () => {
           </div>
           <div className="data-item" onClick={() => setModal(true)}>
             <div className="data-col">
-              <span className="data-label">Company Name</span>
+              <span className="data-label">{t('company_name')}</span>
               <span className="data-value text-soft">{data.company_name}</span>
             </div>
             <div className="data-col data-col-end">
@@ -156,7 +158,7 @@ const UserProfile = () => {
           </div>
           <div className="data-item" onClick={() => setModal(true)}>
             <div className="data-col">
-              <span className="data-label">VAT</span>
+              <span className="data-label">{t('vat')}</span>
               <span className="data-value text-soft">{data.vat}</span>
             </div>
             <div className="data-col data-col-end">
@@ -168,7 +170,7 @@ const UserProfile = () => {
 
           <div className="data-item" onClick={() => setModal(true)}>
             <div className="data-col">
-              <span className="data-label">Address</span>
+              <span className="data-label">{t('address')}</span>
               <span className="data-value">
                 {data.street},
                 <br />
@@ -184,11 +186,11 @@ const UserProfile = () => {
         </div>
         <div className="nk-data data-list data-list-s2">
           <div className="data-head">
-            <h6 className="overline-title">Preferences</h6>
+            <h6 className="overline-title">{t('preferences')}</h6>
           </div>
           <div className="data-item">
             <div className="data-col">
-              <span className="data-label">Language</span>
+              <span className="data-label">{t('language')}</span>
               <span className="data-value">English (United State)</span>
             </div>
             <div className="data-col data-col-end">
@@ -199,13 +201,13 @@ const UserProfile = () => {
                 }}
                 className="link link-primary"
               >
-                Change Language
+                {t('change_lang_btn')}
               </a>
             </div>
           </div>
           <div className="data-item">
             <div className="data-col">
-              <span className="data-label">Date Format</span>
+              <span className="data-label">{t('date_format')}</span>
               <span className="data-value">MM/DD/YYYY</span>
             </div>
             <div className="data-col data-col-end">
@@ -216,7 +218,7 @@ const UserProfile = () => {
                 }}
                 className="link link-primary"
               >
-                Change
+                {t('change_btn')}
               </a>
             </div>
           </div>

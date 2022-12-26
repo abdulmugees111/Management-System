@@ -21,6 +21,7 @@ import {
 import { Form, FormGroup, Spinner, Alert } from "reactstrap";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 
 const mapStateToProps = ({ user, settings, dispatch }) => ({
@@ -32,6 +33,7 @@ const mapStateToProps = ({ user, settings, dispatch }) => ({
 
 
 const Login = ({ dispatch, user, authProvider, logo }) => {
+  const { t } = useTranslation();
   const [passState, setPassState] = useState(false);
   const [errorVal] = useState("");
 
@@ -66,7 +68,7 @@ const Login = ({ dispatch, user, authProvider, logo }) => {
               <BlockContent>
                 <BlockTitle tag="h4">Sign-In</BlockTitle>
                 <BlockDes>
-                  <p>Access Tajr using your email and password.</p>
+                  <p>Access {t("app_name")} using your email and password.</p>
                 </BlockDes>
               </BlockContent>
             </BlockHead>

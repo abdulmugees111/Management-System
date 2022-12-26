@@ -20,8 +20,10 @@ import { useQuery } from "@tanstack/react-query";
 import { get_tickets } from "../../../services/helpdesk/tickets";
 import { Link, useParams } from "react-router-dom";
 import { Card } from "reactstrap";
+import { useTranslation } from "react-i18next";
 
 const Tickets = () => {
+  const {t}=useTranslation(['help','common'])
   const { section_id } = useParams();
   const { isLoading, error, data: tickets } = useQuery(["get-tickets"], get_tickets);
   const [onSearch, setonSearch] = useState(true);
@@ -37,9 +39,9 @@ const Tickets = () => {
         <BlockHead size="sm">
           <BlockBetween>
             <BlockHeadContent>
-              <BlockTitle page>Helpdesk - Tickets</BlockTitle>
+              <BlockTitle page>{t('helpdesk_tickets_title')}</BlockTitle>
               <BlockDes className="text-soft">
-                <p>We are here to help you.</p>
+                <p>{t('helpdesk_tickets_desc')}</p>
               </BlockDes>
             </BlockHeadContent>
 
@@ -47,7 +49,7 @@ const Tickets = () => {
               <ul class="nk-block-tools g-4 flex-wrap">
                 <li class="order-md-last">
                   <Link to="/help/ticket/create" class="btn btn-white btn-dim btn-outline-primary">
-                    <span>Create Ticket</span>
+                    <span>{t('create_ticket_btn',{ns:'common'})}</span>
                   </Link>
                 </li>
               </ul>
@@ -65,13 +67,13 @@ const Tickets = () => {
                   <thead>
                   <tr className="tb-tnx-head">
                     <th className="">
-                      <span className="">Name</span>
+                      <span className="">{t('helpdesk_tickets_name_field')}</span>
                     </th>
                     <th className="">
-                      <span>Ticket Reference</span>
+                      <span>{t('helpdesk_tickets_ticket_ref_field')}</span>
                     </th>
                     <th className="">
-                      <span className="tb-tnx-status d-none d-md-inline-block">Create Date</span>
+                      <span className="tb-tnx-status d-none d-md-inline-block">{t('helpdesk_tickets_create_date_field')}</span>
                     </th>
                   </tr>
                   </thead>
