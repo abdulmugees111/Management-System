@@ -142,8 +142,8 @@ const UserProfileSettingPage = ({history}) => {
            <Icon name="cross-sm"></Icon>
          </a>
          <div className="p-2">
-           <h5 className="title">Change Password</h5>
-           <p>Set a unique password to protect your account.</p>
+           <h5 className="title">{t('change_pass_title')}</h5>
+           <p>{t('change_pass_desc')}.</p>
 
            <br />
 
@@ -151,7 +151,7 @@ const UserProfileSettingPage = ({history}) => {
              <FormGroup>
                <div className="form-label-group">
                  <label className="form-label" htmlFor="old_password">
-                   Old Password
+                 {t('old_password')}
                  </label>
                </div>
                <div className="form-control-wrap">
@@ -173,7 +173,7 @@ const UserProfileSettingPage = ({history}) => {
                    name="old_password"
                    value={userData.old_password}
                    ref={register({ required: "This field is required" })}
-                   placeholder="Enter your old password"
+                   placeholder={t('enter_old_password')}
                    className={`form-control-lg form-control ${passState ? "is-hidden" : "is-shown"}`}
                    onChange={(e) => setUserData({ ...userData, old_password: e.target.value })}
                  />
@@ -184,7 +184,7 @@ const UserProfileSettingPage = ({history}) => {
              <FormGroup>
                <div className="form-label-group">
                  <label className="form-label" htmlFor="password">
-                   New Password
+                 {t('enter_new_password')}
                  </label>
                </div>
                <div className="form-control-wrap">
@@ -206,7 +206,7 @@ const UserProfileSettingPage = ({history}) => {
                    name="passcode"
                    value={userData.password}
                    ref={register({ required: "This field is required" })}
-                   placeholder="Enter your password"
+                   placeholder={t('enter_password')}
                    className={`form-control-lg form-control ${passState ? "is-hidden" : "is-shown"}`}
                    onChange={(e) => setUserData({ ...userData, password: e.target.value })}
                  />
@@ -217,7 +217,7 @@ const UserProfileSettingPage = ({history}) => {
              <FormGroup>
                <div className="form-label-group">
                  <label className="form-label" htmlFor="confirm_password">
-                   Confirm New Password
+                 {t('confirm_password')}
                  </label>
                </div>
                <div className="form-control-wrap">
@@ -239,7 +239,7 @@ const UserProfileSettingPage = ({history}) => {
                    name="confirm_password"
                    value={userData.confirm_password}
                    ref={register({ required: "This field is required" })}
-                   placeholder="Enter your confirm password"
+                   placeholder={t('enter_confirm_password')}
                    className={`form-control-lg form-control ${passState ? "is-hidden" : "is-shown"}`}
                    onChange={(e) => setUserData({ ...userData, confirm_password: e.target.value })}
                  />
@@ -253,7 +253,7 @@ const UserProfileSettingPage = ({history}) => {
 
              <FormGroup>
                <Button type="submit" color="primary" size="lg" className="btn-block">
-                 {isFetching ? <Spinner size="sm" color="light" /> : "Change Password"}
+                 {isFetching ? <Spinner size="sm" color="light" /> : t('change_pass_btn',{ns:'common'})}
                </Button>
              </FormGroup>
            </form>

@@ -7,9 +7,10 @@ import Toggle from "../sidebar/Toggle";
 import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import LanguageSwitcher from "../../components/internationalization/LanguageSwitcher";
+import { useTranslation } from "react-i18next";
 
 const Header = ({ fixed, theme, className, sidebarToggle, setVisibility, ...props }) => {
-
+ const {t}=useTranslation(['dashboard'])
   const headerClass = classNames({
     "nk-header": true,
     "nk-header-fixed": fixed,
@@ -31,7 +32,7 @@ const { pathname } = useLocation();
             <ul className="nk-menu nk-menu-main">
               <li className={`nk-menu-item ${pathname === "/" || pathname === '/dashboard' ? "active current-page" : ""}`}>
                 <Link to={`${process.env.PUBLIC_URL}/`} className="nk-menu-link">
-                  <span className="nk-menu-text">Overview</span>
+                  <span className="nk-menu-text">{t('overview')}</span>
                 </Link>
               </li>
               <li><LanguageSwitcher/></li>

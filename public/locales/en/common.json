@@ -32,5 +32,10 @@
   "subject":"Subject",
   "subject_ph":"I am having issues while connecting website",
   "description":"Description",
-  "description_ph":"Add your description here"
+  "description_ph":"Add your description here",
+  "select_pricing_btn":"Select Pricing",
+  "proceed_payment_btn":"Proceed Payment",
+  "view_profile_btn":"View Profile",
+  "signout_btn":"Signout"
+  
 }

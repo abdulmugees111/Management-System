@@ -23,7 +23,7 @@ import { getPricings } from "../../../services/order/index";
 import { useTranslation } from "react-i18next";
 
 const PricingTable = () => {
-  const { t } = useTranslation(["pricing"]);
+  const { t } = useTranslation(["pricing",'common']);
 
   const { data, isLoading } = useQuery(["get-pricings"], getPricings);
 
@@ -63,7 +63,7 @@ const PricingTable = () => {
                             ? t("basic_plan_title")
                             : item.name === "Tajr Pro Plan"
                             ? t("pro_plan_title")
-                            : item.name === "Tajr Pro Plan"
+                            : item.name === "Tajr Enterprise Plan"
                             ? t("basic_enterprise_title")
                             : null}
                         </h5>
@@ -73,7 +73,7 @@ const PricingTable = () => {
                         <div className="amount">
                           ${item.year_price} <span>/yr</span>
                         </div>
-                        <span className="bill"> Billed Yearly</span>
+                        <span className="bill"> {t("billed_yearly")}</span>
                       </div>
                       <div className="pricing-action">
                         <Link
@@ -82,7 +82,7 @@ const PricingTable = () => {
                             state: { planID: item.id, planName: item.name, planPrice: item.year_price },
                           }}
                         >
-                          <Button color="primary">Select Plan</Button>
+                          <Button color="primary">{t("select_pricing_btn",{ns:'common'})}</Button>
                         </Link>
                       </div>
                     </div>

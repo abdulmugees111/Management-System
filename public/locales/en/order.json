@@ -1,0 +1,14 @@
+{
+  "order_title": "Ready to get started",
+  "product_info": "Product info",
+  "your_plan": "Your plan",
+  "payment_info": "Payment info",
+  "select_plan":"Select a Plan",
+  "select_payment_method": "Select payment method",
+  "wire_transfer": "Wire Transfer",
+  "stripe:": "Stripe",
+  "order_total": "Order Total",
+  "sub_total": "Sub total",
+  "taxes": "Taxes",
+  "total": "Total"
+}

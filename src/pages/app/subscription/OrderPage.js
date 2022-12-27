@@ -11,7 +11,9 @@ import { useQuery } from "@tanstack/react-query";
 import { getPricings, getStripeSession } from "../../../services/order";
 import { PlansReFormattor } from "../../../utils/formattors";
 import { toast } from "react-toastify";
+import { useTranslation } from "react-i18next";
 const OrderPage = ({ history }) => {
+  const {t}=useTranslation(['order','common','pricing'])
   let location = useLocation();
   const { state } = location;
 
@@ -19,7 +21,7 @@ const OrderPage = ({ history }) => {
     price: state?.planPrice || 0,
     plan: {
       value: state?.planID ? state.planID : -1,
-      label: state?.planName ? state.planName : "Select a plan",
+      label: state?.planName ? state.planName : t("select_plan"),
     },
     address: "",
     payment_method: { value: -1, label: "" },
@@ -42,8 +44,8 @@ const OrderPage = ({ history }) => {
   });
 
   const payment_methods = [
-    { value: 1, label: `Wire Transfer` },
-    { value: 2, label: `Stripe` },
+    { value: 1, label: t("wire_transfer")},
+    { value: 2, label:  t("stripe") },
   ];
 
 
@@ -61,7 +63,7 @@ const OrderPage = ({ history }) => {
       <Head title="Order" />
       <BlockHead>
         <BlockHeadContent>
-          <BlockTitle tag="h3">Ready to get started</BlockTitle>
+          <BlockTitle tag="h3">{ t("order_title")}</BlockTitle>
         </BlockHeadContent>
       </BlockHead>
 
@@ -73,16 +75,16 @@ const OrderPage = ({ history }) => {
                 className="card-bordered product-card px-2 py-3 "
                 style={{ overflow: "visible", background: "#fcfcfc" }}
               >
-                <h5 className="py-2 title">Product info</h5>
+                <h5 className="py-2 title">{ t("product_info")}</h5>
                 <label className="form-label" htmlFor="plan">
-                  Your plan:
+                { t("your_plan")}:
                 </label>
 
                 <RSelect
                   options={PlansReFormattor(!isLoading ? data : [])}
                   defaultValue={{
                     value: state?.planID ? state.planID : -1,
-                    label: state?.planName ? state.planName : "Select a plan",
+                    label: state?.planName ? state.planName : t("select_plan"),
                   }}
                   onChange={(e) => 
                     setFormData({
@@ -114,14 +116,14 @@ const OrderPage = ({ history }) => {
                   </div>
                 </FormGroup> */}
                 <li className="divider"></li>
-                <h5 className="py-2 title">Payment info</h5>
+                <h5 className="py-2 title">{t("payment_info")}</h5>
                 <label className="form-label" htmlFor="payment">
-                  Select payment method:
+                {t("select_payment_method")}:
                 </label>
 
                 <RSelect
                   options={payment_methods}
-                  defaultValue={{ value: -1, label: "Select payment method" }}
+                  defaultValue={{ value: -1, label: t("select_payment_method") }}
                   onChange={(e) => setFormData({ ...formData, payment_method: { value: e.value, label: e.label } })}
                 />
               </Card>
@@ -136,19 +138,19 @@ const OrderPage = ({ history }) => {
                   background: "#fcfcfc",
                 }}
               >
-                <h5 className=" title">Order Total</h5>
+                <h5 className=" title">{t("order_total")}</h5>
                 <li className="divider" style={{ marginTop: "10px" }}></li>
                 <div style={{ display: "flex", justifyContent: "space-between" }} className="px-2">
-                  <label className=" form-label">Sub total:</label>
+                  <label className=" form-label">{t("sub_total")}:</label>
                   <label className=" form-label">${formData.price}</label>
                 </div>
                 <div style={{ display: "flex", justifyContent: "space-between" }} className="px-2">
-                  <label className=" form-label">Taxes:</label>
+                  <label className=" form-label">{t("taxes")}:</label>
                   <label className=" form-label">$0</label>
                 </div>
                 <li className="divider"></li>
                 <div style={{ display: "flex", justifyContent: "space-between" }} className="px-2">
-                  <label className=" form-label">Total:</label>
+                  <label className=" form-label">{t("total")}:</label>
                   <label className=" form-label">${formData.price}</label>
                 </div>
 

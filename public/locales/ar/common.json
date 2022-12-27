@@ -32,5 +32,9 @@
   "subject": "موضوعات",
   "subject_ph": "أواجه مشاكل أثناء الاتصال بالموقع",
   "description": "وصف",
-  "description_ph": "أضف وصفك هنا"
+  "description_ph": "أضف وصفك هنا",
+  "select_pricing_btn":"حدد التسعير",
+  "proceed_payment_btn":"متابعة الدفع",
+  "view_profile_btn":"عرض الصفحة الشخصية",
+  "signout_btn":"خروج"
 }

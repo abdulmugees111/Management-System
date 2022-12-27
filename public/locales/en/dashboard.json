@@ -10,5 +10,14 @@
     "account_reports_title":"Account Reports",
     "account_reports_desc":"Check your reports of uses and manage your packages or subscriptions that you have.",
     "help_title":"We’re here to help you!",
-    "help_desc":"Ask a question or file a support ticket, manage request, report an issues. Our support team will get back to you by email."
+    "help_desc":"Ask a question or file a support ticket, manage request, report an issues. Our support team will get back to you by email.",
+    "overview":"Overview",
+    "dashboard":"Dashboard",
+    "invoice_and_payments":"Invoice & payments",
+    "my_subscriptions":"My Subscriptions",
+    "support":"Support",
+    "account_settings":"Account Settings",
+    "knowledge_base":"Knowledge Base",
+    "tickets":"Tickets"
+
 }
