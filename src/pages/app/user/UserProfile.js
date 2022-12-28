@@ -238,7 +238,7 @@ const UserProfile = () => {
             <Icon name="cross-sm"></Icon>
           </a>
           <div className="p-2">
-            <h5 className="title">Update Profile</h5>
+            <h5 className="title">{t('update_profile')}</h5>
             <br />
 
             <div className="tab-content">
@@ -247,7 +247,7 @@ const UserProfile = () => {
                   <Col md="6">
                     <FormGroup>
                       <label className="form-label" htmlFor="full-name">
-                        Full Name
+                      {t('full_name')}
                       </label>
                       <input
                         type="text"
@@ -256,14 +256,14 @@ const UserProfile = () => {
                         name="name"
                         onChange={(e) => onInputChange(e)}
                         defaultValue={formData.name}
-                        placeholder="Enter Full name"
+                        placeholder={t('full_name')}
                       />
                     </FormGroup>
                   </Col>
                   <Col md="6">
                     <FormGroup>
                       <label className="form-label" htmlFor="company-name">
-                        Company Name
+                      {t('company_name')}
                       </label>
                       <input
                         required
@@ -273,14 +273,14 @@ const UserProfile = () => {
                         name="company_name"
                         onChange={(e) => onInputChange(e)}
                         defaultValue={formData.company_name}
-                        placeholder="Enter Company name"
+                        placeholder={t('company_name')}
                       />
                     </FormGroup>
                   </Col>
                   <Col md="6">
                     <FormGroup>
                       <label className="form-label" htmlFor="phone-no">
-                        Phone Number
+                      {t('pno')}
                       </label>
                       <input
                         required
@@ -290,7 +290,7 @@ const UserProfile = () => {
                         name="phone"
                         onChange={(e) => onInputChange(e)}
                         defaultValue={formData.phone}
-                        placeholder="Phone Number"
+                        placeholder={t('pno')}
                       />
                     </FormGroup>
                   </Col>
@@ -315,7 +315,7 @@ const UserProfile = () => {
                   <Col md="6">
                     <FormGroup>
                       <label className="form-label" htmlFor="street">
-                        Street
+                      {t('street')}
                       </label>
                       <input
                         type="text"
@@ -324,13 +324,14 @@ const UserProfile = () => {
                         onChange={(e) => onInputChange(e)}
                         defaultValue={formData.street}
                         className="form-control"
+                        placeholder={t('street')}
                       />
                     </FormGroup>
                   </Col>
                   <Col md="6">
                     <FormGroup>
                       <label className="form-label" htmlFor="email">
-                        Email
+                      {t('email')}
                       </label>
                       <input
                         type="email"
@@ -339,6 +340,7 @@ const UserProfile = () => {
                         onChange={(e) => onInputChange(e)}
                         defaultValue={formData.email}
                         className="form-control"
+                        placeholder={t('email')}
                       />
                     </FormGroup>
                   </Col>
@@ -346,11 +348,11 @@ const UserProfile = () => {
                   <Col md="6">
                     <FormGroup>
                       <label className="form-label" htmlFor="address-county">
-                        Country
+                      {t('country')}
                       </label>
                       <RSelect
                         options={countriesList ? reFormat(countriesList) : []}
-                        placeholder="Select a country"
+                        placeholder={t('country')}
                         defaultValue={[
                           {
                             value: formData.country_id[0],
@@ -365,11 +367,11 @@ const UserProfile = () => {
                   <Col md="6">
                     <FormGroup>
                       <label className="form-label" htmlFor="address-st">
-                        State
+                      {t('state')}
                       </label>
                       <RSelect
                         options={statesList ? reFormat(statesList) : []}
-                        placeholder="Select a state"
+                        placeholder={t('state')}
                         defaultValue={[
                           {
                             value: formData.state_id[0],
@@ -391,7 +393,7 @@ const UserProfile = () => {
                             submitForm();
                           }}
                         >
-                          {updateDataLoading ? <Spinner size="sm" color="light" /> : "Update Profile"}
+                          {updateDataLoading ? <Spinner size="sm" color="light" /> : t('update_profile')}
                         </Button>
                       </li>
                       <li>
@@ -403,7 +405,7 @@ const UserProfile = () => {
                           }}
                           className="link link-light"
                         >
-                          Cancel
+                         {t('cancel_btn')}
                         </a>
                       </li>
                     </ul>

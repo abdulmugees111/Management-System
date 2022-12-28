@@ -1,4 +1,5 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import { DropdownToggle, DropdownMenu, UncontrolledDropdown } from "reactstrap";
 
 import Icon from "../../../../components/icon/Icon";
@@ -20,6 +21,18 @@ const NotificationItem = (props) => {
 };
 
 const Notification = () => {
+  const {t,i18n}=useTranslation(['notification'])
+
+  const translateNotifications=(notification)=>{
+    console.log("Notificqation to is",notification)
+    if(notification==="You have requested to Widthdraw"){
+      return t('withdrawl_request_nt')
+    }
+    else if(notification==="Your Deposit Order is placed"){
+      return t('order_place_nt')
+    }
+    else return notification
+  }
   return (
     <UncontrolledDropdown className="user-dropdown">
       <DropdownToggle tag="a" className="dropdown-toggle nk-quick-nav-icon">
@@ -29,9 +42,9 @@ const Notification = () => {
       </DropdownToggle>
       <DropdownMenu right className="dropdown-menu-xl dropdown-menu-s1">
         <div className="dropdown-head">
-          <span className="sub-title nk-dropdown-title">{data.title}</span>
+          <span className="sub-title nk-dropdown-title">{t('notification_heading')}</span>
           <a href="#markasread" onClick={(ev) => ev.preventDefault()}>
-            Mark All as Read
+         { t('mark_all_read')}
           </a>
         </div>
         <div className="dropdown-body">
@@ -43,8 +56,8 @@ const Notification = () => {
                   id={item.id}
                   icon={item.icon}
                   iconStyle={item.iconStyle}
-                  text={item.text}
-                  time={item.time}
+                  text={translateNotifications(item.text)}
+                  time={t("hours_ago",{time:item.time})}
                 />
               );
             })}
@@ -52,7 +65,7 @@ const Notification = () => {
         </div>
         <div className="dropdown-foot center">
           <a href="#viewall" onClick={(ev) => ev.preventDefault()}>
-            View All
+          { t('view_all')}
           </a>
         </div>
       </DropdownMenu>

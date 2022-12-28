@@ -1,0 +1,10 @@
+{
+  "notification_heading": "Notifications",
+  "withdrawl_request_nt": "You have requested to Widthdraw",
+  "order_place_nt": "Your Deposit Order is placed",
+  "mark_all_read": "Mark All As Read",
+  "hours": "hrs",
+  "ago": "ago",
+  "view_all":"View All",
+  "hours_ago":"{{time}} hours ago"
+}

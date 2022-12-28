@@ -71,7 +71,7 @@ const PricingTable = () => {
                       </div>
                       <div className="pricing-amount">
                         <div className="amount">
-                          ${item.year_price} <span>/yr</span>
+                          ${item.year_price} <span>/{t('year',{ns:"common"})}</span>
                         </div>
                         <span className="bill"> {t("billed_yearly")}</span>
                       </div>

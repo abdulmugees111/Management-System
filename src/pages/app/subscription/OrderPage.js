@@ -155,7 +155,7 @@ const OrderPage = ({ history }) => {
                 </div>
 
                 <Button size="lg" className="btn-block mt-3" color="primary" type="submit">
-                  {isFetching ? <Spinner size={"sm"} color="white" /> : <span>Proceed payment</span>}
+                  {isFetching ? <Spinner size={"sm"} color="white" /> : <span>{t('proceed_payment_btn',{ns:"common"})}</span>}
                 </Button>
               </Card>
             </Col>

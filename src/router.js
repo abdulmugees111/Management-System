@@ -6,6 +6,7 @@ import { connect } from 'react-redux'
 import { ErrorBoundary } from 'react-error-boundary'
 import Layout from './layout/Index'
 import { Button} from "./components/Component";
+import { useTranslation } from 'react-i18next'
 
 function ErrorFallback({ error, resetErrorBoundary }) {
   return (
@@ -191,6 +192,8 @@ const mapStateToProps = ({ settings }) => ({
 })
 
 const Router = ({ history, routerAnimation }) => {
+  // const { t, i18n } = useTranslation();
+  // document.body.dir = i18n.dir();
   return (
     <ConnectedRouter history={history}>
       <Layout>

@@ -36,6 +36,13 @@
   "select_pricing_btn":"Select Pricing",
   "proceed_payment_btn":"Proceed Payment",
   "view_profile_btn":"View Profile",
-  "signout_btn":"Signout"
+  "signout_btn":"Signout",
+  "processing_error":"Error occurred while processing your request",
+  "profile_update_success":"Profile successfully updated",
+  "update_profile":"Update Profile",
+  "street":"Street",
+  "country":"Country",
+  "state":"State",
+  "year":"yr"
   
 }

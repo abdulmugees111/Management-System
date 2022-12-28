@@ -1,0 +1,10 @@
+{
+  "notification_heading": "إشعارات",
+  "withdrawl_request_nt": "لقد طلبت الانسحاب",
+  "order_place_nt": "تم وضع أمر الإيداع الخاص بك",
+  "mark_all_read": "اشر عليها بانها قرات",
+  "hours": "ساعات",
+  "ago": "منذ",
+  "view_all":"مشاهدة الكل",
+  "hours_ago":"منذ ساعات {{time}}"
+}
