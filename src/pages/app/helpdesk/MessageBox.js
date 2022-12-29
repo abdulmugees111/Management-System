@@ -22,8 +22,12 @@ import { get_ticket_messages } from "../../../services/helpdesk/ticketDetails";
 import { Div, Card, Spinner } from "reactstrap";
 import { MessageReply } from "./MessageReply";
 import { useParams } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+import { close_ticket } from "../../../services/helpdesk/tickets";
 
 const MessageBox = ({ ticket_id, stage, ...props }) => {
+
+  const {t}=useTranslation(['help'])
   const {
     isLoading,
     error,
@@ -61,7 +65,7 @@ const MessageBox = ({ ticket_id, stage, ...props }) => {
           }) : null
         }
         {
-          (stage[1] === "New" || stage[1] === "In Progress") ? <MessageReply ticket_id={ticket_id} /> : <h3>Can not send Message</h3>
+          (stage[1] === "New" || stage[1] === "In Progress") ? <MessageReply ticket_id={ticket_id} /> : <h3>{t('cant_send_msg_error')}</h3>
         }
       </PreviewCard>
     </Block>

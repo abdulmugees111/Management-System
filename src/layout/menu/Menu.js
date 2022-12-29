@@ -215,7 +215,20 @@ const PanelItem = ({
   const menuItemClass = classNames({
     "nk-menu-item": true,
   });
-
+  const translateLinks = (link) => {
+    console.log("link ", link);
+    if (link === "Dashboard") {
+      return t("overview");
+    } else if (link === "My Subscriptions") {
+      return t("my_subscriptions");
+    } else if (link === "Invoices & Payments") {
+      return t("invoice_and_payments");
+    } else if (link === "Support") {
+      return t("support");
+    } else if (link === "Account Settings") {
+      return t("account_settings_btn", { ns: "common" });
+    } else return link;
+  };
   if (data === menuData) {
     return (
       <li className={menuItemClass}>
@@ -241,7 +254,7 @@ const PanelItem = ({
             key={item.text}
             link={item.link}
             icon={item.icon}
-            text={item.text}
+            text={translateLinks(item.text)}
             badge={item.badge}
             sub={item.subMenu}
             sidebarToggle={sidebarToggle}
@@ -296,7 +309,7 @@ const checkMenuUrl = (data) => {
 
 const Menu = ({ sidebarToggle, mobileView, menuData }) => {
   const [data, setMenuData] = useState(menuData);
-  const { t } = useTranslation(["dashboard"]);
+  const { t } = useTranslation(["dashboard","common"]);
 
   useEffect(() => {
     data.forEach((item) => {
@@ -350,7 +363,7 @@ const Menu = ({ sidebarToggle, mobileView, menuData }) => {
             key={item.text}
             link={item.link}
             icon={item.icon}
-            text={item.text}
+            text={translateLinks(item.text)}
             index={index}
             panel={item.panel}
             subPanel={item.subPanel}

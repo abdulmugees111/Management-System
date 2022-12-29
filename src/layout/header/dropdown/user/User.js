@@ -58,7 +58,7 @@ const User = (user) => {
               {t('view_profile_btn')}
             </LinkItem>
             <LinkItem link="/account-settings" icon="setting-alt" onClick={toggle}>
-            {t('account_settings_btn')}
+            {t('account_settings_btn', { ns: "common" })}
             </LinkItem>
             {/* <LinkItem link="/user-profile-activity" icon="activity-alt" onClick={toggle}>
               Login Activity

@@ -41,7 +41,7 @@ ReactDOM.render(
         theme="light"
       />
 
-      <QueryClientProvider client={queryClient}>
+      <QueryClientProvider client={queryClient} >
         <Router history={history} />
       </QueryClientProvider>
     </Provider>

@@ -6,6 +6,10 @@ import * as jwt from '../../services/jwt'
 import actions from './actions'
 import store from 'store'
 import { toast } from 'react-toastify';
+import i18next from 'i18next'
+
+
+
 
 const mapAuthProviders = {
   jwt: {
@@ -17,6 +21,7 @@ const mapAuthProviders = {
 }
 
 export function* LOGIN({ payload }) {
+  
   const { name, passcode } = payload
 
   yield put({

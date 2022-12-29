@@ -5,5 +5,15 @@
   "helpdesk_tickets_ticket_ref_field": "مرجع التذاكر",
   "helpdesk_tickets_create_date_field": "تاريخ الإنشاء",
   "create_ticket_title": "إنشاء تذكرة دعم",
-  "create_ticket_desc": "نحن هنا لمساعدتك."
+  "create_ticket_desc": "نحن هنا لمساعدتك.",
+  "ticket_id":"معرف التذكرة",
+  "submitted":"قدمت",
+  "reply":"الرد",
+  "write_msg":"اكتب رسالة",
+  "send_reply_btn":"إرسال الرد",
+  "mark_as_close_btn":"وضع علامة كنهاية",
+  "cant_send_msg_error":"لا يمكن إرسال رسالة",
+  "copied":"Copied",
+  "copy":"Copy"
+
 }

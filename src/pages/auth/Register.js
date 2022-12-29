@@ -21,8 +21,10 @@ import { useQuery } from "@tanstack/react-query";
 import { register_user } from "../../services/user";
   import { toast } from "react-toastify";
   import "react-toastify/dist/ReactToastify.css";
+import { useTranslation } from "react-i18next";
 
 const Register = ({ history }) => {
+  const {t,i18n}=useTranslation(['common','notification'])
   const [passState, setPassState] = useState(false);
   const [isConfirmPassSame, setIsConfirmPassSame] = useState(true)
   const [userData, setUserData] = useState({
@@ -44,15 +46,15 @@ const Register = ({ history }) => {
           password: "",
           confirm_password: "",
         });
-        toast.success('Registered Successfully!')
+        toast.success(t('registered_nt',{ns:'notification'}))
       }else{
-      toast.error("Error occurred while processing your request!");
+      toast.error(t('processing_request_error_nt',{ns:'notification'}));
 
       }
       // 
     },
     onError:()=>{
-      toast.error("Error occurred while processing your request!");
+      toast.error(t('processing_request_error_nt',{ns:'notification'}));
     }
   
   });
@@ -103,7 +105,7 @@ const Register = ({ history }) => {
                     className="form-control-lg form-control"
                     onChange={(e) => setUserData({ ...userData, name: e.target.value })}
                   />
-                  {errors.name && <p className="invalid">This field is required</p>}
+                  {errors.name && <p className="invalid">{t('field_required_error',{ns:"common"})}</p>}
                 </div>
               </FormGroup>
               <FormGroup>
@@ -124,7 +126,7 @@ const Register = ({ history }) => {
                     placeholder="Enter your email address or username"
                     onChange={(e) => setUserData({ ...userData, login: e.target.value })}
                   />
-                  {errors.email && <p className="invalid">This field is required</p>}
+                  {errors.email && <p className="invalid">{t('field_required_error',{ns:"common"})}</p>}
                 </div>
               </FormGroup>
               <FormGroup>
@@ -151,7 +153,7 @@ const Register = ({ history }) => {
                     id="password"
                     name="passcode"
                     value={userData.password}
-                    ref={register({ required: "This field is required" })}
+                    ref={register({ required: t('field_required_error',{ns:"common"}) })}
                     placeholder="Enter your passcode"
                     className={`form-control-lg form-control ${passState ? "is-hidden" : "is-shown"}`}
                     onChange={(e) => setUserData({ ...userData, password: e.target.value })}
@@ -184,7 +186,7 @@ const Register = ({ history }) => {
                     id="confirm_password"
                     name="confirm_password"
                     value={userData.confirm_password}
-                    ref={register({ required: "This field is required" })}
+                    ref={register({ required: t('field_required_error',{ns:"common"}) })}
                     placeholder="Enter your confirm passcode"
                     className={`form-control-lg form-control ${passState ? "is-hidden" : "is-shown"}`}
                     onChange={(e) => setUserData({ ...userData, confirm_password: e.target.value })}

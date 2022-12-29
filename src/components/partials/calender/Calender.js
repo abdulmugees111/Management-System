@@ -10,6 +10,7 @@ import { useForm } from "react-hook-form";
 import { Col, Row, RSelect } from "../../Component";
 import { setDateForPicker } from "../../../utils/Utils";
 import { eventOptions, returnDate } from "./CalenderData";
+import { useTranslation } from "react-i18next";
 
 const EventView = (event) => {
   const [mouseEnter, setMouseEnter] = useState(false);
@@ -28,6 +29,7 @@ const EventView = (event) => {
 };
 
 const CalenderApp = ({ events, onDelete, onEdit }) => {
+  const {t}=useTranslation(['common'])
   const [modalState, updateModal] = useState(false);
   const [mockEvents, updateEvents] = useState(events);
   const [event, updateEvent] = useState({});
@@ -163,7 +165,7 @@ const CalenderApp = ({ events, onDelete, onEdit }) => {
                       ref={register({ required: true })}
                       defaultValue={event.title}
                     />
-                    {errors.title && <p className="invalid">This field is required</p>}
+                    {errors.title && <p className="invalid">{t('field_required_error',{ns:"common"})}</p>}
                   </div>
                 </FormGroup>
               </Col>
@@ -240,7 +242,7 @@ const CalenderApp = ({ events, onDelete, onEdit }) => {
                       ref={register({ required: true })}
                       defaultValue={event.description}
                     ></textarea>
-                    {errors.description && <p className="invalid">This field is required</p>}
+                    {errors.description && <p className="invalid">{t('field_required_error',{ns:"common"})}</p>}
                   </div>
                 </FormGroup>
               </Col>

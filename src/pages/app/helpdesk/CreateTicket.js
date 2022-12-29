@@ -25,7 +25,7 @@ import { toast } from "react-toastify";
 import { useTranslation } from "react-i18next";
 
 const CreateTicket = () => {
-  const {t}=useTranslation(['help','common'])
+  const {t}=useTranslation(['help','common','notification'])
   const history = useHistory();
 
   const useCreateTicket = () => {
@@ -41,14 +41,14 @@ const CreateTicket = () => {
         if (context.successCb) {
           context.successCb(result);
         }
-        toast.success("Ticket Created Successfully.");
+        toast.success(t('ticket_created_nt',{ns:'notification'}));
         history.push('/help/tickets')
       },
       onError: (error, variables, context) => {
         if (context.errorCb) {
           context.errorCb(error);
         }
-        toast.error("There is an error while creating the ticket.");
+        toast.error(t('ticket_created_error_nt',{ns:'notification'}));
 
       },
     });
@@ -97,7 +97,7 @@ const CreateTicket = () => {
                       <label className="form-label">{t('name',{ns:'common'})}</label>
                       <input
                         className="form-control"
-                        ref={register({ required: "This field is required" })}
+                        ref={register({ required: t('field_required_error',{ns:"common"}) })}
                         type="text"
                         name="name"
                         placeholder={t('name_ph',{ns:'common'})}
@@ -113,7 +113,7 @@ const CreateTicket = () => {
                       <label className="form-label"> {t('email',{ns:'common'})} </label>
                       <input
                         className="form-control"
-                        ref={register({ required: "This field is required" })}
+                        ref={register({ required: t('field_required_error',{ns:"common"}) })}
                         type="email"
                         name="email"
                         placeholder="janedoe@gmail.com"
@@ -129,7 +129,7 @@ const CreateTicket = () => {
                       <input
                         className="form-control"
                         placeholder={t('subject_ph',{ns:'common'})}
-                        ref={register({ required: "This field is required" })}
+                        ref={register({ required: t('field_required_error',{ns:"common"}) })}
                         type="text"
                         name="subject"
                         required={true}
@@ -143,7 +143,7 @@ const CreateTicket = () => {
                       <textarea
                         form="submit-ticket"
                         className="form-control"
-                        ref={register({ required: "This field is required" })}
+                        ref={register({ required: t('field_required_error',{ns:"common"}) })}
                         name="description"
                         placeholder={t('description_ph',{ns:'common'})}
                         required={true}

@@ -43,5 +43,6 @@
   "street":"شارع",
   "country":"بلد",
   "state":"دولة",
-  "year":"عام"
+  "year":"عام",
+  "field_required_error":"هذه الخانة مطلوبه"
 }

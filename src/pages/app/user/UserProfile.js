@@ -26,7 +26,7 @@ import { toast } from "react-toastify";
 import { useTranslation } from "react-i18next";
 
 const UserProfile = () => {
-  const {t,i18n}=useTranslation(['common'])
+  const {t,i18n}=useTranslation(['common','notification'])
   const [formData, setFormData] = useState({
     name: "",
     phone: "",
@@ -50,7 +50,7 @@ const UserProfile = () => {
         });
       }
     },
-    onError: () => toast.error("Error occurred while processing your request"),
+    onError: () => toast.error(t('processing_request_error_nt',{ns:'notification'})),
   });
 
   const { isFetching: updateDataLoading, refetch: updateUser } = useQuery(
@@ -62,12 +62,12 @@ const UserProfile = () => {
         if (data) {
           setModal(false);
           getUserRefetch();
-          toast.success("Profile successfully updated");
+          toast.success(t('profile_updated_nt',{ns:'notification'}));
         } else {
-          toast.error("Error processing your request");
+          toast.error(t('processing_request_error_nt',{ns:'notification'}));
         }
       },
-      onError: () => toast.error("Error processing your request"),
+      onError: () => toast.error(t('processing_request_error_nt',{ns:'notification'})),
     }
   );
 

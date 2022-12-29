@@ -21,7 +21,7 @@ import store from "store";
 import { useTranslation } from "react-i18next";
 
 const UserProfileSettingPage = ({history}) => {
-  const { t } = useTranslation(['account_settings','common']);
+  const { t } = useTranslation(['account_settings','common','notification']);
       const [passState, setPassState] = useState(false);
       const [isConfirmPassSame, setIsConfirmPassSame] = useState(true);
 
@@ -50,15 +50,15 @@ const UserProfileSettingPage = ({history}) => {
            password: "",
            confirm_password: "",
          });
-         toast.success("Password Changed Successfully! Please Login again with new password");
+         toast.success(t('password_changed_nt',{ns:'notification'}));
          handleSignout();
        } else {
-         toast.error("Error occurred while processing your request!");
+         toast.error(t('processing_request_error_nt',{ns:'notification'}));
        }
        //
      },
      onError: () => {
-       toast.error("Error occurred while processing your request!");
+       toast.error(t('processing_request_error_nt',{ns:'notification'}));
      },
    });
 
@@ -172,7 +172,7 @@ const UserProfileSettingPage = ({history}) => {
                    id="old_password"
                    name="old_password"
                    value={userData.old_password}
-                   ref={register({ required: "This field is required" })}
+                   ref={register({ required: t('field_required_error',{ns:"common"}) })}
                    placeholder={t('enter_old_password')}
                    className={`form-control-lg form-control ${passState ? "is-hidden" : "is-shown"}`}
                    onChange={(e) => setUserData({ ...userData, old_password: e.target.value })}
@@ -205,7 +205,7 @@ const UserProfileSettingPage = ({history}) => {
                    id="password"
                    name="passcode"
                    value={userData.password}
-                   ref={register({ required: "This field is required" })}
+                   ref={register({ required: t('field_required_error',{ns:"common"}) })}
                    placeholder={t('enter_password')}
                    className={`form-control-lg form-control ${passState ? "is-hidden" : "is-shown"}`}
                    onChange={(e) => setUserData({ ...userData, password: e.target.value })}
@@ -238,7 +238,7 @@ const UserProfileSettingPage = ({history}) => {
                    id="confirm_password"
                    name="confirm_password"
                    value={userData.confirm_password}
-                   ref={register({ required: "This field is required" })}
+                   ref={register({ required: t('field_required_error',{ns:"common"}) })}
                    placeholder={t('enter_confirm_password')}
                    className={`form-control-lg form-control ${passState ? "is-hidden" : "is-shown"}`}
                    onChange={(e) => setUserData({ ...userData, confirm_password: e.target.value })}

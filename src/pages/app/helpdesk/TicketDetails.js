@@ -23,8 +23,10 @@ import { useQuery } from '@tanstack/react-query';
 import { get_ticket, get_ticket_messages } from "../../../services/helpdesk/ticketDetails";
 import { Link, useParams } from "react-router-dom";
 import { Card, Spinner } from "reactstrap";
+import { useTranslation } from "react-i18next";
 
 const TicketDetails = () => {
+    const {t}=useTranslation(['help'])
     const { ticket_id } = useParams();
     const { isLoading, error, data: ticket } = useQuery(["get-ticket", ticket_id], () => get_ticket(ticket_id));
     return (
@@ -40,17 +42,17 @@ const TicketDetails = () => {
                             <BlockBetween>
                                 <BlockHeadContent>
                                     <BlockTitle >{ticket.name}</BlockTitle>
-                                    <div class="nk-block">
-                                        <div class="ticket-info">
-                                            <ul class="ticket-meta">
-                                                <li class="ticket-id">
-                                                    <span>Ticket ID:</span> <strong>#{ticket.id}</strong>
+                                    <div className="nk-block">
+                                        <div className="ticket-info">
+                                            <ul className="ticket-meta">
+                                                <li className="ticket-id">
+                                                    <span>{t('ticket_id')}:</span> <strong>#{ticket.id}</strong>
                                                 </li>
-                                                <li class="ticket-date">
-                                                    <span>Submitted:</span> <strong>{ticket.create_date}</strong>
+                                                <li className="ticket-date">
+                                                    <span>{t('submitted')}:</span> <strong>{ticket.create_date}</strong>
                                                 </li>
                                             </ul>
-                                            <div class="ticket-status"><span class="badge badge-success">{ticket.stage_id[1]}</span>
+                                            <div className="ticket-status"><span className="badge badge-success">{ticket.stage_id[1]}</span>
                                             </div>
                                         </div>
                                     </div>

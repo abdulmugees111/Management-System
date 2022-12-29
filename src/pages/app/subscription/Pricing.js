@@ -24,6 +24,18 @@ import { useTranslation } from "react-i18next";
 
 const PricingTable = () => {
   const { t } = useTranslation(["pricing",'common']);
+  function translatePlan(plan) {
+    console.log("Plan to change")
+    if (plan === "Tajr Basic Plan") {
+      console.log("Plan transform BASIC", plan);
+      return t("basic_plan_title", { ns: "pricing" });
+    } else if (plan === "Tajr Pro Plan") {
+      console.log("Plan transform PRO", plan);
+      return t("basic_pro_title", { ns: "pricing" });
+    } else if (plan === "Tajr Enterprise Plan") {
+      return t("basic_enterprise_title", { ns: "pricing" });
+    } else return plan;
+  }
 
   const { data, isLoading } = useQuery(["get-pricings"], getPricings);
 
@@ -79,7 +91,7 @@ const PricingTable = () => {
                         <Link
                           to={{
                             pathname: "/order",
-                            state: { planID: item.id, planName: item.name, planPrice: item.year_price },
+                            state: { planID: item.id, planName: translatePlan(item.name), planPrice: item.year_price },
                           }}
                         >
                           <Button color="primary">{t("select_pricing_btn",{ns:'common'})}</Button>

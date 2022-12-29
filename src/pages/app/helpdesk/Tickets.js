@@ -28,7 +28,7 @@ const Tickets = () => {
   const { isLoading, error, data: tickets } = useQuery(["get-tickets"], get_tickets);
   const [onSearch, setonSearch] = useState(true);
   const [onSearchText, setSearchText] = useState("");
-
+  console.log("Data in tickets",tickets)
   // function to toggle the search option
   const toggle = () => setonSearch(!onSearch);
 
@@ -46,9 +46,9 @@ const Tickets = () => {
             </BlockHeadContent>
 
             <BlockHeadContent>
-              <ul class="nk-block-tools g-4 flex-wrap">
-                <li class="order-md-last">
-                  <Link to="/help/ticket/create" class="btn btn-white btn-dim btn-outline-primary">
+              <ul className="nk-block-tools g-4 flex-wrap">
+                <li className="order-md-last">
+                  <Link to="/help/ticket/create" className="btn btn-white btn-dim btn-outline-primary">
                     <span>{t('create_ticket_btn',{ns:'common'})}</span>
                   </Link>
                 </li>
