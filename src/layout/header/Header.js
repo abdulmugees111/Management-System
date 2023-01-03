@@ -36,7 +36,7 @@ const Header = ({ fixed, theme, className, sidebarToggle, setVisibility, ...prop
                   }`}
                 >
                   <Link to={`${process.env.PUBLIC_URL}/`} className="nk-menu-link">
-                    <span className="nk-menu-text">{t("overview")}</span>
+                    <span className="nk-menu-text" style={{direction: i18n.language === "ar" ? "rtl" : "ltr"}}>{t("overview")}</span>
                   </Link>
                 </li>
 

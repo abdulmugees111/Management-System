@@ -23,7 +23,7 @@ import { getPricings } from "../../../services/order/index";
 import { useTranslation } from "react-i18next";
 
 const PricingTable = () => {
-  const { t } = useTranslation(["pricing",'common']);
+  const { t ,i18n} = useTranslation(["pricing",'common']);
   function translatePlan(plan) {
     console.log("Plan to change")
     if (plan === "Tajr Basic Plan") {
@@ -43,10 +43,10 @@ const PricingTable = () => {
     <React.Fragment>
       <Head title="Pricing"></Head>
       <Content>
-        <BlockHead size="sm">
+        <BlockHead size="sm" style={{display:"flex",flexDirection: i18n.language === "ar" ? "row-reverse" : "row"}}>
           <BlockBetween className="g-3">
             <BlockContent>
-              <BlockTitle>{t("pricing_title")}</BlockTitle>
+              <BlockTitle style={{textAlign: i18n.language === "ar" ? "right" : "left"}}>{t("pricing_title")}</BlockTitle>
               <BlockDes className="text-soft">
                 <p>{t("pricing_desc")}</p>
               </BlockDes>
@@ -55,7 +55,7 @@ const PricingTable = () => {
         </BlockHead>
 
         <Block size="lg">
-          <Row className="g-gs">
+          <Row className="g-gs" style={{display:"flex",flexDirection: i18n.language === "ar" ? "row-reverse" : "row"}}>
             {data?.records?.map((item) => {
               return (
                 <Col md={6} xl="4" key={item.id}>

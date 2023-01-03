@@ -26,7 +26,7 @@ import { Card, Spinner } from "reactstrap";
 import { useTranslation } from "react-i18next";
 
 const TicketDetails = () => {
-    const {t}=useTranslation(['help'])
+    const {t,i18n}=useTranslation(['help'])
     const { ticket_id } = useParams();
     const { isLoading, error, data: ticket } = useQuery(["get-ticket", ticket_id], () => get_ticket(ticket_id));
     return (
@@ -38,21 +38,21 @@ const TicketDetails = () => {
                 }
                 {ticket !== undefined &&
                     <>
-                        <BlockHead size="sm">
+                        <BlockHead size="sm" style={{display:"flex",flexDirection: i18n.language === "ar" ? "row-reverse" : "row"}}>
                             <BlockBetween>
                                 <BlockHeadContent>
-                                    <BlockTitle >{ticket.name}</BlockTitle>
-                                    <div className="nk-block">
-                                        <div className="ticket-info">
+                                    <BlockTitle style={{textAlign: i18n.language === "ar" ? "right" : "left"}}>{ticket.name}</BlockTitle>
+                                    <div className="nk-block" >
+                                        <div className="ticket-info" style={{display:"flex",flexDirection: i18n.language === "ar" ? "row-reverse" : "row"}}>
                                             <ul className="ticket-meta">
                                                 <li className="ticket-id">
-                                                    <span>{t('ticket_id')}:</span> <strong>#{ticket.id}</strong>
+                                                    <span style={{textAlign: i18n.language === "ar" ? "right" : "left",padding:"20px"}}>{t('ticket_id')}:</span> <strong>#{ticket.id}</strong>
                                                 </li>
                                                 <li className="ticket-date">
-                                                    <span>{t('submitted')}:</span> <strong>{ticket.create_date}</strong>
+                                                    <span style={{textAlign: i18n.language === "ar" ? "right" : "left",padding:"20px"}}>{t('submitted')}:</span> <strong>{ticket.create_date}</strong>
                                                 </li>
                                             </ul>
-                                            <div className="ticket-status"><span className="badge badge-success">{ticket.stage_id[1]}</span>
+                                            <div className="ticket-status"><span className="badge badge-success" style={{margin:"0px 10px"}}>{ticket.stage_id[1]}</span>
                                             </div>
                                         </div>
                                     </div>
@@ -61,7 +61,7 @@ const TicketDetails = () => {
                         </BlockHead>
                         <Block>
                             <PreviewCard className="card-bordered">
-                                <div>{ticket.description}</div>
+                                <div style={{textAlign: i18n.language === "ar" ? "right" : "left",padding:"20px"}}>{ticket.description}</div>
                             </PreviewCard>
                         </Block>
                         <MessageBox ticket_id={ticket_id} stage={ticket.stage_id}/>

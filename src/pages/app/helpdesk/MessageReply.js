@@ -14,7 +14,7 @@ import { close_ticket } from "../../../services/helpdesk/tickets";
 
 const MessageReply = () => {
   
-  const { t } = useTranslation("help");
+  const { t,i18n } = useTranslation("help");
   const { ticket_id } = useParams();
 
   const useMessageReply = () => {
@@ -98,11 +98,11 @@ const handleTicketClose=()=>{
       {/* } */}
       {
         <div className="ticket-msg-reply ml-0">
-          <h5 className="title">{t("reply")}</h5>
+          <h5 className="title" style={{textAlign: i18n.language === "ar" ? "right" : "left"}}>{t("reply")}</h5>
           <form onSubmit={handleSubmit(onFormSubmit)} id="message-form" className="form-reply">
             <div className="form-group">
               <div className="form-editor-custom">
-                <textarea
+                <textarea style={{direction: i18n.language === "ar" ? "rtl" : "ltr",}}
                   id="message"
                   name="message"type="submit"
                   form="message-form"
@@ -115,7 +115,7 @@ const handleTicketClose=()=>{
               </div>
             </div>
             <div className="form-action">
-              <ul className="form-btn-group">
+              <ul className="form-btn-group" >
                 <li>
                   <Button type="submit" color="primary" size="" className="btn-block">
                     {messageReply.isLoading ? <Spinner size="" color="light" /> : t("send_reply_btn")}

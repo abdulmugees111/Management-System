@@ -23,7 +23,7 @@ import { Card } from "reactstrap";
 import { useTranslation } from "react-i18next";
 
 const Tickets = () => {
-  const {t}=useTranslation(['help','common'])
+  const {t,i18n}=useTranslation(['help','common'])
   const { section_id } = useParams();
   const { isLoading, error, data: tickets } = useQuery(["get-tickets"], get_tickets);
   const [onSearch, setonSearch] = useState(true);
@@ -36,12 +36,12 @@ const Tickets = () => {
     <React.Fragment>
       <Head title="Knowledge Base"></Head>
       <Content>
-        <BlockHead size="sm">
+        <BlockHead size="sm" style={{direction: i18n.language === "ar" ? "rtl" : "ltr"}}>
           <BlockBetween>
             <BlockHeadContent>
-              <BlockTitle page>{t('helpdesk_tickets_title')}</BlockTitle>
-              <BlockDes className="text-soft">
-                <p>{t('helpdesk_tickets_desc')}</p>
+              <BlockTitle page style={{textAlign: i18n.language === "ar" ? "right" : "left"}}>{t('helpdesk_tickets_title')}</BlockTitle>
+              <BlockDes className="text-soft" style={{textAlign:i18n.language==="ar"?'right':'left'}}>
+                <p style={{width:"fit-content"}}>{t('helpdesk_tickets_desc')}</p>
               </BlockDes>
             </BlockHeadContent>
 
@@ -63,16 +63,16 @@ const Tickets = () => {
             <div className="card-inner-group">
 
               <div className="card-inner p-0">
-                <table className="table table-tranx">
+                <table className="table table-tranx" style={{direction: i18n.language === "ar" ? "rtl" : "ltr"}}>
                   <thead>
                   <tr className="tb-tnx-head">
-                    <th className="">
+                    <th className="" style={{textAlign: i18n.language === "ar" ? "right" : "left",padding:"20px"}}>
                       <span className="">{t('helpdesk_tickets_name_field')}</span>
                     </th>
-                    <th className="">
+                    <th className="" style={{textAlign: i18n.language === "ar" ? "right" : "left",padding:"20px"}}>
                       <span>{t('helpdesk_tickets_ticket_ref_field')}</span>
                     </th>
-                    <th className="">
+                    <th className="" style={{textAlign: i18n.language === "ar" ? "right" : "left",padding:"20px"}}>
                       <span className="tb-tnx-status d-none d-md-inline-block">{t('helpdesk_tickets_create_date_field')}</span>
                     </th>
                   </tr>
@@ -82,12 +82,12 @@ const Tickets = () => {
                     ? tickets.records.map((ticket) => {
                       return (
                         <tr key={ticket.id} className="tb-tnx-item">
-                          <td>
-                            <a href={`/help/ticket/${ticket.id}`}>
-                              <span>{ticket.name}</span>
+                          <td style={{textAlign: i18n.language === "ar" ? "right" : "left",padding:"20px"}}>
+                            <a href={`/help/ticket/${ticket.id}`} >
+                              <span > {ticket.name}</span>
                             </a>
                           </td>
-                          <td className="tb-tnx-id">
+                          <td className="tb-tnx-id" style={{textAlign: i18n.language === "ar" ? "right" : "left",padding:"20px"}}>
                             <span>{ticket.id}</span>
                           </td>
                           <td></td>

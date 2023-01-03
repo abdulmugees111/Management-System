@@ -29,7 +29,7 @@ export const BlockHead = ({ className, size, wide, ...props }) => {
     [`wide-${wide}`]: wide,
     [`${className}`]: className,
   });
-  return <div className={blockHeadClass}>{props.children}</div>;
+  return <div className={blockHeadClass} {...props}>{props.children}</div>;
 };
 export const BlockHeadContent = ({ className, ...props }) => {
   return <div className={[`nk-block-head-content${className ? " " + className : ""}`]}>{props.children}</div>;
@@ -39,9 +39,9 @@ export const BlockTitle = ({ className, page, ...props }) => {
   return (
     <React.Fragment>
       {!props.tag ? (
-        <h3 className={classes}>{props.children}</h3>
+        <h3 className={classes} {...props}>{props.children}</h3>
       ) : (
-        <props.tag className={classes}>{props.children}</props.tag>
+        <props.tag className={classes} {...props}>{props.children}</props.tag>
       )}
     </React.Fragment>
   );

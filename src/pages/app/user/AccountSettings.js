@@ -21,7 +21,7 @@ import store from "store";
 import { useTranslation } from "react-i18next";
 
 const UserProfileSettingPage = ({history}) => {
-  const { t } = useTranslation(['account_settings','common','notification']);
+  const { t,i18n } = useTranslation(['account_settings','common','notification']);
       const [passState, setPassState] = useState(false);
       const [isConfirmPassSame, setIsConfirmPassSame] = useState(true);
 
@@ -74,10 +74,10 @@ const UserProfileSettingPage = ({history}) => {
    <React.Fragment>
      <Head title="User List - Profile"></Head>
 
-     <BlockHead size="lg">
+     <BlockHead size="lg" style={{display:"flex",flexDirection: i18n.language === "ar" ? "row-reverse" : "row"}}>
        <BlockBetween>
          <BlockHeadContent>
-           <BlockTitle tag="h4">{t("security_settings_title")}</BlockTitle>
+           <BlockTitle tag="h4" style={{textAlign: i18n.language === "ar" ? "right" : "left"}}>{t("security_settings_title")}</BlockTitle>
            <BlockDes>
              <p>{t("security_settings_desc")}</p>
            </BlockDes>
@@ -88,11 +88,11 @@ const UserProfileSettingPage = ({history}) => {
      <Block>
        <Card className="card-bordered">
          <div className="card-inner-group">
-           <div className="card-inner">
-             <div className="between-center flex-wrap g-3">
+           <div className="card-inner" >
+             <div className="between-center flex-wrap g-3" style={{flexDirection: i18n.language === "ar" ? "row-reverse":"row"}}>
                <div className="nk-block-text">
-                 <h6>{t("change_pass_title")}</h6>
-                 <p>{t("change_pass_desc")}</p>
+                 <h6 style={{textAlign: i18n.language === "ar" ? "right":"left"}}>{t("change_pass_title")}</h6>
+                 <p style={{textAlign: i18n.language === "ar" ? "right":"left"}}>{t("change_pass_desc")}</p>
                </div>
                <div className="nk-block-actions flex-shrink-sm-0">
                  <ul className="align-center flex-wrap flex-sm-nowrap gx-3 gy-2">
@@ -111,12 +111,15 @@ const UserProfileSettingPage = ({history}) => {
              </div>
            </div>
            <div className="card-body">
-             <div className="between-center flex-wrap flex-md-nowrap g-3">
-               <div className="nk-block-text">
-                 <h6>
-                 {t("2fa_title")} &nbsp; <span className="badge badge-success ml-0">{t("enabled_state",{ns:'common'})}</span>
+             <div className="between-center flex-wrap flex-md-nowrap g-3" style={{flexDirection: i18n.language === "ar" ? "row-reverse":"row"}}>
+               <div className="nk-block-text" >
+                 <h6 style={{textAlign: i18n.language === "ar" ? "right":"left"}} >
+                  <div style={{display:"flex",flexDirection: i18n.language === "ar" ? "row-reverse":"row"}}>
+                  <span>{t("2fa_title")} </span>&nbsp; <span className="badge badge-success ml-0">{t("enabled_state",{ns:'common'})}</span>
+                  </div>
+              
                  </h6>
-                 <p>
+                 <p style={{textAlign: i18n.language === "ar" ? "right":"left"}}>
                  {t("2fa_desc")}
                  </p>
                </div>
@@ -130,7 +133,7 @@ const UserProfileSettingPage = ({history}) => {
      </Block>
 
      <Modal isOpen={modal} className="modal-dialog-centered" size="lg" toggle={() => setModal(false)}>
-       <ModalBody>
+       <ModalBody style={{direction:i18n.language==="ar"?'rtl':'ltr'}}>
          <a
            href="#dropdownitem"
            onClick={(ev) => {
@@ -138,12 +141,13 @@ const UserProfileSettingPage = ({history}) => {
              setModal(false);
            }}
            className="close"
+           style={{float:i18n.language==="ar"?'left':'right'}}
          >
            <Icon name="cross-sm"></Icon>
          </a>
          <div className="p-2">
-           <h5 className="title">{t('change_pass_title')}</h5>
-           <p>{t('change_pass_desc')}.</p>
+           <h5 className="title" style={{textAlign:i18n.language==="ar"?'right':'left'}}>{t('change_pass_title')}</h5>
+           <p style={{textAlign:i18n.language==="ar"?'right':'left'}}>{t('change_pass_desc')}.</p>
 
            <br />
 

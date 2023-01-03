@@ -37,7 +37,7 @@ import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
 const PaymentHistory = () => {
-  const { t } = useTranslation(['invoices']);
+  const { t,i18n } = useTranslation(['invoices']);
   const [onSearch, setonSearch] = useState(true);
   const [onSearchText, setSearchText] = useState("");
   const [modal, setModal] = useState({
@@ -146,10 +146,10 @@ const PaymentHistory = () => {
     <React.Fragment>
       <Head title={t('payment_history_title')}></Head>
       <Content>
-        <BlockHead size="sm">
+        <BlockHead size="sm" style={{display:"flex",flexDirection: i18n.language === "ar" ? "row-reverse" : "row"}}>
           <BlockBetween>
             <BlockHeadContent>
-              <BlockTitle page>{t('payment_history_title')}</BlockTitle>
+              <BlockTitle page style={{textAlign: i18n.language === "ar" ? "right" : "left"}}>{t('payment_history_title')}</BlockTitle>
               <BlockDes className="text-soft">
                 <p>{t('payment_history_desc')}</p>
               </BlockDes>
@@ -162,7 +162,7 @@ const PaymentHistory = () => {
             <div className="card-inner-group">
               
               <div className="card-inner p-0">
-                <table className="table table-tranx">
+                <table className="table table-tranx" style={{direction:i18n.language==="ar"?'rtl':'ltr'}}>
                   <thead>
                     <tr className="tb-tnx-head">
                       <th className="tb-tnx-id">

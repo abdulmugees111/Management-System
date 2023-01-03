@@ -40,9 +40,9 @@ const MessageBox = ({ ticket_id, stage, ...props }) => {
           isLoading && <Spinner color="primary" />
         }
         {messages && messages.count > 0
-          ? messages.records.map((message) => {
+          ? messages.records.map((message,idx) => {
             return (
-              <div className="ticket-msg-item  pt-0 mt-2">
+              <div key={idx} className="ticket-msg-item  pt-0 mt-2">
                 <div className="ticket-msg-from">
                   <div className="ticket-msg-user user-card">
                     <div className="user-avatar bg-primary">

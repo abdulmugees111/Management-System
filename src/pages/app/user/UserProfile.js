@@ -96,81 +96,81 @@ const UserProfile = () => {
   return (
     <React.Fragment>
       <Head title="User List - Profile"></Head>
-      <BlockHead size="lg">
-        <BlockBetween>
-          <BlockHeadContent>
-            <BlockTitle tag="h4">{t('personal_information')}</BlockTitle>
-            <BlockDes>
+      <BlockHead size="lg" style={{display:"flex",flexDirection: i18n.language === "ar" ? "row-reverse" : "row"}} >
+        <BlockBetween >
+          <BlockHeadContent >
+            <BlockTitle tag="h4" style={{textAlign: i18n.language === "ar" ? "right" : "left"}}>{t('personal_information')} </BlockTitle>
+            <BlockDes >
               <p>{t('personal_information_desc')}</p>
             </BlockDes>
           </BlockHeadContent>
         </BlockBetween>
       </BlockHead>
-
+      {/* style={{flexDirection: i18n.language === "ar" ? "row-reverse" : "row",marginLeft: i18n.language === "ar" ? "auto" : "0px",justifyContent: i18n.language === "ar" ? "flex-end" : "flex-start"}} */}
       <Block>
         <div className="nk-data data-list data-list-s2">
-          <div className="data-head">
-            <h6 className="overline-title">{t('basics')}</h6>
+          <div className="data-head" >
+            <h6 className="overline-title" style={{marginLeft: i18n.language === "ar" ? "auto" : "0px",width:"fit-content"}}>{t('basics')}</h6>
           </div>
-          <div className="data-item" onClick={() => setModal(true)}>
-            <div className="data-col">
-              <span className="data-label">{t('full_name')}</span>
+          <div className="data-item" style={{flexDirection: i18n.language === "ar" ? "row-reverse":"row"}} onClick={() => setModal(true)}>
+            <div className="data-col" style={{flexDirection: i18n.language === "ar" ? "row-reverse":"row",justifyContent:"space-between"}}>
+              <span className="data-label" style={{marginLeft: i18n.language === "ar" ? "auto":"0px",width:"fit-content"}}>{t('full_name')}</span>
               <span className="data-value">{data.name}</span>
             </div>
-            <div className="data-col data-col-end">
-              <span className="data-more">
-                <Icon name="forward-ios"></Icon>
+            <div className="data-col data-col-end" >
+              <span className="data-more"style={{marginRight: i18n.language === "ar" ? "auto":"0px"}}>
+                <Icon name={i18n.language==="ar"?"back-ios":"forward-ios"}></Icon>
               </span>
             </div>
           </div>
-          <div className="data-item">
-            <div className="data-col">
-              <span className="data-label">{t('email')}</span>
+          <div className="data-item" style={{flexDirection: i18n.language === "ar" ? "row-reverse":"row"}}>
+            <div className="data-col" style={{flexDirection: i18n.language === "ar" ? "row-reverse":"row",justifyContent:"space-between"}}>
+              <span className="data-label" style={{marginLeft: i18n.language === "ar" ? "auto":"0px",width:"fit-content"}}>{t('email')}</span>
               <span className="data-value">{data.email}</span>
             </div>
             <div className="data-col data-col-end">
-              <span className="data-more disable">
+              <span className="data-more disable" style={{marginRight: i18n.language === "ar" ? "auto":"0px"}}>
                 <Icon name="lock-alt"></Icon>
               </span>
             </div>
           </div>
-          <div className="data-item" onClick={() => setModal(true)}>
-            <div className="data-col">
-              <span className="data-label">{t('pno')}</span>
+          <div className="data-item" style={{flexDirection: i18n.language === "ar" ? "row-reverse":"row"}} onClick={() => setModal(true)}>
+            <div className="data-col" style={{flexDirection: i18n.language === "ar" ? "row-reverse":"row",justifyContent:"space-between"}}>
+              <span className="data-label" style={{marginLeft: i18n.language === "ar" ? "auto":"0px",width:"fit-content"}}>{t('pno')}</span>
               <span className="data-value text-soft">{data.phone}</span>
             </div>
             <div className="data-col data-col-end">
-              <span className="data-more">
-                <Icon name="forward-ios"></Icon>
+              <span className="data-more" style={{marginRight: i18n.language === "ar" ? "auto":"0px"}}>
+                <Icon name={i18n.language==="ar"?"back-ios":"forward-ios"}></Icon>
               </span>
             </div>
           </div>
-          <div className="data-item" onClick={() => setModal(true)}>
+          <div className="data-item" style={{flexDirection: i18n.language === "ar" ? "row-reverse":"row"}} onClick={() => setModal(true)}>
             <div className="data-col">
-              <span className="data-label">{t('company_name')}</span>
+              <span className="data-label" style={{marginLeft: i18n.language === "ar" ? "auto":"0px",width:"fit-content"}}>{t('company_name')}</span>
               <span className="data-value text-soft">{data.company_name}</span>
             </div>
             <div className="data-col data-col-end">
-              <span className="data-more">
-                <Icon name="forward-ios"></Icon>
+              <span className="data-more" style={{marginRight: i18n.language === "ar" ? "auto":"0px"}}>
+                <Icon name={i18n.language==="ar"?"back-ios":"forward-ios"}></Icon>
               </span>
             </div>
           </div>
-          <div className="data-item" onClick={() => setModal(true)}>
+          <div className="data-item" style={{flexDirection: i18n.language === "ar" ? "row-reverse":"row"}} onClick={() => setModal(true)}>
             <div className="data-col">
-              <span className="data-label">{t('vat')}</span>
+              <span className="data-label" style={{marginLeft: i18n.language === "ar" ? "auto":"0px",width:"fit-content"}}>{t('vat')}</span>
               <span className="data-value text-soft">{data.vat}</span>
             </div>
             <div className="data-col data-col-end">
-              <span className="data-more">
-                <Icon name="forward-ios"></Icon>
+              <span className="data-more" style={{marginRight: i18n.language === "ar" ? "auto":"0px"}}>
+                <Icon name={i18n.language==="ar"?"back-ios":"forward-ios"}></Icon>
               </span>
             </div>
           </div>
 
-          <div className="data-item" onClick={() => setModal(true)}>
+          <div className="data-item" style={{flexDirection: i18n.language === "ar" ? "row-reverse":"row"}} onClick={() => setModal(true)}>
             <div className="data-col">
-              <span className="data-label">{t('address')}</span>
+              <span className="data-label" style={{marginLeft: i18n.language === "ar" ? "auto":"0px",width:"fit-content"}}>{t('address')}</span>
               <span className="data-value">
                 {data.street},
                 <br />
@@ -178,37 +178,38 @@ const UserProfile = () => {
               </span>
             </div>
             <div className="data-col data-col-end">
-              <span className="data-more">
-                <Icon name="forward-ios"></Icon>
+              <span className="data-more" style={{marginRight: i18n.language === "ar" ? "auto":"0px"}}>
+                <Icon name={i18n.language==="ar"?"back-ios":"forward-ios"}></Icon>
               </span>
             </div>
           </div>
         </div>
         <div className="nk-data data-list data-list-s2">
           <div className="data-head">
-            <h6 className="overline-title">{t('preferences')}</h6>
+            <h6 className="overline-title" style={{marginLeft: i18n.language === "ar" ? "auto" : "0px",width:"fit-content"}}>{t('preferences')} </h6>
           </div>
-          <div className="data-item">
-            <div className="data-col">
-              <span className="data-label">{t('language')}</span>
-              <span className="data-value">English (United State)</span>
+          <div className="data-item" style={{flexDirection: i18n.language === "ar" ? "row-reverse":"row"}}>
+            <div className="data-col" style={{flexDirection: i18n.language === "ar" ? "row-reverse":"row",justifyContent:"space-between"}}>
+              <span className="data-label" style={{marginLeft: i18n.language === "ar" ? "auto":"0px",width:"fit-content"}}>{t('language')}</span>
+              <span className="data-value" style={{margin:"0px 10px"}}>English (United State)</span>
             </div>
-            <div className="data-col data-col-end">
+            <div className="data-col data-col-end" >
               <a
                 href="#language"
                 onClick={(ev) => {
                   ev.preventDefault();
                 }}
                 className="link link-primary"
+                style={{marginRight: i18n.language === "ar" ? "auto":"0px"}}
               >
                 {t('change_lang_btn')}
               </a>
             </div>
           </div>
-          <div className="data-item">
-            <div className="data-col">
-              <span className="data-label">{t('date_format')}</span>
-              <span className="data-value">MM/DD/YYYY</span>
+          <div className="data-item" style={{flexDirection: i18n.language === "ar" ? "row-reverse":"row"}}>
+            <div className="data-col" style={{flexDirection: i18n.language === "ar" ? "row-reverse":"row",justifyContent:"space-between"}}>
+              <span className="data-label" style={{marginLeft: i18n.language === "ar" ? "auto":"0px",width:"fit-content"}}>{t('date_format')}</span>
+              <span className="data-value" style={{margin:"0px 10px"}}>MM/DD/YYYY</span>
             </div>
             <div className="data-col data-col-end">
               <a
@@ -217,6 +218,7 @@ const UserProfile = () => {
                   ev.preventDefault();
                 }}
                 className="link link-primary"
+                style={{marginRight: i18n.language === "ar" ? "auto":"0px"}}
               >
                 {t('change_btn')}
               </a>

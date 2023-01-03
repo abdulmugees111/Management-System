@@ -9,9 +9,12 @@ import Content from "../../../layout/content/Content";
 import actions from "../../../redux/projects/actions";
 import ProjectCardPage from "./ProjectCard";
 import { Spinner } from "reactstrap";
+import { useTranslation } from "react-i18next";
 
 
 const Projects = ({ projects, dispatch }) => {
+
+  const {i18n}=useTranslation()
 
   useEffect(() => {
     dispatch({
@@ -66,7 +69,7 @@ const Projects = ({ projects, dispatch }) => {
       <Head title="Projects" />
       <div className="nk-app-root">
         <div className="nk-main">
-          <div className="nk-wrap">
+          <div className="nk-wrap" style={{direction: i18n.language === "ar" ? "rtl" : "ltr"}}>
             <Header
               setVisibility={setVisibility}
               fixed={true}

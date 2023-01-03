@@ -23,8 +23,26 @@ import { Card, Form, FormGroup, Spinner } from "reactstrap";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import { useTranslation } from "react-i18next";
+import { get_user_data } from "../../../services/user";
 
 const CreateTicket = () => {
+  const {
+    isLoading,
+    error,
+    data,
+    refetch: getUserRefetch,
+  } = useQuery(["get-user-data"], get_user_data, {
+    onSuccess: (data) => {
+      if (data) {
+        setFormData({
+          ...(delete data.id && data),
+        });
+      }
+    },
+    onError: () => toast.error(t('processing_request_error_nt',{ns:'notification'})),
+  });
+  console.log("data",data)
+
   const {t}=useTranslation(['help','common','notification'])
   const history = useHistory();
 
@@ -100,7 +118,7 @@ const CreateTicket = () => {
                         ref={register({ required: t('field_required_error',{ns:"common"}) })}
                         type="text"
                         name="name"
-                        placeholder={t('name_ph',{ns:'common'})}
+                        placeholder={data?.name?data?.name:t('name_ph',{ns:'common'})}
                         // required={true}
                         defaultValue={formData.name}
 
@@ -116,7 +134,7 @@ const CreateTicket = () => {
                         ref={register({ required: t('field_required_error',{ns:"common"}) })}
                         type="email"
                         name="email"
-                        placeholder="janedoe@gmail.com"
+                        placeholder={data?.email?data?.email:"janedoe@gmail.com"}
                         required={true}
                         defaultValue={formData.email}
                       />
