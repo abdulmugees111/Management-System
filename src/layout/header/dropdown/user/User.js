@@ -16,7 +16,7 @@ const mapStateToProps = ({ user }) => ({
 
 
 const User = (user) => {
-  const {t}=useTranslation(['common'])
+  const {t,i18n}=useTranslation(['common'])
   const [open, setOpen] = useState(false);
   const toggle = () => setOpen((prevState) => !prevState);
 
@@ -42,11 +42,11 @@ const User = (user) => {
       </DropdownToggle>
       <DropdownMenu right className="dropdown-menu-md dropdown-menu-s1">
         <div className="dropdown-inner user-card-wrap bg-lighter d-none d-md-block">
-          <div className="user-card sm">
-            <div className="user-avatar">
+          <div className="user-card sm" style={{display:"flex",flexDirection: i18n.language === "ar" ? "row-reverse" : "row"}}>
+            <div className="user-avatar" >
               <span>AB</span>
             </div>
-            <div className="user-info">
+            <div className="user-info" style={{marginRight: i18n.language === "ar" ? "1rem" : "0rem"}}>
               <span className="lead-text">{user.user.name}</span>
               <span className="sub-text">{user.user.email}</span>
             </div>
@@ -54,10 +54,10 @@ const User = (user) => {
         </div>
         <div className="dropdown-inner">
           <LinkList>
-            <LinkItem link="/user-profile" icon="user-alt" onClick={toggle}>
+            <LinkItem style={{direction: i18n.language === "ar" ? "rtl" : "ltr"}} link="/user-profile" icon="user-alt" onClick={toggle}>
               {t('view_profile_btn')}
             </LinkItem>
-            <LinkItem link="/account-settings" icon="setting-alt" onClick={toggle}>
+            <LinkItem style={{direction: i18n.language === "ar" ? "rtl" : "ltr"}} link="/account-settings" icon="setting-alt" onClick={toggle}>
             {t('account_settings_btn', { ns: "common" })}
             </LinkItem>
             {/* <LinkItem link="/user-profile-activity" icon="activity-alt" onClick={toggle}>
@@ -67,7 +67,7 @@ const User = (user) => {
         </div>
         <div className="dropdown-inner">
           <LinkList>
-            <a href={`${process.env.PUBLIC_URL}/auth/login`} onClick={handleSignout}>
+            <a href={`${process.env.PUBLIC_URL}/auth/login`} onClick={handleSignout} style={{direction: i18n.language === "ar" ? "rtl" : "ltr"}}>
               <Icon name="signout"></Icon>
               <span> {t('signout_btn')}</span>
             </a>

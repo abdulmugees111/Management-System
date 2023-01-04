@@ -13,7 +13,7 @@ import { PlansReFormattor } from "../../../utils/formattors";
 import { toast } from "react-toastify";
 import { useTranslation } from "react-i18next";
 const OrderPage = ({ history }) => {
-  const { t,i18n } = useTranslation(["order", "common", "pricing", "notification"]);
+  const { t, i18n } = useTranslation(["order", "common", "pricing", "notification"]);
   let location = useLocation();
   const { state } = location;
 
@@ -91,31 +91,31 @@ const OrderPage = ({ history }) => {
   return (
     <React.Fragment>
       <Head title="Order" />
-      <BlockHead style={{display:"flex",flexDirection: i18n.language === "ar" ? "row-reverse" : "row"}}>
+      <BlockHead style={{ display: "flex", flexDirection: i18n.language === "ar" ? "row-reverse" : "row" }}>
         <BlockHeadContent>
-          <BlockTitle tag="h3" style={{textAlign: i18n.language === "ar" ? "right" : "left"}}>{t("order_title")}</BlockTitle>
+          <BlockTitle tag="h3" style={{ textAlign: i18n.language === "ar" ? "right" : "left" }}>{t("order_title")}</BlockTitle>
         </BlockHeadContent>
       </BlockHead>
 
       <Block>
         <form onSubmit={submitHandler}>
-          <Row className="g-gs" style={{display:"flex",flexDirection: i18n.language === "ar" ? "row-reverse" : "row"}} >
+          <Row className="g-gs" style={{ display: "flex", flexDirection: i18n.language === "ar" ? "row-reverse" : "row" }} >
             <Col lg="7">
               <Card
                 className="card-bordered product-card px-2 py-3 "
                 style={{ overflow: "visible", background: "#fcfcfc" }}
               >
-                <h5 className="py-2 title" style={{textAlign:i18n.language==="ar"?'right':'left'}}>{t("product_info")}</h5>
-                <label className="form-label" htmlFor="plan" style={{textAlign:i18n.language==="ar"?'right':'left'}}>
+                <h5 className="py-2 title" style={{ textAlign: i18n.language === "ar" ? 'right' : 'left' }}>{t("product_info")}</h5>
+                <label className="form-label" htmlFor="plan" style={{ textAlign: i18n.language === "ar" ? 'right' : 'left' }}>
                   {t("your_plan")}:
                 </label>
 
                 <RSelect
-                style={{direction:i18n.language==="ar"?'rtl':'ltr'}}
+                  style={{ direction: i18n.language === "ar" ? 'rtl' : 'ltr' }}
                   options={PlansReFormattor(!isLoading ? translatePlanArray(data) : [])}
                   defaultValue={{
                     value: state?.planID ? state.planID : -1,
-                    label: state?.planName ? translatePlan(state.planName) : t("select_plan",{ns:"order"}),
+                    label: state?.planName ? translatePlan(state.planName) : t("select_plan", { ns: "order" }),
                   }}
                   onChange={(e) =>
                     setFormData({
@@ -147,14 +147,14 @@ const OrderPage = ({ history }) => {
                   </div>
                 </FormGroup> */}
                 <li className="divider"></li>
-                <h5 className="py-2 title">{t("payment_info")}</h5>
-                <label className="form-label" htmlFor="payment">
+                <h5 className="py-2 title" style={{ textAlign: i18n.language === "ar" ? 'right' : 'left' }}>{t("payment_info")}</h5>
+                <label className="form-label" htmlFor="payment" style={{ textAlign: i18n.language === "ar" ? 'right' : 'left' }}>
                   {t("select_payment_method")}:
                 </label>
 
                 <RSelect
                   options={payment_methods}
-                  defaultValue={{ value: -1, label: t("select_payment_method",{ns:"order"}) }}
+                  defaultValue={{ value: -1, label: t("select_payment_method", { ns: "order" }) }}
                   onChange={(e) => setFormData({ ...formData, payment_method: { value: e.value, label: e.label } })}
                 />
               </Card>

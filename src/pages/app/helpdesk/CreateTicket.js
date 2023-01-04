@@ -43,7 +43,7 @@ const CreateTicket = () => {
   });
   console.log("data",data)
 
-  const {t}=useTranslation(['help','common','notification'])
+  const {t,i18n}=useTranslation(['help','common','notification'])
   const history = useHistory();
 
   const useCreateTicket = () => {
@@ -93,12 +93,12 @@ const CreateTicket = () => {
     <React.Fragment>
       <Head title="Submit Ticket"></Head>
       <Content>
-        <BlockHead size="sm">
+        <BlockHead size="sm" style={{display:"flex",flexDirection: i18n.language === "ar" ? "row-reverse" : "row"}}>
           <BlockBetween>
             <BlockHeadContent>
-              <BlockTitle page>{t('create_ticket_title',{ns:'help'})}</BlockTitle>
+              <BlockTitle page style={{textAlign: i18n.language === "ar" ? "right" : "left"}}>{t('create_ticket_title',{ns:'help'})}</BlockTitle>
               <BlockDes className="text-soft">
-                <p>{t('create_ticket_desc',{ns:'help'})}</p>
+                <p style={{textAlign: i18n.language === "ar" ? "right" : "left"}}>{t('create_ticket_desc',{ns:'help'})}</p>
               </BlockDes>
             </BlockHeadContent>
 
@@ -112,8 +112,9 @@ const CreateTicket = () => {
                 <Form className="row gy-4" id="submit-ticket" onSubmit={handleSubmit(onFormSubmit)}>
                   <Col md="6">
                     <FormGroup>
-                      <label className="form-label">{t('name',{ns:'common'})}</label>
+                      <label className="form-label" style={{textAlign: i18n.language === "ar" ? "right" : "left",width:"100%"}}>{t('name',{ns:'common'})}</label>
                       <input
+                      style={{textAlign: i18n.language === "ar" ? "right" : "left",width:"100%"}}
                         className="form-control"
                         ref={register({ required: t('field_required_error',{ns:"common"}) })}
                         type="text"
@@ -128,8 +129,9 @@ const CreateTicket = () => {
                   </Col>
                   <Col md="6">
                     <FormGroup>
-                      <label className="form-label"> {t('email',{ns:'common'})} </label>
+                      <label className="form-label" style={{textAlign: i18n.language === "ar" ? "right" : "left",width:"100%"}}> {t('email',{ns:'common'})} </label>
                       <input
+                      style={{textAlign: i18n.language === "ar" ? "right" : "left",width:"100%"}}
                         className="form-control"
                         ref={register({ required: t('field_required_error',{ns:"common"}) })}
                         type="email"
@@ -143,8 +145,9 @@ const CreateTicket = () => {
                   </Col>
                   <Col md="6">
                     <FormGroup>
-                      <label className="form-label">{t('subject',{ns:'common'})}</label>
+                      <label className="form-label" style={{textAlign: i18n.language === "ar" ? "right" : "left",width:"100%"}}>{t('subject',{ns:'common'})}</label>
                       <input
+                      style={{textAlign: i18n.language === "ar" ? "right" : "left",width:"100%"}}
                         className="form-control"
                         placeholder={t('subject_ph',{ns:'common'})}
                         ref={register({ required: t('field_required_error',{ns:"common"}) })}
@@ -157,8 +160,9 @@ const CreateTicket = () => {
                   </Col>
                   <Col md="12">
                     <FormGroup>
-                      <label className="form-label">{t('description',{ns:'common'})}</label>
+                      <label className="form-label" style={{textAlign: i18n.language === "ar" ? "right" : "left",width:"100%"}}>{t('description',{ns:'common'})}</label>
                       <textarea
+                      style={{textAlign: i18n.language === "ar" ? "right" : "left",width:"100%"}}
                         form="submit-ticket"
                         className="form-control"
                         ref={register({ required: t('field_required_error',{ns:"common"}) })}
@@ -170,7 +174,7 @@ const CreateTicket = () => {
                     </FormGroup>
                   </Col>
                   <Col size="12">
-                    <ul className="align-center flex-wrap flex-sm-nowrap gx-4 gy-2">
+                    <ul className="align-center flex-wrap flex-sm-nowrap gx-4 gy-2" style={{display:"flex",flexDirection: i18n.language === "ar" ? "row-reverse" : "row"}}>
                       <li>
                         <Button type="submit" color="primary" disabled={createTicket.isLoading} size="md">
                           {createTicket.isLoading ? <Spinner size="sm" color="light" /> : t('submit_ticket_btn',{ns:'common'})}</Button>

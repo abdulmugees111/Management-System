@@ -44,6 +44,7 @@
   "country":"Country",
   "state":"State",
   "year":"yr",
-  "field_required_error":"This field is required"
+  "field_required_error":"This field is required",
+  "contact_us":"Contact Us"
   
 }
