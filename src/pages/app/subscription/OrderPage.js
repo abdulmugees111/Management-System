@@ -21,11 +21,13 @@ const OrderPage = ({ history }) => {
     price: state?.planPrice || 0,
     plan: {
       value: state?.planID ? state.planID : -1,
-      label: state?.planName ? state.planName : t("select_plan"),
+      label: state?.planName ? translatePlan(state.planName) : t("select_plan", { ns: "order" }),
     },
     address: "",
     payment_method: { value: -1, label: "" },
   });
+
+  useEffect(()=>{},[i18n.language])
 
   const { data, isLoading } = useQuery(["get-pricings"], getPricings);
   const { isFetching, refetch } = useQuery(
@@ -59,13 +61,13 @@ const OrderPage = ({ history }) => {
 
   function translatePlan(plan) {
     console.log("Plan to change")
-    if (plan === "Tajr Basic Plan") {
+    if (plan === "Tajr Basic Plan" ||plan ==="تاجر الخطة الأساسية") {
       console.log("Plan transform BASIC", plan);
       return t("basic_plan_title", { ns: "pricing" });
-    } else if (plan === "Tajr Pro Plan") {
+    } else if (plan === "Tajr Pro Plan"|| plan==="خطة التاجر المهنية") {
       console.log("Plan transform PRO", plan);
       return t("basic_pro_title", { ns: "pricing" });
-    } else if (plan === "Tajr Enterprise Plan") {
+    } else if (plan === "Tajr Enterprise Plan"||plan==="خطة مؤسسة التاجر") {
       return t("basic_enterprise_title", { ns: "pricing" });
     } else return plan;
   }
@@ -73,15 +75,15 @@ const OrderPage = ({ history }) => {
     console.log("Plan Arr", planArr);
 
     planArr.records.map((each) => {
-      if (each.name === "Tajr Basic Plan") {
+      if (each.name === "Tajr Basic Plan" ||each.name ==="تاجر الخطة الأساسية") {
         console.log("Plan transform BASIC", each.name);
         each.name = t("basic_plan_title", { ns: "pricing" });
       }
-      if (each.name === "Tajr Pro Plan") {
+      if (each.name  === "Tajr Pro Plan"|| each.name==="خطة التاجر المهنية") {
         console.log("Plan transform PRO", each.name);
         each.name = t("pro_plan_title", { ns: "pricing" });
       }
-      if (each.name === "Tajr Enterprise Plan") {
+      if (each.name === "Tajr Enterprise Plan"||each.name==="خطة مؤسسة التاجر") {
         each.name = t("basic_enterprise_title", { ns: "pricing" });
       }
     });
@@ -169,18 +171,18 @@ const OrderPage = ({ history }) => {
                   background: "#fcfcfc",
                 }}
               >
-                <h5 className=" title">{t("order_total")}</h5>
+                <h5 className=" title" style={{ textAlign: i18n.language === "ar" ? 'right' : 'left' }}>{t("order_total")}</h5>
                 <li className="divider" style={{ marginTop: "10px" }}></li>
-                <div style={{ display: "flex", justifyContent: "space-between" }} className="px-2">
+                <div style={{ display: "flex", justifyContent: "space-between",flexDirection:i18n.language==="ar"?"row-reverse":"row" }} className="px-2">
                   <label className=" form-label">{t("sub_total")}:</label>
                   <label className=" form-label">${formData.price}</label>
                 </div>
-                <div style={{ display: "flex", justifyContent: "space-between" }} className="px-2">
+                <div style={{ display: "flex", justifyContent: "space-between",flexDirection:i18n.language==="ar"?"row-reverse":"row" }} className="px-2">
                   <label className=" form-label">{t("taxes")}:</label>
                   <label className=" form-label">$0</label>
                 </div>
                 <li className="divider"></li>
-                <div style={{ display: "flex", justifyContent: "space-between" }} className="px-2">
+                <div style={{ display: "flex", justifyContent: "space-between",flexDirection:i18n.language==="ar"?"row-reverse":"row" }} className="px-2">
                   <label className=" form-label">{t("total")}:</label>
                   <label className=" form-label">${formData.price}</label>
                 </div>
