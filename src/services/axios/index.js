@@ -30,7 +30,7 @@ apiClient.interceptors.response.use(undefined, error => {
   const { data } = response
   if (data) {
   // custom code for showing error
-    toast.error(t('processing_request_error_nt',{'ns':'notification'}));
+    toast.error(t('Error occurred while processing your request',{'ns':'notification'}));
 
   }
 })

@@ -94,7 +94,7 @@ const Sections = () => {
               <div class="nk-cta" style={{ display: "flex", flexDirection: i18n.language === "ar" ? "row-reverse" : "row" }}>
                 <div class="nk-cta-block" style={{ display: "flex", flexDirection: i18n.language === "ar" ? "row-reverse" : "row" }}>
                   <div class="nk-cta-img"><em class="icon icon-circle ni ni-msg"></em></div>
-                  <div class="nk-cta-text"><p>{t('not_found')}</p></div>
+                  <div class="nk-cta-text"><p style={{ textAlign: i18n.language === "ar" ? "right" : "left" }}>{t('not_found')}</p></div>
                 </div>
                 <div class="nk-cta-action">
                   <Link to="/help/ticket/create" className="btn btn-primary">{t('contact_us', { ns: "common" })}</Link></div>

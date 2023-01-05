@@ -50,7 +50,7 @@ const UserProfile = () => {
         });
       }
     },
-    onError: () => toast.error(t('processing_request_error_nt',{ns:'notification'})),
+    onError: () => toast.error(t('Error occurred while processing your request',{ns:'notification'})),
   });
 
   const { isFetching: updateDataLoading, refetch: updateUser } = useQuery(
@@ -64,10 +64,10 @@ const UserProfile = () => {
           getUserRefetch();
           toast.success(t('profile_updated_nt',{ns:'notification'}));
         } else {
-          toast.error(t('processing_request_error_nt',{ns:'notification'}));
+          toast.error(t('Error occurred while processing your request',{ns:'notification'}));
         }
       },
-      onError: () => toast.error(t('processing_request_error_nt',{ns:'notification'})),
+      onError: () => toast.error(t('Error occurred while processing your request',{ns:'notification'})),
     }
   );
 
@@ -236,19 +236,20 @@ const UserProfile = () => {
               setModal(false);
             }}
             className="close"
+            style={{float: i18n.language === "ar" ? "left":"right"}}
           >
             <Icon name="cross-sm"></Icon>
           </a>
           <div className="p-2">
-            <h5 className="title">{t('update_profile')}</h5>
+            <h5 className="title" style={{textAlign: i18n.language === "ar" ? "right":"left"}}>{t('update_profile')}</h5>
             <br />
 
             <div className="tab-content">
-              <div className={`tab-pane active`} id="personal">
-                <Row className="gy-4">
+              <div className={`tab-pane active`} id="personal" style={{flexDirection: i18n.language === "ar" ? "row-reverse":"row"}}>
+                <Row className="gy-4" style={{direction: i18n.language === "ar" ? "rtl":"ltr"}}>
                   <Col md="6">
                     <FormGroup>
-                      <label className="form-label" htmlFor="full-name">
+                      <label  style={{textAlign: i18n.language === "ar" ? "right":"left",width:"100%"}} className="form-label" htmlFor="full-name">
                       {t('full_name')}
                       </label>
                       <input
@@ -264,7 +265,7 @@ const UserProfile = () => {
                   </Col>
                   <Col md="6">
                     <FormGroup>
-                      <label className="form-label" htmlFor="company-name">
+                      <label style={{textAlign: i18n.language === "ar" ? "right":"left",width:"100%"}}  className="form-label" htmlFor="company-name">
                       {t('company_name')}
                       </label>
                       <input
@@ -281,7 +282,7 @@ const UserProfile = () => {
                   </Col>
                   <Col md="6">
                     <FormGroup>
-                      <label className="form-label" htmlFor="phone-no">
+                      <label style={{textAlign: i18n.language === "ar" ? "right":"left",width:"100%"}}  className="form-label" htmlFor="phone-no">
                       {t('pno')}
                       </label>
                       <input
@@ -298,7 +299,7 @@ const UserProfile = () => {
                   </Col>
                   <Col md="6">
                     <FormGroup>
-                      <label className="form-label" htmlFor="vat">
+                      <label style={{textAlign: i18n.language === "ar" ? "right":"left",width:"100%"}}  className="form-label" htmlFor="vat">
                         VAT
                       </label>
                       <input
@@ -316,7 +317,7 @@ const UserProfile = () => {
 
                   <Col md="6">
                     <FormGroup>
-                      <label className="form-label" htmlFor="street">
+                      <label style={{textAlign: i18n.language === "ar" ? "right":"left",width:"100%"}}  className="form-label" htmlFor="street">
                       {t('street')}
                       </label>
                       <input
@@ -332,7 +333,7 @@ const UserProfile = () => {
                   </Col>
                   <Col md="6">
                     <FormGroup>
-                      <label className="form-label" htmlFor="email">
+                      <label style={{textAlign: i18n.language === "ar" ? "right":"left",width:"100%"}}  className="form-label" htmlFor="email">
                       {t('email')}
                       </label>
                       <input
@@ -349,7 +350,7 @@ const UserProfile = () => {
 
                   <Col md="6">
                     <FormGroup>
-                      <label className="form-label" htmlFor="address-county">
+                      <label style={{textAlign: i18n.language === "ar" ? "right":"left",width:"100%"}}  className="form-label" htmlFor="address-county">
                       {t('country')}
                       </label>
                       <RSelect
@@ -368,7 +369,7 @@ const UserProfile = () => {
 
                   <Col md="6">
                     <FormGroup>
-                      <label className="form-label" htmlFor="address-st">
+                      <label style={{textAlign: i18n.language === "ar" ? "right":"left",width:"100%"}}  className="form-label" htmlFor="address-st">
                       {t('state')}
                       </label>
                       <RSelect

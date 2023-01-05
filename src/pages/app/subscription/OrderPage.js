@@ -39,10 +39,10 @@ const OrderPage = ({ history }) => {
         // history.push(data.redirect_url)
         window.location.replace(data.redirect_url);
         if (!data) {
-          toast.error(t("processing_request_error_nt", { ns: "notification" }));
+          toast.error(t("Error occurred while processing your request", { ns: "notification" }));
         }
       },
-      onError: () => toast.error(t("processing_request_error_nt", { ns: "notification" })),
+      onError: () => toast.error(t("Error occurred while processing your request", { ns: "notification" })),
     }
   );
 
@@ -66,7 +66,7 @@ const OrderPage = ({ history }) => {
       return t("basic_plan_title", { ns: "pricing" });
     } else if (plan === "Tajr Pro Plan"|| plan==="خطة التاجر المهنية") {
       console.log("Plan transform PRO", plan);
-      return t("basic_pro_title", { ns: "pricing" });
+      return t("pro_plan_title", { ns: "pricing" });
     } else if (plan === "Tajr Enterprise Plan"||plan==="خطة مؤسسة التاجر") {
       return t("basic_enterprise_title", { ns: "pricing" });
     } else return plan;

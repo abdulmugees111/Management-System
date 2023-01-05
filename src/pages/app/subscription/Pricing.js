@@ -31,7 +31,7 @@ const PricingTable = () => {
       return t("basic_plan_title", { ns: "pricing" });
     } else if (plan === "Tajr Pro Plan") {
       console.log("Plan transform PRO", plan);
-      return t("basic_pro_title", { ns: "pricing" });
+      return t("pro_plan_title", { ns: "pricing" });
     } else if (plan === "Tajr Enterprise Plan") {
       return t("basic_enterprise_title", { ns: "pricing" });
     } else return plan;

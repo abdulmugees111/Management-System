@@ -42,7 +42,7 @@ const Notification = () => {
         </div>
       </DropdownToggle>
       <DropdownMenu right className="dropdown-menu-xl dropdown-menu-s1">
-        <div className="dropdown-head">
+        <div className="dropdown-head" style={{direction:i18n.language==="ar"?"rtl":"ltr"}}>
           <span className="sub-title nk-dropdown-title">{t('notification_heading')}</span>
           <a href="#markasread" onClick={(ev) => ev.preventDefault()}>
             {t('mark_all_read')}

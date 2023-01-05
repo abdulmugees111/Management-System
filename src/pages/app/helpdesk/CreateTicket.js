@@ -39,7 +39,7 @@ const CreateTicket = () => {
         });
       }
     },
-    onError: () => toast.error(t('processing_request_error_nt',{ns:'notification'})),
+    onError: () => toast.error(t('Error occurred while processing your request',{ns:'notification'})),
   });
   console.log("data",data)
 

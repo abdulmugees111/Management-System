@@ -141,7 +141,7 @@ const Dashboard = ({ user }) => {
           </BlockBetween>
         </BlockHead>
         <Block>
-          <Row>
+          <Row style={{display:"flex",flexDirection: i18n.language === "ar" ? "row-reverse" : "row"}}>
             {cardsData.map((data, i) => {
               return (
                 <Col sm="6" key={i}>

@@ -48,13 +48,13 @@ const Register = ({ history }) => {
         });
         toast.success(t('registered_nt',{ns:'notification'}))
       }else{
-      toast.error(t('processing_request_error_nt',{ns:'notification'}));
+      toast.error(t('Error occurred while processing your request',{ns:'notification'}));
 
       }
       // 
     },
     onError:()=>{
-      toast.error(t('processing_request_error_nt',{ns:'notification'}));
+      toast.error(t('Error occurred while processing your request',{ns:'notification'}));
     }
   
   });

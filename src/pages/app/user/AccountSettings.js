@@ -50,15 +50,15 @@ const UserProfileSettingPage = ({history}) => {
            password: "",
            confirm_password: "",
          });
-         toast.success(t('password_changed_nt',{ns:'notification'}));
+         toast.success(t('Password Changed Successfully! Please Login again with new password',{ns:'notification'}));
          handleSignout();
        } else {
-         toast.error(t('processing_request_error_nt',{ns:'notification'}));
+         toast.error(t('Error occurred while processing your request',{ns:'notification'}));
        }
        //
      },
      onError: () => {
-       toast.error(t('processing_request_error_nt',{ns:'notification'}));
+       toast.error(t('Error occurred while processing your request',{ns:'notification'}));
      },
    });
 
