@@ -40,12 +40,13 @@ const Sections = () => {
             isLoading && <Spinner color="primary" />
           }
           {sections && sections.count > 0
-            ? sections.records.map((section) => {
+            ? sections.records.map((section,idx) => {
 
               return (
-                <div class="support-topic-item card card-bordered">
+                <div key={idx} class="support-topic-item card card-bordered">
                   <Link to={`${process.env.PUBLIC_URL}/kb/article/section/${section.id}`}
-                    className="support-topic-block card-inner">
+                    className="support-topic-block card-inner" style={{ display: "flex", direction: i18n.language === "ar" ? "rtl" : "ltr" }}>
+                      
                     <div class="support-topic-media">
                       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 90 90">
                         <path
@@ -81,7 +82,7 @@ const Sections = () => {
                       <div dangerouslySetInnerHTML={{ __html: section.description }} class="support-topic-info" />
                       {/*<div class="support-topic-count">Here are 7 questions and answers.</div>*/}
                     </div>
-                    <div class="support-topic-action"><em class="icon ni ni-chevron-right"></em>
+                    <div style={{ marginRight: i18n.language === "ar" ? "1rem" : "0rem" }} class="support-topic-action"><em class={`icon ni ${i18n.language === "ar" ? "ni-chevron-left":"ni-chevron-right"}`}></em>
                     </div>
                   </Link>
                 </div>
