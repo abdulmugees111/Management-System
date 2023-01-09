@@ -30,3 +30,20 @@ export async function create_ticket(ticketData) {
         throw new Error(err);
       });
   }
+
+  export async function close_ticket(ticketId) {
+    console.log({close: ticketId})
+    return apiClient
+      .post(`/help/ticket/close/${ticketId}`)
+      .then((response) => {
+        if (response) {
+          console.log(response.data)
+          return response.data;
+        }
+        return false;
+      })
+      .catch((err) => {
+        console.log(err);
+        throw new Error(err);
+      });
+  }

@@ -3,10 +3,12 @@ import React, { useEffect, useState } from "react";
 import Icon from "../../components/icon/Icon";
 import classNames from "classnames";
 import { NavLink, Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const MenuHeading = ({ heading }) => {
+  const {i18n} =useTranslation()
   return (
-    <li className="nk-menu-heading">
+    <li className="nk-menu-heading" style={{textAlign:i18n.language==="ar"?"right":"left"}}>
       <h6 className="overline-title text-primary-alt">{heading}</h6>
     </li>
   );
@@ -14,7 +16,15 @@ const MenuHeading = ({ heading }) => {
 
 const MenuItem = ({ icon, link, text, sub, newTab, child, sidebarToggle, badge, mobileView, ...props }) => {
   let currentUrl;
-
+  const { t, i18n } = useTranslation();
+  const translateSubmenu = (text) => {
+    console.log("text ", text);
+    if (text === "Knowledge Base") {
+      return t("Knowledge Base");
+    } else if (text === "Tickets") {
+      return t("tickets");
+    } else return text;
+  };
   const toggleActionSidebar = (e) => {
     if (!sub && !newTab && mobileView) {
       sidebarToggle(e);
@@ -148,6 +158,7 @@ const MenuItem = ({ icon, link, text, sub, newTab, child, sidebarToggle, badge, 
           target="_blank"
           rel="noopener noreferrer"
           className="nk-menu-link"
+          style={{ flexDirection: i18n.language === "ar" ? "row-reverse" : "row" }}
         >
           {icon ? (
             <span className="nk-menu-icon">
@@ -161,13 +172,21 @@ const MenuItem = ({ icon, link, text, sub, newTab, child, sidebarToggle, badge, 
           to={`${process.env.PUBLIC_URL + link}`}
           className={`nk-menu-link${sub ? " nk-menu-toggle" : ""}`}
           onClick={sub ? menuToggle : null}
+          style={{
+            flexDirection: i18n.language === "ar" ? "row-reverse" : "row",
+            justifyContent: i18n.language === "ar" ? "flex-start" : "flex-end",
+          }}
         >
           {icon ? (
             <span className="nk-menu-icon">
               <Icon name={icon} />
             </span>
           ) : null}
-          <span className="nk-menu-text">{text}</span>
+          <span className="nk-menu-text" style={{
+            flexGrow: i18n.language === "ar" ? "unset" : 1,
+            paddingRight: i18n.language === "ar" ? "10px" : "0px",
+            
+          }}>{text}</span>
           {badge && <span className="nk-menu-badge">{badge}</span>}
         </NavLink>
       )}
@@ -180,11 +199,36 @@ const MenuItem = ({ icon, link, text, sub, newTab, child, sidebarToggle, badge, 
   );
 };
 
-const PanelItem = ({ icon, link, text, subPanel, index, data, setMenuData, sidebarToggle, mobileView,menuData, ...props }) => {
+const PanelItem = ({
+  icon,
+  link,
+  text,
+  subPanel,
+  index,
+  data,
+  setMenuData,
+  sidebarToggle,
+  mobileView,
+  menuData,
+  ...props
+}) => {
   const menuItemClass = classNames({
     "nk-menu-item": true,
   });
-
+  const translateLinks = (link) => {
+    console.log("link ", link);
+    if (link === "Dashboard") {
+      return t("overview");
+    } else if (link === "My Subscriptions") {
+      return t("my_subscriptions");
+    } else if (link === "Invoices & Payments") {
+      return t("invoice_and_payments");
+    } else if (link === "Support") {
+      return t("support");
+    } else if (link === "Account Settings") {
+      return t("account_settings_btn", { ns: "common" });
+    } else return link;
+  };
   if (data === menuData) {
     return (
       <li className={menuItemClass}>
@@ -210,7 +254,7 @@ const PanelItem = ({ icon, link, text, subPanel, index, data, setMenuData, sideb
             key={item.text}
             link={item.link}
             icon={item.icon}
-            text={item.text}
+            text={translateLinks(item.text)}
             badge={item.badge}
             sub={item.subMenu}
             sidebarToggle={sidebarToggle}
@@ -223,13 +267,23 @@ const PanelItem = ({ icon, link, text, subPanel, index, data, setMenuData, sideb
 };
 
 const MenuSub = ({ icon, link, text, sub, sidebarToggle, mobileView, ...props }) => {
+  const { t } = useTranslation();
+  const translateSubmenu = (text) => {
+    console.log("text ", text);
+    if (text === "Knowledge Base") {
+      return t("knowledge_base", { ns: "dashboard" });
+    } else if (text === "Tickets") {
+      return t("tickets", { ns: "dashboard" });
+    } else return text;
+  };
+
   return (
     <ul className="nk-menu-sub" style={props.style}>
       {sub.map((item) => (
         <MenuItem
           link={item.link}
           icon={item.icon}
-          text={item.text}
+          text={translateSubmenu(item.text)}
           sub={item.subMenu}
           badge={item.badge}
           key={item.text}
@@ -253,8 +307,9 @@ const checkMenuUrl = (data) => {
   }
 };
 
-const Menu = ({ sidebarToggle, mobileView, menuData, }) => {
+const Menu = ({ sidebarToggle, mobileView, menuData }) => {
   const [data, setMenuData] = useState(menuData);
+  const { t } = useTranslation(["dashboard","common"]);
 
   useEffect(() => {
     data.forEach((item) => {
@@ -275,17 +330,40 @@ const Menu = ({ sidebarToggle, mobileView, menuData, }) => {
     });
   }, [window.location.pathname]); // eslint-disable-line react-hooks/exhaustive-deps
 
+  const translateHeadings = (heading) => {
+    console.log("Heading ", heading);
+    if (heading === "Overview") {
+      return t("overview");
+    } else if (heading === "Advanced") {
+      return t("advanced");
+    } else return heading;
+  };
+
+  const translateLinks = (link) => {
+    console.log("link ", link);
+    if (link === "Dashboard") {
+      return t("overview");
+    } else if (link === "My Subscriptions") {
+      return t("my_subscriptions");
+    } else if (link === "Invoices & Payments") {
+      return t("invoice_and_payments");
+    } else if (link === "Support") {
+      return t("support");
+    } else if (link === "Account Settings") {
+      return t("account_settings_btn", { ns: "common" });
+    } else return link;
+  };
   return (
     <ul className="nk-menu" id="main-menu">
-      {data.map((item, index) =>
-        item.heading ? (
-          <MenuHeading heading={item.heading} key={item.heading} />
+      {data.map((item, index) => {
+        return item.heading ? (
+          <MenuHeading heading={translateHeadings(item.heading)} key={item.heading} />
         ) : item.panel ? (
           <PanelItem
             key={item.text}
             link={item.link}
             icon={item.icon}
-            text={item.text}
+            text={translateLinks(item.text)}
             index={index}
             panel={item.panel}
             subPanel={item.subPanel}
@@ -300,7 +378,7 @@ const Menu = ({ sidebarToggle, mobileView, menuData, }) => {
             key={item.text}
             link={item.link}
             icon={item.icon}
-            text={item.text}
+            text={translateLinks(item.text)}
             sub={item.subMenu}
             child={item.child}
             badge={item.badge}
@@ -308,21 +386,19 @@ const Menu = ({ sidebarToggle, mobileView, menuData, }) => {
             mobileView={mobileView}
           />
         ) : (
-           (
-            <MenuItem
-              key={item.text}
-              link={item.link}
-              icon={item.icon}
-              text={item.text}
-              sub={item.subMenu}
-              child={item.child}
-              badge={item.badge}
-              sidebarToggle={sidebarToggle}
-              mobileView={mobileView}
-            />
-          )
-        )
-      )}
+          <MenuItem
+            key={item.text}
+            link={item.link}
+            icon={item.icon}
+            text={translateLinks(item.text)}
+            sub={item.subMenu}
+            child={item.child}
+            badge={item.badge}
+            sidebarToggle={sidebarToggle}
+            mobileView={mobileView}
+          />
+        );
+      })}
     </ul>
   );
 };

@@ -11,7 +11,9 @@ import { useQuery } from "@tanstack/react-query";
 import { getPricings, getStripeSession } from "../../../services/order";
 import { PlansReFormattor } from "../../../utils/formattors";
 import { toast } from "react-toastify";
+import { useTranslation } from "react-i18next";
 const OrderPage = ({ history }) => {
+  const { t, i18n } = useTranslation(["order", "common", "pricing", "notification"]);
   let location = useLocation();
   const { state } = location;
 
@@ -19,33 +21,35 @@ const OrderPage = ({ history }) => {
     price: state?.planPrice || 0,
     plan: {
       value: state?.planID ? state.planID : -1,
-      label: state?.planName ? state.planName : "Select a plan",
+      label: state?.planName ? translatePlan(state.planName) : t("select_plan", { ns: "order" }),
     },
     address: "",
     payment_method: { value: -1, label: "" },
   });
 
+  useEffect(()=>{},[i18n.language])
+
   const { data, isLoading } = useQuery(["get-pricings"], getPricings);
-  const {
-    isFetching,
-    refetch,
-  } = useQuery(["get-stripe-session", formData.plan.value], () => getStripeSession(formData.plan.value), {
-    enabled: false,
-    onSuccess: (data) => {
-      // history.push(data.redirect_url)
-      window.location.replace(data.redirect_url);
-      if (!data) {
-        toast.error("Error occurred while processing your request");
-      }
-    },
-    onError: () => toast.error("Error occurred while processing your request"),
-  });
+  const { isFetching, refetch } = useQuery(
+    ["get-stripe-session", formData.plan.value],
+    () => getStripeSession(formData.plan.value),
+    {
+      enabled: false,
+      onSuccess: (data) => {
+        // history.push(data.redirect_url)
+        window.location.replace(data.redirect_url);
+        if (!data) {
+          toast.error(t("Error occurred while processing your request", { ns: "notification" }));
+        }
+      },
+      onError: () => toast.error(t("Error occurred while processing your request", { ns: "notification" })),
+    }
+  );
 
   const payment_methods = [
-    { value: 1, label: `Wire Transfer` },
-    { value: 2, label: `Stripe` },
+    { value: 1, label: t("wire_transfer") },
+    { value: 2, label: t("stripe") },
   ];
-
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -55,39 +59,70 @@ const OrderPage = ({ history }) => {
     }
   };
 
+  function translatePlan(plan) {
+    console.log("Plan to change")
+    if (plan === "Tajr Basic Plan" ||plan ==="تاجر الخطة الأساسية") {
+      console.log("Plan transform BASIC", plan);
+      return t("basic_plan_title", { ns: "pricing" });
+    } else if (plan === "Tajr Pro Plan"|| plan==="خطة التاجر المهنية") {
+      console.log("Plan transform PRO", plan);
+      return t("pro_plan_title", { ns: "pricing" });
+    } else if (plan === "Tajr Enterprise Plan"||plan==="خطة مؤسسة التاجر") {
+      return t("basic_enterprise_title", { ns: "pricing" });
+    } else return plan;
+  }
+  function translatePlanArray(planArr) {
+    console.log("Plan Arr", planArr);
+
+    planArr.records.map((each) => {
+      if (each.name === "Tajr Basic Plan" ||each.name ==="تاجر الخطة الأساسية") {
+        console.log("Plan transform BASIC", each.name);
+        each.name = t("basic_plan_title", { ns: "pricing" });
+      }
+      if (each.name  === "Tajr Pro Plan"|| each.name==="خطة التاجر المهنية") {
+        console.log("Plan transform PRO", each.name);
+        each.name = t("pro_plan_title", { ns: "pricing" });
+      }
+      if (each.name === "Tajr Enterprise Plan"||each.name==="خطة مؤسسة التاجر") {
+        each.name = t("basic_enterprise_title", { ns: "pricing" });
+      }
+    });
+    return planArr;
+  }
 
   return (
     <React.Fragment>
       <Head title="Order" />
-      <BlockHead>
+      <BlockHead style={{ display: "flex", flexDirection: i18n.language === "ar" ? "row-reverse" : "row" }}>
         <BlockHeadContent>
-          <BlockTitle tag="h3">Ready to get started</BlockTitle>
+          <BlockTitle tag="h3" style={{ textAlign: i18n.language === "ar" ? "right" : "left" }}>{t("order_title")}</BlockTitle>
         </BlockHeadContent>
       </BlockHead>
 
       <Block>
         <form onSubmit={submitHandler}>
-          <Row className="g-gs">
+          <Row className="g-gs" style={{ display: "flex", flexDirection: i18n.language === "ar" ? "row-reverse" : "row" }} >
             <Col lg="7">
               <Card
                 className="card-bordered product-card px-2 py-3 "
                 style={{ overflow: "visible", background: "#fcfcfc" }}
               >
-                <h5 className="py-2 title">Product info</h5>
-                <label className="form-label" htmlFor="plan">
-                  Your plan:
+                <h5 className="py-2 title" style={{ textAlign: i18n.language === "ar" ? 'right' : 'left' }}>{t("product_info")}</h5>
+                <label className="form-label" htmlFor="plan" style={{ textAlign: i18n.language === "ar" ? 'right' : 'left' }}>
+                  {t("your_plan")}:
                 </label>
 
                 <RSelect
-                  options={PlansReFormattor(!isLoading ? data : [])}
+                  style={{ direction: i18n.language === "ar" ? 'rtl' : 'ltr' }}
+                  options={PlansReFormattor(!isLoading ? translatePlanArray(data) : [])}
                   defaultValue={{
                     value: state?.planID ? state.planID : -1,
-                    label: state?.planName ? state.planName : "Select a plan",
+                    label: state?.planName ? translatePlan(state.planName) : t("select_plan", { ns: "order" }),
                   }}
-                  onChange={(e) => 
+                  onChange={(e) =>
                     setFormData({
                       ...formData,
-                      plan: { value: e.value, label: e.label },
+                      plan: { value: e.value, label: translatePlan(e.label) },
                       price: e.price,
                     })
                   }
@@ -114,14 +149,14 @@ const OrderPage = ({ history }) => {
                   </div>
                 </FormGroup> */}
                 <li className="divider"></li>
-                <h5 className="py-2 title">Payment info</h5>
-                <label className="form-label" htmlFor="payment">
-                  Select payment method:
+                <h5 className="py-2 title" style={{ textAlign: i18n.language === "ar" ? 'right' : 'left' }}>{t("payment_info")}</h5>
+                <label className="form-label" htmlFor="payment" style={{ textAlign: i18n.language === "ar" ? 'right' : 'left' }}>
+                  {t("select_payment_method")}:
                 </label>
 
                 <RSelect
                   options={payment_methods}
-                  defaultValue={{ value: -1, label: "Select payment method" }}
+                  defaultValue={{ value: -1, label: t("select_payment_method", { ns: "order" }) }}
                   onChange={(e) => setFormData({ ...formData, payment_method: { value: e.value, label: e.label } })}
                 />
               </Card>
@@ -136,24 +171,28 @@ const OrderPage = ({ history }) => {
                   background: "#fcfcfc",
                 }}
               >
-                <h5 className=" title">Order Total</h5>
+                <h5 className=" title" style={{ textAlign: i18n.language === "ar" ? 'right' : 'left' }}>{t("order_total")}</h5>
                 <li className="divider" style={{ marginTop: "10px" }}></li>
-                <div style={{ display: "flex", justifyContent: "space-between" }} className="px-2">
-                  <label className=" form-label">Sub total:</label>
+                <div style={{ display: "flex", justifyContent: "space-between",flexDirection:i18n.language==="ar"?"row-reverse":"row" }} className="px-2">
+                  <label className=" form-label">{t("sub_total")}:</label>
                   <label className=" form-label">${formData.price}</label>
                 </div>
-                <div style={{ display: "flex", justifyContent: "space-between" }} className="px-2">
-                  <label className=" form-label">Taxes:</label>
+                <div style={{ display: "flex", justifyContent: "space-between",flexDirection:i18n.language==="ar"?"row-reverse":"row" }} className="px-2">
+                  <label className=" form-label">{t("taxes")}:</label>
                   <label className=" form-label">$0</label>
                 </div>
                 <li className="divider"></li>
-                <div style={{ display: "flex", justifyContent: "space-between" }} className="px-2">
-                  <label className=" form-label">Total:</label>
+                <div style={{ display: "flex", justifyContent: "space-between",flexDirection:i18n.language==="ar"?"row-reverse":"row" }} className="px-2">
+                  <label className=" form-label">{t("total")}:</label>
                   <label className=" form-label">${formData.price}</label>
                 </div>
 
                 <Button size="lg" className="btn-block mt-3" color="primary" type="submit">
-                  {isFetching ? <Spinner size={"sm"} color="white" /> : <span>Proceed payment</span>}
+                  {isFetching ? (
+                    <Spinner size={"sm"} color="white" />
+                  ) : (
+                    <span>{t("proceed_payment_btn", { ns: "common" })}</span>
+                  )}
                 </Button>
               </Card>
             </Col>

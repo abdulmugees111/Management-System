@@ -1,4 +1,4 @@
-import React, {Fragment, useEffect, useState, useLayoutEffect } from "react";
+import React, { Fragment, useEffect, useState, useLayoutEffect } from "react";
 import Sidebar from "../sidebar/Sidebar";
 import Head from "../head/Head";
 import Header from "../header/Header";
@@ -6,27 +6,25 @@ import Footer from "../footer/Footer";
 import classNames from "classnames";
 import menu from "../dashboard-menu/MenuData";
 
-import { withRouter, Redirect } from 'react-router-dom'
-import { connect } from 'react-redux'
+import { withRouter, Redirect } from "react-router-dom";
+import { connect } from "react-redux";
+import { useTranslation } from "react-i18next";
+import actions from "../../redux/settings/actions";
 
-const mapStateToProps = ({ settings }) => ({
+const mapStateToProps = ({ settings,dispatch }) => ({
   logo: settings.logo,
   isGrayTopbar: settings.isGrayTopbar,
   isCardShadow: settings.isCardShadow,
   isSquaredBorders: settings.isSquaredBorders,
   isBorderless: settings.isBorderless,
-  authPagesColor: settings.authPagesColor
+  authPagesColor: settings.authPagesColor,
+  dispatch
 });
 
-const MainLayout = ({
-                      children,
-                      logo,
-                      isGrayTopbar,
-                      isCardShadow,
-                      isSquaredBorders,
-                      isBorderless,
-                      authPagesColor
-                    }) => {
+const MainLayout = ({ children, logo, isGrayTopbar, isCardShadow, isSquaredBorders, isBorderless, authPagesColor ,dispatch}) => {
+
+  const {i18n}=useTranslation()
+  console.log("lang ",i18n.language)
   //Sidebar
   const [mobileView, setMobileView] = useState();
   const [visibility, setVisibility] = useState(false);
@@ -39,6 +37,13 @@ const MainLayout = ({
   useEffect(() => {
     viewChange();
   }, []);
+
+  useEffect(()=>{
+    dispatch({
+      type: actions.CHANGE_LOCALE,
+      payload: i18n.language,
+    })
+  },[i18n.language])
 
   // Stops scrolling on overlay
   useLayoutEffect(() => {
@@ -87,7 +92,6 @@ const MainLayout = ({
     "nk-sidebar-active": visibility && mobileView,
   });
 
-
   return (
     <Fragment>
       <Head title="Loading" />
@@ -102,7 +106,7 @@ const MainLayout = ({
             />
             <div className="nk-content">
               <div className="container wide-xl">
-                <div className="nk-content-inner">
+                <div className="nk-content-inner" style={{flexDirection:i18n.language==="ar"?"row-reverse":"row"}}>
                   <Sidebar
                     sidebarToggle={toggleSidebar}
                     visibility={visibility}
@@ -110,7 +114,7 @@ const MainLayout = ({
                     fixed
                     theme="light"
                     className={sidebarClass}
-                    layout='main'
+                    layout="main"
                   />
                   {visibility && mobileView && <div className="toggle-overlay" onClick={(e) => toggleSidebar(e)} />}
                   <div className="nk-content-body">

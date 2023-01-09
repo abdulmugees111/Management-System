@@ -2,8 +2,21 @@ import React from "react";
 import Icon from "../../../icon/Icon";
 import { notificationData } from "./NotificationData";
 import { CardTitle } from "reactstrap";
+import { useTranslation } from "react-i18next";
 
 const Notifications = () => {
+  const {t,i18n}=useTranslation(['notifications'])
+
+  const translateNotifications=(notification)=>{
+    console.log("Notificqation to is",notification)
+    if(notification==="You have requested to Widthdraw"){
+      return t('withdrawl_request_nt')
+    }
+    else if(notification==="Your Deposit Order is placed"){
+      return t('order_place_nt')
+    }
+    else return notification
+  }
   return (
     <React.Fragment>
       <div className="card-inner border-bottom">
@@ -36,7 +49,7 @@ const Notifications = () => {
                     {item.date} <Icon name="alarm-alt"></Icon>
                   </div>
                   <div className="timeline-data">
-                    <h6 className="timeline-title">{item.text}</h6>
+                    <h6 className="timeline-title">{translateNotifications(item.text)}</h6>
                     <div className="timeline-des">
                       <p>{item.subtitle}</p>
                       <span className="time">{item.time}</span>

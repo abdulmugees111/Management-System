@@ -6,14 +6,16 @@ import { connect } from 'react-redux'
 import { ErrorBoundary } from 'react-error-boundary'
 import Layout from './layout/Index'
 import { Button} from "./components/Component";
+import { useTranslation } from 'react-i18next'
 
 function ErrorFallback({ error, resetErrorBoundary }) {
+  const {t}=useTranslation(['notification'])
   return (
     <div role="alert">
-      <p>Something went wrong:</p>
+      <p>{t('something_wrong')}:</p>
       <pre>{error.message}</pre>
       <Button onClick={resetErrorBoundary} type="button">
-        Try again
+      {t('try_again')}
       </Button>
     </div>
   )
@@ -191,6 +193,8 @@ const mapStateToProps = ({ settings }) => ({
 })
 
 const Router = ({ history, routerAnimation }) => {
+  // const { t, i18n } = useTranslation();
+  // document.body.dir = i18n.dir();
   return (
     <ConnectedRouter history={history}>
       <Layout>

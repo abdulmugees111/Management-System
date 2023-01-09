@@ -23,8 +23,10 @@ import { useQuery } from "@tanstack/react-query";
 import { get_countries, get_states, get_user_data, update_user_data } from "../../../services/user/index";
 import { reFormat } from "../../../utils/formattors";
 import { toast } from "react-toastify";
+import { useTranslation } from "react-i18next";
 
 const UserProfile = () => {
+  const {t,i18n}=useTranslation(['common','notification'])
   const [formData, setFormData] = useState({
     name: "",
     phone: "",
@@ -48,7 +50,7 @@ const UserProfile = () => {
         });
       }
     },
-    onError: () => toast.error("Error occurred while processing your request"),
+    onError: () => toast.error(t('Error occurred while processing your request',{ns:'notification'})),
   });
 
   const { isFetching: updateDataLoading, refetch: updateUser } = useQuery(
@@ -60,12 +62,12 @@ const UserProfile = () => {
         if (data) {
           setModal(false);
           getUserRefetch();
-          toast.success("Profile successfully updated");
+          toast.success(t('profile_updated_nt',{ns:'notification'}));
         } else {
-          toast.error("Error processing your request");
+          toast.error(t('Error occurred while processing your request',{ns:'notification'}));
         }
       },
-      onError: () => toast.error("Error processing your request"),
+      onError: () => toast.error(t('Error occurred while processing your request',{ns:'notification'})),
     }
   );
 
@@ -94,81 +96,81 @@ const UserProfile = () => {
   return (
     <React.Fragment>
       <Head title="User List - Profile"></Head>
-      <BlockHead size="lg">
-        <BlockBetween>
-          <BlockHeadContent>
-            <BlockTitle tag="h4">Personal Information</BlockTitle>
-            <BlockDes>
-              <p>Basic info, like your name and address, that you use on Tajr Platform.</p>
+      <BlockHead size="lg" style={{display:"flex",flexDirection: i18n.language === "ar" ? "row-reverse" : "row"}} >
+        <BlockBetween >
+          <BlockHeadContent >
+            <BlockTitle tag="h4" style={{textAlign: i18n.language === "ar" ? "right" : "left"}}>{t('personal_information')} </BlockTitle>
+            <BlockDes >
+              <p>{t('personal_information_desc')}</p>
             </BlockDes>
           </BlockHeadContent>
         </BlockBetween>
       </BlockHead>
-
+      {/* style={{flexDirection: i18n.language === "ar" ? "row-reverse" : "row",marginLeft: i18n.language === "ar" ? "auto" : "0px",justifyContent: i18n.language === "ar" ? "flex-end" : "flex-start"}} */}
       <Block>
         <div className="nk-data data-list data-list-s2">
-          <div className="data-head">
-            <h6 className="overline-title">Basics</h6>
+          <div className="data-head" >
+            <h6 className="overline-title" style={{marginLeft: i18n.language === "ar" ? "auto" : "0px",width:"fit-content"}}>{t('basics')}</h6>
           </div>
-          <div className="data-item" onClick={() => setModal(true)}>
-            <div className="data-col">
-              <span className="data-label">Full Name</span>
+          <div className="data-item" style={{flexDirection: i18n.language === "ar" ? "row-reverse":"row"}} onClick={() => setModal(true)}>
+            <div className="data-col" style={{flexDirection: i18n.language === "ar" ? "row-reverse":"row",justifyContent:"space-between"}}>
+              <span className="data-label" style={{marginLeft: i18n.language === "ar" ? "auto":"0px",width:"fit-content"}}>{t('full_name')}</span>
               <span className="data-value">{data.name}</span>
             </div>
-            <div className="data-col data-col-end">
-              <span className="data-more">
-                <Icon name="forward-ios"></Icon>
+            <div className="data-col data-col-end" >
+              <span className="data-more"style={{marginRight: i18n.language === "ar" ? "auto":"0px"}}>
+                <Icon name={i18n.language==="ar"?"back-ios":"forward-ios"}></Icon>
               </span>
             </div>
           </div>
-          <div className="data-item">
-            <div className="data-col">
-              <span className="data-label">Email</span>
+          <div className="data-item" style={{flexDirection: i18n.language === "ar" ? "row-reverse":"row"}}>
+            <div className="data-col" style={{flexDirection: i18n.language === "ar" ? "row-reverse":"row",justifyContent:"space-between"}}>
+              <span className="data-label" style={{marginLeft: i18n.language === "ar" ? "auto":"0px",width:"fit-content"}}>{t('email')}</span>
               <span className="data-value">{data.email}</span>
             </div>
             <div className="data-col data-col-end">
-              <span className="data-more disable">
+              <span className="data-more disable" style={{marginRight: i18n.language === "ar" ? "auto":"0px"}}>
                 <Icon name="lock-alt"></Icon>
               </span>
             </div>
           </div>
-          <div className="data-item" onClick={() => setModal(true)}>
-            <div className="data-col">
-              <span className="data-label">Phone Number</span>
+          <div className="data-item" style={{flexDirection: i18n.language === "ar" ? "row-reverse":"row"}} onClick={() => setModal(true)}>
+            <div className="data-col" style={{flexDirection: i18n.language === "ar" ? "row-reverse":"row",justifyContent:"space-between"}}>
+              <span className="data-label" style={{marginLeft: i18n.language === "ar" ? "auto":"0px",width:"fit-content"}}>{t('pno')}</span>
               <span className="data-value text-soft">{data.phone}</span>
             </div>
             <div className="data-col data-col-end">
-              <span className="data-more">
-                <Icon name="forward-ios"></Icon>
+              <span className="data-more" style={{marginRight: i18n.language === "ar" ? "auto":"0px"}}>
+                <Icon name={i18n.language==="ar"?"back-ios":"forward-ios"}></Icon>
               </span>
             </div>
           </div>
-          <div className="data-item" onClick={() => setModal(true)}>
+          <div className="data-item" style={{flexDirection: i18n.language === "ar" ? "row-reverse":"row"}} onClick={() => setModal(true)}>
             <div className="data-col">
-              <span className="data-label">Company Name</span>
+              <span className="data-label" style={{marginLeft: i18n.language === "ar" ? "auto":"0px",width:"fit-content"}}>{t('company_name')}</span>
               <span className="data-value text-soft">{data.company_name}</span>
             </div>
             <div className="data-col data-col-end">
-              <span className="data-more">
-                <Icon name="forward-ios"></Icon>
+              <span className="data-more" style={{marginRight: i18n.language === "ar" ? "auto":"0px"}}>
+                <Icon name={i18n.language==="ar"?"back-ios":"forward-ios"}></Icon>
               </span>
             </div>
           </div>
-          <div className="data-item" onClick={() => setModal(true)}>
+          <div className="data-item" style={{flexDirection: i18n.language === "ar" ? "row-reverse":"row"}} onClick={() => setModal(true)}>
             <div className="data-col">
-              <span className="data-label">VAT</span>
+              <span className="data-label" style={{marginLeft: i18n.language === "ar" ? "auto":"0px",width:"fit-content"}}>{t('vat')}</span>
               <span className="data-value text-soft">{data.vat}</span>
             </div>
             <div className="data-col data-col-end">
-              <span className="data-more">
-                <Icon name="forward-ios"></Icon>
+              <span className="data-more" style={{marginRight: i18n.language === "ar" ? "auto":"0px"}}>
+                <Icon name={i18n.language==="ar"?"back-ios":"forward-ios"}></Icon>
               </span>
             </div>
           </div>
 
-          <div className="data-item" onClick={() => setModal(true)}>
+          <div className="data-item" style={{flexDirection: i18n.language === "ar" ? "row-reverse":"row"}} onClick={() => setModal(true)}>
             <div className="data-col">
-              <span className="data-label">Address</span>
+              <span className="data-label" style={{marginLeft: i18n.language === "ar" ? "auto":"0px",width:"fit-content"}}>{t('address')}</span>
               <span className="data-value">
                 {data.street},
                 <br />
@@ -176,37 +178,38 @@ const UserProfile = () => {
               </span>
             </div>
             <div className="data-col data-col-end">
-              <span className="data-more">
-                <Icon name="forward-ios"></Icon>
+              <span className="data-more" style={{marginRight: i18n.language === "ar" ? "auto":"0px"}}>
+                <Icon name={i18n.language==="ar"?"back-ios":"forward-ios"}></Icon>
               </span>
             </div>
           </div>
         </div>
         <div className="nk-data data-list data-list-s2">
           <div className="data-head">
-            <h6 className="overline-title">Preferences</h6>
+            <h6 className="overline-title" style={{marginLeft: i18n.language === "ar" ? "auto" : "0px",width:"fit-content"}}>{t('preferences')} </h6>
           </div>
-          <div className="data-item">
-            <div className="data-col">
-              <span className="data-label">Language</span>
-              <span className="data-value">English (United State)</span>
+          <div className="data-item" style={{flexDirection: i18n.language === "ar" ? "row-reverse":"row"}}>
+            <div className="data-col" style={{flexDirection: i18n.language === "ar" ? "row-reverse":"row",justifyContent:"space-between"}}>
+              <span className="data-label" style={{marginLeft: i18n.language === "ar" ? "auto":"0px",width:"fit-content"}}>{t('language')}</span>
+              <span className="data-value" style={{margin:"0px 10px"}}>English (United State)</span>
             </div>
-            <div className="data-col data-col-end">
+            <div className="data-col data-col-end" >
               <a
                 href="#language"
                 onClick={(ev) => {
                   ev.preventDefault();
                 }}
                 className="link link-primary"
+                style={{marginRight: i18n.language === "ar" ? "auto":"0px"}}
               >
-                Change Language
+                {t('change_lang_btn')}
               </a>
             </div>
           </div>
-          <div className="data-item">
-            <div className="data-col">
-              <span className="data-label">Date Format</span>
-              <span className="data-value">MM/DD/YYYY</span>
+          <div className="data-item" style={{flexDirection: i18n.language === "ar" ? "row-reverse":"row"}}>
+            <div className="data-col" style={{flexDirection: i18n.language === "ar" ? "row-reverse":"row",justifyContent:"space-between"}}>
+              <span className="data-label" style={{marginLeft: i18n.language === "ar" ? "auto":"0px",width:"fit-content"}}>{t('date_format')}</span>
+              <span className="data-value" style={{margin:"0px 10px"}}>MM/DD/YYYY</span>
             </div>
             <div className="data-col data-col-end">
               <a
@@ -215,8 +218,9 @@ const UserProfile = () => {
                   ev.preventDefault();
                 }}
                 className="link link-primary"
+                style={{marginRight: i18n.language === "ar" ? "auto":"0px"}}
               >
-                Change
+                {t('change_btn')}
               </a>
             </div>
           </div>
@@ -232,20 +236,21 @@ const UserProfile = () => {
               setModal(false);
             }}
             className="close"
+            style={{float: i18n.language === "ar" ? "left":"right"}}
           >
             <Icon name="cross-sm"></Icon>
           </a>
           <div className="p-2">
-            <h5 className="title">Update Profile</h5>
+            <h5 className="title" style={{textAlign: i18n.language === "ar" ? "right":"left"}}>{t('update_profile')}</h5>
             <br />
 
             <div className="tab-content">
-              <div className={`tab-pane active`} id="personal">
-                <Row className="gy-4">
+              <div className={`tab-pane active`} id="personal" style={{flexDirection: i18n.language === "ar" ? "row-reverse":"row"}}>
+                <Row className="gy-4" style={{direction: i18n.language === "ar" ? "rtl":"ltr"}}>
                   <Col md="6">
                     <FormGroup>
-                      <label className="form-label" htmlFor="full-name">
-                        Full Name
+                      <label  style={{textAlign: i18n.language === "ar" ? "right":"left",width:"100%"}} className="form-label" htmlFor="full-name">
+                      {t('full_name')}
                       </label>
                       <input
                         type="text"
@@ -254,14 +259,14 @@ const UserProfile = () => {
                         name="name"
                         onChange={(e) => onInputChange(e)}
                         defaultValue={formData.name}
-                        placeholder="Enter Full name"
+                        placeholder={t('full_name')}
                       />
                     </FormGroup>
                   </Col>
                   <Col md="6">
                     <FormGroup>
-                      <label className="form-label" htmlFor="company-name">
-                        Company Name
+                      <label style={{textAlign: i18n.language === "ar" ? "right":"left",width:"100%"}}  className="form-label" htmlFor="company-name">
+                      {t('company_name')}
                       </label>
                       <input
                         required
@@ -271,14 +276,14 @@ const UserProfile = () => {
                         name="company_name"
                         onChange={(e) => onInputChange(e)}
                         defaultValue={formData.company_name}
-                        placeholder="Enter Company name"
+                        placeholder={t('company_name')}
                       />
                     </FormGroup>
                   </Col>
                   <Col md="6">
                     <FormGroup>
-                      <label className="form-label" htmlFor="phone-no">
-                        Phone Number
+                      <label style={{textAlign: i18n.language === "ar" ? "right":"left",width:"100%"}}  className="form-label" htmlFor="phone-no">
+                      {t('pno')}
                       </label>
                       <input
                         required
@@ -288,13 +293,13 @@ const UserProfile = () => {
                         name="phone"
                         onChange={(e) => onInputChange(e)}
                         defaultValue={formData.phone}
-                        placeholder="Phone Number"
+                        placeholder={t('pno')}
                       />
                     </FormGroup>
                   </Col>
                   <Col md="6">
                     <FormGroup>
-                      <label className="form-label" htmlFor="vat">
+                      <label style={{textAlign: i18n.language === "ar" ? "right":"left",width:"100%"}}  className="form-label" htmlFor="vat">
                         VAT
                       </label>
                       <input
@@ -312,8 +317,8 @@ const UserProfile = () => {
 
                   <Col md="6">
                     <FormGroup>
-                      <label className="form-label" htmlFor="street">
-                        Street
+                      <label style={{textAlign: i18n.language === "ar" ? "right":"left",width:"100%"}}  className="form-label" htmlFor="street">
+                      {t('street')}
                       </label>
                       <input
                         type="text"
@@ -322,13 +327,14 @@ const UserProfile = () => {
                         onChange={(e) => onInputChange(e)}
                         defaultValue={formData.street}
                         className="form-control"
+                        placeholder={t('street')}
                       />
                     </FormGroup>
                   </Col>
                   <Col md="6">
                     <FormGroup>
-                      <label className="form-label" htmlFor="email">
-                        Email
+                      <label style={{textAlign: i18n.language === "ar" ? "right":"left",width:"100%"}}  className="form-label" htmlFor="email">
+                      {t('email')}
                       </label>
                       <input
                         type="email"
@@ -337,18 +343,19 @@ const UserProfile = () => {
                         onChange={(e) => onInputChange(e)}
                         defaultValue={formData.email}
                         className="form-control"
+                        placeholder={t('email')}
                       />
                     </FormGroup>
                   </Col>
 
                   <Col md="6">
                     <FormGroup>
-                      <label className="form-label" htmlFor="address-county">
-                        Country
+                      <label style={{textAlign: i18n.language === "ar" ? "right":"left",width:"100%"}}  className="form-label" htmlFor="address-county">
+                      {t('country')}
                       </label>
                       <RSelect
                         options={countriesList ? reFormat(countriesList) : []}
-                        placeholder="Select a country"
+                        placeholder={t('country')}
                         defaultValue={[
                           {
                             value: formData.country_id[0],
@@ -362,12 +369,12 @@ const UserProfile = () => {
 
                   <Col md="6">
                     <FormGroup>
-                      <label className="form-label" htmlFor="address-st">
-                        State
+                      <label style={{textAlign: i18n.language === "ar" ? "right":"left",width:"100%"}}  className="form-label" htmlFor="address-st">
+                      {t('state')}
                       </label>
                       <RSelect
                         options={statesList ? reFormat(statesList) : []}
-                        placeholder="Select a state"
+                        placeholder={t('state')}
                         defaultValue={[
                           {
                             value: formData.state_id[0],
@@ -389,7 +396,7 @@ const UserProfile = () => {
                             submitForm();
                           }}
                         >
-                          {updateDataLoading ? <Spinner size="sm" color="light" /> : "Update Profile"}
+                          {updateDataLoading ? <Spinner size="sm" color="light" /> : t('update_profile')}
                         </Button>
                       </li>
                       <li>
@@ -401,7 +408,7 @@ const UserProfile = () => {
                           }}
                           className="link link-light"
                         >
-                          Cancel
+                         {t('cancel_btn')}
                         </a>
                       </li>
                     </ul>

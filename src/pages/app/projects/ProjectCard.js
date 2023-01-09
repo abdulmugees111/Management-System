@@ -17,20 +17,22 @@ import {
   Card,
 } from "reactstrap";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const ProjectCardPage = ({projects, history}) => {
+  const { t } = useTranslation(['projects','common']);
   const [sm, updateSm] = useState(false);
   const [data, setData] = useState(projects);
 
   return (
     <React.Fragment>
-      <Head title="My Subscriptions"></Head>
+      <Head title={t("subscriptions_title")}></Head>
       <Content>
         <BlockHead size="sm">
           <BlockBetween>
             <BlockHeadContent>
-              <BlockTitle page> My Subscriptions </BlockTitle>
-              <BlockDes className="text-soft">You have total {data && data.length} subscriptions </BlockDes>
+              <BlockTitle page> {t("subscriptions_title")} </BlockTitle>
+              <BlockDes className="text-soft">{t("subscriptions_desc",{subs:data?data.length:0})}</BlockDes>
             </BlockHeadContent>
             <Col md='6'>
             </Col>
@@ -49,7 +51,7 @@ const ProjectCardPage = ({projects, history}) => {
 
                       <Button color="primary">
                         <Icon name="plus"></Icon>
-                        <span>Add Subscription</span>
+                        <span>{t('add_subscription_btn',{ns:"common"})}</span>
                       </Button>
                       </Link>
                     </li>

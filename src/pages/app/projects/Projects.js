@@ -9,9 +9,12 @@ import Content from "../../../layout/content/Content";
 import actions from "../../../redux/projects/actions";
 import ProjectCardPage from "./ProjectCard";
 import { Spinner } from "reactstrap";
+import { useTranslation } from "react-i18next";
 
 
 const Projects = ({ projects, dispatch }) => {
+
+  const {i18n}=useTranslation()
 
   useEffect(() => {
     dispatch({
@@ -20,7 +23,7 @@ const Projects = ({ projects, dispatch }) => {
   }, []);
 
   //Sidebar
-  const [list, setList] = useState(projects.data.results);
+  const [list, setList] = useState(projects?.data?.results);
   const [mobileView, setMobileView] = useState();
   const [visibility, setVisibility] = useState(false);
   const [themeState] = useState({
@@ -66,7 +69,7 @@ const Projects = ({ projects, dispatch }) => {
       <Head title="Projects" />
       <div className="nk-app-root">
         <div className="nk-main">
-          <div className="nk-wrap">
+          <div className="nk-wrap" style={{direction: i18n.language === "ar" ? "rtl" : "ltr"}}>
             <Header
               setVisibility={setVisibility}
               fixed={true}
@@ -78,8 +81,8 @@ const Projects = ({ projects, dispatch }) => {
                   projects.isLoading && <Spinner color="primary" />
                 }
                 {
-                  projects.data.count !== -1 &&
-                  <ProjectCardPage projects={projects.data.results} />
+                  projects?.data?.count !== -1 &&
+                  <ProjectCardPage projects={projects?.data?.results} />
                 }
               </Block>
             </Content>

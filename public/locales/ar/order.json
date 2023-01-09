@@ -1,0 +1,14 @@
+{
+  "order_title": "على استعداد للبدء",
+  "product_info": "معلومات المنتج",
+  "your_plan": "خطتك",
+  "payment_info": "معلومات الدفع",
+  "select_plan":"حدد خطة",
+  "select_payment_method": "اختار طريقة الدفع",
+  "wire_transfer": "تحويلة كهربية بالسلك",
+  "stripe:": "Stripe",
+  "order_total": "الطلب الكلي",
+  "sub_total": "المجموع الفرعي",
+  "taxes": "الضرائب",
+  "total": "مجموع"
+}

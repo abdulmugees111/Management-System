@@ -22,8 +22,28 @@ import { Link, useHistory } from "react-router-dom";
 import { Card, Form, FormGroup, Spinner } from "reactstrap";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
+import { useTranslation } from "react-i18next";
+import { get_user_data } from "../../../services/user";
 
 const CreateTicket = () => {
+  const {
+    isLoading,
+    error,
+    data,
+    refetch: getUserRefetch,
+  } = useQuery(["get-user-data"], get_user_data, {
+    onSuccess: (data) => {
+      if (data) {
+        setFormData({
+          ...(delete data.id && data),
+        });
+      }
+    },
+    onError: () => toast.error(t('Error occurred while processing your request',{ns:'notification'})),
+  });
+  console.log("data",data)
+
+  const {t,i18n}=useTranslation(['help','common','notification'])
   const history = useHistory();
 
   const useCreateTicket = () => {
@@ -39,14 +59,14 @@ const CreateTicket = () => {
         if (context.successCb) {
           context.successCb(result);
         }
-        toast.success("Ticket Created Successfully.");
+        toast.success(t('ticket_created_nt',{ns:'notification'}));
         history.push('/help/tickets')
       },
       onError: (error, variables, context) => {
         if (context.errorCb) {
           context.errorCb(error);
         }
-        toast.error("There is an error while creating the ticket.");
+        toast.error(t('ticket_created_error_nt',{ns:'notification'}));
 
       },
     });
@@ -73,12 +93,12 @@ const CreateTicket = () => {
     <React.Fragment>
       <Head title="Submit Ticket"></Head>
       <Content>
-        <BlockHead size="sm">
+        <BlockHead size="sm" style={{display:"flex",flexDirection: i18n.language === "ar" ? "row-reverse" : "row"}}>
           <BlockBetween>
             <BlockHeadContent>
-              <BlockTitle page>Create Support Ticket</BlockTitle>
+              <BlockTitle page style={{textAlign: i18n.language === "ar" ? "right" : "left"}}>{t('create_ticket_title',{ns:'help'})}</BlockTitle>
               <BlockDes className="text-soft">
-                <p>We are here to help you.</p>
+                <p style={{textAlign: i18n.language === "ar" ? "right" : "left"}}>{t('create_ticket_desc',{ns:'help'})}</p>
               </BlockDes>
             </BlockHeadContent>
 
@@ -92,13 +112,14 @@ const CreateTicket = () => {
                 <Form className="row gy-4" id="submit-ticket" onSubmit={handleSubmit(onFormSubmit)}>
                   <Col md="6">
                     <FormGroup>
-                      <label className="form-label">Name</label>
+                      <label className="form-label" style={{textAlign: i18n.language === "ar" ? "right" : "left",width:"100%"}}>{t('name',{ns:'common'})}</label>
                       <input
+                      style={{textAlign: i18n.language === "ar" ? "right" : "left",width:"100%"}}
                         className="form-control"
-                        ref={register({ required: "This field is required" })}
+                        ref={register({ required: t('field_required_error',{ns:"common"}) })}
                         type="text"
                         name="name"
-                        placeholder="Jane Doe"
+                        placeholder={data?.name?data?.name:t('name_ph',{ns:'common'})}
                         // required={true}
                         defaultValue={formData.name}
 
@@ -108,13 +129,14 @@ const CreateTicket = () => {
                   </Col>
                   <Col md="6">
                     <FormGroup>
-                      <label className="form-label"> Email </label>
+                      <label className="form-label" style={{textAlign: i18n.language === "ar" ? "right" : "left",width:"100%"}}> {t('email',{ns:'common'})} </label>
                       <input
+                      style={{textAlign: i18n.language === "ar" ? "right" : "left",width:"100%"}}
                         className="form-control"
-                        ref={register({ required: "This field is required" })}
+                        ref={register({ required: t('field_required_error',{ns:"common"}) })}
                         type="email"
                         name="email"
-                        placeholder="janedoe@gmail.com"
+                        placeholder={data?.email?data?.email:"janedoe@gmail.com"}
                         required={true}
                         defaultValue={formData.email}
                       />
@@ -123,11 +145,12 @@ const CreateTicket = () => {
                   </Col>
                   <Col md="6">
                     <FormGroup>
-                      <label className="form-label">Subject</label>
+                      <label className="form-label" style={{textAlign: i18n.language === "ar" ? "right" : "left",width:"100%"}}>{t('subject',{ns:'common'})}</label>
                       <input
+                      style={{textAlign: i18n.language === "ar" ? "right" : "left",width:"100%"}}
                         className="form-control"
-                        placeholder="I am having issue while connecting website"
-                        ref={register({ required: "This field is required" })}
+                        placeholder={t('subject_ph',{ns:'common'})}
+                        ref={register({ required: t('field_required_error',{ns:"common"}) })}
                         type="text"
                         name="subject"
                         required={true}
@@ -137,29 +160,30 @@ const CreateTicket = () => {
                   </Col>
                   <Col md="12">
                     <FormGroup>
-                      <label className="form-label">Description</label>
+                      <label className="form-label" style={{textAlign: i18n.language === "ar" ? "right" : "left",width:"100%"}}>{t('description',{ns:'common'})}</label>
                       <textarea
+                      style={{textAlign: i18n.language === "ar" ? "right" : "left",width:"100%"}}
                         form="submit-ticket"
                         className="form-control"
-                        ref={register({ required: "This field is required" })}
+                        ref={register({ required: t('field_required_error',{ns:"common"}) })}
                         name="description"
-                        placeholder="Add Your Description Here..."
+                        placeholder={t('description_ph',{ns:'common'})}
                         required={true}
                       />
                       {errors.description && <span className="invalid">{errors.description.message}</span>}
                     </FormGroup>
                   </Col>
                   <Col size="12">
-                    <ul className="align-center flex-wrap flex-sm-nowrap gx-4 gy-2">
+                    <ul className="align-center flex-wrap flex-sm-nowrap gx-4 gy-2" style={{display:"flex",flexDirection: i18n.language === "ar" ? "row-reverse" : "row"}}>
                       <li>
                         <Button type="submit" color="primary" disabled={createTicket.isLoading} size="md">
-                          {createTicket.isLoading ? <Spinner size="sm" color="light" /> : "Submit Ticket"}</Button>
+                          {createTicket.isLoading ? <Spinner size="sm" color="light" /> : t('submit_ticket_btn',{ns:'common'})}</Button>
                       </li>
                       <li>
                         <Link to="/help/tickets"
                               className="link link-light"
                         >
-                          Cancel
+                          {t('cancel_btn',{ns:'common'})}
                         </Link>
                       </li>
                     </ul>

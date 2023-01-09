@@ -16,32 +16,46 @@ import {
   Row,
 } from "../../../components/Component";
 import { Card } from "reactstrap";
-import {pricingTableDataV2} from './data'
+import { pricingTableDataV2 } from "./data";
 import { Link } from "react-router-dom";
-import { useQuery } from '@tanstack/react-query';
-import {getPricings} from '../../../services/order/index'
+import { useQuery } from "@tanstack/react-query";
+import { getPricings } from "../../../services/order/index";
+import { useTranslation } from "react-i18next";
 
 const PricingTable = () => {
+  const { t ,i18n} = useTranslation(["pricing",'common']);
+  function translatePlan(plan) {
+    console.log("Plan to change")
+    if (plan === "Tajr Basic Plan") {
+      console.log("Plan transform BASIC", plan);
+      return t("basic_plan_title", { ns: "pricing" });
+    } else if (plan === "Tajr Pro Plan") {
+      console.log("Plan transform PRO", plan);
+      return t("pro_plan_title", { ns: "pricing" });
+    } else if (plan === "Tajr Enterprise Plan") {
+      return t("basic_enterprise_title", { ns: "pricing" });
+    } else return plan;
+  }
 
-  const {data, isLoading} = useQuery(['get-pricings'],getPricings)
-  
+  const { data, isLoading } = useQuery(["get-pricings"], getPricings);
+
   return (
     <React.Fragment>
       <Head title="Pricing"></Head>
       <Content>
-        <BlockHead size="sm">
+        <BlockHead size="sm" style={{display:"flex",flexDirection: i18n.language === "ar" ? "row-reverse" : "row"}}>
           <BlockBetween className="g-3">
             <BlockContent>
-              <BlockTitle>Tajr Pricing</BlockTitle>
+              <BlockTitle style={{textAlign: i18n.language === "ar" ? "right" : "left"}}>{t("pricing_title")}</BlockTitle>
               <BlockDes className="text-soft">
-                <p>Choose your pricing plan and start enjoying our service.</p>
+                <p>{t("pricing_desc")}</p>
               </BlockDes>
             </BlockContent>
           </BlockBetween>
         </BlockHead>
 
         <Block size="lg">
-          <Row className="g-gs">
+          <Row className="g-gs" style={{display:"flex",flexDirection: i18n.language === "ar" ? "row-reverse" : "row"}}>
             {data?.records?.map((item) => {
               return (
                 <Col md={6} xl="4" key={item.id}>
@@ -56,26 +70,32 @@ const PricingTable = () => {
                         <img src={item.id === 1 ? PlanS1 : item.id === 2 ? PlanS2 : PlanS3} alt="" />
                       </div>
                       <div className="pricing-title w-220px mx-auto">
-                        <h5 className="title">{item.name}</h5>
+                        <h5 className="title">
+                          {item.name === "Tajr Basic Plan"
+                            ? t("basic_plan_title")
+                            : item.name === "Tajr Pro Plan"
+                            ? t("pro_plan_title")
+                            : item.name === "Tajr Enterprise Plan"
+                            ? t("basic_enterprise_title")
+                            : null}
+                        </h5>
                         <span className="sub-text">{item.desc}</span>
                       </div>
                       <div className="pricing-amount">
                         <div className="amount">
-                          ${item.year_price} <span>/yr</span>
+                          ${item.year_price} <span>/{t('year',{ns:"common"})}</span>
                         </div>
-                        <span className="bill"> Billed Yearly</span>
+                        <span className="bill"> {t("billed_yearly")}</span>
                       </div>
                       <div className="pricing-action">
-
                         <Link
                           to={{
                             pathname: "/order",
-                            state: { planID: item.id, planName: item.name, planPrice: item.year_price },
+                            state: { planID: item.id, planName: translatePlan(item.name), planPrice: item.year_price },
                           }}
                         >
-                          <Button color="primary">Select Plan</Button>
+                          <Button color="primary">{t("select_pricing_btn",{ns:'common'})}</Button>
                         </Link>
-
                       </div>
                     </div>
                   </Card>

@@ -1,0 +1,8 @@
+{
+    "payment_history_title":"Payment History",
+    "payment_history_desc":"Here is payment history of your account.",
+    "name_table_field":"NAME",
+    "payment_ref_table_field":"PAYMENT REFERENCE",
+    "invoice_date_table_field":"INVOICE DATE",
+    "state_table_field":"STATE"
+}

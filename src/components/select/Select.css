@@ -1,0 +1,9 @@
+.rtl{
+    direction: rtl;
+}
+.ltr{
+    direction: ltr;
+}
+.form-control-select:after{
+    display: none;
+}

@@ -1,0 +1,20 @@
+{
+  "notification_heading": "إشعارات",
+  "withdrawl_request_nt": "لقد طلبت الانسحاب",
+  "order_place_nt": "تم وضع أمر الإيداع الخاص بك",
+  "mark_all_read": "اشر عليها بانها قرات",
+  "hours": "ساعات",
+  "ago": "منذ",
+  "view_all":"مشاهدة الكل",
+  "hours_ago":"منذ ساعات {{time}}",
+  "ticket_created_nt":"تم إنشاء التذكرة بنجاح",
+  "ticket_created_error_nt":"حدث خطأ أثناء إنشاء التذكرة.",
+  "Error occurred while processing your request":"حدث خطأ أثناء معالجة طلبك",
+  "Password Changed Successfully! Please Login again with new password":"تم تغيير الرقم السري بنجاح! الرجاء تسجيل الدخول مرة أخرى بكلمة مرور جديدة",
+  "profile_updated_nt":"تم تحديث الملف الشخصي بنجاح",
+  "registered_nt":"مسجل بنجاح!",
+  "logged_in_nt":"تم تسجيل الدخول بنجاح",
+  "login_error_nt":"خطأ في تسجيل الدخول! يرجى التحقق من أوراق الاعتماد",
+  "something_wrong":"هناك خطأ ما",
+  "try_again":"حاول مرة أخرى"
+}
