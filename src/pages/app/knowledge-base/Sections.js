@@ -77,7 +77,9 @@ const Sections = () => {
                           stroke-miterlimit="10" stroke-width="2"></line>
                       </svg>
                     </div>
-                    <div class="support-topic-context"><h5
+                    <div class="support-topic-context">
+                      <h5
+                      style={{ marginRight:i18n.language === "ar" ? "1rem" : "0rem" ,width:"fit-content",textAlign: i18n.language === "ar" ? "right" : "left" }}
                       class="support-topic-title title">{section.name}</h5>
                       <div dangerouslySetInnerHTML={{ __html: section.description }} class="support-topic-info" />
                       {/*<div class="support-topic-count">Here are 7 questions and answers.</div>*/}

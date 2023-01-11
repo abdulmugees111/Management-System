@@ -10,6 +10,7 @@ import { withRouter, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { useTranslation } from "react-i18next";
 import actions from "../../redux/settings/actions";
+import { useSelector } from "react-redux";
 
 const mapStateToProps = ({ settings,dispatch }) => ({
   logo: settings.logo,
@@ -22,7 +23,7 @@ const mapStateToProps = ({ settings,dispatch }) => ({
 });
 
 const MainLayout = ({ children, logo, isGrayTopbar, isCardShadow, isSquaredBorders, isBorderless, authPagesColor ,dispatch}) => {
-
+  const langFromApi=useSelector((state)=>state.user.lang)
   const {i18n}=useTranslation()
   console.log("lang ",i18n.language)
   //Sidebar
@@ -39,11 +40,12 @@ const MainLayout = ({ children, logo, isGrayTopbar, isCardShadow, isSquaredBorde
   }, []);
 
   useEffect(()=>{
-    dispatch({
-      type: actions.CHANGE_LOCALE,
-      payload: i18n.language,
-    })
-  },[i18n.language])
+    console.log("Lang FROM API",langFromApi)
+    if(langFromApi==='en_US'||'ar_001'){
+        i18n.changeLanguage(langFromApi==='en_US'?'en':'ar')
+    }
+  
+  },[langFromApi])
 
   // Stops scrolling on overlay
   useLayoutEffect(() => {
