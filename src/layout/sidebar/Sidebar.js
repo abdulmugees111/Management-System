@@ -5,6 +5,7 @@ import Menu from "../menu/Menu";
 import projectMenu from "../menu/MenuData";
 import mainMenu from "../dashboard-menu/MenuData";
 import { useTranslation } from "react-i18next";
+import './customization.css'
 
 const Sidebar = ({ fixed, theme, className, visibility, sidebarToggle, mobileView, layout, ...props }) => {
   const { i18n } = useTranslation();
@@ -20,9 +21,9 @@ const Sidebar = ({ fixed, theme, className, visibility, sidebarToggle, mobileVie
     <div
       className={classes}
       style={{
-        paddingRight: i18n.language === "en" ? "0px" : "0px",
+        paddingRight: "0px",
         paddingLeft: i18n.language === "ar" ? "32px" : "0px",
-        margin: i18n.language === "ar" ? "0px" : "0px",
+        margin:  "0px",
       }}
     >
       <SimpleBar className="nk-sidebar-menu">

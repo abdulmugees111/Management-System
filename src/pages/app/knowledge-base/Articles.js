@@ -25,7 +25,7 @@ import { useTranslation } from "react-i18next";
 const Articles = () => {
   const { section_id } = useParams();
   const { isLoading, error, data: articles } = useQuery(["get-articles", section_id], () => get_articles(section_id));
-  const { i18n } = useTranslation()
+  const { t,i18n } = useTranslation(['knowledge_base', 'common'])
 
   return (
     <React.Fragment>
@@ -37,13 +37,13 @@ const Articles = () => {
       {articles &&
         <Content>
           <Block>
-            <BlockHead size="sm">
+            <BlockHead size="sm" style={{ display: "flex", flexDirection: i18n.language === "ar" ? "row-reverse" : "row" }}>
               <BlockBetween>
-                <BlockHeadContent>
-                  <BackTo link="/knowledge-base" icon="arrow-left">
-                    Sections
+                <BlockHeadContent style={{display:"flex",flexDirection:"column",alignItems:i18n.language === "ar" ?"flex-end":"flex-start"}} >
+                  <BackTo link="/knowledge-base" icon={i18n.language === "ar" ?"arrow-right":"arrow-left"}>
+                  {t('sections')}
                   </BackTo>
-                  <BlockTitle page tag="h3">
+                  <BlockTitle page tag="h3" style={{ textAlign: i18n.language === "ar" ? "right" : "left" }}>
                     {articles.section.name}
                   </BlockTitle>
                   <BlockDes className="text-soft">

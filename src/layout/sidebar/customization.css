@@ -1,0 +1,13 @@
+.rightAlignedSidebar{
+    position: fixed;
+    top: 0;
+    right: 0;
+    border-right: 1px solid #e5e9f2;
+    transform: translateX(-100%);
+    background: #fff;
+    min-height: 100vh;
+    max-height: 100vh;
+    z-index: 700;
+    width: 280px;
+    padding-top: 75px;
+}

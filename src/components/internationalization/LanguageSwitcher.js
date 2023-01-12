@@ -2,12 +2,15 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import React from "react";
 
 import { useTranslation } from "react-i18next";
+import { connect } from "react-redux";
+import { withRouter } from "react-router";
 import { useToast } from "react-toastify";
 import enImg from "../../assets/images/en.png";
+import actions from "../../redux/user/actions";
 import { change_language } from "../../services/internationalization/localization";
 import switchStyles from './languageSwitcher.module.css'
 
-function LanguageSwitcher() {
+function LanguageSwitcher({ dispatch }) {
   const { i18n } = useTranslation();
 
 
@@ -25,7 +28,13 @@ function LanguageSwitcher() {
           context.successCb(result);
         }
         console.log("Languiage chnaged")
-  
+         
+      // window.location.reload()
+      queryClient.invalidateQueries(()=>{
+         dispatch({
+            type: actions.LOAD_CURRENT_ACCOUNT
+          });
+      })
       },
       onError: (error, variables, context) => {
         if (context.errorCb) {
@@ -42,6 +51,7 @@ function LanguageSwitcher() {
   const handleChange=(e)=>{
     i18n.changeLanguage(e.target.value)
     changeLang.mutate(e.target.value)
+  
 
   }
 
@@ -58,4 +68,9 @@ function LanguageSwitcher() {
   );
 }
 
-export default LanguageSwitcher;
+
+const mapStateToProps = ({ dispatch }) => ({
+  dispatch: dispatch
+});
+
+export default withRouter(connect(mapStateToProps)(LanguageSwitcher));

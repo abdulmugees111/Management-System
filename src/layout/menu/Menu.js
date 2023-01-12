@@ -4,6 +4,7 @@ import Icon from "../../components/icon/Icon";
 import classNames from "classnames";
 import { NavLink, Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import './customStyles.css'
 
 const MenuHeading = ({ heading }) => {
   const {i18n} =useTranslation()
@@ -161,8 +162,8 @@ const MenuItem = ({ icon, link, text, sub, newTab, child, sidebarToggle, badge, 
           style={{ flexDirection: i18n.language === "ar" ? "row-reverse" : "row" }}
         >
           {icon ? (
-            <span className="nk-menu-icon">
-              <Icon name={icon} />
+            <span className="nk-menu-icon" style={{width:"fit-content",marginRight:i18n.language==="en"?"0.8rem":"0rem"}} >
+              <Icon style={{width:"fit-content"}} name={icon} />
             </span>
           ) : null}
           <span className="nk-menu-text">{text}</span>
@@ -178,8 +179,8 @@ const MenuItem = ({ icon, link, text, sub, newTab, child, sidebarToggle, badge, 
           }}
         >
           {icon ? (
-            <span className="nk-menu-icon">
-              <Icon name={icon} />
+            <span className="nk-menu-icon" style={{width:"fit-content",marginRight:i18n.language==="en"?"0.8rem":"0rem"}}>
+              <Icon style={{width:"fit-content"}} name={icon} />
             </span>
           ) : null}
           <span className="nk-menu-text" style={{
@@ -212,6 +213,7 @@ const PanelItem = ({
   menuData,
   ...props
 }) => {
+  const {i18n,t} =useTranslation()
   const menuItemClass = classNames({
     "nk-menu-item": true,
   });
@@ -238,8 +240,8 @@ const PanelItem = ({
           onClick={() => setMenuData([menuData[index]])}
         >
           {icon ? (
-            <span className="nk-menu-icon">
-              <Icon name={icon} />
+            <span className="nk-menu-icon" style={{width:"fit-content",marginRight:i18n.language==="en"?"0.8rem":"0rem"}}>
+              <Icon style={{width:"fit-content"}} style={{width:"fit-content"}} name={icon} />
             </span>
           ) : null}
           <span className="nk-menu-text">{text}</span>

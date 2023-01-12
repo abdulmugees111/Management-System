@@ -44,11 +44,11 @@ const TicketDetails = () => {
                                     <BlockTitle style={{textAlign: i18n.language === "ar" ? "right" : "left"}}>{ticket.name}</BlockTitle>
                                     <div className="nk-block" >
                                         <div className="ticket-info" style={{display:"flex",flexDirection: i18n.language === "ar" ? "row-reverse" : "row"}}>
-                                            <ul className="ticket-meta">
-                                                <li className="ticket-id">
-                                                    <span style={{textAlign: i18n.language === "ar" ? "right" : "left",padding:"20px"}}>{t('ticket_id')}:</span> <strong>#{ticket.id}</strong>
+                                            <ul className="ticket-meta" style={{display:"flex",flexDirection: i18n.language === "ar" ? "row-reverse" : "row"}}>
+                                                <li className="ticket-id" style={{paddingRight:"0px"}}>
+                                                    <span style={{textAlign: i18n.language === "ar" ? "right" : "left"}}> {t("ticket_id", { id: ticket.id })}</span> 
                                                 </li>
-                                                <li className="ticket-date">
+                                                <li className="ticket-date" style={{paddingRight:"0px"}}>
                                                     <span style={{textAlign: i18n.language === "ar" ? "right" : "left",padding:"20px"}}>{t('submitted')}:</span> <strong>{ticket.create_date}</strong>
                                                 </li>
                                             </ul>

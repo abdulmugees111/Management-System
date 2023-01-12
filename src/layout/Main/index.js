@@ -12,7 +12,7 @@ import { useTranslation } from "react-i18next";
 import actions from "../../redux/settings/actions";
 import { useSelector } from "react-redux";
 
-const mapStateToProps = ({ settings,dispatch }) => ({
+const mapStateToProps = ({ settings, dispatch }) => ({
   logo: settings.logo,
   isGrayTopbar: settings.isGrayTopbar,
   isCardShadow: settings.isCardShadow,
@@ -22,10 +22,10 @@ const mapStateToProps = ({ settings,dispatch }) => ({
   dispatch
 });
 
-const MainLayout = ({ children, logo, isGrayTopbar, isCardShadow, isSquaredBorders, isBorderless, authPagesColor ,dispatch}) => {
-  const langFromApi=useSelector((state)=>state.user.lang)
-  const {i18n}=useTranslation()
-  console.log("lang ",i18n.language)
+const MainLayout = ({ children, logo, isGrayTopbar, isCardShadow, isSquaredBorders, isBorderless, authPagesColor, dispatch }) => {
+  const langFromApi = useSelector((state) => state.user.lang)
+  const { i18n } = useTranslation()
+  console.log("lang ", i18n.language)
   //Sidebar
   const [mobileView, setMobileView] = useState();
   const [visibility, setVisibility] = useState(false);
@@ -39,13 +39,16 @@ const MainLayout = ({ children, logo, isGrayTopbar, isCardShadow, isSquaredBorde
     viewChange();
   }, []);
 
-  useEffect(()=>{
-    console.log("Lang FROM API",langFromApi)
-    if(langFromApi==='en_US'||'ar_001'){
-        i18n.changeLanguage(langFromApi==='en_US'?'en':'ar')
+  useEffect(() => {
+    console.log("Lang FROM API", langFromApi)
+    if (langFromApi === 'en_US' || 'ar_001') {
+      i18n.changeLanguage(langFromApi === 'en_US' ? 'en' : 'ar')
+      document.body.style.fontFamily = langFromApi === 'en_US' ?
+        'Roboto, sans-serif, "Helvetica Neue", Arial, "Noto Sans", sans-serif'
+        : 'Din, sans-serif, "Helvetica Neue", Arial, "Noto Sans", sans-serif'
     }
-  
-  },[langFromApi])
+
+  }, [langFromApi])
 
   // Stops scrolling on overlay
   useLayoutEffect(() => {
@@ -60,9 +63,8 @@ const MainLayout = ({ children, logo, isGrayTopbar, isCardShadow, isSquaredBorde
   }, [visibility]);
 
   useEffect(() => {
-    document.body.className = `nk-body bg-white npc-default has-aside no-touch nk-nio-theme ${
-      themeState.skin === "dark" ? "dark-mode" : " "
-    }`;
+    document.body.className = `nk-body bg-white npc-default has-aside no-touch nk-nio-theme ${themeState.skin === "dark" ? "dark-mode" : " "
+      }`;
 
     document.body.classList.remove("apps-only");
   }, [window.location.pathname]); // eslint-disable-line react-hooks/exhaustive-deps
@@ -108,7 +110,7 @@ const MainLayout = ({ children, logo, isGrayTopbar, isCardShadow, isSquaredBorde
             />
             <div className="nk-content">
               <div className="container wide-xl">
-                <div className="nk-content-inner" style={{flexDirection:i18n.language==="ar"?"row-reverse":"row"}}>
+                <div className="nk-content-inner" style={{ flexDirection: i18n.language === "ar" ? "row-reverse" : "row" }}>
                   <Sidebar
                     sidebarToggle={toggleSidebar}
                     visibility={visibility}
