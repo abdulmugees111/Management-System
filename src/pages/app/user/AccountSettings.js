@@ -165,6 +165,7 @@ const UserProfileSettingPage = ({history}) => {
                      ev.preventDefault();
                      setPassState(!passState);
                    }}
+                   style={{left:i18n.language==="ar"?'1px':'unset',right:i18n.language==="ar"?'unset':'1px'}}
                    className={`form-icon lg form-icon-right passcode-switch ${passState ? "is-hidden" : "is-shown"}`}
                  >
                    <Icon name="eye" className="passcode-icon icon-show"></Icon>
@@ -180,6 +181,7 @@ const UserProfileSettingPage = ({history}) => {
                    placeholder={t('enter_old_password')}
                    className={`form-control-lg form-control ${passState ? "is-hidden" : "is-shown"}`}
                    onChange={(e) => setUserData({ ...userData, old_password: e.target.value })}
+                   style={{paddingRight:i18n.language==="ar"?'0.5rem':'1rem'}}
                  />
                  {errors.old_password && <span className="invalid">{errors.passcode.message}</span>}
                </div>
@@ -193,6 +195,7 @@ const UserProfileSettingPage = ({history}) => {
                </div>
                <div className="form-control-wrap">
                  <a
+                 style={{left:i18n.language==="ar"?'1px':'unset',right:i18n.language==="ar"?'unset':'1px'}}
                    href="#password"
                    onClick={(ev) => {
                      ev.preventDefault();
@@ -213,6 +216,7 @@ const UserProfileSettingPage = ({history}) => {
                    placeholder={t('enter_password')}
                    className={`form-control-lg form-control ${passState ? "is-hidden" : "is-shown"}`}
                    onChange={(e) => setUserData({ ...userData, password: e.target.value })}
+                   style={{paddingRight:i18n.language==="ar"?'0.5rem':'1rem'}}
                  />
                  {errors.passcode && <span className="invalid">{errors.passcode.message}</span>}
                </div>
@@ -226,6 +230,7 @@ const UserProfileSettingPage = ({history}) => {
                </div>
                <div className="form-control-wrap">
                  <a
+                 style={{left:i18n.language==="ar"?'1px':'unset',right:i18n.language==="ar"?'unset':'1px'}}
                    href="#confirm_password"
                    onClick={(ev) => {
                      ev.preventDefault();
@@ -246,6 +251,7 @@ const UserProfileSettingPage = ({history}) => {
                    placeholder={t('enter_confirm_password')}
                    className={`form-control-lg form-control ${passState ? "is-hidden" : "is-shown"}`}
                    onChange={(e) => setUserData({ ...userData, confirm_password: e.target.value })}
+                   style={{paddingRight:i18n.language==="ar"?'0.5rem':'1rem'}}
                  />
                  {errors.confirm_password && <span className="invalid">{errors.confirm_password.message}</span>}
                </div>

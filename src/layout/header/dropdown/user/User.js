@@ -69,7 +69,7 @@ const User = (user) => {
           <LinkList>
             <a href={`${process.env.PUBLIC_URL}/auth/login`} onClick={handleSignout} style={{direction: i18n.language === "ar" ? "rtl" : "ltr"}}>
               <Icon name="signout"></Icon>
-              <span> {t('signout_btn')}</span>
+              <span style={{marginRight: i18n.language === "ar" ? "1rem" : "0rem"}}> {t('signout_btn')}</span>
             </a>
           </LinkList>
         </div>

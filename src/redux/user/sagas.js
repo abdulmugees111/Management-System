@@ -87,7 +87,8 @@ export function* LOAD_CURRENT_ACCOUNT() {
   const { authProvider } = yield select(state => state.settings)
   const response = yield call(mapAuthProviders[authProvider].currentAccount)
   if (response) {
-    const { id, email, name, partner_id } = response;
+    const { id, email, name, partner_id ,lang} = response;
+    console.log("Language from api",lang)
     yield put({
       type: 'user/SET_STATE',
       payload: {
@@ -96,6 +97,7 @@ export function* LOAD_CURRENT_ACCOUNT() {
         email,
         partner_id,
         authorized: true,
+        lang
       },
     })
   }

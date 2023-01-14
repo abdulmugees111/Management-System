@@ -175,8 +175,8 @@ const Dashboard = ({ user }) => {
               <div className="nk-block-image w-120px flex-shrink-0">{supportIcon}</div>
               <BlockContent>
                 <div className="nk-block-content-head px-lg-4">
-                  <h5>{t("help_title")}</h5>
-                  <p className="text-soft">{t("help_desc")}</p>
+                  <h5 style={{textAlign: i18n.language === "ar" ? "right" : "left"}}>{t("help_title")}</h5>
+                  <p style={{textAlign: i18n.language === "ar" ? "right" : "left"}} className="text-soft">{t("help_desc")}</p>
                 </div>
               </BlockContent>
               <BlockContent className="flex-shrink-0">

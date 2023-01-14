@@ -6,7 +6,7 @@
   "helpdesk_tickets_create_date_field": "CREATE DATE",
   "create_ticket_title": "Create Support Ticket",
   "create_ticket_desc": "We are here to help you.",
-  "ticket_id": "Ticket ID",
+  "ticket_id": "Ticket ID:# {{id}}",
   "submitted": "Submitted",
   "reply": "Reply",
   "write_msg": "Write a Message",

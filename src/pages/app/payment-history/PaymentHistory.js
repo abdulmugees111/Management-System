@@ -165,10 +165,10 @@ const PaymentHistory = () => {
                 <table className="table table-tranx" style={{direction:i18n.language==="ar"?'rtl':'ltr'}}>
                   <thead>
                     <tr className="tb-tnx-head">
-                      <th className="tb-tnx-id">
+                      <th className="tb-tnx-id" style={{ textAlign: i18n.language==="ar"?"right":"left"}}>
                         <span className="">{t('name_table_field')}</span>
                       </th>
-                      <th className="tb-tnx-info">
+                      <th className="tb-tnx-info" style={{ textAlign: i18n.language==="ar"?"right":"left"}}>
                         <span className="tb-tnx-desc d-none d-sm-inline-block">
                           <span>{t('payment_ref_table_field')}</span>
                         </span>
@@ -178,7 +178,7 @@ const PaymentHistory = () => {
                           </span>
                         </span>
                       </th>
-                      <th className="tb-tnx-amount is-alt">
+                      <th className="tb-tnx-amount is-alt" style={{ textAlign: i18n.language==="ar"?"right":"left"}}>
                         <span className="tb-tnx-status d-none d-md-inline-block">{t('state_table_field')}</span>
                       </th>
                       {/*<th className="tb-tnx-action">*/}
