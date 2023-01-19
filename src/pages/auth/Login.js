@@ -89,6 +89,7 @@ const Login = ({ dispatch, user, authProvider, logo }) => {
                 </div>
                 <div className="form-control-wrap">
                   <input
+                  tabIndex={1}
                     type="text"
                     id="default-01"
                     name="name"
@@ -123,6 +124,7 @@ const Login = ({ dispatch, user, authProvider, logo }) => {
                     <Icon name="eye-off" className="passcode-icon icon-hide"></Icon>
                   </a>
                   <input
+                  tabIndex={2}
                     type={passState ? "text" : "password"}
                     id="password"
                     name="passcode"
