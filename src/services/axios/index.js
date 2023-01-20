@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 import { t } from 'i18next';
 
 const apiClient = axios.create({
-  baseURL: 'https://app.tajr.io/api/',
+  baseURL: 'https://app.idara.io/api/',
   // baseURL: 'http://localhost:8043/api/',
   // timeout: 1000,
   // headers: { 'X-Custom-Header': 'foobar' }
