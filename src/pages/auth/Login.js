@@ -136,7 +136,7 @@ const Login = ({ dispatch, user, authProvider, logo }) => {
                   {errors.passcode && <span className="invalid">{errors.passcode.message}</span>}
                 </div>
               </FormGroup>
-              <FormGroup>
+              <FormGroup tabIndex={3}>
                 <Button size="lg" className="btn-block" type="submit" color="primary">
                   {user.loading? <Spinner size={'sm'} color="white" /> : <span>Sign in</span>}
                 </Button>
