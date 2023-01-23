@@ -61,13 +61,13 @@ const OrderPage = ({ history }) => {
 
   function translatePlan(plan) {
     console.log("Plan to change")
-    if (plan === "Tajr Basic Plan" ||plan ==="تاجر الخطة الأساسية") {
+    if (plan === "Idara Basic Plan" ||plan ==="تاجر الخطة الأساسية") {
       console.log("Plan transform BASIC", plan);
       return t("basic_plan_title", { ns: "pricing" });
-    } else if (plan === "Tajr Pro Plan"|| plan==="خطة التاجر المهنية") {
+    } else if (plan === "Idara Pro Plan"|| plan==="خطة التاجر المهنية") {
       console.log("Plan transform PRO", plan);
       return t("pro_plan_title", { ns: "pricing" });
-    } else if (plan === "Tajr Enterprise Plan"||plan==="خطة مؤسسة التاجر") {
+    } else if (plan === "Idara Enterprise Plan"||plan==="خطة مؤسسة التاجر") {
       return t("basic_enterprise_title", { ns: "pricing" });
     } else return plan;
   }
@@ -75,15 +75,15 @@ const OrderPage = ({ history }) => {
     console.log("Plan Arr", planArr);
 
     planArr.records.map((each) => {
-      if (each.name === "Tajr Basic Plan" ||each.name ==="تاجر الخطة الأساسية") {
+      if (each.name === "Idara Basic Plan" ||each.name ==="تاجر الخطة الأساسية") {
         console.log("Plan transform BASIC", each.name);
         each.name = t("basic_plan_title", { ns: "pricing" });
       }
-      if (each.name  === "Tajr Pro Plan"|| each.name==="خطة التاجر المهنية") {
+      if (each.name  === "Idara Pro Plan"|| each.name==="خطة التاجر المهنية") {
         console.log("Plan transform PRO", each.name);
         each.name = t("pro_plan_title", { ns: "pricing" });
       }
-      if (each.name === "Tajr Enterprise Plan"||each.name==="خطة مؤسسة التاجر") {
+      if (each.name === "Idara Enterprise Plan"||each.name==="خطة مؤسسة التاجر") {
         each.name = t("basic_enterprise_title", { ns: "pricing" });
       }
     });

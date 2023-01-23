@@ -34,7 +34,7 @@ const Tickets = () => {
 
   return (
     <React.Fragment>
-      <Head title="Knowledge Base"></Head>
+      <Head title="Tickets"></Head>
       <Content>
         <BlockHead size="sm" style={{direction: i18n.language === "ar" ? "rtl" : "ltr"}}>
           <BlockBetween>

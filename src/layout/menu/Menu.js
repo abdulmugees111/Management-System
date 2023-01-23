@@ -7,10 +7,11 @@ import { useTranslation } from "react-i18next";
 import './customStyles.css'
 
 const MenuHeading = ({ heading }) => {
+  console.log("heading" , heading)
   const {i18n} =useTranslation()
   return (
     <li className="nk-menu-heading" style={{textAlign:i18n.language==="ar"?"right":"left"}}>
-      <h6 className="overline-title text-primary-alt">{heading}</h6>
+      {/* <h6 className="overline-title text-primary-alt">{heading}</h6> */}
     </li>
   );
 };
