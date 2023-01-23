@@ -45,6 +45,12 @@
   "state":"State",
   "year":"yr",
   "field_required_error":"This field is required",
-  "contact_us":"Contact Us"
+  "contact_us":"Contact Us",
+  "More Info":"More Info",
+  "Auto Renew":"Auto Renew",
+  "Started On":"Started On",
+  "Recurring":"Recurring",
+  "Yes":"Yes",
+  "project ID":"project ID"
   
 }

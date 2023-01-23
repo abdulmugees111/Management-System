@@ -1,4 +1,10 @@
 {
-    "subscriptions_title":"My Subscriptions",
-    "subscriptions_desc":"You have total {{subs}} subscriptions"
+    "subscriptions_title": "My Subscriptions",
+    "subscriptions_desc": "You have total {{subs}} subscriptions",
+    "More Info": "More Info",
+    "Auto Renew": "Auto Renew",
+    "Started On": "Started On",
+    "Recurring": "Recurring",
+    "Yes": "Yes",
+    "project ID":"project ID"
 }
