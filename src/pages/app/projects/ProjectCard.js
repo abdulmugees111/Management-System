@@ -76,11 +76,11 @@ const ProjectCardPage = ({projects, history}) => {
                             <div className="sp-plan-name">
                             
                               <h6
-                              style={{ marginRight:i18n.language === "ar" ? "1rem" : "0rem" ,width:"fit-content",textAlign: i18n.language === "ar" ? "right" : "left" }}
+                              style={{ marginRight:i18n.language === "ar" ? "1rem" : "0rem" ,width:"fit-content",textAlign: i18n.language === "ar" ? "right" : "left",  }}
                                className="title">
                                 <Link to={`/project/${project.app_name}/overview`}>
                                   {project.name}
-                                  <span className="badge bg-success rounded-pill">Active</span>
+                                  <span  style={{ marginRight:i18n.language === "ar" ? "0.4rem" : "0rem" }}  className="badge bg-success rounded-pill">Active</span>
                                 </Link>
                               </h6>
                               <p style={{ marginRight:i18n.language === "ar" ? "1rem" : "0rem" ,width:"fit-content",textAlign: i18n.language === "ar" ? "right" : "left" }}>
@@ -105,14 +105,14 @@ const ProjectCardPage = ({projects, history}) => {
                       <div className="sp-plan-desc card-inner">
                         <ul className="row gx-1">
                           <li className="col-6 col-lg-3">
-                            <p>
+                            <p style={{ marginRight:i18n.language === "ar" ? "1rem" : "0rem" ,width:"fit-content",textAlign: i18n.language === "ar" ? "right" : "left" }}>
                               <span className="text-soft">
                               <span>{t('Started On',{ns:"common"})}</span>
                               </span> Oct 12, 2018
                             </p>
                           </li>
-                          <li className="col-6 col-lg-3">
-                            <p>
+                          <li  className="col-6 col-lg-3">
+                            <p  style={{ marginRight:i18n.language === "ar" ? "1rem" : "0rem" ,width:"fit-content",textAlign: i18n.language === "ar" ? "right" : "left" }}>
                               <span className="text-soft">
                               <span>{t('Recurring',{ns:"common"})}</span>
                               </span> 
