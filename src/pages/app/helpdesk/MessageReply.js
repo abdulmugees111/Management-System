@@ -98,7 +98,9 @@ const handleTicketClose=()=>{
       {/* } */}
       {
         <div className="ticket-msg-reply ml-0">
-          <h5 className="title" style={{textAlign: i18n.language === "ar" ? "right" : "left"}}>{t("reply")}</h5>
+          <h5 className="title" style={{textAlign: i18n.language === "ar" ? "right" : "left",
+          marginRight:i18n.language === "ar" ? "0.3rem" : "0rem"
+          }}>{t("reply")}</h5>
           <form onSubmit={handleSubmit(onFormSubmit)} id="message-form" className="form-reply">
             <div className="form-group">
               <div className="form-editor-custom">
