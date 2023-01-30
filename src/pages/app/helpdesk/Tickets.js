@@ -32,6 +32,7 @@ const Tickets = () => {
   // function to toggle the search option
   const toggle = () => setonSearch(!onSearch);
 
+
   return (
     <React.Fragment>
       <Head title="Tickets"></Head>

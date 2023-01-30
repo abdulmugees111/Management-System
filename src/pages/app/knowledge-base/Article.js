@@ -40,7 +40,7 @@ const Article = () => {
                         <BlockHead size="sm" style={{ display: "flex", flexDirection: i18n.language === "ar" ? "row-reverse" : "row" }}>
                             <BlockBetween>
                                 <BlockHeadContent>
-                                    <BackTo link={`/kb/article/section/${article.section_id[0]}`} icon="arrow-left">
+                                    <BackTo link={`/kb/article/section/${article.section_id[0]}`} icon={i18n.language==="en"?"arrow-left":"arrow-right"}>
                                         {article.section_id[1]}
                                     </BackTo>
                                     <BlockTitle page>{article.name}</BlockTitle>
