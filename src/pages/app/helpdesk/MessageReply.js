@@ -5,25 +5,35 @@ import Head from "../../../layout/head/Head";
 import { Button } from "../../../components/Component";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { post_ticket_message } from "../../../services/helpdesk/ticketDetails";
+import { focusManager } from '@tanstack/react-query'
+
 
 import { Div, Card, Spinner } from "reactstrap";
 import { useForm } from "react-hook-form";
 import { useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { close_ticket } from "../../../services/helpdesk/tickets";
+import { formatDate } from "@fullcalendar/core";
 
 const MessageReply = () => {
-  
-  const { t,i18n } = useTranslation("help");
+
+  const { t, i18n } = useTranslation("help");
   const { ticket_id } = useParams();
 
   const useMessageReply = () => {
     const queryClient = useQueryClient();
 
+
+    // Override the default focus state
+    focusManager.setFocused(true)
+
+    // Fallback to the default focus check
+    focusManager.setFocused(undefined)
+
     queryClient.setMutationDefaults(["post-reply"], {
       mutationFn: (data) => post_ticket_message(data),
       onMutate: async (variables) => {
-        console.log("Post reply mutate",{variables})
+        console.log("Post reply mutate", { variables })
         const { successCb, errorCb } = variables;
         return { successCb, errorCb };
       },
@@ -50,7 +60,7 @@ const MessageReply = () => {
     queryClient.setMutationDefaults(["close-ticket"], {
       mutationFn: (ticketId) => close_ticket(ticketId),
       onMutate: async (variables) => {
-        console.log({variables})
+        console.log({ variables })
         const { successCb, errorCb } = variables;
         return { successCb, errorCb };
       },
@@ -78,34 +88,41 @@ const MessageReply = () => {
 
   const [formData, setformData] = useState({
     message: "",
-    closeTicket:false
+    closeTicket: false
   });
 
   const onFormSubmit = async (formData) => {
-    messageReply.mutate({'ticket_id': ticket_id, 'message': formData.message})
 
+    messageReply.mutate({ 'ticket_id': ticket_id, 'message': formData.message })
     console.log("Form data is", formData);
     // closeTicket.mutate()
   };
-const handleTicketClose=()=>{
-  console.log({ticket_id})
-     closeTicket.mutate(ticket_id)
-}
+  const handleTicketClose = () => {
+    console.log({ ticket_id })
+    closeTicket.mutate(ticket_id)
+  }
   return (
     <>
       {/* { */}
       {/* isLoading && <Spinner color="primary" /> */}
       {/* } */}
+
       {
         <div className="ticket-msg-reply ml-0">
-          <h5 className="title" style={{textAlign: i18n.language === "ar" ? "right" : "left"}}>{t("reply")}</h5>
+
+          <h5 className="title" style={{
+            textAlign: i18n.language === "ar" ? "right" : "left",
+            marginRight: i18n.language === "ar" ? "0.3rem" : "0rem"
+          }}>{t("reply")}</h5>
           <form onSubmit={handleSubmit(onFormSubmit)} id="message-form" className="form-reply">
             <div className="form-group">
               <div className="form-editor-custom">
-                <textarea style={{direction: i18n.language === "ar" ? "rtl" : "ltr",}}
+                <textarea style={{ direction: i18n.language === "ar" ? "rtl" : "ltr", }}
                   id="message"
-                  name="message"type="submit"
+                  name="message" type="submit"
                   form="message-form"
+                  onChange={(e) => setformData({ messgae: e.target.value })}
+
                   className="form-control-lg form-control"
                   ref={register({ required: t("field_required_error", { ns: "common" }) })}
                   required={true}

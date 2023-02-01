@@ -30,7 +30,7 @@ const mainMenu = [
       },
     ]
   },
-  { heading: "Advanced" },
+  // { heading: "Advanced" },
   {
     icon: "text-rich",
     text: "Account Settings",

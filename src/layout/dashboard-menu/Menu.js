@@ -279,7 +279,7 @@ const DashboardMenu = ({ sidebarToggle, mobileView }) => {
     <ul className="nk-menu" id="main-menu">
       {data.map((item, index) =>
         item.heading ? (
-          <MenuHeading heading={item.heading} key={item.heading} />
+          {/* <MenuHeading heading={item.heading} key={item.heading} /> */}
         ) : item.panel ? (
           <PanelItem
             key={item.text}

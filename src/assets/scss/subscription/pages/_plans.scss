@@ -4,14 +4,28 @@
 	&-name {
 		font-size: $fx-sz-13;
 		color: $base-light;
+		// margin-left: 15rem;
 		.badge {
 			@if($rtl==false){
 				margin-left: .5rem;
 			}
 			@if($rtl==true){
+				
 				margin-right: .5rem;
+				
 			}
         }
+		.title{
+			
+			@if($rtl==true){
+				
+				margin-left: 15rem;
+				span {
+					margin-left: 15rem;
+				}
+			}
+
+		}
 	}
 	&-opt{
 		width: 100%;
@@ -63,9 +77,21 @@
 		}
 		.title {
 			line-height: 1.3;
+
 			& + span {
 				font-size: $fx-sz-13;
+
+				
 			}
+			@if($rtl==true){
+				
+				margin-right: .5rem;
+				& + span {
+					margin-left: 15rem;
+				}
+			}
+			
+			
 		}
 	}
 	&-amount {

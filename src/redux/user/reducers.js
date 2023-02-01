@@ -7,6 +7,7 @@ const initialState = {
   email: '',
   avatar: '',
   authorized: process.env.REACT_APP_AUTHENTICATED || false, // false is default value
+  lang:'',
   loading: false,
 }
 

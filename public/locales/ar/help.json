@@ -6,7 +6,7 @@
   "helpdesk_tickets_create_date_field": "تاريخ الإنشاء",
   "create_ticket_title": "إنشاء تذكرة دعم",
   "create_ticket_desc": "نحن هنا لمساعدتك.",
-  "ticket_id":"معرف التذكرة",
+  "ticket_id":"{{id}}#:معرف التذكرة",
   "submitted":"قدمت",
   "reply":"الرد",
   "write_msg":"اكتب رسالة",

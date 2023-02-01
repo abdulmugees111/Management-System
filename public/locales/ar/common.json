@@ -13,7 +13,7 @@
   "create_ticket_btn": "إنشاء تذكرة",
   "submit_ticket_btn": "قدم التذكرة",
   "personal_information": "معلومات شخصية",
-  "personal_information_desc": "المعلومات الأساسية ، مثل اسمك وعنوانك ، التي تستخدمها على منصة Tajr.",
+  "personal_information_desc": "المعلومات الأساسية ، مثل اسمك وعنوانك ، التي تستخدمها على منصة Idara.",
   "basics": "أساسيات",
   "full_name": "الاسم الكامل",
   "name": "اسم",
@@ -45,5 +45,12 @@
   "state":"دولة",
   "year":"عام",
   "field_required_error":"هذه الخانة مطلوبه",
-  "contact_us":"اتصل بنا"
+  "contact_us":"اتصل بنا",
+  "More Info": "معلومات أكثر",
+  "Auto Renew":"يجدد ذاتيا",
+  "Started On":"بدأ في",
+  "Recurring":"يتكرر",
+  "Yes":"نعم",
+  "idara-app":"",
+  "project ID":"معرف المشروع"
 }

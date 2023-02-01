@@ -13,7 +13,7 @@
   "create_ticket_btn": "Create Ticket",
   "submit_ticket_btn": "Submit Ticket",
   "personal_information": "Personal Information",
-  "personal_information_desc": "Basic info, like your name and address, that you use on Tajr Platform.",
+  "personal_information_desc": "Basic info, like your name and address, that you use on Idara Platform.",
   "basics": "BASICS",
   "full_name": "Full Name",
   "name":"Name",
@@ -45,6 +45,12 @@
   "state":"State",
   "year":"yr",
   "field_required_error":"This field is required",
-  "contact_us":"Contact Us"
+  "contact_us":"Contact Us",
+  "More Info":"More Info",
+  "Auto Renew":"Auto Renew",
+  "Started On":"Started On",
+  "Recurring":"Recurring",
+  "Yes":"Yes",
+  "project ID":"project ID"
   
 }

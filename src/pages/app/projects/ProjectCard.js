@@ -20,7 +20,7 @@ import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
 const ProjectCardPage = ({projects, history}) => {
-  const { t } = useTranslation(['projects','common']);
+  const { t, i18n } = useTranslation(['projects','common']);
   const [sm, updateSm] = useState(false);
   const [data, setData] = useState(projects);
 
@@ -74,14 +74,20 @@ const ProjectCardPage = ({projects, history}) => {
                         <Row className="gx-0 gy-3">
                           <div className="col-xl-9 col-sm-8">
                             <div className="sp-plan-name">
-                              <h6 className="title">
+                            
+                              <h6
+                              style={{ marginRight:i18n.language === "ar" ? "1rem" : "0rem" ,width:"fit-content",textAlign: i18n.language === "ar" ? "right" : "left",  }}
+                               className="title">
                                 <Link to={`/project/${project.app_name}/overview`}>
                                   {project.name}
-                                  <span className="badge bg-success rounded-pill">Active</span>
+                                  <span  style={{ marginRight:i18n.language === "ar" ? "0.4rem" : "0rem" }}  className="badge bg-success rounded-pill">Active</span>
                                 </Link>
                               </h6>
-                              <p>
-                                project ID: <span className="text-base">{project.app_name}</span>
+                              <p style={{ marginRight:i18n.language === "ar" ? "1rem" : "0rem" ,width:"fit-content",textAlign: i18n.language === "ar" ? "right" : "left" }}>
+                              <span>{t('project ID',{ns:"common"})}</span>
+                              :
+                                
+                                 <span className="text-base">{project.app_name}</span>
                               </p>
                             </div>
                           </div>
@@ -89,7 +95,7 @@ const ProjectCardPage = ({projects, history}) => {
                             <div className="sp-plan-opt">
                               <div className="custom-control custom-switch checked">
                                 <label className="custom-control-label text-soft" htmlFor="auto-plan-p1">
-                                  Auto Renew
+                                 <span>{t('Auto Renew',{ns:"common"})}</span>
                                 </label>
                               </div>
                             </div>
@@ -99,13 +105,18 @@ const ProjectCardPage = ({projects, history}) => {
                       <div className="sp-plan-desc card-inner">
                         <ul className="row gx-1">
                           <li className="col-6 col-lg-3">
-                            <p>
-                              <span className="text-soft">Started On</span> Oct 12, 2018
+                            <p style={{ marginRight:i18n.language === "ar" ? "1rem" : "0rem" ,width:"fit-content",textAlign: i18n.language === "ar" ? "right" : "left" }}>
+                              <span className="text-soft">
+                              <span>{t('Started On',{ns:"common"})}</span>
+                              </span> Oct 12, 2018
                             </p>
                           </li>
-                          <li className="col-6 col-lg-3">
-                            <p>
-                              <span className="text-soft">Recurring</span> Yes
+                          <li  className="col-6 col-lg-3">
+                            <p  style={{ marginRight:i18n.language === "ar" ? "1rem" : "0rem" ,width:"fit-content",textAlign: i18n.language === "ar" ? "right" : "left" }}>
+                              <span className="text-soft">
+                              <span>{t('Recurring',{ns:"common"})}</span>
+                              </span> 
+                              <span>{t('Yes',{ns:"common"})}</span>
                             </p>
                           </li>
                         </ul>
@@ -115,7 +126,7 @@ const ProjectCardPage = ({projects, history}) => {
                       <div className="sp-plan-action card-inner">
                         <div className="sp-plan-btn">
                           <Link to={`/project/${project.app_name}/overview`} className="btn btn-primary">
-                            <span>More Info</span>
+                          <span>{t('More Info',{ns:"common"})}</span>
                           </Link>
                         </div>
                       </div>

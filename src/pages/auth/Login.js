@@ -89,6 +89,7 @@ const Login = ({ dispatch, user, authProvider, logo }) => {
                 </div>
                 <div className="form-control-wrap">
                   <input
+                  tabIndex={1}
                     type="text"
                     id="default-01"
                     name="name"
@@ -123,6 +124,7 @@ const Login = ({ dispatch, user, authProvider, logo }) => {
                     <Icon name="eye-off" className="passcode-icon icon-hide"></Icon>
                   </a>
                   <input
+                  tabIndex={2}
                     type={passState ? "text" : "password"}
                     id="password"
                     name="passcode"
@@ -134,7 +136,7 @@ const Login = ({ dispatch, user, authProvider, logo }) => {
                   {errors.passcode && <span className="invalid">{errors.passcode.message}</span>}
                 </div>
               </FormGroup>
-              <FormGroup>
+              <FormGroup tabIndex={3}>
                 <Button size="lg" className="btn-block" type="submit" color="primary">
                   {user.loading? <Spinner size={'sm'} color="white" /> : <span>Sign in</span>}
                 </Button>

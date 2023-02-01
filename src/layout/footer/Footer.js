@@ -8,7 +8,8 @@ const Footer = () => {
         <div className="nk-footer-wrap">
           <div className="nk-footer-copyright">
             {" "}
-            All rights are reserved &copy; <a href='https://tajr.io'>Tajr</a>
+          
+            All rights are reserved &copy; <a href='https://idara.io'>Idara</a>
           </div>
           <div className="nk-footer-links">
             <ul className="nav nav-sm">

@@ -20,7 +20,10 @@ import { useQuery } from '@tanstack/react-query';
 import { get_article } from "../../../services/knowledge-base/article";
 import { Link, useParams } from "react-router-dom";
 import { Spinner } from "reactstrap";
+import { useTranslation } from "react-i18next";
+
 const Article = () => {
+    const { t,i18n } = useTranslation(['knowledge_base', 'common'])
     const { article_id } = useParams();
     const { isLoading, error, data: article } = useQuery(["get-article", article_id], () => get_article(article_id));
     return (
@@ -34,10 +37,10 @@ const Article = () => {
                 article !== undefined &&
                 <Content>
                     <Block>
-                        <BlockHead size="sm">
+                        <BlockHead size="sm" style={{ display: "flex", flexDirection: i18n.language === "ar" ? "row-reverse" : "row" }}>
                             <BlockBetween>
                                 <BlockHeadContent>
-                                    <BackTo link={`/kb/article/section/${article.section_id[0]}`} icon="arrow-left">
+                                    <BackTo link={`/kb/article/section/${article.section_id[0]}`} icon={i18n.language==="en"?"arrow-left":"arrow-right"}>
                                         {article.section_id[1]}
                                     </BackTo>
                                     <BlockTitle page>{article.name}</BlockTitle>

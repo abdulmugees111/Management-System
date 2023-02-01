@@ -16,6 +16,7 @@ import "./services/internationalization/i18";
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
+
 // middlewared
 const history = createBrowserHistory();
 const sagaMiddleware = createSagaMiddleware();
@@ -43,6 +44,7 @@ ReactDOM.render(
 
       <QueryClientProvider client={queryClient} >
         <Router history={history} />
+     
       </QueryClientProvider>
     </Provider>
   </React.Suspense>,

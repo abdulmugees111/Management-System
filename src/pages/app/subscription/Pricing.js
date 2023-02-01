@@ -26,13 +26,13 @@ const PricingTable = () => {
   const { t ,i18n} = useTranslation(["pricing",'common']);
   function translatePlan(plan) {
     console.log("Plan to change")
-    if (plan === "Tajr Basic Plan") {
+    if (plan === "Idara Basic Plan") {
       console.log("Plan transform BASIC", plan);
       return t("basic_plan_title", { ns: "pricing" });
-    } else if (plan === "Tajr Pro Plan") {
+    } else if (plan === "Idara Pro Plan") {
       console.log("Plan transform PRO", plan);
       return t("pro_plan_title", { ns: "pricing" });
-    } else if (plan === "Tajr Enterprise Plan") {
+    } else if (plan === "Idara Enterprise Plan") {
       return t("basic_enterprise_title", { ns: "pricing" });
     } else return plan;
   }
@@ -71,11 +71,11 @@ const PricingTable = () => {
                       </div>
                       <div className="pricing-title w-220px mx-auto">
                         <h5 className="title">
-                          {item.name === "Tajr Basic Plan"
+                          {item.name === "Idara Basic Plan"
                             ? t("basic_plan_title")
-                            : item.name === "Tajr Pro Plan"
+                            : item.name === "Idara Pro Plan"
                             ? t("pro_plan_title")
-                            : item.name === "Tajr Enterprise Plan"
+                            : item.name === "Idara Enterprise Plan"
                             ? t("basic_enterprise_title")
                             : null}
                         </h5>

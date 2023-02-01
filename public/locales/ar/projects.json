@@ -1,4 +1,10 @@
 {
     "subscriptions_title":"اشتراكاتي",
-    "subscriptions_desc":"لديك إجمالي الاشتراكات"
+    "subscriptions_desc":"لديك إجمالي الاشتراكات",
+    "More Info": "معلومات أكثر",
+    "Auto Renew":"يجدد ذاتيا",
+    "Started On":"بدأ في",
+    "Recurring":"يتكرر",
+    "Yes":"نعم",
+    "project ID":"معرف المشروع"
 }

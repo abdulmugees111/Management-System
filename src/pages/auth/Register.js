@@ -85,7 +85,7 @@ const Register = ({ history }) => {
               <BlockContent>
                 <BlockTitle tag="h4">Register</BlockTitle>
                 <BlockDes>
-                  <p>Create New Tajr Account</p>
+                  <p>Create New Idara Account</p>
                 </BlockDes>
               </BlockContent>
             </BlockHead>

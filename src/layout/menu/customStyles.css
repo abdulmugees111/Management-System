@@ -1,0 +1,13 @@
+
+.leftAlignedIcon::after{
+    position: absolute;
+    font-family: "Nioicon";
+    top: 50%;
+    left: 1.25rem;
+    content: "";
+    transform: translateY(-50%);
+    transform: rotateZ(180deg);
+    font-size: 1rem;
+    color: #8094ae;
+    transition: transform 0.3s, color 0.1s;
+}

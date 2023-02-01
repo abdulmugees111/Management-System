@@ -109,7 +109,7 @@ const CreateTicket = () => {
           <Card className="card-bordered card-stretch">
             <div className="p-2">
               <div className="mt-4">
-                <Form className="row gy-4" id="submit-ticket" onSubmit={handleSubmit(onFormSubmit)}>
+                <Form style={{flexDirection: i18n.language === "ar" ? "row-reverse" : "row"}} className="row gy-4" id="submit-ticket" onSubmit={handleSubmit(onFormSubmit)}>
                   <Col md="6">
                     <FormGroup>
                       <label className="form-label" style={{textAlign: i18n.language === "ar" ? "right" : "left",width:"100%"}}>{t('name',{ns:'common'})}</label>
