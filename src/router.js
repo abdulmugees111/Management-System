@@ -145,6 +145,13 @@ const routes = [
     exact: true,
   },
   // Auth Pages
+
+  {
+    path: "/auth/login/profile",
+    Component: lazy(() => import("./layout/header/dropdown/user/User")),
+    exact: true,
+  
+  },
   {
     path: "/auth/login",
     Component: lazy(() => import("./pages/auth/Login")),

@@ -100,7 +100,7 @@ const AuthFooter = () => {
           <Col lg="6">
             <div className="nk-block-content text-center text-lg-left">
               <p className="text-soft">
-                All rights are reserved &copy; <a href='https://idara.io'>Idara</a>              
+                All rights are reserved &copy; <a href='https://Fawterha.io'>Fawterha</a>              
               </p>
             </div>
           </Col>

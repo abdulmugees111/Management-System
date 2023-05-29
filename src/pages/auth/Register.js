@@ -22,6 +22,7 @@ import { register_user } from "../../services/user";
   import { toast } from "react-toastify";
   import "react-toastify/dist/ReactToastify.css";
 import { useTranslation } from "react-i18next";
+import Fawterha from '../../assets/images/jsTree/fawterhalogo.png';
 
 const Register = ({ history }) => {
   const {t,i18n}=useTranslation(['common','notification'])
@@ -77,7 +78,9 @@ const Register = ({ history }) => {
           <div className="brand-logo pb-4 text-center">
             <Link to={`${process.env.PUBLIC_URL}/`} className="logo-link">
               <img className="logo-light logo-img logo-img-lg" src={Logo} alt="logo" />
-              <img className="logo-dark logo-img logo-img-lg" src={LogoDark} alt="logo-dark" />
+              <img className="logo-dark logo-img logo-img-lg" src={Fawterha} alt="Fawterha logo" />
+
+              {/* <img className="logo-dark logo-img logo-img-lg" src={LogoDark} alt="logo-dark" />*/}
             </Link>
           </div>
           <PreviewCard className="card-bordered" bodyClass="card-inner-lg">
@@ -85,7 +88,7 @@ const Register = ({ history }) => {
               <BlockContent>
                 <BlockTitle tag="h4">Register</BlockTitle>
                 <BlockDes>
-                  <p>Create New Idara Account</p>
+                  <p>Create New Fawterha Account</p>
                 </BlockDes>
               </BlockContent>
             </BlockHead>

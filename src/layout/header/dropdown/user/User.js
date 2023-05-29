@@ -37,7 +37,7 @@ const User = (user) => {
         }}
       >
         <div className="user-toggle">
-          <UserAvatar icon="user-alt" className="sm" />
+          <UserAvatar icon="user-alt" className="sm"/>
         </div>
       </DropdownToggle>
       <DropdownMenu right className="dropdown-menu-md dropdown-menu-s1">
@@ -54,6 +54,7 @@ const User = (user) => {
         </div>
         <div className="dropdown-inner">
           <LinkList>
+         
             <LinkItem style={{direction: i18n.language === "ar" ? "rtl" : "ltr"}} link="/user-profile" icon="user-alt" onClick={toggle}>
               {t('view_profile_btn')}
             </LinkItem>

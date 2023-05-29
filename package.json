@@ -1,9 +1,11 @@
 {
   "name": "saas-portal",
-  "homepage": "https://idara.io",
+  "homepage": "https://Fawterha.io",
   "version": "1.3.2",
   "private": true,
   "dependencies": {
+    "@chakra-ui/react": "^2.6.1",
+    "@emotion/react": "^11.11.0",
     "@fortawesome/fontawesome-free": "^5.15.4",
     "@fullcalendar/bootstrap": "^5.9.0",
     "@fullcalendar/core": "^5.9.0",
@@ -79,6 +81,7 @@
     "web-vitals": "^1.1.2"
   },
   "scripts": {
+    "dev": "your-dev-command",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",

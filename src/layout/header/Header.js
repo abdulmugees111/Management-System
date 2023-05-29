@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import LanguageSwitcher from "../../components/internationalization/LanguageSwitcher";
 import { useTranslation } from "react-i18next";
+import Fawterha from '../../assets/images/jsTree/fawterhalogo.png';
 
 const Header = ({ fixed, theme, className, sidebarToggle, setVisibility, ...props }) => {
   const { t, i18n } = useTranslation(["dashboard"]);
@@ -26,8 +27,9 @@ const Header = ({ fixed, theme, className, sidebarToggle, setVisibility, ...prop
         <div className="nk-header-wrap" style={{ flexDirection: i18n.language === "ar" ? "row-reverse" : "row",justifyContent: i18n.language === "ar" ? "space-between" : "space-between" }}>
           <div style={{ display: "flex", flexDirection: i18n.language === "ar" ? "row-reverse" : "row" }}>
             <div className="nk-header-brand">
-              <Logo />
-            </div>
+                {/*<Logo />*/}
+                <img className="logo-dark logo-img logo-img-lg" src={Fawterha} alt="Fawterha logo" />
+                </div>
             <div className="nk-header-menu">
               <ul className="nk-menu nk-menu-main">
                 <li
@@ -36,7 +38,7 @@ const Header = ({ fixed, theme, className, sidebarToggle, setVisibility, ...prop
                   }`}
                 >
                   <Link to={`${process.env.PUBLIC_URL}/`} className="nk-menu-link">
-                    <span className="nk-menu-text" style={{direction: i18n.language === "ar" ? "rtl" : "ltr"}}>{t("overview")}</span>
+                   {/*<span className="nk-menu-text" style={{direction: i18n.language === "ar" ? "rtl" : "ltr"}}>{t("overview")}</span> */} 
                   </Link>
                 </li>
 
@@ -61,11 +63,12 @@ const Header = ({ fixed, theme, className, sidebarToggle, setVisibility, ...prop
                 <LanguageSwitcher />
               </li>
               <li className="notification-dropdown" onClick={() => setVisibility(false)}>
-                <Notification />
+                {/*<Notification />*/}
               </li>
               <li className="user-dropdown" onClick={() => setVisibility(false)}>
                 <User />
               </li>
+              
               <li className="d-lg-none">
                 <Toggle icon="menu" className="toggle nk-quick-nav-icon mr-n1" click={sidebarToggle} />
               </li>

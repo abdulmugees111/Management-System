@@ -9,7 +9,7 @@ const Footer = () => {
           <div className="nk-footer-copyright">
             {" "}
           
-            All rights are reserved &copy; <a href='https://idara.io'>Idara</a>
+            All rights are reserved &copy; <a href='https://Fawterha.io'>Fawterha</a>
           </div>
           <div className="nk-footer-links">
             <ul className="nav nav-sm">

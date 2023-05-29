@@ -5,7 +5,7 @@ import PageContainer from "../../layout/page-container/PageContainer";
 import Head from "../../layout/head/Head";
 import AuthFooter from "./AuthFooter";
 import { connect } from 'react-redux'
-
+import Fawterha from '../../assets/images/jsTree/fawterhalogo.png';
 import {
   Block,
   BlockContent,
@@ -22,7 +22,7 @@ import { Form, FormGroup, Spinner, Alert } from "reactstrap";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-
+import Multistep from '../../onBoardingForm/onBoardingForm'
 
 const mapStateToProps = ({ user, settings, dispatch }) => ({
   dispatch,
@@ -58,8 +58,10 @@ const Login = ({ dispatch, user, authProvider, logo }) => {
         <Block className="nk-block-middle nk-auth-body  wide-xs">
           <div className="brand-logo pb-4 text-center">
             <Link to={process.env.PUBLIC_URL + "/"} className="logo-link">
+            
               <img className="logo-light logo-img logo-img-lg" src={Logo} alt="logo" />
-              <img className="logo-dark logo-img logo-img-lg" src={LogoDark} alt="logo-dark" />
+             {/*<img className="logo-dark logo-img logo-img-lg" src={LogoDark} alt="logo-dark" />*/ } 
+             <img className="logo-dark logo-img logo-img-lg" src={Fawterha} alt="Fawterha logo" />
             </Link>
           </div>
 
@@ -68,7 +70,7 @@ const Login = ({ dispatch, user, authProvider, logo }) => {
               <BlockContent>
                 <BlockTitle tag="h4">Sign-In</BlockTitle>
                 <BlockDes>
-                  <p>Access {t("app_name")} using your email and password.</p>
+                  <p>Access Fawterha{/*t("app_name")*/} using your email and password.</p>
                 </BlockDes>
               </BlockContent>
             </BlockHead>
@@ -146,11 +148,15 @@ const Login = ({ dispatch, user, authProvider, logo }) => {
               {" "}
               New on our platform? <Link to={`${process.env.PUBLIC_URL}/auth/register`}>Create an account</Link>
             </div>
-  
+            <div className="form-note-s2 text-center pt-4">
+            {" "}
+            New on our platform? <Link to={`${process.env.PUBLIC_URL}/auth/login/profile`}>Create an testing</Link>
+          </div>
           </PreviewCard>
         </Block>
         <AuthFooter />
       </PageContainer>
+      {/*<Multistep/>*/}
     </React.Fragment>
   );
 };

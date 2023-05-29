@@ -44,7 +44,7 @@ const ProjectDetails = () => {
         Subscription Overview
        </BlockTitle>
        <BlockDes className="text-soft">
-        <p>Welcome to Idara Portal</p>
+        <p>Welcome to Fawterha Portal</p>
        </BlockDes>
       </BlockHeadContent>
       <BlockHeadContent>
