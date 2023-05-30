@@ -47,13 +47,23 @@ const Login = ({ dispatch, user, authProvider, logo }) => {
   const onFinishFailed = errorInfo => {
     console.log('Failed:', errorInfo)
   }
-
-
+  {/*<a href={`${process.env.PUBLIC_URL}/user-profile`}  style={{direction: i18n.language === "ar" ? "rtl" : "ltr"}}>sdfvdbd</a>*/}
+  
   const { errors, register, handleSubmit } = useForm();
+// console.log("onFinishFailed",onFinishFailed)
+// console.log("mapStateToProps",mapStateToProps)
+// console.log("dispatch",dispatch)
+// console.log("user",user)
+// console.log("authProvider",authProvider)
+// console.log("logo",logo)
+// console.log("passState",passState)
+// console.log("errorVal",errorVal)
+// console.log("payload",dispatch.values) 
+// console.log("onFinish",onFinish)
 
-  return (
+return (
     <React.Fragment>
-      <Head title="Login" />
+          <Head title="Login" />
       <PageContainer>
         <Block className="nk-block-middle nk-auth-body  wide-xs">
           <div className="brand-logo pb-4 text-center">
@@ -70,7 +80,7 @@ const Login = ({ dispatch, user, authProvider, logo }) => {
               <BlockContent>
                 <BlockTitle tag="h4">Sign-In</BlockTitle>
                 <BlockDes>
-                  <p>Access Fawterha{/*t("app_name")*/} using your email and password.</p>
+                  <p>Access {t("app_name")} using your email and password.</p>
                 </BlockDes>
               </BlockContent>
             </BlockHead>

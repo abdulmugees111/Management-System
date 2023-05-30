@@ -122,13 +122,13 @@ const UserProfileSettingPage = ({history}) => {
                  <p style={{textAlign: i18n.language === "ar" ? "right":"left"}}>
                  {t("2fa_desc")}
                  </p>
-                  </div>
+               </div>
                <div className="nk-block-actions">
                  <Button color="primary">{t("disable_btn",{ns:'common'})}</Button>
                </div>
              </div>
-           </div>*/}
-         </div>``
+                  </div>*/}
+         </div>
        </Card>
      </Block>
 

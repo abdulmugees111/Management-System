@@ -60,13 +60,14 @@ const SpecialTablePage = () => {
                 The following table can be use for <strong className="text-primary">invoice, payment history</strong>{" "}
                 related transaction.
               </p>
+              
             </BlockHeadContent>
           </BlockHead>
           <Card className="card-bordered card-preview">
             <SpecialTable action={false} />
           </Card>
         </Block>
-
+        <h1>testing</h1>
         <Block size="lg">
           <BlockHead>
             <BlockHeadContent>

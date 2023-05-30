@@ -24,8 +24,9 @@ const User = (user) => {
     store.remove("access_token");
     store.remove("refresh_token");
     store.remove("uid");
+    
   };
-
+  // const isLoggedIn =false;
   return (
     <Dropdown isOpen={open} className="user-dropdown" toggle={toggle}>
       <DropdownToggle
@@ -55,6 +56,10 @@ const User = (user) => {
         <div className="dropdown-inner">
           <LinkList>
          
+         
+         {/* <a href={isLoggedIn?`${process.env.PUBLIC_URL}/user-profile`:`${process.env.PUBLIC_URL}/account-settings`} >sdfvdbd</a>
+       */} 
+
             <LinkItem style={{direction: i18n.language === "ar" ? "rtl" : "ltr"}} link="/user-profile" icon="user-alt" onClick={toggle}>
               {t('view_profile_btn')}
             </LinkItem>

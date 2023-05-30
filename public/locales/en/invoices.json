@@ -4,5 +4,8 @@
     "name_table_field":"NAME",
     "payment_ref_table_field":"PAYMENT REFERENCE",
     "invoice_date_table_field":"INVOICE DATE",
-    "state_table_field":"STATE"
+    "state_table_field":"STATE",
+    "create_invoice":"Create an Invoice",
+    "invoice_text":"Please fill the following fields to create an invoice"
+
 }

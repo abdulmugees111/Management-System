@@ -35,9 +35,19 @@ import { useQuery } from '@tanstack/react-query';
 import { get_invoices } from "../../../services/invoice";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-
+import { Spinner} from "reactstrap";
+import InvoiceForm from './testing-invoice'
 const PaymentHistory = () => {
-  const { t,i18n } = useTranslation(['invoices']);
+
+  const [userData, setUserData] = useState({
+    old_password: "",
+    password: "",
+    confirm_password: "",
+  });
+  const [passState, setPassState] = useState(false);
+  const [modal2, setModal2] = useState(false);
+  // const { errors2, register2, handleSubmit2 } = useForm();
+  const { t,i18n } = useTranslation(['invoices','account_settings','common','notification']);
   const [onSearch, setonSearch] = useState(true);
   const [onSearchText, setSearchText] = useState("");
   const [modal, setModal] = useState({
@@ -144,18 +154,14 @@ const PaymentHistory = () => {
   const { isLoading, error, data:invoices } = useQuery(["get-invoices"], get_invoices);
   return (
     <React.Fragment>
+    <InvoiceForm/>
+
+
       <Head title={t('payment_history_title')}></Head>
       <Content>
-        <BlockHead size="sm" style={{display:"flex",flexDirection: i18n.language === "ar" ? "row-reverse" : "row"}}>
-          <BlockBetween>
-            <BlockHeadContent>
-              <BlockTitle page style={{textAlign: i18n.language === "ar" ? "right" : "left"}}>{t('payment_history_title')}</BlockTitle>
-              <BlockDes className="text-soft">
-                <p>{t('payment_history_desc')}</p>
-              </BlockDes>
-            </BlockHeadContent>
-          </BlockBetween>
-        </BlockHead>
+            
+        
+
 
         <Block>
           <Card className="card-bordered card-stretch">
@@ -280,8 +286,203 @@ const PaymentHistory = () => {
           </ModalBody>
         </Modal>
       </Content>
+
+
+                         
+
+
+
+
+
+    {/*  <Modal isOpen={modal} className="modal-dialog-centered" size="lg" toggle={() => setModal2(false)}>
+      <ModalBody style={{direction:i18n.language==="ar"?'rtl':'ltr'}}>
+        <a
+          href="#dropdownitem"
+          onClick={(ev) => {
+            ev.preventDefault();
+            setModal2(false);
+          }}
+          className="close"
+          style={{float:i18n.language==="ar"?'left':'right'}}
+        >
+          <Icon name="cross-sm"></Icon>
+        </a>
+        <div className="p-2">
+          <h5 className="title" style={{textAlign:i18n.language==="ar"?'right':'left'}}>{t('change_pass_title')}</h5>
+          <p style={{textAlign:i18n.language==="ar"?'right':'left'}}>{t('change_pass_desc')}.</p>
+
+          <br />
+
+          <form className="is-alter" onSubmit={handleSubmit()}>
+            <FormGroup>
+              <div className="form-label-group">
+                <label className="form-label" htmlFor="old_password">
+                {t('old_password')}
+                </label>
+              </div>
+              <div className="form-control-wrap">
+                <a
+                  href="#old_password"
+                  onClick={(ev) => {
+                    ev.preventDefault();
+                    setPassState(!passState);
+                  }}
+                  style={{left:i18n.language==="ar"?'1px':'unset',right:i18n.language==="ar"?'unset':'1px'}}
+                  className={`form-icon lg form-icon-right passcode-switch ${"is-shown"}`}
+                >
+                  <Icon name="eye" className="passcode-icon icon-show"></Icon>
+
+                  <Icon name="eye-off" className="passcode-icon icon-hide"></Icon>
+                </a>
+                <input
+                  type={"text"}
+                  id="old_password"
+                  name="old_password"
+                  value={userData.old_password}
+                  ref={register({ required: t('field_required_error',{ns:"common"}) })}
+                  placeholder={t('enter_old_password')}
+                  className={`form-control-lg form-control ${"is-shown"}`}
+                  onChange={(e) => setUserData({ ...userData, old_password: e.target.value })}
+                  style={{paddingRight:i18n.language==="ar"?'0.5rem':'1rem'}}
+                />
+                {errors.old_password && <span className="invalid">{errors.passcode.message}</span>}
+              </div>
+            </FormGroup>
+
+            <FormGroup>
+              <div className="form-label-group">
+                <label className="form-label" htmlFor="password">
+                {t('enter_new_password')}
+                </label>
+              </div>
+              <div className="form-control-wrap">
+                <a
+                style={{left:i18n.language==="ar"?'1px':'unset',right:i18n.language==="ar"?'unset':'1px'}}
+                  href="#password"
+                  onClick={(ev) => {
+                    ev.preventDefault();
+                    setPassState(!passState);
+                  }}
+                  className={`form-icon lg form-icon-right passcode-switch ${"is-shown"}`}
+                >
+                  <Icon name="eye" className="passcode-icon icon-show"></Icon>
+
+                  <Icon name="eye-off" className="passcode-icon icon-hide"></Icon>
+                </a>
+                <input
+                  type={"text"}
+                  id="password"
+                  name="passcode"
+                  value={userData.password}
+                  ref={register({ required: t('field_required_error',{ns:"common"}) })}
+                  placeholder={t('enter_password')}
+                  className={`form-control-lg form-control ${"is-shown"}`}
+                  onChange={(e) => setUserData({ ...userData, password: e.target.value })}
+                  style={{paddingRight:i18n.language==="ar"?'0.5rem':'1rem'}}
+                />
+                {errors.passcode && <span className="invalid">{errors.passcode.message}</span>}
+              </div>
+            </FormGroup>
+
+            <FormGroup>
+              <div className="form-label-group">
+                <label className="form-label" htmlFor="confirm_password">
+                {t('confirm_password')}
+                </label>
+              </div>
+              <div className="form-control-wrap">
+                <a
+                style={{left:i18n.language==="ar"?'1px':'unset',right:i18n.language==="ar"?'unset':'1px'}}
+                  href="#confirm_password"
+                  onClick={(ev) => {
+                    ev.preventDefault();
+                    setPassState(!passState);
+                  }}
+                  className={`form-icon lg form-icon-right passcode-switch ${"is-shown"}`}
+                >
+                  <Icon name="eye" className="passcode-icon icon-show"></Icon>
+
+                  <Icon name="eye-off" className="passcode-icon icon-hide"></Icon>
+                </a>
+                <input
+                  type={"text"}
+                  id="confirm_password"
+                  name="confirm_password"
+                  value={userData.confirm_password}
+                  ref={register({ required: t('field_required_error',{ns:"common"}) })}
+                  placeholder={t('enter_confirm_password')}
+                  className={`form-control-lg form-control ${passState ? "is-hidden" : "is-shown"}`}
+                  onChange={(e) => setUserData({ ...userData, confirm_password: e.target.value })}
+                  style={{paddingRight:i18n.language==="ar"?'0.5rem':'1rem'}}
+                />
+                {errors.confirm_password && <span className="invalid">{errors.confirm_password.message}</span>}
+              </div>
+            </FormGroup>
+
+            <div style={{ color: "red", textAlign: "center", visibility:  "visible"}}>
+              Password & Confirm Password must match!
+            </div>
+
+            <FormGroup>
+              <Button type="submit" color="primary" size="lg" className="btn-block">
+                 <Spinner size="sm" color="light" /> : {t('change_pass_btn',{ns:'common'})}
+              </Button>
+            </FormGroup>
+          </form>
+        </div>
+      </ModalBody>
+    </Modal>*/} 
+        
+
+
+
+
+
+
+
+
+
+      
     </React.Fragment>
   );
 };
 
 export default PaymentHistory;
+
+
+{/*   <BlockHead size="sm" style={{display:"flex",flexDirection: i18n.language === "ar" ? "row-reverse" : "row"}}>
+          <BlockBetween>
+            <BlockHeadContent>
+              <BlockTitle page style={{textAlign: i18n.language === "ar" ? "right" : "left"}}>{t('payment_history_title')}</BlockTitle>
+              <BlockDes className="text-soft">
+                <p>{t('payment_history_desc')}</p>
+              </BlockDes>
+            </BlockHeadContent>
+          </BlockBetween>
+        </BlockHead>
+      
+      
+      
+      
+       <BlockHead size="sm" style={{direction: i18n.language === "ar" ? "rtl" : "ltr"}}>
+        <BlockBetween>
+          <BlockHeadContent>
+            <BlockTitle page style={{textAlign: i18n.language === "ar" ? "right" : "left"}}>{t('payment_history_title')}</BlockTitle>
+            <BlockDes className="text-soft" style={{textAlign:i18n.language==="ar"?'right':'left'}}>
+              <p style={{width:"fit-content"}}>{t('payment_history_desc')}</p>
+            </BlockDes>
+          </BlockHeadContent>
+         
+          <BlockHeadContent>
+            <ul className="nk-block-tools g-4 flex-wrap">
+              <li className="order-md-last">
+                <Link to="/help/ticket/create" className="btn btn-white btn-dim btn-outline-primary">
+                  <span>{t('create_invoice_btn',{ns:'common'})}</span>
+                </Link>
+              </li>
+            </ul>
+          </BlockHeadContent>
+        
+        </BlockBetween>
+        </BlockHead>
+      */}

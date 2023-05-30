@@ -7,7 +7,9 @@ import actions from './actions'
 import store from 'store'
 import { toast } from 'react-toastify';
 import i18next from 'i18next'
-
+import { useState } from 'react'
+import { takeLatest } from 'redux-saga/effects';
+import { push } from 'connected-react-router';
 
 
 
@@ -83,10 +85,13 @@ export function* LOAD_CURRENT_ACCOUNT() {
     payload: {
       loading: true,
     },
+    
   })
+  
   const { authProvider } = yield select(state => state.settings)
   const response = yield call(mapAuthProviders[authProvider].currentAccount)
   if (response) {
+    
     const { id, email, name, partner_id ,lang} = response;
     console.log("Language from api",lang)
     yield put({
@@ -101,6 +106,12 @@ export function* LOAD_CURRENT_ACCOUNT() {
       },
     })
   }
+  
+  if (response){
+    yield put(push('/user-profile'));
+   console.log("if condition")
+  }
+  console.log("hello for response",response)
   yield put({
     type: 'user/SET_STATE',
     payload: {

@@ -11,6 +11,7 @@
   "disabled_state": "Disabled",
   "enabled_state": "Enabled",
   "create_ticket_btn": "Create Ticket",
+  "create_invoice_btn": "Create Invoice +",
   "submit_ticket_btn": "Submit Ticket",
   "personal_information": "Personal Information",
   "personal_information_desc": "Basic info, like your name and address, that you use on Fawterha Platform.",

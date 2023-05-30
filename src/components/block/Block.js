@@ -37,14 +37,30 @@ export const BlockHeadContent = ({ className, ...props }) => {
 };
 export const BlockTitle = ({ className, page, ...props }) => {
   const classes = [`nk-block-title ${page ? "page-title" : "title"}${className ? " " + className : ""}`];
+ console.log("classes",classes, props.children)
+//  const buttonStyles = {
+//   marginLeft: '80%',  // Set the left margin
+//   position: 'absolute',
+//   }
   return (
     <React.Fragment>
+    {/*props.children=="Payment History"?(
+      <a
+      style={buttonStyles}
+      href="#toggle"
+      onClick={(ev) => ev.preventDefault()}
+      className="btn btn-primary btn-dim d-none d-sm-inline-flex"
+    >Create Invoice +</a>):(<h1></h1>)
+    */}
       {!props.tag ? (
         <h3 className={classes} {...props}>{props.children}</h3>
       ) : (
         <props.tag className={classes} {...props}>{props.children}</props.tag>
       )}
-    </React.Fragment>
+      {/*add */}
+     
+      
+          </React.Fragment>
   );
 };
 export const BlockDes = ({ className, page, ...props }) => {
