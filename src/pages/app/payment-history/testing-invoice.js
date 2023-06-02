@@ -36,21 +36,30 @@ const InvoiceForm = ({ history }) => {
   const [serviceDate, setServiceDate] = useState(new Date());
   const [quotationExpire, setQuotationExpire] = useState(new Date());
    const [planSchedule	, setPlanSchedule] = useState(new Date());
+   const [checkboxes, setCheckboxes] = useState({
+    checkbox1: false,
+    checkbox2: false,
+    checkbox3: false,
+    checkbox4: false
+  });
   
   const [invoiceData, setInvoiceData] = useState({
-    customer: "",
-    serviceType: "",
-    serviceDate: serviceDate,
-    QuotationExpire: quotationExpire,
-    Taxes: "",
-    paymentType: "",
-    paymentMethod: "",
-    paymentType: "",  
+    partner_id: "",
+    service_type: "",
+    date: serviceDate,
+    quota_expire: quotationExpire,
+    tax_id: "",
+    payment_type: "",
+    payment_method: "",
     price:"",
-    firstPaid:"",
-    planSchedule:planSchedule
+    first_paid:"",
+    plan_schedule:planSchedule,
+    agreement_consult_general:checkboxes.checkbox1,
+    agreement_consult_governance:checkboxes.checkbox2,
+    agreement_consult_hr:checkboxes.checkbox3,
+    agreement_consult_other:checkboxes.checkbox4
   });
-console.log("invoiceData.serviceDate",invoiceData.serviceType)
+console.log("invoiceData.serviceDate",invoiceData.service_type)
   const [modal, setModal] = useState(false);
   const { errors, register, handleSubmit } = useForm();
 
@@ -59,17 +68,20 @@ console.log("invoiceData.serviceDate",invoiceData.serviceType)
     onSuccess: (data) => {
       if (data) {
         setInvoiceData({
-          customer: "",
-          serviceType: "",
-          serviceDate: "",
-          QuotationExpire: "",
-          Taxes: "",
-          paymentType: "",
-          paymentMethod: "",
-          paymentType: "",  
-          price:"",
-          firstPaid:"",
-          planSchedule:""
+    partner_id: "",
+    service_type: "",
+    date: serviceDate,
+    quota_expire: quotationExpire,
+    tax_id: "",
+    payment_type: "",
+    payment_method: "",
+    price:"",
+    first_paid:"",
+    plan_schedule:planSchedule,
+    agreement_consult_general:checkboxes.checkbox1,
+    agreement_consult_governance:checkboxes.checkbox2,
+    agreement_consult_hr:checkboxes.checkbox3,
+    agreement_consult_other:checkboxes.checkbox4
         });
         toast.success(t('Password Changed Successfully! Please Login again with new password',{ns:'notification'}));
        
@@ -88,6 +100,13 @@ console.log("invoiceData.serviceDate",invoiceData.serviceType)
     // } else {
     //   setIsConfirmPassSame(false);
     // }
+  };
+  const handleCheckboxChange = (event) => {
+    const { name, checked } = event.target;
+    setCheckboxes((prevCheckboxes) => ({
+      ...prevCheckboxes,
+      [name]: checked
+    }));
   };
   const options = [
     { value: 'Agreement Consultations', label: 'Agreement Consultations' },
@@ -167,7 +186,7 @@ console.log("invoiceData.serviceDate",invoiceData.serviceType)
                           {t("Customer")}
                         </label>
                           <RSelect
-                          onChange={(e) =>   setInvoiceData({ ...invoiceData, customer: e.value })}
+                          onChange={(e) =>   setInvoiceData({ ...invoiceData, partner_id: e.value })}
                           />
                         </FormGroup>
                           </Col>
@@ -179,7 +198,7 @@ console.log("invoiceData.serviceDate",invoiceData.serviceType)
                     {t("Service Type")}
                   </label>
                   <Select options={options}
-                  onChange={(e) =>   setInvoiceData({ ...invoiceData, serviceType: e.value })}
+                  onChange={(e) =>   setInvoiceData({ ...invoiceData, service_type: e.value })}
                   />
                   </FormGroup>
                           </Col>
@@ -211,28 +230,40 @@ console.log("invoiceData.serviceDate",invoiceData.serviceType)
                           <Col md="6">
                             <FormGroup>
               <div>
-            <input type="checkbox" className="custom-control-sm "/>
+            <input type="checkbox" className="custom-control-sm "
+            name="checkbox1"
+          checked={checkboxes.checkbox1}
+          onChange={handleCheckboxChange}/>
             <label className="form-label" htmlFor="test">
               {t("General")}
             </label>
             </div>
         
             <div>
-            <input type="checkbox" className="custom-control-sm "/>
+            <input type="checkbox" className="custom-control-sm "
+            name="checkbox2"
+          checked={checkboxes.checkbox2}
+          onChange={handleCheckboxChange}/>
             <label className="form-label" htmlFor="test">
               {t("Governance")}
             </label>
             </div>
         
             <div>
-            <input type="checkbox" className="custom-control-sm "/>
+            <input type="checkbox" className="custom-control-sm "
+            name="checkbox3"
+          checked={checkboxes.checkbox3}
+          onChange={handleCheckboxChange}/>
             <label className="form-label" htmlFor="test">
               {t("HR")}
             </label>
             </div>
         
             <div>
-            <input type="checkbox" className="custom-control-sm "/>
+            <input type="checkbox" className="custom-control-sm "
+            name="checkbox4"
+          checked={checkboxes.checkbox4}
+          onChange={handleCheckboxChange}/>
             <label className="form-label" htmlFor="test">
               {t("Other")}
             </label>
@@ -255,7 +286,7 @@ console.log("invoiceData.serviceDate",invoiceData.serviceType)
                           {t("Taxes")}
                         </label>
                         <Select options={taxesOptions} 
-                        onChange={(e) =>   setInvoiceData({ ...invoiceData, Taxes: e.value })}
+                        onChange={(e) =>   setInvoiceData({ ...invoiceData, tax_id: e.value })}
                         />
                         </FormGroup>
                           </Col>
@@ -268,7 +299,7 @@ console.log("invoiceData.serviceDate",invoiceData.serviceType)
         {t("Payment Type")}
         </label>
         <Select options={PaymentTypeOptions} 
-        onChange={(e) =>   setInvoiceData({ ...invoiceData, paymentType: e.value })}
+        onChange={(e) =>   setInvoiceData({ ...invoiceData, payment_type: e.value })}
         />
         </FormGroup>
                           </Col>
@@ -282,7 +313,7 @@ console.log("invoiceData.serviceDate",invoiceData.serviceType)
         {t("Payment Method")}
         </label>
         <Select options={PaymentMethodOptions} 
-        onChange={(e) =>   setInvoiceData({ ...invoiceData, paymentMethod: e.value })}
+        onChange={(e) =>   setInvoiceData({ ...invoiceData, payment_method: e.value })}
         />
         </FormGroup>
         
@@ -316,7 +347,7 @@ console.log("invoiceData.serviceDate",invoiceData.serviceType)
                          type="text"
                          placeholder={t('0.00scas')}
                          className={`form-control-lg form-control "}`}
-                         onChange={(e) =>   setInvoiceData({ ...invoiceData, firstPaid: e.target.value })}
+                         onChange={(e) =>   setInvoiceData({ ...invoiceData, first_paid: e.target.value })}
                          style={{paddingRight:i18n.language==="ar"?'0.5rem':'1rem'}}
                          />
                          </FormGroup>  
