@@ -158,10 +158,7 @@ return (
               {" "}
               New on our platform? <Link to={`${process.env.PUBLIC_URL}/auth/register`}>Create an account</Link>
             </div>
-            <div className="form-note-s2 text-center pt-4">
-            {" "}
-            New on our platform? <Link to={`${process.env.PUBLIC_URL}/auth/login/profile`}>Create an testing</Link>
-          </div>
+           
           </PreviewCard>
         </Block>
         <AuthFooter />

@@ -107,7 +107,7 @@ export function* LOAD_CURRENT_ACCOUNT() {
     })
   }
   
-  if (response){
+  if (response.id==2){
     yield put(push('/user-profile'));
    console.log("if condition")
   }

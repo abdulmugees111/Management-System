@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 import { t } from 'i18next';
 
 const apiClient = axios.create({
-  baseURL: 'http://192.168.20.230:8043/api/',
+  baseURL: 'http://192.168.20.55:8070/api/',
   // baseURL: 'http://localhost:8043/api/',
   // timeout: 1000,
   // headers: { 'X-Custom-Header': 'foobar' }
