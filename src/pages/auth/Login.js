@@ -45,21 +45,11 @@ const Login = ({ dispatch, user, authProvider, logo }) => {
   }
 
   const onFinishFailed = errorInfo => {
-    console.log('Failed:', errorInfo)
   }
   {/*<a href={`${process.env.PUBLIC_URL}/user-profile`}  style={{direction: i18n.language === "ar" ? "rtl" : "ltr"}}>sdfvdbd</a>*/}
   
   const { errors, register, handleSubmit } = useForm();
-// console.log("onFinishFailed",onFinishFailed)
-// console.log("mapStateToProps",mapStateToProps)
-// console.log("dispatch",dispatch)
-// console.log("user",user)
-// console.log("authProvider",authProvider)
-// console.log("logo",logo)
-// console.log("passState",passState)
-// console.log("errorVal",errorVal)
-// console.log("payload",dispatch.values) 
-// console.log("onFinish",onFinish)
+
 
 return (
     <React.Fragment>

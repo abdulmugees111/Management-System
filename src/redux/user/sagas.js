@@ -93,7 +93,6 @@ export function* LOAD_CURRENT_ACCOUNT() {
   if (response) {
     
     const { id, email, name, partner_id ,lang} = response;
-    // console.log("Language from api",lang)
     yield put({
       type: 'user/SET_STATE',
       payload: {
@@ -109,9 +108,9 @@ export function* LOAD_CURRENT_ACCOUNT() {
   
   if (response.id==2){
     yield put(push('/user-profile'));
-  //  console.log("if condition")
+ 
   }
-  // console.log("hello for response",response)
+
   yield put({
     type: 'user/SET_STATE',
     payload: {

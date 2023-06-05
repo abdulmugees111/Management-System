@@ -28,7 +28,6 @@ const Tickets = () => {
   const { isLoading, error, data: tickets } = useQuery(["get-tickets"], get_tickets);
   const [onSearch, setonSearch] = useState(true);
   const [onSearchText, setSearchText] = useState("");
-  console.log("Data in tickets",tickets)
   // function to toggle the search option
   const toggle = () => setonSearch(!onSearch);
 

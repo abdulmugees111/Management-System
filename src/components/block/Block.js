@@ -37,7 +37,6 @@ export const BlockHeadContent = ({ className, ...props }) => {
 };
 export const BlockTitle = ({ className, page, ...props }) => {
   const classes = [`nk-block-title ${page ? "page-title" : "title"}${className ? " " + className : ""}`];
- console.log("classes",classes, props.children)
 //  const buttonStyles = {
 //   marginLeft: '80%',  // Set the left margin
 //   position: 'absolute',

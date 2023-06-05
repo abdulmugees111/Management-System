@@ -25,7 +25,7 @@ apiClient.interceptors.response.use(undefined, error => {
  
   // Errors handling
   const { response } = error
-  console.log(error)
+  // console.log(error)
   const { data } = response
   if (data) {
   // custom code for showing error
